@@ -9,11 +9,11 @@ import { useMemo } from 'react'
 
 const MyApp: NextPage<AppProps> = ({ Component, pageProps }) => {
   const ssrCache = useMemo(createSSRExchange, [])
-  const client = useMemo(() => createUrqlClient(ssrCache), [ssrCache])
-
   if (pageProps.urqlState) {
     ssrCache.restoreData(pageProps.urqlState)
   }
+  const client = useMemo(() => createUrqlClient(ssrCache), [ssrCache])
+
   return (
     <Provider value={client}>
       <Component {...(pageProps as any)} />
