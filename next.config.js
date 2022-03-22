@@ -7,6 +7,9 @@ const nextConfig = {
   eslint: { ignoreDuringBuilds: true },
   swcMinify: true,
   compress: true,
+  images: {
+    domains: ['dev-rayat.herokuapp.com', 'localhost'],
+  },
 }
 
 module.exports = nextConfig
