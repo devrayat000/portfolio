@@ -1,0 +1,15 @@
+enum ProjectsBy {
+  TITLE
+  CREATED_AT
+}
+
+enum ImagesBy {
+  NAME
+  ALT_TEXT
+  CREATED_AT
+}
+
+enum Order {
+  ASC
+  DESC
+}

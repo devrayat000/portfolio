@@ -1,0 +1,23 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "module": "commonjs",
+        "disableReferencedProjectLoad": false,
+        "noEmit": true
+        // "incremental": false,
+    },
+    "ts-node": {
+        "typeCheck": false,
+        // Do not forget to `npm i -D tsconfig-paths`
+        "require": [
+            "tsconfig-paths/register"
+        ],
+        "transpileOnly": true,
+        "compilerOptions": {
+            "typeRoots": [
+                "./src/types/apollo_context.d.ts",
+                "./src/types/graphql.d.ts"
+            ]
+        }
+    }
+}

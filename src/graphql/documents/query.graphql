@@ -1,0 +1,26 @@
+# import '../input.graphql'
+# import './fragment.graphql'
+
+query GetProjects($where: ProjectWhereInput = {}) {
+  projects(where: $where) {
+    ...ProjectFragment
+  }
+}
+
+query GetProjectById($id: ID!) {
+  project(where: { id: $id }) {
+    ...ProjectFragment
+  }
+}
+
+query GetImages($where: ImageWhereInput = {}) {
+  images(where: $where) {
+    ...ImageFragment
+  }
+}
+
+query GetImageById($id: ID!) {
+  image(where: { id: $id }) {
+    ...ImageFragment
+  }
+}

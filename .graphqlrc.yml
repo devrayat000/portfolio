@@ -1,0 +1,30 @@
+documents: 'src/graphql/documents/*.{gql,graphql}'
+schema: http://localhost:8000/api/graphql
+
+extensions:
+  codegen:
+    overwrite: true
+    schema: http://localhost:8000/api/graphql
+    documents: 'src/graphql/documents/*.{gql,graphql}'
+
+    generates:
+      src/graphql/generated.ts:
+        plugins:
+          - "typescript"
+          - "typescript-operations"
+          - "typescript-urql"
+
+    config:
+      inputMaybeValue: T | undefined
+      declarationKind:
+        type: 'interface'
+        input: 'interface'
+        interface: 'interface'
+        arguments: 'interface'
+      federation: true
+      constEnums: true
+      namingConvention:
+            typeNames: keep
+            enumValues: change-case-all#constantCase
+
+

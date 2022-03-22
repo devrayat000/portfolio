@@ -1,0 +1,25 @@
+# import '../type.graphql'
+
+fragment ProjectFragment on Project {
+  id
+  title
+  description {
+    document
+  }
+  demo
+  source
+  images {
+    ...ImageFragment
+  }
+}
+
+fragment ImageFragment on Image {
+  id
+  label
+  image {
+    id
+    url
+    width
+    height
+  }
+}
