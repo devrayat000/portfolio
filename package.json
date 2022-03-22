@@ -2,11 +2,9 @@
   "name": "portfolio",
   "private": true,
   "scripts": {
-    "postinstall": "keystone postinstall",
     "dev": "next dev",
     "dev:gen": "concurrently -n \"codegen,next\" \"yarn gql:watch\" \"yarn next:dev\"",
     "build": "next build",
-    "kbuild": "keystone build",
     "start": "next start",
     "lint": "next lint",
     "gql:gen": "graphql-codegen --config .graphqlrc.yml",
