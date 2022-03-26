@@ -84,11 +84,69 @@ export interface AdminWhereUniqueInput {
   id?: InputMaybe<Scalars['ID']>;
 }
 
+export interface ApiKey {
+  __typename?: 'ApiKey';
+  createdAt?: Maybe<Scalars['DateTime']>;
+  id: Scalars['ID'];
+}
+
+export interface ApiKeyCreateInput {
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+}
+
+export interface ApiKeyOrderByInput {
+  createdAt?: InputMaybe<OrderDirection>;
+  id?: InputMaybe<OrderDirection>;
+}
+
+export interface ApiKeyUpdateArgs {
+  data: ApiKeyUpdateInput;
+  where: ApiKeyWhereUniqueInput;
+}
+
+export interface ApiKeyUpdateInput {
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+}
+
+export interface ApiKeyWhereInput {
+  AND?: InputMaybe<Array<ApiKeyWhereInput>>;
+  NOT?: InputMaybe<Array<ApiKeyWhereInput>>;
+  OR?: InputMaybe<Array<ApiKeyWhereInput>>;
+  createdAt?: InputMaybe<DateTimeNullableFilter>;
+  id?: InputMaybe<IDFilter>;
+}
+
+export interface ApiKeyWhereUniqueInput {
+  id?: InputMaybe<Scalars['ID']>;
+}
+
 export type AuthenticatedItem = Admin;
 
-export interface CloudImageFieldOutput extends ImageFieldOutput {
-  __typename?: 'CloudImageFieldOutput';
-  extension: ImageExtension;
+export const enum AzureStorageImageExtension {
+  GIF = 'gif',
+  JPG = 'jpg',
+  PNG = 'png',
+  WEBP = 'webp'
+};
+
+export interface AzureStorageImageFieldInput {
+  ref?: InputMaybe<Scalars['String']>;
+  upload?: InputMaybe<Scalars['Upload']>;
+}
+
+export interface AzureStorageImageFieldOutput {
+  extension: AzureStorageImageExtension;
+  filesize: Scalars['Int'];
+  height: Scalars['Int'];
+  id: Scalars['ID'];
+  ref: Scalars['String'];
+  url: Scalars['String'];
+  width: Scalars['Int'];
+}
+
+export interface AzureStorageImageFieldOutputType extends AzureStorageImageFieldOutput {
+  __typename?: 'AzureStorageImageFieldOutputType';
+  extension: AzureStorageImageExtension;
   filesize: Scalars['Int'];
   height: Scalars['Int'];
   id: Scalars['ID'];
@@ -103,6 +161,17 @@ export interface CreateInitialAdminInput {
   password?: InputMaybe<Scalars['String']>;
 }
 
+export interface DateTimeFilter {
+  equals?: InputMaybe<Scalars['DateTime']>;
+  gt?: InputMaybe<Scalars['DateTime']>;
+  gte?: InputMaybe<Scalars['DateTime']>;
+  in?: InputMaybe<Array<Scalars['DateTime']>>;
+  lt?: InputMaybe<Scalars['DateTime']>;
+  lte?: InputMaybe<Scalars['DateTime']>;
+  not?: InputMaybe<DateTimeFilter>;
+  notIn?: InputMaybe<Array<Scalars['DateTime']>>;
+}
+
 export interface DateTimeNullableFilter {
   equals?: InputMaybe<Scalars['DateTime']>;
   gt?: InputMaybe<Scalars['DateTime']>;
@@ -112,6 +181,65 @@ export interface DateTimeNullableFilter {
   lte?: InputMaybe<Scalars['DateTime']>;
   not?: InputMaybe<DateTimeNullableFilter>;
   notIn?: InputMaybe<Array<Scalars['DateTime']>>;
+}
+
+export interface Education {
+  __typename?: 'Education';
+  certificate?: Maybe<Scalars['String']>;
+  description?: Maybe<Education_description_Document>;
+  id: Scalars['ID'];
+  passed?: Maybe<Scalars['DateTime']>;
+  title?: Maybe<Scalars['String']>;
+}
+
+export interface EducationCreateInput {
+  certificate?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['JSON']>;
+  passed?: InputMaybe<Scalars['DateTime']>;
+  title?: InputMaybe<Scalars['String']>;
+}
+
+export interface EducationOrderByInput {
+  certificate?: InputMaybe<OrderDirection>;
+  id?: InputMaybe<OrderDirection>;
+  passed?: InputMaybe<OrderDirection>;
+  title?: InputMaybe<OrderDirection>;
+}
+
+export interface EducationUpdateArgs {
+  data: EducationUpdateInput;
+  where: EducationWhereUniqueInput;
+}
+
+export interface EducationUpdateInput {
+  certificate?: InputMaybe<Scalars['String']>;
+  description?: InputMaybe<Scalars['JSON']>;
+  passed?: InputMaybe<Scalars['DateTime']>;
+  title?: InputMaybe<Scalars['String']>;
+}
+
+export interface EducationWhereInput {
+  AND?: InputMaybe<Array<EducationWhereInput>>;
+  NOT?: InputMaybe<Array<EducationWhereInput>>;
+  OR?: InputMaybe<Array<EducationWhereInput>>;
+  certificate?: InputMaybe<StringFilter>;
+  id?: InputMaybe<IDFilter>;
+  passed?: InputMaybe<DateTimeFilter>;
+  title?: InputMaybe<StringFilter>;
+}
+
+export interface EducationWhereUniqueInput {
+  id?: InputMaybe<Scalars['ID']>;
+}
+
+export interface Education_description_Document {
+  __typename?: 'Education_description_Document';
+  document: Scalars['JSON'];
+}
+
+
+export interface Education_description_DocumentdocumentArgs {
+  hydrateRelationships?: Scalars['Boolean'];
 }
 
 export interface IDFilter {
@@ -127,36 +255,16 @@ export interface IDFilter {
 
 export interface Image {
   __typename?: 'Image';
+  createdAt?: Maybe<Scalars['DateTime']>;
   id: Scalars['ID'];
-  image?: Maybe<ImageFieldOutput>;
+  image?: Maybe<AzureStorageImageFieldOutput>;
   label?: Maybe<Scalars['String']>;
 }
 
 export interface ImageCreateInput {
-  image?: InputMaybe<ImageFieldInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  image?: InputMaybe<AzureStorageImageFieldInput>;
   label?: InputMaybe<Scalars['String']>;
-}
-
-export const enum ImageExtension {
-  GIF = 'gif',
-  JPG = 'jpg',
-  PNG = 'png',
-  WEBP = 'webp'
-};
-
-export interface ImageFieldInput {
-  ref?: InputMaybe<Scalars['String']>;
-  upload?: InputMaybe<Scalars['Upload']>;
-}
-
-export interface ImageFieldOutput {
-  extension: ImageExtension;
-  filesize: Scalars['Int'];
-  height: Scalars['Int'];
-  id: Scalars['ID'];
-  ref: Scalars['String'];
-  url: Scalars['String'];
-  width: Scalars['Int'];
 }
 
 export interface ImageManyRelationFilter {
@@ -166,6 +274,7 @@ export interface ImageManyRelationFilter {
 }
 
 export interface ImageOrderByInput {
+  createdAt?: InputMaybe<OrderDirection>;
   id?: InputMaybe<OrderDirection>;
   label?: InputMaybe<OrderDirection>;
 }
@@ -188,7 +297,8 @@ export interface ImageUpdateArgs {
 }
 
 export interface ImageUpdateInput {
-  image?: InputMaybe<ImageFieldInput>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  image?: InputMaybe<AzureStorageImageFieldInput>;
   label?: InputMaybe<Scalars['String']>;
 }
 
@@ -196,12 +306,24 @@ export interface ImageWhereInput {
   AND?: InputMaybe<Array<ImageWhereInput>>;
   NOT?: InputMaybe<Array<ImageWhereInput>>;
   OR?: InputMaybe<Array<ImageWhereInput>>;
+  createdAt?: InputMaybe<DateTimeNullableFilter>;
   id?: InputMaybe<IDFilter>;
   label?: InputMaybe<StringFilter>;
 }
 
 export interface ImageWhereUniqueInput {
   id?: InputMaybe<Scalars['ID']>;
+}
+
+export interface IntFilter {
+  equals?: InputMaybe<Scalars['Int']>;
+  gt?: InputMaybe<Scalars['Int']>;
+  gte?: InputMaybe<Scalars['Int']>;
+  in?: InputMaybe<Array<Scalars['Int']>>;
+  lt?: InputMaybe<Scalars['Int']>;
+  lte?: InputMaybe<Scalars['Int']>;
+  not?: InputMaybe<IntFilter>;
+  notIn?: InputMaybe<Array<Scalars['Int']>>;
 }
 
 export interface KeystoneAdminMeta {
@@ -304,40 +426,59 @@ export interface KeystoneMeta {
   adminMeta: KeystoneAdminMeta;
 }
 
-export interface LocalImageFieldOutput extends ImageFieldOutput {
-  __typename?: 'LocalImageFieldOutput';
-  extension: ImageExtension;
-  filesize: Scalars['Int'];
-  height: Scalars['Int'];
-  id: Scalars['ID'];
-  ref: Scalars['String'];
-  url: Scalars['String'];
-  width: Scalars['Int'];
-}
-
 export interface Mutation {
   __typename?: 'Mutation';
   authenticateAdminWithPassword?: Maybe<AdminAuthenticationWithPasswordResult>;
   createAdmin?: Maybe<Admin>;
   createAdmins?: Maybe<Array<Maybe<Admin>>>;
+  createApiKey?: Maybe<ApiKey>;
+  createApiKeys?: Maybe<Array<Maybe<ApiKey>>>;
+  createEducation?: Maybe<Education>;
+  createEducations?: Maybe<Array<Maybe<Education>>>;
   createImage?: Maybe<Image>;
   createImages?: Maybe<Array<Maybe<Image>>>;
   createInitialAdmin: AdminAuthenticationWithPasswordSuccess;
   createProject?: Maybe<Project>;
   createProjects?: Maybe<Array<Maybe<Project>>>;
+  createService?: Maybe<Service>;
+  createServices?: Maybe<Array<Maybe<Service>>>;
+  createSkill?: Maybe<Skill>;
+  createSkills?: Maybe<Array<Maybe<Skill>>>;
+  createTag?: Maybe<Tag>;
+  createTags?: Maybe<Array<Maybe<Tag>>>;
   deleteAdmin?: Maybe<Admin>;
   deleteAdmins?: Maybe<Array<Maybe<Admin>>>;
+  deleteApiKey?: Maybe<ApiKey>;
+  deleteApiKeys?: Maybe<Array<Maybe<ApiKey>>>;
+  deleteEducation?: Maybe<Education>;
+  deleteEducations?: Maybe<Array<Maybe<Education>>>;
   deleteImage?: Maybe<Image>;
   deleteImages?: Maybe<Array<Maybe<Image>>>;
   deleteProject?: Maybe<Project>;
   deleteProjects?: Maybe<Array<Maybe<Project>>>;
+  deleteService?: Maybe<Service>;
+  deleteServices?: Maybe<Array<Maybe<Service>>>;
+  deleteSkill?: Maybe<Skill>;
+  deleteSkills?: Maybe<Array<Maybe<Skill>>>;
+  deleteTag?: Maybe<Tag>;
+  deleteTags?: Maybe<Array<Maybe<Tag>>>;
   endSession: Scalars['Boolean'];
   updateAdmin?: Maybe<Admin>;
   updateAdmins?: Maybe<Array<Maybe<Admin>>>;
+  updateApiKey?: Maybe<ApiKey>;
+  updateApiKeys?: Maybe<Array<Maybe<ApiKey>>>;
+  updateEducation?: Maybe<Education>;
+  updateEducations?: Maybe<Array<Maybe<Education>>>;
   updateImage?: Maybe<Image>;
   updateImages?: Maybe<Array<Maybe<Image>>>;
   updateProject?: Maybe<Project>;
   updateProjects?: Maybe<Array<Maybe<Project>>>;
+  updateService?: Maybe<Service>;
+  updateServices?: Maybe<Array<Maybe<Service>>>;
+  updateSkill?: Maybe<Skill>;
+  updateSkills?: Maybe<Array<Maybe<Skill>>>;
+  updateTag?: Maybe<Tag>;
+  updateTags?: Maybe<Array<Maybe<Tag>>>;
 }
 
 
@@ -354,6 +495,26 @@ export interface MutationcreateAdminArgs {
 
 export interface MutationcreateAdminsArgs {
   data: Array<AdminCreateInput>;
+}
+
+
+export interface MutationcreateApiKeyArgs {
+  data: ApiKeyCreateInput;
+}
+
+
+export interface MutationcreateApiKeysArgs {
+  data: Array<ApiKeyCreateInput>;
+}
+
+
+export interface MutationcreateEducationArgs {
+  data: EducationCreateInput;
+}
+
+
+export interface MutationcreateEducationsArgs {
+  data: Array<EducationCreateInput>;
 }
 
 
@@ -382,6 +543,36 @@ export interface MutationcreateProjectsArgs {
 }
 
 
+export interface MutationcreateServiceArgs {
+  data: ServiceCreateInput;
+}
+
+
+export interface MutationcreateServicesArgs {
+  data: Array<ServiceCreateInput>;
+}
+
+
+export interface MutationcreateSkillArgs {
+  data: SkillCreateInput;
+}
+
+
+export interface MutationcreateSkillsArgs {
+  data: Array<SkillCreateInput>;
+}
+
+
+export interface MutationcreateTagArgs {
+  data: TagCreateInput;
+}
+
+
+export interface MutationcreateTagsArgs {
+  data: Array<TagCreateInput>;
+}
+
+
 export interface MutationdeleteAdminArgs {
   where: AdminWhereUniqueInput;
 }
@@ -389,6 +580,26 @@ export interface MutationdeleteAdminArgs {
 
 export interface MutationdeleteAdminsArgs {
   where: Array<AdminWhereUniqueInput>;
+}
+
+
+export interface MutationdeleteApiKeyArgs {
+  where: ApiKeyWhereUniqueInput;
+}
+
+
+export interface MutationdeleteApiKeysArgs {
+  where: Array<ApiKeyWhereUniqueInput>;
+}
+
+
+export interface MutationdeleteEducationArgs {
+  where: EducationWhereUniqueInput;
+}
+
+
+export interface MutationdeleteEducationsArgs {
+  where: Array<EducationWhereUniqueInput>;
 }
 
 
@@ -412,6 +623,36 @@ export interface MutationdeleteProjectsArgs {
 }
 
 
+export interface MutationdeleteServiceArgs {
+  where: ServiceWhereUniqueInput;
+}
+
+
+export interface MutationdeleteServicesArgs {
+  where: Array<ServiceWhereUniqueInput>;
+}
+
+
+export interface MutationdeleteSkillArgs {
+  where: SkillWhereUniqueInput;
+}
+
+
+export interface MutationdeleteSkillsArgs {
+  where: Array<SkillWhereUniqueInput>;
+}
+
+
+export interface MutationdeleteTagArgs {
+  where: TagWhereUniqueInput;
+}
+
+
+export interface MutationdeleteTagsArgs {
+  where: Array<TagWhereUniqueInput>;
+}
+
+
 export interface MutationupdateAdminArgs {
   data: AdminUpdateInput;
   where: AdminWhereUniqueInput;
@@ -420,6 +661,28 @@ export interface MutationupdateAdminArgs {
 
 export interface MutationupdateAdminsArgs {
   data: Array<AdminUpdateArgs>;
+}
+
+
+export interface MutationupdateApiKeyArgs {
+  data: ApiKeyUpdateInput;
+  where: ApiKeyWhereUniqueInput;
+}
+
+
+export interface MutationupdateApiKeysArgs {
+  data: Array<ApiKeyUpdateArgs>;
+}
+
+
+export interface MutationupdateEducationArgs {
+  data: EducationUpdateInput;
+  where: EducationWhereUniqueInput;
+}
+
+
+export interface MutationupdateEducationsArgs {
+  data: Array<EducationUpdateArgs>;
 }
 
 
@@ -442,6 +705,39 @@ export interface MutationupdateProjectArgs {
 
 export interface MutationupdateProjectsArgs {
   data: Array<ProjectUpdateArgs>;
+}
+
+
+export interface MutationupdateServiceArgs {
+  data: ServiceUpdateInput;
+  where: ServiceWhereUniqueInput;
+}
+
+
+export interface MutationupdateServicesArgs {
+  data: Array<ServiceUpdateArgs>;
+}
+
+
+export interface MutationupdateSkillArgs {
+  data: SkillUpdateInput;
+  where: SkillWhereUniqueInput;
+}
+
+
+export interface MutationupdateSkillsArgs {
+  data: Array<SkillUpdateArgs>;
+}
+
+
+export interface MutationupdateTagArgs {
+  data: TagUpdateInput;
+  where: TagWhereUniqueInput;
+}
+
+
+export interface MutationupdateTagsArgs {
+  data: Array<TagUpdateArgs>;
 }
 
 export interface NestedStringFilter {
@@ -470,12 +766,17 @@ export interface PasswordState {
 
 export interface Project {
   __typename?: 'Project';
+  createdAt?: Maybe<Scalars['DateTime']>;
   demo?: Maybe<Scalars['String']>;
   description?: Maybe<Project_description_Document>;
   id: Scalars['ID'];
   images?: Maybe<Array<Image>>;
   imagesCount?: Maybe<Scalars['Int']>;
+  publishedAt?: Maybe<Scalars['DateTime']>;
   source?: Maybe<Scalars['String']>;
+  status?: Maybe<ProjectStatusType>;
+  tags?: Maybe<Array<Tag>>;
+  tagsCount?: Maybe<Scalars['Int']>;
   title?: Maybe<Scalars['String']>;
 }
 
@@ -492,19 +793,69 @@ export interface ProjectimagesCountArgs {
   where?: ImageWhereInput;
 }
 
+
+export interface ProjecttagsArgs {
+  orderBy?: Array<TagOrderByInput>;
+  skip?: Scalars['Int'];
+  take?: InputMaybe<Scalars['Int']>;
+  where?: TagWhereInput;
+}
+
+
+export interface ProjecttagsCountArgs {
+  where?: TagWhereInput;
+}
+
 export interface ProjectCreateInput {
+  createdAt?: InputMaybe<Scalars['DateTime']>;
   demo?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['JSON']>;
   images?: InputMaybe<ImageRelateToManyForCreateInput>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
   source?: InputMaybe<Scalars['String']>;
+  status?: InputMaybe<ProjectStatusType>;
+  tags?: InputMaybe<TagRelateToManyForCreateInput>;
   title?: InputMaybe<Scalars['String']>;
 }
 
+export interface ProjectManyRelationFilter {
+  every?: InputMaybe<ProjectWhereInput>;
+  none?: InputMaybe<ProjectWhereInput>;
+  some?: InputMaybe<ProjectWhereInput>;
+}
+
 export interface ProjectOrderByInput {
+  createdAt?: InputMaybe<OrderDirection>;
   demo?: InputMaybe<OrderDirection>;
   id?: InputMaybe<OrderDirection>;
+  publishedAt?: InputMaybe<OrderDirection>;
   source?: InputMaybe<OrderDirection>;
+  status?: InputMaybe<OrderDirection>;
   title?: InputMaybe<OrderDirection>;
+}
+
+export interface ProjectRelateToManyForCreateInput {
+  connect?: InputMaybe<Array<ProjectWhereUniqueInput>>;
+  create?: InputMaybe<Array<ProjectCreateInput>>;
+}
+
+export interface ProjectRelateToManyForUpdateInput {
+  connect?: InputMaybe<Array<ProjectWhereUniqueInput>>;
+  create?: InputMaybe<Array<ProjectCreateInput>>;
+  disconnect?: InputMaybe<Array<ProjectWhereUniqueInput>>;
+  set?: InputMaybe<Array<ProjectWhereUniqueInput>>;
+}
+
+export const enum ProjectStatusType {
+  DRAFT = 'draft',
+  PUBLISHED = 'published'
+};
+
+export interface ProjectStatusTypeNullableFilter {
+  equals?: InputMaybe<ProjectStatusType>;
+  in?: InputMaybe<Array<ProjectStatusType>>;
+  not?: InputMaybe<ProjectStatusTypeNullableFilter>;
+  notIn?: InputMaybe<Array<ProjectStatusType>>;
 }
 
 export interface ProjectUpdateArgs {
@@ -513,10 +864,14 @@ export interface ProjectUpdateArgs {
 }
 
 export interface ProjectUpdateInput {
+  createdAt?: InputMaybe<Scalars['DateTime']>;
   demo?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['JSON']>;
   images?: InputMaybe<ImageRelateToManyForUpdateInput>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
   source?: InputMaybe<Scalars['String']>;
+  status?: InputMaybe<ProjectStatusType>;
+  tags?: InputMaybe<TagRelateToManyForUpdateInput>;
   title?: InputMaybe<Scalars['String']>;
 }
 
@@ -524,10 +879,14 @@ export interface ProjectWhereInput {
   AND?: InputMaybe<Array<ProjectWhereInput>>;
   NOT?: InputMaybe<Array<ProjectWhereInput>>;
   OR?: InputMaybe<Array<ProjectWhereInput>>;
+  createdAt?: InputMaybe<DateTimeNullableFilter>;
   demo?: InputMaybe<StringFilter>;
   id?: InputMaybe<IDFilter>;
   images?: InputMaybe<ImageManyRelationFilter>;
+  publishedAt?: InputMaybe<DateTimeNullableFilter>;
   source?: InputMaybe<StringFilter>;
+  status?: InputMaybe<ProjectStatusTypeNullableFilter>;
+  tags?: InputMaybe<TagManyRelationFilter>;
   title?: InputMaybe<StringFilter>;
 }
 
@@ -550,7 +909,13 @@ export interface Query {
   admin?: Maybe<Admin>;
   admins?: Maybe<Array<Admin>>;
   adminsCount?: Maybe<Scalars['Int']>;
+  apiKey?: Maybe<ApiKey>;
+  apiKeys?: Maybe<Array<ApiKey>>;
+  apiKeysCount?: Maybe<Scalars['Int']>;
   authenticatedItem?: Maybe<AuthenticatedItem>;
+  education?: Maybe<Education>;
+  educations?: Maybe<Array<Education>>;
+  educationsCount?: Maybe<Scalars['Int']>;
   image?: Maybe<Image>;
   images?: Maybe<Array<Image>>;
   imagesCount?: Maybe<Scalars['Int']>;
@@ -558,6 +923,15 @@ export interface Query {
   project?: Maybe<Project>;
   projects?: Maybe<Array<Project>>;
   projectsCount?: Maybe<Scalars['Int']>;
+  service?: Maybe<Service>;
+  services?: Maybe<Array<Service>>;
+  servicesCount?: Maybe<Scalars['Int']>;
+  skill?: Maybe<Skill>;
+  skills?: Maybe<Array<Skill>>;
+  skillsCount?: Maybe<Scalars['Int']>;
+  tag?: Maybe<Tag>;
+  tags?: Maybe<Array<Tag>>;
+  tagsCount?: Maybe<Scalars['Int']>;
 }
 
 
@@ -576,6 +950,42 @@ export interface QueryadminsArgs {
 
 export interface QueryadminsCountArgs {
   where?: AdminWhereInput;
+}
+
+
+export interface QueryapiKeyArgs {
+  where: ApiKeyWhereUniqueInput;
+}
+
+
+export interface QueryapiKeysArgs {
+  orderBy?: Array<ApiKeyOrderByInput>;
+  skip?: Scalars['Int'];
+  take?: InputMaybe<Scalars['Int']>;
+  where?: ApiKeyWhereInput;
+}
+
+
+export interface QueryapiKeysCountArgs {
+  where?: ApiKeyWhereInput;
+}
+
+
+export interface QueryeducationArgs {
+  where: EducationWhereUniqueInput;
+}
+
+
+export interface QueryeducationsArgs {
+  orderBy?: Array<EducationOrderByInput>;
+  skip?: Scalars['Int'];
+  take?: InputMaybe<Scalars['Int']>;
+  where?: EducationWhereInput;
+}
+
+
+export interface QueryeducationsCountArgs {
+  where?: EducationWhereInput;
 }
 
 
@@ -614,10 +1024,166 @@ export interface QueryprojectsCountArgs {
   where?: ProjectWhereInput;
 }
 
+
+export interface QueryserviceArgs {
+  where: ServiceWhereUniqueInput;
+}
+
+
+export interface QueryservicesArgs {
+  orderBy?: Array<ServiceOrderByInput>;
+  skip?: Scalars['Int'];
+  take?: InputMaybe<Scalars['Int']>;
+  where?: ServiceWhereInput;
+}
+
+
+export interface QueryservicesCountArgs {
+  where?: ServiceWhereInput;
+}
+
+
+export interface QueryskillArgs {
+  where: SkillWhereUniqueInput;
+}
+
+
+export interface QueryskillsArgs {
+  orderBy?: Array<SkillOrderByInput>;
+  skip?: Scalars['Int'];
+  take?: InputMaybe<Scalars['Int']>;
+  where?: SkillWhereInput;
+}
+
+
+export interface QueryskillsCountArgs {
+  where?: SkillWhereInput;
+}
+
+
+export interface QuerytagArgs {
+  where: TagWhereUniqueInput;
+}
+
+
+export interface QuerytagsArgs {
+  orderBy?: Array<TagOrderByInput>;
+  skip?: Scalars['Int'];
+  take?: InputMaybe<Scalars['Int']>;
+  where?: TagWhereInput;
+}
+
+
+export interface QuerytagsCountArgs {
+  where?: TagWhereInput;
+}
+
 export const enum QueryMode {
   DEFAULT = 'default',
   INSENSITIVE = 'insensitive'
 };
+
+export interface Service {
+  __typename?: 'Service';
+  details?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  image?: Maybe<AzureStorageImageFieldOutput>;
+  title?: Maybe<Scalars['String']>;
+}
+
+export interface ServiceCreateInput {
+  details?: InputMaybe<Scalars['String']>;
+  image?: InputMaybe<AzureStorageImageFieldInput>;
+  title?: InputMaybe<Scalars['String']>;
+}
+
+export interface ServiceOrderByInput {
+  details?: InputMaybe<OrderDirection>;
+  id?: InputMaybe<OrderDirection>;
+  title?: InputMaybe<OrderDirection>;
+}
+
+export interface ServiceUpdateArgs {
+  data: ServiceUpdateInput;
+  where: ServiceWhereUniqueInput;
+}
+
+export interface ServiceUpdateInput {
+  details?: InputMaybe<Scalars['String']>;
+  image?: InputMaybe<AzureStorageImageFieldInput>;
+  title?: InputMaybe<Scalars['String']>;
+}
+
+export interface ServiceWhereInput {
+  AND?: InputMaybe<Array<ServiceWhereInput>>;
+  NOT?: InputMaybe<Array<ServiceWhereInput>>;
+  OR?: InputMaybe<Array<ServiceWhereInput>>;
+  details?: InputMaybe<StringFilter>;
+  id?: InputMaybe<IDFilter>;
+  title?: InputMaybe<StringFilter>;
+}
+
+export interface ServiceWhereUniqueInput {
+  id?: InputMaybe<Scalars['ID']>;
+}
+
+export interface Skill {
+  __typename?: 'Skill';
+  id: Scalars['ID'];
+  label?: Maybe<Scalars['String']>;
+  type?: Maybe<SkillTypeType>;
+  value?: Maybe<Scalars['Int']>;
+}
+
+export interface SkillCreateInput {
+  label?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<SkillTypeType>;
+  value?: InputMaybe<Scalars['Int']>;
+}
+
+export interface SkillOrderByInput {
+  id?: InputMaybe<OrderDirection>;
+  label?: InputMaybe<OrderDirection>;
+  type?: InputMaybe<OrderDirection>;
+  value?: InputMaybe<OrderDirection>;
+}
+
+export const enum SkillTypeType {
+  DEV = 'dev',
+  LANG = 'lang'
+};
+
+export interface SkillTypeTypeNullableFilter {
+  equals?: InputMaybe<SkillTypeType>;
+  in?: InputMaybe<Array<SkillTypeType>>;
+  not?: InputMaybe<SkillTypeTypeNullableFilter>;
+  notIn?: InputMaybe<Array<SkillTypeType>>;
+}
+
+export interface SkillUpdateArgs {
+  data: SkillUpdateInput;
+  where: SkillWhereUniqueInput;
+}
+
+export interface SkillUpdateInput {
+  label?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<SkillTypeType>;
+  value?: InputMaybe<Scalars['Int']>;
+}
+
+export interface SkillWhereInput {
+  AND?: InputMaybe<Array<SkillWhereInput>>;
+  NOT?: InputMaybe<Array<SkillWhereInput>>;
+  OR?: InputMaybe<Array<SkillWhereInput>>;
+  id?: InputMaybe<IDFilter>;
+  label?: InputMaybe<StringFilter>;
+  type?: InputMaybe<SkillTypeTypeNullableFilter>;
+  value?: InputMaybe<IntFilter>;
+}
+
+export interface SkillWhereUniqueInput {
+  id?: InputMaybe<Scalars['ID']>;
+}
 
 export interface StringFilter {
   contains?: InputMaybe<Scalars['String']>;
@@ -634,37 +1200,109 @@ export interface StringFilter {
   startsWith?: InputMaybe<Scalars['String']>;
 }
 
-export type ProjectFragmentFragment = { __typename?: 'Project', id: string, title?: string | null | undefined, demo?: string | null | undefined, source?: string | null | undefined, description?: { __typename?: 'Project_description_Document', document: any } | null | undefined, images?: Array<{ __typename?: 'Image', id: string, label?: string | null | undefined, image?: { __typename?: 'CloudImageFieldOutput', id: string, url: string, width: number, height: number } | { __typename?: 'LocalImageFieldOutput', id: string, url: string, width: number, height: number } | null | undefined }> | null | undefined };
+export interface Tag {
+  __typename?: 'Tag';
+  id: Scalars['ID'];
+  name?: Maybe<Scalars['String']>;
+  projects?: Maybe<Array<Project>>;
+  projectsCount?: Maybe<Scalars['Int']>;
+}
 
-export type ImageFragmentFragment = { __typename?: 'Image', id: string, label?: string | null | undefined, image?: { __typename?: 'CloudImageFieldOutput', id: string, url: string, width: number, height: number } | { __typename?: 'LocalImageFieldOutput', id: string, url: string, width: number, height: number } | null | undefined };
+
+export interface TagprojectsArgs {
+  orderBy?: Array<ProjectOrderByInput>;
+  skip?: Scalars['Int'];
+  take?: InputMaybe<Scalars['Int']>;
+  where?: ProjectWhereInput;
+}
+
+
+export interface TagprojectsCountArgs {
+  where?: ProjectWhereInput;
+}
+
+export interface TagCreateInput {
+  name?: InputMaybe<Scalars['String']>;
+  projects?: InputMaybe<ProjectRelateToManyForCreateInput>;
+}
+
+export interface TagManyRelationFilter {
+  every?: InputMaybe<TagWhereInput>;
+  none?: InputMaybe<TagWhereInput>;
+  some?: InputMaybe<TagWhereInput>;
+}
+
+export interface TagOrderByInput {
+  id?: InputMaybe<OrderDirection>;
+  name?: InputMaybe<OrderDirection>;
+}
+
+export interface TagRelateToManyForCreateInput {
+  connect?: InputMaybe<Array<TagWhereUniqueInput>>;
+  create?: InputMaybe<Array<TagCreateInput>>;
+}
+
+export interface TagRelateToManyForUpdateInput {
+  connect?: InputMaybe<Array<TagWhereUniqueInput>>;
+  create?: InputMaybe<Array<TagCreateInput>>;
+  disconnect?: InputMaybe<Array<TagWhereUniqueInput>>;
+  set?: InputMaybe<Array<TagWhereUniqueInput>>;
+}
+
+export interface TagUpdateArgs {
+  data: TagUpdateInput;
+  where: TagWhereUniqueInput;
+}
+
+export interface TagUpdateInput {
+  name?: InputMaybe<Scalars['String']>;
+  projects?: InputMaybe<ProjectRelateToManyForUpdateInput>;
+}
+
+export interface TagWhereInput {
+  AND?: InputMaybe<Array<TagWhereInput>>;
+  NOT?: InputMaybe<Array<TagWhereInput>>;
+  OR?: InputMaybe<Array<TagWhereInput>>;
+  id?: InputMaybe<IDFilter>;
+  name?: InputMaybe<StringFilter>;
+  projects?: InputMaybe<ProjectManyRelationFilter>;
+}
+
+export interface TagWhereUniqueInput {
+  id?: InputMaybe<Scalars['ID']>;
+}
+
+export type ProjectFragmentFragment = { __typename?: 'Project', id: string, title?: string | null | undefined, demo?: string | null | undefined, source?: string | null | undefined, description?: { __typename?: 'Project_description_Document', document: any } | null | undefined, images?: Array<{ __typename?: 'Image', id: string, label?: string | null | undefined, image?: { __typename?: 'AzureStorageImageFieldOutputType', id: string, url: string, width: number, height: number } | null | undefined }> | null | undefined };
+
+export type ImageFragmentFragment = { __typename?: 'Image', id: string, label?: string | null | undefined, image?: { __typename?: 'AzureStorageImageFieldOutputType', id: string, url: string, width: number, height: number } | null | undefined };
 
 export type GetProjectsQueryVariables = Exact<{
   where?: InputMaybe<ProjectWhereInput>;
 }>;
 
 
-export type GetProjectsQuery = { __typename?: 'Query', projects?: Array<{ __typename?: 'Project', id: string, title?: string | null | undefined, demo?: string | null | undefined, source?: string | null | undefined, description?: { __typename?: 'Project_description_Document', document: any } | null | undefined, images?: Array<{ __typename?: 'Image', id: string, label?: string | null | undefined, image?: { __typename?: 'CloudImageFieldOutput', id: string, url: string, width: number, height: number } | { __typename?: 'LocalImageFieldOutput', id: string, url: string, width: number, height: number } | null | undefined }> | null | undefined }> | null | undefined };
+export type GetProjectsQuery = { __typename?: 'Query', projects?: Array<{ __typename?: 'Project', id: string, title?: string | null | undefined, demo?: string | null | undefined, source?: string | null | undefined, description?: { __typename?: 'Project_description_Document', document: any } | null | undefined, images?: Array<{ __typename?: 'Image', id: string, label?: string | null | undefined, image?: { __typename?: 'AzureStorageImageFieldOutputType', id: string, url: string, width: number, height: number } | null | undefined }> | null | undefined }> | null | undefined };
 
 export type GetProjectByIdQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type GetProjectByIdQuery = { __typename?: 'Query', project?: { __typename?: 'Project', id: string, title?: string | null | undefined, demo?: string | null | undefined, source?: string | null | undefined, description?: { __typename?: 'Project_description_Document', document: any } | null | undefined, images?: Array<{ __typename?: 'Image', id: string, label?: string | null | undefined, image?: { __typename?: 'CloudImageFieldOutput', id: string, url: string, width: number, height: number } | { __typename?: 'LocalImageFieldOutput', id: string, url: string, width: number, height: number } | null | undefined }> | null | undefined } | null | undefined };
+export type GetProjectByIdQuery = { __typename?: 'Query', project?: { __typename?: 'Project', id: string, title?: string | null | undefined, demo?: string | null | undefined, source?: string | null | undefined, description?: { __typename?: 'Project_description_Document', document: any } | null | undefined, images?: Array<{ __typename?: 'Image', id: string, label?: string | null | undefined, image?: { __typename?: 'AzureStorageImageFieldOutputType', id: string, url: string, width: number, height: number } | null | undefined }> | null | undefined } | null | undefined };
 
 export type GetImagesQueryVariables = Exact<{
   where?: InputMaybe<ImageWhereInput>;
 }>;
 
 
-export type GetImagesQuery = { __typename?: 'Query', images?: Array<{ __typename?: 'Image', id: string, label?: string | null | undefined, image?: { __typename?: 'CloudImageFieldOutput', id: string, url: string, width: number, height: number } | { __typename?: 'LocalImageFieldOutput', id: string, url: string, width: number, height: number } | null | undefined }> | null | undefined };
+export type GetImagesQuery = { __typename?: 'Query', images?: Array<{ __typename?: 'Image', id: string, label?: string | null | undefined, image?: { __typename?: 'AzureStorageImageFieldOutputType', id: string, url: string, width: number, height: number } | null | undefined }> | null | undefined };
 
 export type GetImageByIdQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type GetImageByIdQuery = { __typename?: 'Query', image?: { __typename?: 'Image', id: string, label?: string | null | undefined, image?: { __typename?: 'CloudImageFieldOutput', id: string, url: string, width: number, height: number } | { __typename?: 'LocalImageFieldOutput', id: string, url: string, width: number, height: number } | null | undefined } | null | undefined };
+export type GetImageByIdQuery = { __typename?: 'Query', image?: { __typename?: 'Image', id: string, label?: string | null | undefined, image?: { __typename?: 'AzureStorageImageFieldOutputType', id: string, url: string, width: number, height: number } | null | undefined } | null | undefined };
 
 export const ImageFragmentFragmentDoc = gql`
     fragment ImageFragment on Image {
@@ -693,7 +1331,7 @@ export const ProjectFragmentFragmentDoc = gql`
 }
     ${ImageFragmentFragmentDoc}`;
 export const GetProjectsDocument = gql`
-    query GetProjects($where: ProjectWhereInput = {}) {
+    query GetProjects($where: ProjectWhereInput = {status: {equals: published}}) {
   projects(where: $where) {
     ...ProjectFragment
   }
