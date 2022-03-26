@@ -66,15 +66,15 @@ export default function Home() {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ctx => {
-  const ssrCache = createSSRExchange()
-  const client = createUrqlClient(ssrCache)
+// export const getServerSideProps: GetServerSideProps = async ctx => {
+//   const ssrCache = createSSRExchange()
+//   const client = createUrqlClient(ssrCache)
 
-  await client.query(GetProjectsDocument).toPromise()
+//   await client.query(GetProjectsDocument).toPromise()
 
-  return {
-    props: {
-      urqlState: ssrCache.extractData(),
-    },
-  }
-}
+//   return {
+//     props: {
+//       urqlState: ssrCache.extractData(),
+//     },
+//   }
+// }

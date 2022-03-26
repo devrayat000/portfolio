@@ -12,6 +12,14 @@ export function createUrqlClient(ssr: SSRExchange) {
   return createClient({
     url: process.env.NEXT_PUBLIC_API_URL + '/api/graphql',
     exchanges: [dedupExchange, cacheExchange, ssr, multipartFetchExchange],
+    fetchOptions: {
+      // @ts-ignore next-line
+      headers: {
+        'x-api-key': process.env.NEXT_PUBLIC_API_KEY,
+      },
+      credentials: 'include',
+      mode: 'cors',
+    },
   })
 }
 

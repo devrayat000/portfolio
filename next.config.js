@@ -8,7 +8,11 @@ const nextConfig = {
   swcMinify: true,
   compress: true,
   images: {
-    domains: ['dev-rayat.herokuapp.com', 'localhost'],
+    domains: [
+      'dev-rayat.herokuapp.com',
+      'localhost',
+      'devrayatstorage.blob.core.windows.net',
+    ],
   },
 }
 
