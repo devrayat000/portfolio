@@ -26,12 +26,8 @@ export function createUrqlClient(ssr: SSRExchange) {
 export function createSSRExchange() {
   return ssrExchange({
     isClient: typeof window !== 'undefined',
-    // initialState: typeof window != 'undefined' ? window.__URQL_DATA__ : undefined,
   })
 }
 
-declare global {
-  interface Window {
-    __URQL_DATA__: SSRData
-  }
-}
+// docker run -p 10000:10000  -v c:/azurite:/data mcr.microsoft.com/azure-storage/azurite mcr.microsoft.com/azure-storage/azurite azurite-blob --blobHost 0.0.0.0
+// docker run -p 10000:10000 -p 10001:10001 -v c:/azurite:/data mcr.microsoft.com/azure-storage/azurite
