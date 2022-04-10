@@ -2,12 +2,13 @@ import Head from 'next/head'
 import Image from 'next/image'
 // import { query } from '.keystone/api'
 
-import { useGetProjectsQuery, GetProjectsDocument } from '$graphql/generated'
+// import { useGetProjectsQuery, GetProjectsDocument } from '$graphql/generated'
 // import { GetServerSideProps } from 'next'
 // import { createSSRExchange, createUrqlClient } from '$utils/urql_client'
-import { DocumentRenderer } from '@keystone-6/document-renderer'
-import { getImageUrl } from '$lib/utils/image-url'
+// import { DocumentRenderer } from '@keystone-6/document-renderer'
+// import { getImageUrl } from '$lib/utils/image-url'
 import Intro from '$lib/components/home/intro'
+import Services from '$lib/components/home/services'
 
 export default function Home() {
   return (
@@ -18,8 +19,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
+      <main className="max-w-4xl mx-auto">
         <Intro />
+        <Services />
       </main>
     </div>
   )

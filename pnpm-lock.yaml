@@ -20,6 +20,7 @@ specifiers:
   concurrently: ^7.0.0
   eslint: 7.32.0
   eslint-config-next: 12.0.7
+  flowbite: ^1.4.1
   graphql: '>=15.7.2 <16.0.0'
   graphql-tag: ^2.0.0
   next: ^12.1.0
@@ -58,6 +59,7 @@ devDependencies:
   concurrently: 7.1.0
   eslint: 7.32.0
   eslint-config-next: 12.0.7_75673dfa1936ce077bd471cd49e2b167
+  flowbite: 1.4.1
   postcss: 8.4.12
   tailwindcss: 3.0.23_autoprefixer@10.4.4
   typescript: 4.6.3
@@ -1356,6 +1358,10 @@ packages:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.13.0
+    dev: true
+
+  /@popperjs/core/2.11.5:
+    resolution: {integrity: sha512-9X2obfABZuDVLCgPK9aX0a/x4jaOEweTTWE2+9sr0Qqqevj2Uv5XorvusThmc9XGYpS9yI+fhh8RTafBtGposw==}
     dev: true
 
   /@rushstack/eslint-patch/1.1.2:
@@ -3001,6 +3007,13 @@ packages:
     resolution: {integrity: sha512-WIWGi2L3DyTUvUrwRKgGi9TwxQMUEqPOPQBVi71R96jZXJdFskXEmf54BoZaS1kknGODoIGASGEzBUYdyMCBJg==}
     dev: true
 
+  /flowbite/1.4.1:
+    resolution: {integrity: sha512-65QrhBUVa7BHGDLM1t1vySgS8unlxTw8PQfJXraTj5Fez+OE17XOTBuOSVk3DCDjAicWBydD+Gkmz53S/8IJ2A==}
+    dependencies:
+      '@popperjs/core': 2.11.5
+      mini-svg-data-uri: 1.4.4
+    dev: true
+
   /form-data-encoder/1.7.2:
     resolution: {integrity: sha512-qfqtYan3rxrnCk1VYaA4H+Ms9xdpPqvLZa6xmMgFvhO32x7/3J/ExcTd6qpxM0vH2GdMI+poehyBZvqfMTto8A==}
     dev: true
@@ -4014,6 +4027,11 @@ packages:
   /mimic-response/1.0.1:
     resolution: {integrity: sha512-j5EctnkH7amfV/q5Hgmoal1g2QHFJRraOtmx0JpIqkxhBhI/lJSl1nMpQ45hVarwNETOoWEimndZ4QK0RHxuxQ==}
     engines: {node: '>=4'}
+    dev: true
+
+  /mini-svg-data-uri/1.4.4:
+    resolution: {integrity: sha512-r9deDe9p5FJUPZAk3A59wGH7Ii9YrjjWw0jmw/liSbHl2CHiyXj6FcDXDu2K3TjVAXqiJdaw3xxwlZZr9E6nHg==}
+    hasBin: true
     dev: true
 
   /minimatch/3.1.2:

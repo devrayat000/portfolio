@@ -6,5 +6,10 @@
   html,
   body {
     @apply prose max-w-screen-xl;
+    background-color: #F0F0F6;
+  }
+
+  p {
+    @apply text-paragraph;
   }
 }
