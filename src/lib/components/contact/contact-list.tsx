@@ -6,6 +6,8 @@ import {
   Group,
   SimpleGrid,
   Box,
+  Anchor,
+  AnchorProps,
 } from '@mantine/core'
 import { Sun, Phone, MapPin, At } from 'tabler-icons-react'
 
@@ -46,8 +48,7 @@ const useStyles = createStyles((theme, { variant }: ContactIconStyles) => ({
   },
 }))
 
-interface ContactIconProps
-  extends Omit<React.ComponentPropsWithoutRef<'div'>, 'title'> {
+interface ContactIconProps extends Omit<AnchorProps<'a'>, 'title' | 'variant'> {
   icon: React.FC<any>
   title: React.ReactNode
   description: React.ReactNode
@@ -65,7 +66,11 @@ function ContactIcon({
   const { classes, cx } = useStyles({ variant }, { name: 'contact-list' })
 
   return (
-    <div className={cx(classes.wrapper, className)} {...others}>
+    <Anchor
+      className={cx(classes.wrapper, className)}
+      underline={false}
+      {...others}
+    >
       {variant === 'gradient' ? (
         <ThemeIcon size={40} radius="md" className={classes.icon}>
           <Icon size={24} />
@@ -80,11 +85,9 @@ function ContactIcon({
         <Text size="xs" className={classes.title}>
           {title}
         </Text>
-        <Text className={classes.description} component="p">
-          {description}
-        </Text>
+        <Text className={classes.description}>{description}</Text>
       </div>
-    </div>
+    </Anchor>
   )
 }
 
@@ -94,9 +97,28 @@ interface ContactIconsListProps {
 }
 
 const MOCKDATA: ContactIconProps[] = [
-  { title: 'Email', description: 'hello@mantine.dev', icon: At },
-  { title: 'Phone', description: '+49 (800) 335 35 35', icon: Phone },
-  { title: 'Address', description: '844 Morris Park avenue', icon: MapPin },
+  {
+    title: 'Email',
+    description: 'dev.rayat000@gmail.com',
+    href: 'mailto:dev.rayat000@gmail.com',
+    icon: At,
+  },
+  {
+    title: 'Phone',
+    description: '+880 (17) 41 891 955',
+    href: 'call:+8801741891955',
+    icon: Phone,
+  },
+  {
+    title: 'Address',
+    description: '844 Morris Park avenue',
+    target: '_blank',
+    href:
+      'https://www.google.com/maps/search/' +
+      encodeURIComponent('844 Morris Park avenue'),
+
+    icon: MapPin,
+  },
   { title: 'Working hours', description: '8 a.m. – 11 p.m.', icon: Sun },
 ]
 

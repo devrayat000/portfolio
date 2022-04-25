@@ -85,7 +85,10 @@ export default function Intro() {
               hooks to cover you in any situation
             </Text>
 
-            <Button size="md" rightIcon={<ArrowRight size={16} />}>
+            <Button
+              size="md"
+              rightIcon={<ArrowRight size={18} strokeWidth={3} />}
+            >
               Hire Me
             </Button>
           </div>

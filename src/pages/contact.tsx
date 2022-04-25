@@ -9,6 +9,7 @@ import {
   SimpleGrid,
   createStyles,
 } from '@mantine/core'
+import { Send } from 'tabler-icons-react'
 
 const useStyles = createStyles(theme => {
   const BREAKPOINT = theme.fn.smallerThan('sm')
@@ -48,37 +49,21 @@ const useStyles = createStyles(theme => {
       marginTop: -12,
     },
 
-    fieldInput: {
-      flex: 1,
-
-      '& + &': {
-        marginLeft: theme.spacing.md,
-
-        [BREAKPOINT]: {
-          marginLeft: 0,
-          marginTop: theme.spacing.md,
-        },
-      },
-    },
-
-    fieldsGroup: {
-      display: 'flex',
-
-      [BREAKPOINT]: {
-        flexDirection: 'column',
-      },
-    },
-
     contacts: {
       boxSizing: 'border-box',
       position: 'relative',
       borderRadius: theme.radius.lg - 2,
-      //   backgroundImage: `url(${bg.src})`,
-      //   backgroundSize: 'cover',
-      //   backgroundPosition: 'center',
-      backgroundImage: `linear-gradient(135deg, ${
-        theme.colors[theme.primaryColor][6]
-      } 0%, ${theme.colors[theme.primaryColor][4]} 100%)`,
+      backgroundImage: `radial-gradient(at 0% 100%,
+          ${theme.colors[theme.primaryColor][8]} 0%,
+          ${theme.colors[theme.primaryColor][8]} 20%,
+          ${theme.colors[theme.primaryColor][7]} 20%,
+          ${theme.colors[theme.primaryColor][7]} 40%,
+          ${theme.colors[theme.primaryColor][6]} 40%,
+          ${theme.colors[theme.primaryColor][6]} 60%,
+          ${theme.colors[theme.primaryColor][5]} 60%,
+          ${theme.colors[theme.primaryColor][5]} 80%,
+          ${theme.colors[theme.primaryColor][4]} 80%,
+          ${theme.colors[theme.primaryColor][4]} 100%)`,
       border: '1px solid transparent',
       padding: theme.spacing.xl,
       flex: '0 0 280px',
@@ -91,7 +76,6 @@ const useStyles = createStyles(theme => {
 
     title: {
       marginBottom: theme.spacing.xl * 1.5,
-      fontFamily: `Greycliff CF, ${theme.fontFamily}`,
 
       [BREAKPOINT]: {
         marginBottom: theme.spacing.xl,
@@ -117,7 +101,9 @@ export default function ContactPage() {
             size="lg"
             weight={700}
             className={classes.title}
-            sx={{ color: '#fff' }}
+            sx={theme => ({
+              color: theme.white,
+            })}
           >
             Contact information
           </Text>
@@ -153,7 +139,13 @@ export default function ContactPage() {
             />
 
             <Group position="right" mt="md">
-              <Button type="submit" className={classes.control}>
+              <Button
+                type="submit"
+                className={classes.control}
+                rightIcon={
+                  <Send size={20} style={{ transform: 'rotate(45deg)' }} />
+                }
+              >
                 Send message
               </Button>
             </Group>

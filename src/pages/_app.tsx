@@ -6,8 +6,8 @@ import type { SSRData } from '@urql/core/dist/types/exchanges/ssr'
 
 import { createUrqlClient, createSSRExchange } from '$lib/utils/urql_client'
 import ThemeProvider from '$lib/components/common/theme-provider'
-import '../styles/globals.css'
-import { AppShell, createStyles } from '@mantine/core'
+// import '../styles/globals.css'
+import { AppShell, createStyles, ScrollArea } from '@mantine/core'
 import MyNavbar from '$lib/components/home/navbar'
 import MyAside from '$lib/components/home/aside'
 
@@ -34,7 +34,9 @@ const MyAppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         main: classes.main,
       }}
     >
-      {children}
+      <ScrollArea type="scroll" style={{ height: '100vh' }}>
+        {children}
+      </ScrollArea>
     </AppShell>
   )
 }
