@@ -16,7 +16,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "strictPropertyInitialization": false,
-    "noImplicitOverride": true,
+    "noImplicitOverride": false,
     "removeComments": true,
     "jsx": "preserve",
     "baseUrl": "./src",

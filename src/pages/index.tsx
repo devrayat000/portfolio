@@ -9,8 +9,16 @@ import Image from 'next/image'
 // import { getImageUrl } from '$lib/utils/image-url'
 import Intro from '$lib/components/home/intro'
 import Services from '$lib/components/home/services'
+import { AppShell, Aside, createStyles, Navbar } from '@mantine/core'
+
+const useStyles = createStyles(theme => ({
+  main: {
+    backgroundColor: '#f0f0f6',
+  },
+}))
 
 export default function Home() {
+  const { classes } = useStyles()
   return (
     <div>
       <Head>
@@ -19,10 +27,20 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="max-w-4xl mx-auto">
+      <AppShell
+        navbarOffsetBreakpoint="md"
+        asideOffsetBreakpoint="md"
+        navbar={
+          <Navbar width={{ base: 280 }} p="xs">
+            hi
+          </Navbar>
+        }
+        aside={<Aside width={{ base: 80 }}>A</Aside>}
+        classNames={{ main: classes.main }}
+      >
         <Intro />
         <Services />
-      </main>
+      </AppShell>
     </div>
   )
 }
