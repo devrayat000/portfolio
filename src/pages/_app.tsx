@@ -7,6 +7,37 @@ import type { SSRData } from '@urql/core/dist/types/exchanges/ssr'
 import { createUrqlClient, createSSRExchange } from '$lib/utils/urql_client'
 import ThemeProvider from '$lib/components/common/theme-provider'
 import '../styles/globals.css'
+import { AppShell, createStyles } from '@mantine/core'
+import MyNavbar from '$lib/components/home/navbar'
+import MyAside from '$lib/components/home/aside'
+
+const useStyles = createStyles(theme => ({
+  main: {
+    backgroundColor:
+      theme.colorScheme == 'light'
+        ? theme.colors.gray[1]
+        : theme.colors.gray[8],
+    paddingTop: 0,
+  },
+}))
+
+const MyAppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { classes } = useStyles()
+
+  return (
+    <AppShell
+      navbarOffsetBreakpoint="md"
+      asideOffsetBreakpoint="md"
+      navbar={<MyNavbar />}
+      aside={<MyAside />}
+      classNames={{
+        main: classes.main,
+      }}
+    >
+      {children}
+    </AppShell>
+  )
+}
 
 const MyApp: NextPage<AppProps> = ({ Component, pageProps }) => {
   const ssrCache = useMemo(createSSRExchange, [])
@@ -18,7 +49,9 @@ const MyApp: NextPage<AppProps> = ({ Component, pageProps }) => {
   return (
     <Provider value={client}>
       <ThemeProvider>
-        <Component {...(pageProps as any)} />
+        <MyAppShell>
+          <Component {...(pageProps as any)} />
+        </MyAppShell>
       </ThemeProvider>
     </Provider>
   )

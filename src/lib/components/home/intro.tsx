@@ -1,29 +1,102 @@
-import { Button, Paper, Title, Text } from '@mantine/core'
+import {
+  createStyles,
+  Image,
+  Container,
+  Title,
+  Button,
+  Text,
+  Paper,
+} from '@mantine/core'
 import { ArrowRight } from 'tabler-icons-react'
 
-interface IntroProps {}
+const useStyles = createStyles(theme => ({
+  inner: {
+    display: 'flex',
+    justifyContent: 'space-between',
+  },
 
-const Intro: React.FC<IntroProps> = props => {
+  content: {
+    maxWidth: 480,
+    marginRight: theme.spacing.xl * 3,
+
+    [theme.fn.smallerThan('md')]: {
+      maxWidth: '100%',
+      marginRight: 0,
+    },
+  },
+
+  title: {
+    fontSize: 40,
+    lineHeight: 1.4,
+    letterSpacing: 1.1,
+    fontWeight: 900,
+
+    [theme.fn.smallerThan('xs')]: {
+      fontSize: 20,
+    },
+  },
+
+  control: {
+    [theme.fn.smallerThan('xs')]: {
+      flex: 1,
+    },
+  },
+
+  image: {
+    flex: 1,
+
+    [theme.fn.smallerThan('md')]: {
+      display: 'none',
+    },
+  },
+
+  highlight: {
+    position: 'relative',
+    backgroundColor:
+      theme.colorScheme === 'dark'
+        ? theme.fn.rgba(theme.colors[theme.primaryColor][5], 0.55)
+        : theme.colors[theme.primaryColor][1],
+    borderRadius: theme.radius.sm,
+    padding: '4px 12px',
+  },
+}))
+
+export default function Intro() {
+  const { classes } = useStyles()
+
   return (
-    <Paper p={12 * 4} shadow="md" radius="sm" mb="xl">
-      <Title order={1}>
-        I’m Zul Ikram Musaddik Rayat
-        <br />
-        <Text color="yellow" size="lg" component="span">
-          Full-stack
-        </Text>{' '}
-        Developer
-      </Title>
-      <Text variant="text" component="p" sx={{ maxWidth: '50%' }}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Et, volutpat
-        feugiat placerat lobortis. Natoque rutrum semper sed suspendisse nunc
-        lectus.
-      </Text>
-      <Button type="button" size="md" rightIcon={<ArrowRight size={16} />}>
-        Hire Me
-      </Button>
-    </Paper>
+    <div>
+      <Container>
+        <Paper
+          className={classes.inner}
+          p={12 * 4}
+          shadow="md"
+          radius="sm"
+          mb="xl"
+        >
+          <div className={classes.content}>
+            <Title className={classes.title} order={1}>
+              I’m Musaddik Rayat <br />
+              <span className={classes.highlight}>Full-stack</span> Developer
+            </Title>
+            <Text color="dimmed" my="xl" component="p">
+              Build fully functional accessible web applications faster than
+              ever – Mantine includes more than 120 customizable components and
+              hooks to cover you in any situation
+            </Text>
+
+            <Button size="md" rightIcon={<ArrowRight size={16} />}>
+              Hire Me
+            </Button>
+          </div>
+          <Image
+            src="/images/rayat2.png"
+            alt="Zul ikram Musaddik Rayat"
+            withPlaceholder
+            className={classes.image}
+          />
+        </Paper>
+      </Container>
+    </div>
   )
 }
-
-export default Intro

@@ -12,6 +12,7 @@ const Services = (props: Props) => {
         <Text
           component="p"
           align="center"
+          color="dimmed"
           sx={{
             maxWidth: '50%',
           }}
