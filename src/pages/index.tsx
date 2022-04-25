@@ -9,11 +9,16 @@ import Image from 'next/image'
 // import { getImageUrl } from '$lib/utils/image-url'
 import Intro from '$lib/components/home/intro'
 import Services from '$lib/components/home/services'
-import { AppShell, Aside, createStyles, Navbar } from '@mantine/core'
+import { AppShell, createStyles, Navbar, ScrollArea } from '@mantine/core'
+import MyAside from '$lib/components/home/aside'
 
 const useStyles = createStyles(theme => ({
   main: {
-    backgroundColor: '#f0f0f6',
+    backgroundColor:
+      theme.colorScheme == 'light'
+        ? theme.colors.gray[1]
+        : theme.colors.gray[8],
+    paddingTop: 0,
   },
 }))
 
@@ -35,11 +40,15 @@ export default function Home() {
             hi
           </Navbar>
         }
-        aside={<Aside width={{ base: 80 }}>A</Aside>}
-        classNames={{ main: classes.main }}
+        aside={<MyAside />}
+        classNames={{
+          main: classes.main,
+        }}
       >
-        <Intro />
-        <Services />
+        <ScrollArea type="scroll" style={{ height: '100vh' }}>
+          <Intro />
+          <Services />
+        </ScrollArea>
       </AppShell>
     </div>
   )
