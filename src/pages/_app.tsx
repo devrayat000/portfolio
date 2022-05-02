@@ -6,10 +6,10 @@ import type { SSRData } from '@urql/core/dist/types/exchanges/ssr'
 
 import { createUrqlClient, createSSRExchange } from '$lib/utils/urql_client'
 import ThemeProvider from '$lib/components/common/theme-provider'
-// import '../styles/globals.css'
 import { AppShell, createStyles, ScrollArea } from '@mantine/core'
 import MyNavbar from '$lib/components/home/navbar'
 import MyAside from '$lib/components/home/aside'
+import '../styles/globals.css'
 
 const useStyles = createStyles(theme => ({
   main: {

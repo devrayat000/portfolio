@@ -72,7 +72,7 @@ export default function Intro() {
           p={12 * 4}
           shadow="md"
           radius="sm"
-          mb="xl"
+          // mb="xl"
         >
           <div className={classes.content}>
             <Title className={classes.title} order={1}>
@@ -94,7 +94,7 @@ export default function Intro() {
           </div>
           <Image
             src="/images/rayat2.png"
-            alt="Zul ikram Musaddik Rayat"
+            alt="Zul Ikram Musaddik Rayat"
             withPlaceholder
             className={classes.image}
           />
