@@ -6,10 +6,10 @@ const MyNavbar = () => {
       <Center>
         <Indicator
           inline
-          size={16}
-          offset={7}
+          size={20}
+          offset={23}
           position="bottom-end"
-          color="red"
+          color="green"
           withBorder
         >
           <Avatar

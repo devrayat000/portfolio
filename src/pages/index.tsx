@@ -1,18 +1,23 @@
 import Head from 'next/head'
 // import Image from 'next/image'
 // import { query } from '.keystone/api'
-
-// import { useGetProjectsQuery, GetProjectsDocument } from '$graphql/generated'
-// import { GetServerSideProps } from 'next'
-// import { createSSRExchange, createUrqlClient } from '$utils/urql_client'
+//
+import { useGetProjectsQuery, GetProjectsDocument } from '$graphql/generated'
+import { GetServerSideProps, GetStaticProps } from 'next'
+import {
+  createSSRExchange,
+  createUrqlClient,
+  getClientOptions,
+} from '$lib/utils/urql_client'
 // import { DocumentRenderer } from '@keystone-6/document-renderer'
 // import { getImageUrl } from '$lib/utils/image-url'
 import Intro from '$lib/components/home/intro'
 import Services from '$lib/components/home/services'
 import Projects from '$lib/components/home/projects'
 import { Stack } from '@mantine/core'
+import { withUrqlClient, initUrqlClient } from 'next-urql'
 
-export default function Home() {
+function Home() {
   return (
     <Stack align="stretch" spacing="xl">
       <Head>
@@ -39,3 +44,22 @@ export default function Home() {
 //     },
 //   }
 // }
+
+export const getStaticProps: GetStaticProps = async context => {
+  const ssrCache = createSSRExchange()
+  const client = initUrqlClient(getClientOptions(ssrCache), false)!
+
+  await client.query(GetProjectsDocument).toPromise()
+
+  return {
+    props: {
+      urqlState: ssrCache.extractData(),
+    },
+    revalidate: 600,
+  }
+}
+
+export default withUrqlClient(
+  ssr => getClientOptions(ssr),
+  { ssr: false, neverSuspend: true } // Important so we don't wrap our component in getInitialProps
+)(Home)

@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 import type { NextPage } from 'next'
 import { Provider } from 'urql'
 import type { AppProps as IAppProps } from 'next/app'
+import { AnimatePresence } from 'framer-motion'
 import type { SSRData } from '@urql/core/dist/types/exchanges/ssr'
 
 import { createUrqlClient, createSSRExchange } from '$lib/utils/urql_client'
@@ -10,6 +11,8 @@ import { AppShell, createStyles, ScrollArea } from '@mantine/core'
 import MyNavbar from '$lib/components/home/navbar'
 import MyAside from '$lib/components/home/aside'
 import '../styles/globals.css'
+import { QueryClientProvider } from 'react-query'
+import { createQueryClient } from '$lib/utils/query_client'
 
 const useStyles = createStyles(theme => ({
   main: {
@@ -41,21 +44,29 @@ const MyAppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   )
 }
 
-const MyApp: NextPage<AppProps> = ({ Component, pageProps }) => {
+const MyApp: NextPage<AppProps> = ({
+  Component,
+  pageProps: { urqlState, ...pageProps },
+}) => {
   const ssrCache = useMemo(createSSRExchange, [])
-  if (pageProps.urqlState) {
-    ssrCache.restoreData(pageProps.urqlState)
+  if (urqlState) {
+    ssrCache.restoreData(urqlState)
   }
   const client = useMemo(() => createUrqlClient(ssrCache), [ssrCache])
+  const queryClient = useMemo(() => createQueryClient(), [])
 
   return (
-    <Provider value={client}>
-      <ThemeProvider>
-        <MyAppShell>
-          <Component {...(pageProps as any)} />
-        </MyAppShell>
-      </ThemeProvider>
-    </Provider>
+    // <Provider value={client}>
+    //   <QueryClientProvider client={queryClient}>
+    <ThemeProvider>
+      <MyAppShell>
+        <AnimatePresence exitBeforeEnter>
+          <Component {...pageProps} />
+        </AnimatePresence>
+      </MyAppShell>
+    </ThemeProvider>
+    //   </QueryClientProvider>
+    // </Provider>
   )
 }
 
