@@ -8,8 +8,10 @@ import {
   Title,
   Text,
   Group,
+  ScrollArea,
   ActionIcon,
   useMantineTheme,
+  Mark,
 } from '@mantine/core'
 import { motion, useMotionValue, useTransform } from 'framer-motion'
 import {
@@ -20,9 +22,15 @@ import {
   type Icon,
 } from 'tabler-icons-react'
 
+import { slideY, stagger } from '$lib/animation'
+import HumanLanguageSkill from '../common/nav/human-language-skill'
+import { Suspense } from 'react'
+import Info from '../common/nav/info-item'
+
 interface SocialIconProp {
   icon: Icon
   link?: string
+  label?: string
 }
 
 const socialActions: SocialIconProp[] = [
@@ -43,51 +51,60 @@ const socialActions: SocialIconProp[] = [
 const MyNavbar = () => {
   const theme = useMantineTheme()
   return (
-    <Navbar width={{ base: 280 }} p="sm">
-      {/* <Center> */}
-      <Stack align="center">
-        <motion.div variants={pageFade}>
-          <Indicator
-            inline
-            size={20}
-            offset={23}
-            position="bottom-end"
-            color="green"
-            withBorder
-          >
-            <Avatar
-              src="/images/rayat.jpg"
-              alt="Me"
-              radius={160}
-              size={160}
-
-              //   withPlaceholder
-            />
-          </Indicator>
-        </motion.div>
-        <Title order={4}>Zul Ikram Musaddik Rayat</Title>
-        <Text variant="text" color="dimmed">
-          Full-Stack Developer
-        </Text>
-        <Group>
-          {socialActions.map((s, index) => (
-            <ActionIcon
-              key={index}
-              color="primaryColor"
-              size="lg"
-              radius="xl"
-              variant="filled"
+    <ScrollArea type="scroll" style={{ height: '100vh' }}>
+      <Navbar width={{ base: 280 }} p="sm" py="xl">
+        <Stack align="center">
+          <motion.div variants={pageFade}>
+            <Indicator
+              inline
+              size={20}
+              offset={23}
+              position="bottom-end"
+              color="green"
+              withBorder
             >
-              <s.icon
-                color={theme.colorScheme === 'dark' ? theme.black : theme.white}
+              <Avatar
+                src="/images/rayat.jpg"
+                alt="Me"
+                radius={160}
+                size={160}
+
+                //   withPlaceholder
               />
-            </ActionIcon>
-          ))}
-        </Group>
-        <Divider my="sm" size="sm" style={{ alignSelf: 'stretch' }} />
-      </Stack>
-      {/* </Center> */}
-    </Navbar>
+            </Indicator>
+          </motion.div>
+          <Title order={4}>Zul Ikram Musaddik Rayat</Title>
+          <Text variant="text" color="dimmed">
+            Full-Stack Developer
+          </Text>
+          <motion.div variants={stagger}>
+            <Group>
+              {socialActions.map((s, index) => (
+                <ActionIcon<typeof motion.a>
+                  key={index}
+                  color="primaryColor"
+                  size="lg"
+                  radius="xl"
+                  variant="filled"
+                  component={motion.a}
+                  variants={slideY(10)}
+                >
+                  <s.icon
+                    color={
+                      theme.colorScheme === 'dark' ? theme.black : theme.white
+                    }
+                  />
+                </ActionIcon>
+              ))}
+            </Group>
+          </motion.div>
+          <Divider my="sm" size="sm" style={{ alignSelf: 'stretch' }} />
+          <Info />
+          <Divider my="sm" size="sm" style={{ alignSelf: 'stretch' }} />
+          <HumanLanguageSkill />
+        </Stack>
+      </Navbar>
+    </ScrollArea>
   )
 }
 

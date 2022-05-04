@@ -19,6 +19,7 @@ specifiers:
   '@types/react-dom': ^18.0.2
   '@urql/core': ^2.4.4
   '@urql/exchange-multipart-fetch': ^0.1.14
+  '@urql/exchange-suspense': ^1.9.2
   concurrently: ^7.0.0
   eslint: 7.32.0
   eslint-config-next: 12.0.7
@@ -30,6 +31,7 @@ specifiers:
   react: 18.1.0
   react-dom: 18.1.0
   react-error-boundary: ^3.1.4
+  react-is: ^18.1.0
   react-query: ^3.38.1
   sharp: ^0.30.4
   tabler-icons-react: ^1.46.0
@@ -42,6 +44,7 @@ dependencies:
   '@mantine/hooks': 4.2.2_react@18.1.0
   '@mantine/next': 4.2.2_e721045221d5ae1bba0fcd333282dc3b
   '@urql/core': 2.4.4_graphql@15.8.0
+  '@urql/exchange-suspense': 1.9.2_graphql@15.8.0+react@18.1.0
   framer-motion: 6.3.3_react-dom@18.1.0+react@18.1.0
   graphql: 15.8.0
   graphql-tag: 2.12.6_graphql@15.8.0
@@ -50,6 +53,7 @@ dependencies:
   react: 18.1.0
   react-dom: 18.1.0_react@18.1.0
   react-error-boundary: 3.1.4_react@18.1.0
+  react-is: 18.1.0
   react-query: 3.38.1_react-dom@18.1.0+react@18.1.0
   sharp: 0.30.4
   tabler-icons-react: 1.46.0_react@18.1.0
@@ -1960,6 +1964,19 @@ packages:
       graphql: 15.8.0
       wonka: 4.0.15
     dev: true
+
+  /@urql/exchange-suspense/1.9.2_graphql@15.8.0+react@18.1.0:
+    resolution: {integrity: sha512-44imfGv55Fpt2xO4olEUYyV2SL3F8F9wSBFZHW6p6F9bLtL8FVpNm8FpHpz0RiMW3RdYE+9xew63R9crZHS4tg==}
+    deprecated: This package is obsolete and Suspense support is included in urql since v2.0.0
+    peerDependencies:
+      graphql: ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0
+      react: '>= 16.8.0'
+    dependencies:
+      '@urql/core': 2.4.4_graphql@15.8.0
+      graphql: 15.8.0
+      react: 18.1.0
+      wonka: 4.0.15
+    dev: false
 
   /abort-controller/3.0.0:
     resolution: {integrity: sha512-h8lQ8tacZYnR3vNQTgibj+tODHI5/+l06Au2Pcriv/Gmet0eaj4TwWH41sO9wnHDiQsEj19q0drzdWdeAHtweg==}
@@ -5083,6 +5100,10 @@ packages:
 
   /react-is/16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
+
+  /react-is/18.1.0:
+    resolution: {integrity: sha512-Fl7FuabXsJnV5Q1qIOQwx/sagGF18kogb4gpfcG4gjLBWO0WDiiz1ko/ExayuxE7InyQkBLkxRFG5oxY6Uu3Kg==}
+    dev: false
 
   /react-popper/2.2.5_c5208ccc89c9abb9b99c6a1c942e2152:
     resolution: {integrity: sha512-kxGkS80eQGtLl18+uig1UIf9MKixFSyPxglsgLBxlYnyDf65BiY9B3nZSc6C9XUNDgStROB0fMQlTEz1KxGddw==}

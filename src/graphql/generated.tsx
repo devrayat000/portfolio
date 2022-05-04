@@ -1,8 +1,7 @@
 import gql from 'graphql-tag';
-import * as React from 'react';
 import * as Urql from 'urql';
 export type Maybe<T> = T | null;
-export type InputMaybe<T> = T | undefined;
+export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
@@ -21,104 +20,165 @@ export type Scalars = {
   Upload: any;
 };
 
-export interface Admin {
+export type Admin = {
   __typename?: 'Admin';
+  address?: Maybe<Scalars['String']>;
+  age?: Maybe<Scalars['Int']>;
   createdAt?: Maybe<Scalars['DateTime']>;
   email?: Maybe<Scalars['String']>;
+  freelance?: Maybe<AdminFreelanceType>;
   id: Scalars['ID'];
+  languageSkills?: Maybe<Array<LanguageSkill>>;
+  languageSkillsCount?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
   password?: Maybe<PasswordState>;
-}
+  residence?: Maybe<Scalars['String']>;
+};
 
-export interface AdminAuthenticationWithPasswordFailure {
+
+export type AdminlanguageSkillsArgs = {
+  orderBy?: Array<LanguageSkillOrderByInput>;
+  skip?: Scalars['Int'];
+  take?: InputMaybe<Scalars['Int']>;
+  where?: LanguageSkillWhereInput;
+};
+
+
+export type AdminlanguageSkillsCountArgs = {
+  where?: LanguageSkillWhereInput;
+};
+
+export type AdminAuthenticationWithPasswordFailure = {
   __typename?: 'AdminAuthenticationWithPasswordFailure';
   message: Scalars['String'];
-}
+};
 
 export type AdminAuthenticationWithPasswordResult = AdminAuthenticationWithPasswordFailure | AdminAuthenticationWithPasswordSuccess;
 
-export interface AdminAuthenticationWithPasswordSuccess {
+export type AdminAuthenticationWithPasswordSuccess = {
   __typename?: 'AdminAuthenticationWithPasswordSuccess';
   item: Admin;
   sessionToken: Scalars['String'];
-}
+};
 
-export interface AdminCreateInput {
+export type AdminCreateInput = {
+  address?: InputMaybe<Scalars['String']>;
+  age?: InputMaybe<Scalars['Int']>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   email?: InputMaybe<Scalars['String']>;
+  freelance?: InputMaybe<AdminFreelanceType>;
+  languageSkills?: InputMaybe<LanguageSkillRelateToManyForCreateInput>;
   name?: InputMaybe<Scalars['String']>;
   password?: InputMaybe<Scalars['String']>;
-}
+  residence?: InputMaybe<Scalars['String']>;
+};
 
-export interface AdminOrderByInput {
+export const enum AdminFreelanceType {
+  AVAILABLE = 'available',
+  UNAVAILABLE = 'unavailable'
+};
+
+export type AdminFreelanceTypeNullableFilter = {
+  equals?: InputMaybe<AdminFreelanceType>;
+  in?: InputMaybe<Array<AdminFreelanceType>>;
+  not?: InputMaybe<AdminFreelanceTypeNullableFilter>;
+  notIn?: InputMaybe<Array<AdminFreelanceType>>;
+};
+
+export type AdminOrderByInput = {
+  address?: InputMaybe<OrderDirection>;
+  age?: InputMaybe<OrderDirection>;
   createdAt?: InputMaybe<OrderDirection>;
   email?: InputMaybe<OrderDirection>;
+  freelance?: InputMaybe<OrderDirection>;
   id?: InputMaybe<OrderDirection>;
   name?: InputMaybe<OrderDirection>;
-}
+  residence?: InputMaybe<OrderDirection>;
+};
 
-export interface AdminUpdateArgs {
+export type AdminRelateToOneForCreateInput = {
+  connect?: InputMaybe<AdminWhereUniqueInput>;
+  create?: InputMaybe<AdminCreateInput>;
+};
+
+export type AdminRelateToOneForUpdateInput = {
+  connect?: InputMaybe<AdminWhereUniqueInput>;
+  create?: InputMaybe<AdminCreateInput>;
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+};
+
+export type AdminUpdateArgs = {
   data: AdminUpdateInput;
   where: AdminWhereUniqueInput;
-}
+};
 
-export interface AdminUpdateInput {
+export type AdminUpdateInput = {
+  address?: InputMaybe<Scalars['String']>;
+  age?: InputMaybe<Scalars['Int']>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   email?: InputMaybe<Scalars['String']>;
+  freelance?: InputMaybe<AdminFreelanceType>;
+  languageSkills?: InputMaybe<LanguageSkillRelateToManyForUpdateInput>;
   name?: InputMaybe<Scalars['String']>;
   password?: InputMaybe<Scalars['String']>;
-}
+  residence?: InputMaybe<Scalars['String']>;
+};
 
-export interface AdminWhereInput {
+export type AdminWhereInput = {
   AND?: InputMaybe<Array<AdminWhereInput>>;
   NOT?: InputMaybe<Array<AdminWhereInput>>;
   OR?: InputMaybe<Array<AdminWhereInput>>;
+  address?: InputMaybe<StringFilter>;
+  age?: InputMaybe<IntFilter>;
   createdAt?: InputMaybe<DateTimeNullableFilter>;
   email?: InputMaybe<StringFilter>;
+  freelance?: InputMaybe<AdminFreelanceTypeNullableFilter>;
   id?: InputMaybe<IDFilter>;
+  languageSkills?: InputMaybe<LanguageSkillManyRelationFilter>;
   name?: InputMaybe<StringFilter>;
-}
+  residence?: InputMaybe<StringFilter>;
+};
 
-export interface AdminWhereUniqueInput {
+export type AdminWhereUniqueInput = {
   email?: InputMaybe<Scalars['String']>;
   id?: InputMaybe<Scalars['ID']>;
-}
+};
 
-export interface ApiKey {
+export type ApiKey = {
   __typename?: 'ApiKey';
   createdAt?: Maybe<Scalars['DateTime']>;
   id: Scalars['ID'];
-}
+};
 
-export interface ApiKeyCreateInput {
+export type ApiKeyCreateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
-}
+};
 
-export interface ApiKeyOrderByInput {
+export type ApiKeyOrderByInput = {
   createdAt?: InputMaybe<OrderDirection>;
   id?: InputMaybe<OrderDirection>;
-}
+};
 
-export interface ApiKeyUpdateArgs {
+export type ApiKeyUpdateArgs = {
   data: ApiKeyUpdateInput;
   where: ApiKeyWhereUniqueInput;
-}
+};
 
-export interface ApiKeyUpdateInput {
+export type ApiKeyUpdateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
-}
+};
 
-export interface ApiKeyWhereInput {
+export type ApiKeyWhereInput = {
   AND?: InputMaybe<Array<ApiKeyWhereInput>>;
   NOT?: InputMaybe<Array<ApiKeyWhereInput>>;
   OR?: InputMaybe<Array<ApiKeyWhereInput>>;
   createdAt?: InputMaybe<DateTimeNullableFilter>;
   id?: InputMaybe<IDFilter>;
-}
+};
 
-export interface ApiKeyWhereUniqueInput {
+export type ApiKeyWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']>;
-}
+};
 
 export type AuthenticatedItem = Admin;
 
@@ -129,12 +189,12 @@ export const enum AzureStorageImageExtension {
   WEBP = 'webp'
 };
 
-export interface AzureStorageImageFieldInput {
+export type AzureStorageImageFieldInput = {
   ref?: InputMaybe<Scalars['String']>;
   upload?: InputMaybe<Scalars['Upload']>;
-}
+};
 
-export interface AzureStorageImageFieldOutput {
+export type AzureStorageImageFieldOutput = {
   extension: AzureStorageImageExtension;
   filesize: Scalars['Int'];
   height: Scalars['Int'];
@@ -142,9 +202,9 @@ export interface AzureStorageImageFieldOutput {
   ref: Scalars['String'];
   url: Scalars['String'];
   width: Scalars['Int'];
-}
+};
 
-export interface AzureStorageImageFieldOutputType extends AzureStorageImageFieldOutput {
+export type AzureStorageImageFieldOutputType = AzureStorageImageFieldOutput & {
   __typename?: 'AzureStorageImageFieldOutputType';
   extension: AzureStorageImageExtension;
   filesize: Scalars['Int'];
@@ -153,15 +213,15 @@ export interface AzureStorageImageFieldOutputType extends AzureStorageImageField
   ref: Scalars['String'];
   url: Scalars['String'];
   width: Scalars['Int'];
-}
+};
 
-export interface CreateInitialAdminInput {
+export type CreateInitialAdminInput = {
   email?: InputMaybe<Scalars['String']>;
   name?: InputMaybe<Scalars['String']>;
   password?: InputMaybe<Scalars['String']>;
-}
+};
 
-export interface DateTimeFilter {
+export type DateTimeFilter = {
   equals?: InputMaybe<Scalars['DateTime']>;
   gt?: InputMaybe<Scalars['DateTime']>;
   gte?: InputMaybe<Scalars['DateTime']>;
@@ -170,9 +230,9 @@ export interface DateTimeFilter {
   lte?: InputMaybe<Scalars['DateTime']>;
   not?: InputMaybe<DateTimeFilter>;
   notIn?: InputMaybe<Array<Scalars['DateTime']>>;
-}
+};
 
-export interface DateTimeNullableFilter {
+export type DateTimeNullableFilter = {
   equals?: InputMaybe<Scalars['DateTime']>;
   gt?: InputMaybe<Scalars['DateTime']>;
   gte?: InputMaybe<Scalars['DateTime']>;
@@ -181,44 +241,44 @@ export interface DateTimeNullableFilter {
   lte?: InputMaybe<Scalars['DateTime']>;
   not?: InputMaybe<DateTimeNullableFilter>;
   notIn?: InputMaybe<Array<Scalars['DateTime']>>;
-}
+};
 
-export interface Education {
+export type Education = {
   __typename?: 'Education';
   certificate?: Maybe<Scalars['String']>;
   description?: Maybe<Education_description_Document>;
   id: Scalars['ID'];
   passed?: Maybe<Scalars['DateTime']>;
   title?: Maybe<Scalars['String']>;
-}
+};
 
-export interface EducationCreateInput {
+export type EducationCreateInput = {
   certificate?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['JSON']>;
   passed?: InputMaybe<Scalars['DateTime']>;
   title?: InputMaybe<Scalars['String']>;
-}
+};
 
-export interface EducationOrderByInput {
+export type EducationOrderByInput = {
   certificate?: InputMaybe<OrderDirection>;
   id?: InputMaybe<OrderDirection>;
   passed?: InputMaybe<OrderDirection>;
   title?: InputMaybe<OrderDirection>;
-}
+};
 
-export interface EducationUpdateArgs {
+export type EducationUpdateArgs = {
   data: EducationUpdateInput;
   where: EducationWhereUniqueInput;
-}
+};
 
-export interface EducationUpdateInput {
+export type EducationUpdateInput = {
   certificate?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['JSON']>;
   passed?: InputMaybe<Scalars['DateTime']>;
   title?: InputMaybe<Scalars['String']>;
-}
+};
 
-export interface EducationWhereInput {
+export type EducationWhereInput = {
   AND?: InputMaybe<Array<EducationWhereInput>>;
   NOT?: InputMaybe<Array<EducationWhereInput>>;
   OR?: InputMaybe<Array<EducationWhereInput>>;
@@ -226,23 +286,23 @@ export interface EducationWhereInput {
   id?: InputMaybe<IDFilter>;
   passed?: InputMaybe<DateTimeFilter>;
   title?: InputMaybe<StringFilter>;
-}
+};
 
-export interface EducationWhereUniqueInput {
+export type EducationWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']>;
-}
+};
 
-export interface Education_description_Document {
+export type Education_description_Document = {
   __typename?: 'Education_description_Document';
   document: Scalars['JSON'];
-}
+};
 
 
-export interface Education_description_DocumentdocumentArgs {
+export type Education_description_DocumentdocumentArgs = {
   hydrateRelationships?: Scalars['Boolean'];
-}
+};
 
-export interface IDFilter {
+export type IDFilter = {
   equals?: InputMaybe<Scalars['ID']>;
   gt?: InputMaybe<Scalars['ID']>;
   gte?: InputMaybe<Scalars['ID']>;
@@ -251,71 +311,71 @@ export interface IDFilter {
   lte?: InputMaybe<Scalars['ID']>;
   not?: InputMaybe<IDFilter>;
   notIn?: InputMaybe<Array<Scalars['ID']>>;
-}
+};
 
-export interface Image {
+export type Image = {
   __typename?: 'Image';
   createdAt?: Maybe<Scalars['DateTime']>;
   id: Scalars['ID'];
   image?: Maybe<AzureStorageImageFieldOutput>;
   label?: Maybe<Scalars['String']>;
-}
+};
 
-export interface ImageCreateInput {
+export type ImageCreateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
   image?: InputMaybe<AzureStorageImageFieldInput>;
   label?: InputMaybe<Scalars['String']>;
-}
+};
 
-export interface ImageManyRelationFilter {
+export type ImageManyRelationFilter = {
   every?: InputMaybe<ImageWhereInput>;
   none?: InputMaybe<ImageWhereInput>;
   some?: InputMaybe<ImageWhereInput>;
-}
+};
 
-export interface ImageOrderByInput {
+export type ImageOrderByInput = {
   createdAt?: InputMaybe<OrderDirection>;
   id?: InputMaybe<OrderDirection>;
   label?: InputMaybe<OrderDirection>;
-}
+};
 
-export interface ImageRelateToManyForCreateInput {
+export type ImageRelateToManyForCreateInput = {
   connect?: InputMaybe<Array<ImageWhereUniqueInput>>;
   create?: InputMaybe<Array<ImageCreateInput>>;
-}
+};
 
-export interface ImageRelateToManyForUpdateInput {
+export type ImageRelateToManyForUpdateInput = {
   connect?: InputMaybe<Array<ImageWhereUniqueInput>>;
   create?: InputMaybe<Array<ImageCreateInput>>;
   disconnect?: InputMaybe<Array<ImageWhereUniqueInput>>;
   set?: InputMaybe<Array<ImageWhereUniqueInput>>;
-}
+};
 
-export interface ImageUpdateArgs {
+export type ImageUpdateArgs = {
   data: ImageUpdateInput;
   where: ImageWhereUniqueInput;
-}
+};
 
-export interface ImageUpdateInput {
+export type ImageUpdateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
   image?: InputMaybe<AzureStorageImageFieldInput>;
   label?: InputMaybe<Scalars['String']>;
-}
+};
 
-export interface ImageWhereInput {
+export type ImageWhereInput = {
   AND?: InputMaybe<Array<ImageWhereInput>>;
   NOT?: InputMaybe<Array<ImageWhereInput>>;
   OR?: InputMaybe<Array<ImageWhereInput>>;
   createdAt?: InputMaybe<DateTimeNullableFilter>;
   id?: InputMaybe<IDFilter>;
   label?: InputMaybe<StringFilter>;
-}
+};
 
-export interface ImageWhereUniqueInput {
+export type ImageWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']>;
-}
+};
 
-export interface IntFilter {
+export type IntFilter = {
   equals?: InputMaybe<Scalars['Int']>;
   gt?: InputMaybe<Scalars['Int']>;
   gte?: InputMaybe<Scalars['Int']>;
@@ -324,22 +384,22 @@ export interface IntFilter {
   lte?: InputMaybe<Scalars['Int']>;
   not?: InputMaybe<IntFilter>;
   notIn?: InputMaybe<Array<Scalars['Int']>>;
-}
+};
 
-export interface KeystoneAdminMeta {
+export type KeystoneAdminMeta = {
   __typename?: 'KeystoneAdminMeta';
   enableSessionItem: Scalars['Boolean'];
   enableSignout: Scalars['Boolean'];
   list?: Maybe<KeystoneAdminUIListMeta>;
   lists: Array<KeystoneAdminUIListMeta>;
-}
+};
 
 
-export interface KeystoneAdminMetalistArgs {
+export type KeystoneAdminMetalistArgs = {
   key: Scalars['String'];
-}
+};
 
-export interface KeystoneAdminUIFieldMeta {
+export type KeystoneAdminUIFieldMeta = {
   __typename?: 'KeystoneAdminUIFieldMeta';
   createView: KeystoneAdminUIFieldMetaCreateView;
   customViewsIndex?: Maybe<Scalars['Int']>;
@@ -352,27 +412,27 @@ export interface KeystoneAdminUIFieldMeta {
   path: Scalars['String'];
   search?: Maybe<QueryMode>;
   viewsIndex: Scalars['Int'];
-}
+};
 
 
-export interface KeystoneAdminUIFieldMetaitemViewArgs {
+export type KeystoneAdminUIFieldMetaitemViewArgs = {
   id?: InputMaybe<Scalars['ID']>;
-}
+};
 
-export interface KeystoneAdminUIFieldMetaCreateView {
+export type KeystoneAdminUIFieldMetaCreateView = {
   __typename?: 'KeystoneAdminUIFieldMetaCreateView';
   fieldMode: KeystoneAdminUIFieldMetaCreateViewFieldMode;
-}
+};
 
 export const enum KeystoneAdminUIFieldMetaCreateViewFieldMode {
   EDIT = 'edit',
   HIDDEN = 'hidden'
 };
 
-export interface KeystoneAdminUIFieldMetaItemView {
+export type KeystoneAdminUIFieldMetaItemView = {
   __typename?: 'KeystoneAdminUIFieldMetaItemView';
   fieldMode?: Maybe<KeystoneAdminUIFieldMetaItemViewFieldMode>;
-}
+};
 
 export const enum KeystoneAdminUIFieldMetaItemViewFieldMode {
   EDIT = 'edit',
@@ -380,17 +440,17 @@ export const enum KeystoneAdminUIFieldMetaItemViewFieldMode {
   READ = 'read'
 };
 
-export interface KeystoneAdminUIFieldMetaListView {
+export type KeystoneAdminUIFieldMetaListView = {
   __typename?: 'KeystoneAdminUIFieldMetaListView';
   fieldMode: KeystoneAdminUIFieldMetaListViewFieldMode;
-}
+};
 
 export const enum KeystoneAdminUIFieldMetaListViewFieldMode {
   HIDDEN = 'hidden',
   READ = 'read'
 };
 
-export interface KeystoneAdminUIListMeta {
+export type KeystoneAdminUIListMeta = {
   __typename?: 'KeystoneAdminUIListMeta';
   description?: Maybe<Scalars['String']>;
   fields: Array<KeystoneAdminUIFieldMeta>;
@@ -408,25 +468,106 @@ export interface KeystoneAdminUIListMeta {
   path: Scalars['String'];
   plural: Scalars['String'];
   singular: Scalars['String'];
-}
+};
 
-export interface KeystoneAdminUISort {
+export type KeystoneAdminUISort = {
   __typename?: 'KeystoneAdminUISort';
   direction: KeystoneAdminUISortDirection;
   field: Scalars['String'];
-}
+};
 
 export const enum KeystoneAdminUISortDirection {
   ASC = 'ASC',
   DESC = 'DESC'
 };
 
-export interface KeystoneMeta {
+export type KeystoneMeta = {
   __typename?: 'KeystoneMeta';
   adminMeta: KeystoneAdminMeta;
-}
+};
 
-export interface Mutation {
+export type LanguageSkill = {
+  __typename?: 'LanguageSkill';
+  id: Scalars['ID'];
+  language?: Maybe<Scalars['String']>;
+  type?: Maybe<LanguageSkillTypeType>;
+  user?: Maybe<Admin>;
+  value?: Maybe<Scalars['Int']>;
+};
+
+export type LanguageSkillCreateInput = {
+  language?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<LanguageSkillTypeType>;
+  user?: InputMaybe<AdminRelateToOneForCreateInput>;
+  value?: InputMaybe<Scalars['Int']>;
+};
+
+export type LanguageSkillManyRelationFilter = {
+  every?: InputMaybe<LanguageSkillWhereInput>;
+  none?: InputMaybe<LanguageSkillWhereInput>;
+  some?: InputMaybe<LanguageSkillWhereInput>;
+};
+
+export type LanguageSkillOrderByInput = {
+  id?: InputMaybe<OrderDirection>;
+  language?: InputMaybe<OrderDirection>;
+  type?: InputMaybe<OrderDirection>;
+  value?: InputMaybe<OrderDirection>;
+};
+
+export type LanguageSkillRelateToManyForCreateInput = {
+  connect?: InputMaybe<Array<LanguageSkillWhereUniqueInput>>;
+  create?: InputMaybe<Array<LanguageSkillCreateInput>>;
+};
+
+export type LanguageSkillRelateToManyForUpdateInput = {
+  connect?: InputMaybe<Array<LanguageSkillWhereUniqueInput>>;
+  create?: InputMaybe<Array<LanguageSkillCreateInput>>;
+  disconnect?: InputMaybe<Array<LanguageSkillWhereUniqueInput>>;
+  set?: InputMaybe<Array<LanguageSkillWhereUniqueInput>>;
+};
+
+export const enum LanguageSkillTypeType {
+  HUMAN = 'human',
+  PROGRAMMING = 'programming'
+};
+
+export type LanguageSkillTypeTypeNullableFilter = {
+  equals?: InputMaybe<LanguageSkillTypeType>;
+  in?: InputMaybe<Array<LanguageSkillTypeType>>;
+  not?: InputMaybe<LanguageSkillTypeTypeNullableFilter>;
+  notIn?: InputMaybe<Array<LanguageSkillTypeType>>;
+};
+
+export type LanguageSkillUpdateArgs = {
+  data: LanguageSkillUpdateInput;
+  where: LanguageSkillWhereUniqueInput;
+};
+
+export type LanguageSkillUpdateInput = {
+  language?: InputMaybe<Scalars['String']>;
+  type?: InputMaybe<LanguageSkillTypeType>;
+  user?: InputMaybe<AdminRelateToOneForUpdateInput>;
+  value?: InputMaybe<Scalars['Int']>;
+};
+
+export type LanguageSkillWhereInput = {
+  AND?: InputMaybe<Array<LanguageSkillWhereInput>>;
+  NOT?: InputMaybe<Array<LanguageSkillWhereInput>>;
+  OR?: InputMaybe<Array<LanguageSkillWhereInput>>;
+  id?: InputMaybe<IDFilter>;
+  language?: InputMaybe<StringFilter>;
+  type?: InputMaybe<LanguageSkillTypeTypeNullableFilter>;
+  user?: InputMaybe<AdminWhereInput>;
+  value?: InputMaybe<IntFilter>;
+};
+
+export type LanguageSkillWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']>;
+  language?: InputMaybe<Scalars['String']>;
+};
+
+export type Mutation = {
   __typename?: 'Mutation';
   authenticateAdminWithPassword?: Maybe<AdminAuthenticationWithPasswordResult>;
   createAdmin?: Maybe<Admin>;
@@ -438,6 +579,8 @@ export interface Mutation {
   createImage?: Maybe<Image>;
   createImages?: Maybe<Array<Maybe<Image>>>;
   createInitialAdmin: AdminAuthenticationWithPasswordSuccess;
+  createLanguageSkill?: Maybe<LanguageSkill>;
+  createLanguageSkills?: Maybe<Array<Maybe<LanguageSkill>>>;
   createProject?: Maybe<Project>;
   createProjects?: Maybe<Array<Maybe<Project>>>;
   createService?: Maybe<Service>;
@@ -454,6 +597,8 @@ export interface Mutation {
   deleteEducations?: Maybe<Array<Maybe<Education>>>;
   deleteImage?: Maybe<Image>;
   deleteImages?: Maybe<Array<Maybe<Image>>>;
+  deleteLanguageSkill?: Maybe<LanguageSkill>;
+  deleteLanguageSkills?: Maybe<Array<Maybe<LanguageSkill>>>;
   deleteProject?: Maybe<Project>;
   deleteProjects?: Maybe<Array<Maybe<Project>>>;
   deleteService?: Maybe<Service>;
@@ -471,6 +616,8 @@ export interface Mutation {
   updateEducations?: Maybe<Array<Maybe<Education>>>;
   updateImage?: Maybe<Image>;
   updateImages?: Maybe<Array<Maybe<Image>>>;
+  updateLanguageSkill?: Maybe<LanguageSkill>;
+  updateLanguageSkills?: Maybe<Array<Maybe<LanguageSkill>>>;
   updateProject?: Maybe<Project>;
   updateProjects?: Maybe<Array<Maybe<Project>>>;
   updateService?: Maybe<Service>;
@@ -479,268 +626,299 @@ export interface Mutation {
   updateSkills?: Maybe<Array<Maybe<Skill>>>;
   updateTag?: Maybe<Tag>;
   updateTags?: Maybe<Array<Maybe<Tag>>>;
-}
+};
 
 
-export interface MutationauthenticateAdminWithPasswordArgs {
+export type MutationauthenticateAdminWithPasswordArgs = {
   email: Scalars['String'];
   password: Scalars['String'];
-}
+};
 
 
-export interface MutationcreateAdminArgs {
+export type MutationcreateAdminArgs = {
   data: AdminCreateInput;
-}
+};
 
 
-export interface MutationcreateAdminsArgs {
+export type MutationcreateAdminsArgs = {
   data: Array<AdminCreateInput>;
-}
+};
 
 
-export interface MutationcreateApiKeyArgs {
+export type MutationcreateApiKeyArgs = {
   data: ApiKeyCreateInput;
-}
+};
 
 
-export interface MutationcreateApiKeysArgs {
+export type MutationcreateApiKeysArgs = {
   data: Array<ApiKeyCreateInput>;
-}
+};
 
 
-export interface MutationcreateEducationArgs {
+export type MutationcreateEducationArgs = {
   data: EducationCreateInput;
-}
+};
 
 
-export interface MutationcreateEducationsArgs {
+export type MutationcreateEducationsArgs = {
   data: Array<EducationCreateInput>;
-}
+};
 
 
-export interface MutationcreateImageArgs {
+export type MutationcreateImageArgs = {
   data: ImageCreateInput;
-}
+};
 
 
-export interface MutationcreateImagesArgs {
+export type MutationcreateImagesArgs = {
   data: Array<ImageCreateInput>;
-}
+};
 
 
-export interface MutationcreateInitialAdminArgs {
+export type MutationcreateInitialAdminArgs = {
   data: CreateInitialAdminInput;
-}
+};
 
 
-export interface MutationcreateProjectArgs {
+export type MutationcreateLanguageSkillArgs = {
+  data: LanguageSkillCreateInput;
+};
+
+
+export type MutationcreateLanguageSkillsArgs = {
+  data: Array<LanguageSkillCreateInput>;
+};
+
+
+export type MutationcreateProjectArgs = {
   data: ProjectCreateInput;
-}
+};
 
 
-export interface MutationcreateProjectsArgs {
+export type MutationcreateProjectsArgs = {
   data: Array<ProjectCreateInput>;
-}
+};
 
 
-export interface MutationcreateServiceArgs {
+export type MutationcreateServiceArgs = {
   data: ServiceCreateInput;
-}
+};
 
 
-export interface MutationcreateServicesArgs {
+export type MutationcreateServicesArgs = {
   data: Array<ServiceCreateInput>;
-}
+};
 
 
-export interface MutationcreateSkillArgs {
+export type MutationcreateSkillArgs = {
   data: SkillCreateInput;
-}
+};
 
 
-export interface MutationcreateSkillsArgs {
+export type MutationcreateSkillsArgs = {
   data: Array<SkillCreateInput>;
-}
+};
 
 
-export interface MutationcreateTagArgs {
+export type MutationcreateTagArgs = {
   data: TagCreateInput;
-}
+};
 
 
-export interface MutationcreateTagsArgs {
+export type MutationcreateTagsArgs = {
   data: Array<TagCreateInput>;
-}
+};
 
 
-export interface MutationdeleteAdminArgs {
+export type MutationdeleteAdminArgs = {
   where: AdminWhereUniqueInput;
-}
+};
 
 
-export interface MutationdeleteAdminsArgs {
+export type MutationdeleteAdminsArgs = {
   where: Array<AdminWhereUniqueInput>;
-}
+};
 
 
-export interface MutationdeleteApiKeyArgs {
+export type MutationdeleteApiKeyArgs = {
   where: ApiKeyWhereUniqueInput;
-}
+};
 
 
-export interface MutationdeleteApiKeysArgs {
+export type MutationdeleteApiKeysArgs = {
   where: Array<ApiKeyWhereUniqueInput>;
-}
+};
 
 
-export interface MutationdeleteEducationArgs {
+export type MutationdeleteEducationArgs = {
   where: EducationWhereUniqueInput;
-}
+};
 
 
-export interface MutationdeleteEducationsArgs {
+export type MutationdeleteEducationsArgs = {
   where: Array<EducationWhereUniqueInput>;
-}
+};
 
 
-export interface MutationdeleteImageArgs {
+export type MutationdeleteImageArgs = {
   where: ImageWhereUniqueInput;
-}
+};
 
 
-export interface MutationdeleteImagesArgs {
+export type MutationdeleteImagesArgs = {
   where: Array<ImageWhereUniqueInput>;
-}
+};
 
 
-export interface MutationdeleteProjectArgs {
+export type MutationdeleteLanguageSkillArgs = {
+  where: LanguageSkillWhereUniqueInput;
+};
+
+
+export type MutationdeleteLanguageSkillsArgs = {
+  where: Array<LanguageSkillWhereUniqueInput>;
+};
+
+
+export type MutationdeleteProjectArgs = {
   where: ProjectWhereUniqueInput;
-}
+};
 
 
-export interface MutationdeleteProjectsArgs {
+export type MutationdeleteProjectsArgs = {
   where: Array<ProjectWhereUniqueInput>;
-}
+};
 
 
-export interface MutationdeleteServiceArgs {
+export type MutationdeleteServiceArgs = {
   where: ServiceWhereUniqueInput;
-}
+};
 
 
-export interface MutationdeleteServicesArgs {
+export type MutationdeleteServicesArgs = {
   where: Array<ServiceWhereUniqueInput>;
-}
+};
 
 
-export interface MutationdeleteSkillArgs {
+export type MutationdeleteSkillArgs = {
   where: SkillWhereUniqueInput;
-}
+};
 
 
-export interface MutationdeleteSkillsArgs {
+export type MutationdeleteSkillsArgs = {
   where: Array<SkillWhereUniqueInput>;
-}
+};
 
 
-export interface MutationdeleteTagArgs {
+export type MutationdeleteTagArgs = {
   where: TagWhereUniqueInput;
-}
+};
 
 
-export interface MutationdeleteTagsArgs {
+export type MutationdeleteTagsArgs = {
   where: Array<TagWhereUniqueInput>;
-}
+};
 
 
-export interface MutationupdateAdminArgs {
+export type MutationupdateAdminArgs = {
   data: AdminUpdateInput;
   where: AdminWhereUniqueInput;
-}
+};
 
 
-export interface MutationupdateAdminsArgs {
+export type MutationupdateAdminsArgs = {
   data: Array<AdminUpdateArgs>;
-}
+};
 
 
-export interface MutationupdateApiKeyArgs {
+export type MutationupdateApiKeyArgs = {
   data: ApiKeyUpdateInput;
   where: ApiKeyWhereUniqueInput;
-}
+};
 
 
-export interface MutationupdateApiKeysArgs {
+export type MutationupdateApiKeysArgs = {
   data: Array<ApiKeyUpdateArgs>;
-}
+};
 
 
-export interface MutationupdateEducationArgs {
+export type MutationupdateEducationArgs = {
   data: EducationUpdateInput;
   where: EducationWhereUniqueInput;
-}
+};
 
 
-export interface MutationupdateEducationsArgs {
+export type MutationupdateEducationsArgs = {
   data: Array<EducationUpdateArgs>;
-}
+};
 
 
-export interface MutationupdateImageArgs {
+export type MutationupdateImageArgs = {
   data: ImageUpdateInput;
   where: ImageWhereUniqueInput;
-}
+};
 
 
-export interface MutationupdateImagesArgs {
+export type MutationupdateImagesArgs = {
   data: Array<ImageUpdateArgs>;
-}
+};
 
 
-export interface MutationupdateProjectArgs {
+export type MutationupdateLanguageSkillArgs = {
+  data: LanguageSkillUpdateInput;
+  where: LanguageSkillWhereUniqueInput;
+};
+
+
+export type MutationupdateLanguageSkillsArgs = {
+  data: Array<LanguageSkillUpdateArgs>;
+};
+
+
+export type MutationupdateProjectArgs = {
   data: ProjectUpdateInput;
   where: ProjectWhereUniqueInput;
-}
+};
 
 
-export interface MutationupdateProjectsArgs {
+export type MutationupdateProjectsArgs = {
   data: Array<ProjectUpdateArgs>;
-}
+};
 
 
-export interface MutationupdateServiceArgs {
+export type MutationupdateServiceArgs = {
   data: ServiceUpdateInput;
   where: ServiceWhereUniqueInput;
-}
+};
 
 
-export interface MutationupdateServicesArgs {
+export type MutationupdateServicesArgs = {
   data: Array<ServiceUpdateArgs>;
-}
+};
 
 
-export interface MutationupdateSkillArgs {
+export type MutationupdateSkillArgs = {
   data: SkillUpdateInput;
   where: SkillWhereUniqueInput;
-}
+};
 
 
-export interface MutationupdateSkillsArgs {
+export type MutationupdateSkillsArgs = {
   data: Array<SkillUpdateArgs>;
-}
+};
 
 
-export interface MutationupdateTagArgs {
+export type MutationupdateTagArgs = {
   data: TagUpdateInput;
   where: TagWhereUniqueInput;
-}
+};
 
 
-export interface MutationupdateTagsArgs {
+export type MutationupdateTagsArgs = {
   data: Array<TagUpdateArgs>;
-}
+};
 
-export interface NestedStringFilter {
+export type NestedStringFilter = {
   contains?: InputMaybe<Scalars['String']>;
   endsWith?: InputMaybe<Scalars['String']>;
   equals?: InputMaybe<Scalars['String']>;
@@ -752,19 +930,19 @@ export interface NestedStringFilter {
   not?: InputMaybe<NestedStringFilter>;
   notIn?: InputMaybe<Array<Scalars['String']>>;
   startsWith?: InputMaybe<Scalars['String']>;
-}
+};
 
 export const enum OrderDirection {
   ASC = 'asc',
   DESC = 'desc'
 };
 
-export interface PasswordState {
+export type PasswordState = {
   __typename?: 'PasswordState';
   isSet: Scalars['Boolean'];
-}
+};
 
-export interface Project {
+export type Project = {
   __typename?: 'Project';
   createdAt?: Maybe<Scalars['DateTime']>;
   demo?: Maybe<Scalars['String']>;
@@ -778,35 +956,35 @@ export interface Project {
   tags?: Maybe<Array<Tag>>;
   tagsCount?: Maybe<Scalars['Int']>;
   title?: Maybe<Scalars['String']>;
-}
+};
 
 
-export interface ProjectimagesArgs {
+export type ProjectimagesArgs = {
   orderBy?: Array<ImageOrderByInput>;
   skip?: Scalars['Int'];
   take?: InputMaybe<Scalars['Int']>;
   where?: ImageWhereInput;
-}
+};
 
 
-export interface ProjectimagesCountArgs {
+export type ProjectimagesCountArgs = {
   where?: ImageWhereInput;
-}
+};
 
 
-export interface ProjecttagsArgs {
+export type ProjecttagsArgs = {
   orderBy?: Array<TagOrderByInput>;
   skip?: Scalars['Int'];
   take?: InputMaybe<Scalars['Int']>;
   where?: TagWhereInput;
-}
+};
 
 
-export interface ProjecttagsCountArgs {
+export type ProjecttagsCountArgs = {
   where?: TagWhereInput;
-}
+};
 
-export interface ProjectCreateInput {
+export type ProjectCreateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
   demo?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['JSON']>;
@@ -816,15 +994,15 @@ export interface ProjectCreateInput {
   status?: InputMaybe<ProjectStatusType>;
   tags?: InputMaybe<TagRelateToManyForCreateInput>;
   title?: InputMaybe<Scalars['String']>;
-}
+};
 
-export interface ProjectManyRelationFilter {
+export type ProjectManyRelationFilter = {
   every?: InputMaybe<ProjectWhereInput>;
   none?: InputMaybe<ProjectWhereInput>;
   some?: InputMaybe<ProjectWhereInput>;
-}
+};
 
-export interface ProjectOrderByInput {
+export type ProjectOrderByInput = {
   createdAt?: InputMaybe<OrderDirection>;
   demo?: InputMaybe<OrderDirection>;
   id?: InputMaybe<OrderDirection>;
@@ -832,38 +1010,38 @@ export interface ProjectOrderByInput {
   source?: InputMaybe<OrderDirection>;
   status?: InputMaybe<OrderDirection>;
   title?: InputMaybe<OrderDirection>;
-}
+};
 
-export interface ProjectRelateToManyForCreateInput {
+export type ProjectRelateToManyForCreateInput = {
   connect?: InputMaybe<Array<ProjectWhereUniqueInput>>;
   create?: InputMaybe<Array<ProjectCreateInput>>;
-}
+};
 
-export interface ProjectRelateToManyForUpdateInput {
+export type ProjectRelateToManyForUpdateInput = {
   connect?: InputMaybe<Array<ProjectWhereUniqueInput>>;
   create?: InputMaybe<Array<ProjectCreateInput>>;
   disconnect?: InputMaybe<Array<ProjectWhereUniqueInput>>;
   set?: InputMaybe<Array<ProjectWhereUniqueInput>>;
-}
+};
 
 export const enum ProjectStatusType {
   DRAFT = 'draft',
   PUBLISHED = 'published'
 };
 
-export interface ProjectStatusTypeNullableFilter {
+export type ProjectStatusTypeNullableFilter = {
   equals?: InputMaybe<ProjectStatusType>;
   in?: InputMaybe<Array<ProjectStatusType>>;
   not?: InputMaybe<ProjectStatusTypeNullableFilter>;
   notIn?: InputMaybe<Array<ProjectStatusType>>;
-}
+};
 
-export interface ProjectUpdateArgs {
+export type ProjectUpdateArgs = {
   data: ProjectUpdateInput;
   where: ProjectWhereUniqueInput;
-}
+};
 
-export interface ProjectUpdateInput {
+export type ProjectUpdateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
   demo?: InputMaybe<Scalars['String']>;
   description?: InputMaybe<Scalars['JSON']>;
@@ -873,9 +1051,9 @@ export interface ProjectUpdateInput {
   status?: InputMaybe<ProjectStatusType>;
   tags?: InputMaybe<TagRelateToManyForUpdateInput>;
   title?: InputMaybe<Scalars['String']>;
-}
+};
 
-export interface ProjectWhereInput {
+export type ProjectWhereInput = {
   AND?: InputMaybe<Array<ProjectWhereInput>>;
   NOT?: InputMaybe<Array<ProjectWhereInput>>;
   OR?: InputMaybe<Array<ProjectWhereInput>>;
@@ -888,23 +1066,23 @@ export interface ProjectWhereInput {
   status?: InputMaybe<ProjectStatusTypeNullableFilter>;
   tags?: InputMaybe<TagManyRelationFilter>;
   title?: InputMaybe<StringFilter>;
-}
+};
 
-export interface ProjectWhereUniqueInput {
+export type ProjectWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']>;
-}
+};
 
-export interface Project_description_Document {
+export type Project_description_Document = {
   __typename?: 'Project_description_Document';
   document: Scalars['JSON'];
-}
+};
 
 
-export interface Project_description_DocumentdocumentArgs {
+export type Project_description_DocumentdocumentArgs = {
   hydrateRelationships?: Scalars['Boolean'];
-}
+};
 
-export interface Query {
+export type Query = {
   __typename?: 'Query';
   admin?: Maybe<Admin>;
   admins?: Maybe<Array<Admin>>;
@@ -920,6 +1098,9 @@ export interface Query {
   images?: Maybe<Array<Image>>;
   imagesCount?: Maybe<Scalars['Int']>;
   keystone: KeystoneMeta;
+  languageSkill?: Maybe<LanguageSkill>;
+  languageSkills?: Maybe<Array<LanguageSkill>>;
+  languageSkillsCount?: Maybe<Scalars['Int']>;
   project?: Maybe<Project>;
   projects?: Maybe<Array<Project>>;
   projectsCount?: Maybe<Scalars['Int']>;
@@ -932,246 +1113,264 @@ export interface Query {
   tag?: Maybe<Tag>;
   tags?: Maybe<Array<Tag>>;
   tagsCount?: Maybe<Scalars['Int']>;
-}
+};
 
 
-export interface QueryadminArgs {
+export type QueryadminArgs = {
   where: AdminWhereUniqueInput;
-}
+};
 
 
-export interface QueryadminsArgs {
+export type QueryadminsArgs = {
   orderBy?: Array<AdminOrderByInput>;
   skip?: Scalars['Int'];
   take?: InputMaybe<Scalars['Int']>;
   where?: AdminWhereInput;
-}
+};
 
 
-export interface QueryadminsCountArgs {
+export type QueryadminsCountArgs = {
   where?: AdminWhereInput;
-}
+};
 
 
-export interface QueryapiKeyArgs {
+export type QueryapiKeyArgs = {
   where: ApiKeyWhereUniqueInput;
-}
+};
 
 
-export interface QueryapiKeysArgs {
+export type QueryapiKeysArgs = {
   orderBy?: Array<ApiKeyOrderByInput>;
   skip?: Scalars['Int'];
   take?: InputMaybe<Scalars['Int']>;
   where?: ApiKeyWhereInput;
-}
+};
 
 
-export interface QueryapiKeysCountArgs {
+export type QueryapiKeysCountArgs = {
   where?: ApiKeyWhereInput;
-}
+};
 
 
-export interface QueryeducationArgs {
+export type QueryeducationArgs = {
   where: EducationWhereUniqueInput;
-}
+};
 
 
-export interface QueryeducationsArgs {
+export type QueryeducationsArgs = {
   orderBy?: Array<EducationOrderByInput>;
   skip?: Scalars['Int'];
   take?: InputMaybe<Scalars['Int']>;
   where?: EducationWhereInput;
-}
+};
 
 
-export interface QueryeducationsCountArgs {
+export type QueryeducationsCountArgs = {
   where?: EducationWhereInput;
-}
+};
 
 
-export interface QueryimageArgs {
+export type QueryimageArgs = {
   where: ImageWhereUniqueInput;
-}
+};
 
 
-export interface QueryimagesArgs {
+export type QueryimagesArgs = {
   orderBy?: Array<ImageOrderByInput>;
   skip?: Scalars['Int'];
   take?: InputMaybe<Scalars['Int']>;
   where?: ImageWhereInput;
-}
+};
 
 
-export interface QueryimagesCountArgs {
+export type QueryimagesCountArgs = {
   where?: ImageWhereInput;
-}
+};
 
 
-export interface QueryprojectArgs {
+export type QuerylanguageSkillArgs = {
+  where: LanguageSkillWhereUniqueInput;
+};
+
+
+export type QuerylanguageSkillsArgs = {
+  orderBy?: Array<LanguageSkillOrderByInput>;
+  skip?: Scalars['Int'];
+  take?: InputMaybe<Scalars['Int']>;
+  where?: LanguageSkillWhereInput;
+};
+
+
+export type QuerylanguageSkillsCountArgs = {
+  where?: LanguageSkillWhereInput;
+};
+
+
+export type QueryprojectArgs = {
   where: ProjectWhereUniqueInput;
-}
+};
 
 
-export interface QueryprojectsArgs {
+export type QueryprojectsArgs = {
   orderBy?: Array<ProjectOrderByInput>;
   skip?: Scalars['Int'];
   take?: InputMaybe<Scalars['Int']>;
   where?: ProjectWhereInput;
-}
+};
 
 
-export interface QueryprojectsCountArgs {
+export type QueryprojectsCountArgs = {
   where?: ProjectWhereInput;
-}
+};
 
 
-export interface QueryserviceArgs {
+export type QueryserviceArgs = {
   where: ServiceWhereUniqueInput;
-}
+};
 
 
-export interface QueryservicesArgs {
+export type QueryservicesArgs = {
   orderBy?: Array<ServiceOrderByInput>;
   skip?: Scalars['Int'];
   take?: InputMaybe<Scalars['Int']>;
   where?: ServiceWhereInput;
-}
+};
 
 
-export interface QueryservicesCountArgs {
+export type QueryservicesCountArgs = {
   where?: ServiceWhereInput;
-}
+};
 
 
-export interface QueryskillArgs {
+export type QueryskillArgs = {
   where: SkillWhereUniqueInput;
-}
+};
 
 
-export interface QueryskillsArgs {
+export type QueryskillsArgs = {
   orderBy?: Array<SkillOrderByInput>;
   skip?: Scalars['Int'];
   take?: InputMaybe<Scalars['Int']>;
   where?: SkillWhereInput;
-}
+};
 
 
-export interface QueryskillsCountArgs {
+export type QueryskillsCountArgs = {
   where?: SkillWhereInput;
-}
+};
 
 
-export interface QuerytagArgs {
+export type QuerytagArgs = {
   where: TagWhereUniqueInput;
-}
+};
 
 
-export interface QuerytagsArgs {
+export type QuerytagsArgs = {
   orderBy?: Array<TagOrderByInput>;
   skip?: Scalars['Int'];
   take?: InputMaybe<Scalars['Int']>;
   where?: TagWhereInput;
-}
+};
 
 
-export interface QuerytagsCountArgs {
+export type QuerytagsCountArgs = {
   where?: TagWhereInput;
-}
+};
 
 export const enum QueryMode {
   DEFAULT = 'default',
   INSENSITIVE = 'insensitive'
 };
 
-export interface Service {
+export type Service = {
   __typename?: 'Service';
   details?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   image?: Maybe<AzureStorageImageFieldOutput>;
   title?: Maybe<Scalars['String']>;
-}
+};
 
-export interface ServiceCreateInput {
+export type ServiceCreateInput = {
   details?: InputMaybe<Scalars['String']>;
   image?: InputMaybe<AzureStorageImageFieldInput>;
   title?: InputMaybe<Scalars['String']>;
-}
+};
 
-export interface ServiceOrderByInput {
+export type ServiceOrderByInput = {
   details?: InputMaybe<OrderDirection>;
   id?: InputMaybe<OrderDirection>;
   title?: InputMaybe<OrderDirection>;
-}
+};
 
-export interface ServiceUpdateArgs {
+export type ServiceUpdateArgs = {
   data: ServiceUpdateInput;
   where: ServiceWhereUniqueInput;
-}
+};
 
-export interface ServiceUpdateInput {
+export type ServiceUpdateInput = {
   details?: InputMaybe<Scalars['String']>;
   image?: InputMaybe<AzureStorageImageFieldInput>;
   title?: InputMaybe<Scalars['String']>;
-}
+};
 
-export interface ServiceWhereInput {
+export type ServiceWhereInput = {
   AND?: InputMaybe<Array<ServiceWhereInput>>;
   NOT?: InputMaybe<Array<ServiceWhereInput>>;
   OR?: InputMaybe<Array<ServiceWhereInput>>;
   details?: InputMaybe<StringFilter>;
   id?: InputMaybe<IDFilter>;
   title?: InputMaybe<StringFilter>;
-}
+};
 
-export interface ServiceWhereUniqueInput {
+export type ServiceWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']>;
-}
+};
 
-export interface Skill {
+export type Skill = {
   __typename?: 'Skill';
   id: Scalars['ID'];
   label?: Maybe<Scalars['String']>;
   type?: Maybe<SkillTypeType>;
   value?: Maybe<Scalars['Int']>;
-}
+};
 
-export interface SkillCreateInput {
+export type SkillCreateInput = {
   label?: InputMaybe<Scalars['String']>;
   type?: InputMaybe<SkillTypeType>;
   value?: InputMaybe<Scalars['Int']>;
-}
+};
 
-export interface SkillOrderByInput {
+export type SkillOrderByInput = {
   id?: InputMaybe<OrderDirection>;
   label?: InputMaybe<OrderDirection>;
   type?: InputMaybe<OrderDirection>;
   value?: InputMaybe<OrderDirection>;
-}
+};
 
 export const enum SkillTypeType {
   DEV = 'dev',
   LANG = 'lang'
 };
 
-export interface SkillTypeTypeNullableFilter {
+export type SkillTypeTypeNullableFilter = {
   equals?: InputMaybe<SkillTypeType>;
   in?: InputMaybe<Array<SkillTypeType>>;
   not?: InputMaybe<SkillTypeTypeNullableFilter>;
   notIn?: InputMaybe<Array<SkillTypeType>>;
-}
+};
 
-export interface SkillUpdateArgs {
+export type SkillUpdateArgs = {
   data: SkillUpdateInput;
   where: SkillWhereUniqueInput;
-}
+};
 
-export interface SkillUpdateInput {
+export type SkillUpdateInput = {
   label?: InputMaybe<Scalars['String']>;
   type?: InputMaybe<SkillTypeType>;
   value?: InputMaybe<Scalars['Int']>;
-}
+};
 
-export interface SkillWhereInput {
+export type SkillWhereInput = {
   AND?: InputMaybe<Array<SkillWhereInput>>;
   NOT?: InputMaybe<Array<SkillWhereInput>>;
   OR?: InputMaybe<Array<SkillWhereInput>>;
@@ -1179,13 +1378,13 @@ export interface SkillWhereInput {
   label?: InputMaybe<StringFilter>;
   type?: InputMaybe<SkillTypeTypeNullableFilter>;
   value?: InputMaybe<IntFilter>;
-}
+};
 
-export interface SkillWhereUniqueInput {
+export type SkillWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']>;
-}
+};
 
-export interface StringFilter {
+export type StringFilter = {
   contains?: InputMaybe<Scalars['String']>;
   endsWith?: InputMaybe<Scalars['String']>;
   equals?: InputMaybe<Scalars['String']>;
@@ -1198,83 +1397,87 @@ export interface StringFilter {
   not?: InputMaybe<NestedStringFilter>;
   notIn?: InputMaybe<Array<Scalars['String']>>;
   startsWith?: InputMaybe<Scalars['String']>;
-}
+};
 
-export interface Tag {
+export type Tag = {
   __typename?: 'Tag';
   id: Scalars['ID'];
   name?: Maybe<Scalars['String']>;
   projects?: Maybe<Array<Project>>;
   projectsCount?: Maybe<Scalars['Int']>;
-}
+};
 
 
-export interface TagprojectsArgs {
+export type TagprojectsArgs = {
   orderBy?: Array<ProjectOrderByInput>;
   skip?: Scalars['Int'];
   take?: InputMaybe<Scalars['Int']>;
   where?: ProjectWhereInput;
-}
+};
 
 
-export interface TagprojectsCountArgs {
+export type TagprojectsCountArgs = {
   where?: ProjectWhereInput;
-}
+};
 
-export interface TagCreateInput {
+export type TagCreateInput = {
   name?: InputMaybe<Scalars['String']>;
   projects?: InputMaybe<ProjectRelateToManyForCreateInput>;
-}
+};
 
-export interface TagManyRelationFilter {
+export type TagManyRelationFilter = {
   every?: InputMaybe<TagWhereInput>;
   none?: InputMaybe<TagWhereInput>;
   some?: InputMaybe<TagWhereInput>;
-}
+};
 
-export interface TagOrderByInput {
+export type TagOrderByInput = {
   id?: InputMaybe<OrderDirection>;
   name?: InputMaybe<OrderDirection>;
-}
+};
 
-export interface TagRelateToManyForCreateInput {
+export type TagRelateToManyForCreateInput = {
   connect?: InputMaybe<Array<TagWhereUniqueInput>>;
   create?: InputMaybe<Array<TagCreateInput>>;
-}
+};
 
-export interface TagRelateToManyForUpdateInput {
+export type TagRelateToManyForUpdateInput = {
   connect?: InputMaybe<Array<TagWhereUniqueInput>>;
   create?: InputMaybe<Array<TagCreateInput>>;
   disconnect?: InputMaybe<Array<TagWhereUniqueInput>>;
   set?: InputMaybe<Array<TagWhereUniqueInput>>;
-}
+};
 
-export interface TagUpdateArgs {
+export type TagUpdateArgs = {
   data: TagUpdateInput;
   where: TagWhereUniqueInput;
-}
+};
 
-export interface TagUpdateInput {
+export type TagUpdateInput = {
   name?: InputMaybe<Scalars['String']>;
   projects?: InputMaybe<ProjectRelateToManyForUpdateInput>;
-}
+};
 
-export interface TagWhereInput {
+export type TagWhereInput = {
   AND?: InputMaybe<Array<TagWhereInput>>;
   NOT?: InputMaybe<Array<TagWhereInput>>;
   OR?: InputMaybe<Array<TagWhereInput>>;
   id?: InputMaybe<IDFilter>;
   name?: InputMaybe<StringFilter>;
   projects?: InputMaybe<ProjectManyRelationFilter>;
-}
+};
 
-export interface TagWhereUniqueInput {
+export type TagWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']>;
-}
+};
 
 export type ProjectFragmentFragment = { __typename?: 'Project', id: string, title?: string | null, demo?: string | null, source?: string | null, description?: { __typename?: 'Project_description_Document', document: any } | null, images?: Array<{ __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'AzureStorageImageFieldOutputType', id: string, url: string, width: number, height: number } | null }> | null };
 
 export type ImageFragmentFragment = { __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'AzureStorageImageFieldOutputType', id: string, url: string, width: number, height: number } | null };
+
+export type LanguageFragmentFragment = { __typename?: 'LanguageSkill', id: string, language?: string | null, value?: number | null };
+
+export type MyInfoFragment = { __typename?: 'Admin', age?: number | null, residence?: string | null, freelance?: AdminFreelanceType | null, address?: string | null };
 
 export type GetProjectsQueryVariables = Exact<{
   where?: InputMaybe<ProjectWhereInput>;
@@ -1304,6 +1507,21 @@ export type GetImageByIdQueryVariables = Exact<{
 
 export type GetImageByIdQuery = { __typename?: 'Query', image?: { __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'AzureStorageImageFieldOutputType', id: string, url: string, width: number, height: number } | null } | null };
 
+export type GetHumanLanguageSkillsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetHumanLanguageSkillsQuery = { __typename?: 'Query', languageSkills?: Array<{ __typename?: 'LanguageSkill', id: string, language?: string | null, value?: number | null }> | null };
+
+export type GetProgrammingLanguageSkillsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetProgrammingLanguageSkillsQuery = { __typename?: 'Query', languageSkills?: Array<{ __typename?: 'LanguageSkill', id: string, language?: string | null, value?: number | null }> | null };
+
+export type GetMyInfoQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetMyInfoQuery = { __typename?: 'Query', admin?: { __typename?: 'Admin', age?: number | null, residence?: string | null, freelance?: AdminFreelanceType | null, address?: string | null } | null };
+
 export const ImageFragmentFragmentDoc = gql`
     fragment ImageFragment on Image {
   id
@@ -1330,6 +1548,21 @@ export const ProjectFragmentFragmentDoc = gql`
   }
 }
     `;
+export const LanguageFragmentFragmentDoc = gql`
+    fragment LanguageFragment on LanguageSkill {
+  id
+  language
+  value
+}
+    `;
+export const MyInfoFragmentDoc = gql`
+    fragment MyInfo on Admin {
+  age
+  residence
+  freelance
+  address
+}
+    `;
 export const GetProjectsDocument = gql`
     query GetProjects($where: ProjectWhereInput = {status: {equals: published}}) {
   projects(where: $where) {
@@ -1338,11 +1571,6 @@ export const GetProjectsDocument = gql`
 }
     ${ProjectFragmentFragmentDoc}
 ${ImageFragmentFragmentDoc}`;
-
-export const GetProjectsComponent = (props: Omit<Urql.QueryProps<GetProjectsQuery, GetProjectsQueryVariables>, 'query'> & { variables?: GetProjectsQueryVariables }) => (
-  <Urql.Query {...props} query={GetProjectsDocument} />
-);
-
 
 export function useGetProjectsQuery(options?: Omit<Urql.UseQueryArgs<GetProjectsQueryVariables>, 'query'>) {
   return Urql.useQuery<GetProjectsQuery>({ query: GetProjectsDocument, ...options });
@@ -1356,11 +1584,6 @@ export const GetProjectByIdDocument = gql`
     ${ProjectFragmentFragmentDoc}
 ${ImageFragmentFragmentDoc}`;
 
-export const GetProjectByIdComponent = (props: Omit<Urql.QueryProps<GetProjectByIdQuery, GetProjectByIdQueryVariables>, 'query'> & { variables: GetProjectByIdQueryVariables }) => (
-  <Urql.Query {...props} query={GetProjectByIdDocument} />
-);
-
-
 export function useGetProjectByIdQuery(options: Omit<Urql.UseQueryArgs<GetProjectByIdQueryVariables>, 'query'>) {
   return Urql.useQuery<GetProjectByIdQuery>({ query: GetProjectByIdDocument, ...options });
 };
@@ -1371,11 +1594,6 @@ export const GetImagesDocument = gql`
   }
 }
     ${ImageFragmentFragmentDoc}`;
-
-export const GetImagesComponent = (props: Omit<Urql.QueryProps<GetImagesQuery, GetImagesQueryVariables>, 'query'> & { variables?: GetImagesQueryVariables }) => (
-  <Urql.Query {...props} query={GetImagesDocument} />
-);
-
 
 export function useGetImagesQuery(options?: Omit<Urql.UseQueryArgs<GetImagesQueryVariables>, 'query'>) {
   return Urql.useQuery<GetImagesQuery>({ query: GetImagesDocument, ...options });
@@ -1388,11 +1606,43 @@ export const GetImageByIdDocument = gql`
 }
     ${ImageFragmentFragmentDoc}`;
 
-export const GetImageByIdComponent = (props: Omit<Urql.QueryProps<GetImageByIdQuery, GetImageByIdQueryVariables>, 'query'> & { variables: GetImageByIdQueryVariables }) => (
-  <Urql.Query {...props} query={GetImageByIdDocument} />
-);
-
-
 export function useGetImageByIdQuery(options: Omit<Urql.UseQueryArgs<GetImageByIdQueryVariables>, 'query'>) {
   return Urql.useQuery<GetImageByIdQuery>({ query: GetImageByIdDocument, ...options });
+};
+export const GetHumanLanguageSkillsDocument = gql`
+    query GetHumanLanguageSkills {
+  languageSkills(
+    where: {type: {equals: human}, user: {email: {equals: "dev.rayat000@gmail.com"}}}
+  ) {
+    ...LanguageFragment
+  }
+}
+    ${LanguageFragmentFragmentDoc}`;
+
+export function useGetHumanLanguageSkillsQuery(options?: Omit<Urql.UseQueryArgs<GetHumanLanguageSkillsQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetHumanLanguageSkillsQuery>({ query: GetHumanLanguageSkillsDocument, ...options });
+};
+export const GetProgrammingLanguageSkillsDocument = gql`
+    query GetProgrammingLanguageSkills {
+  languageSkills(
+    where: {type: {equals: programming}, user: {email: {equals: "dev.rayat000@gmail.com"}}}
+  ) {
+    ...LanguageFragment
+  }
+}
+    ${LanguageFragmentFragmentDoc}`;
+
+export function useGetProgrammingLanguageSkillsQuery(options?: Omit<Urql.UseQueryArgs<GetProgrammingLanguageSkillsQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetProgrammingLanguageSkillsQuery>({ query: GetProgrammingLanguageSkillsDocument, ...options });
+};
+export const GetMyInfoDocument = gql`
+    query GetMyInfo {
+  admin(where: {email: "dev.rayat000@gmail.com"}) {
+    ...MyInfo
+  }
+}
+    ${MyInfoFragmentDoc}`;
+
+export function useGetMyInfoQuery(options?: Omit<Urql.UseQueryArgs<GetMyInfoQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetMyInfoQuery>({ query: GetMyInfoDocument, ...options });
 };

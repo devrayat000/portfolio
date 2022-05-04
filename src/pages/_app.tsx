@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import type { NextPage } from 'next'
 import { Provider } from 'urql'
-import type { AppProps as IAppProps } from 'next/app'
+import { type AppProps as IAppProps } from 'next/app'
 import { AnimatePresence, motion } from 'framer-motion'
 import {
   Affix,
@@ -13,14 +13,20 @@ import {
 import { useWindowScroll } from '@mantine/hooks'
 import { ArrowUp as ArrowUpIcon } from 'tabler-icons-react'
 import type { SSRData } from '@urql/core/dist/types/exchanges/ssr'
+import { initUrqlClient, withUrqlClient } from 'next-urql'
 
-import { createUrqlClient, createSSRExchange } from '$lib/utils/urql_client'
+import {
+  createUrqlClient,
+  createSSRExchange,
+  getClientOptions,
+} from '$lib/utils/urql_client'
 import ThemeProvider from '$lib/components/common/theme-provider'
 import MyNavbar from '$lib/components/home/navbar'
 import MyAside from '$lib/components/home/aside'
-import '../styles/globals.css'
 import { createQueryClient } from '$lib/utils/query_client'
 import { slideX } from '$lib/animation/slide'
+import { GetHumanLanguageSkillsDocument } from '$graphql/generated'
+import '../styles/globals.css'
 
 const useStyles = createStyles(theme => ({
   main: {
@@ -35,53 +41,57 @@ const useStyles = createStyles(theme => ({
 const MyAppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { classes } = useStyles()
 
-  const [scroll, scrollTo] = useWindowScroll()
-
   return (
-    <AppShell
-      navbarOffsetBreakpoint="md"
-      asideOffsetBreakpoint="md"
-      navbar={<MyNavbar />}
-      aside={<MyAside />}
-      classNames={{
-        main: classes.main,
-      }}
-    >
-      <ScrollArea type="scroll" style={{ height: '100vh' }}>
-        {children}
-      </ScrollArea>
-    </AppShell>
+    <motion.div initial="hidden" animate="show" exit="hidden">
+      <AppShell
+        navbarOffsetBreakpoint="md"
+        asideOffsetBreakpoint="md"
+        navbar={<MyNavbar />}
+        aside={<MyAside />}
+        classNames={{
+          main: classes.main,
+        }}
+      >
+        <ScrollArea type="scroll" style={{ height: '100vh' }}>
+          {children}
+        </ScrollArea>
+      </AppShell>
+    </motion.div>
   )
 }
 
-const MyApp: NextPage<AppProps> = ({
+const MyApp: NextPage<AppProps, AppProps['pageProps']> = ({
   Component,
-  pageProps: { urqlState, ...pageProps },
+  pageProps,
   router,
 }) => {
-  const ssrCache = useMemo(createSSRExchange, [])
-  if (urqlState) {
-    ssrCache.restoreData(urqlState)
-  }
-  const client = useMemo(() => createUrqlClient(ssrCache), [ssrCache])
-  const queryClient = useMemo(() => createQueryClient(), [])
+  // const ssrCache = useMemo(createSSRExchange, [])
+  // if (pageProps?.urqlState) {
+  //   ssrCache.restoreData(pageProps?.urqlState)
+  // }
+  // const client = useMemo(() => createUrqlClient(ssrCache), [ssrCache])
 
   return (
-    // <Provider value={client}>
     //   <QueryClientProvider client={queryClient}>
+    // <Provider value={client}>
     <ThemeProvider>
       <MyAppShell>
         <AnimatePresence exitBeforeEnter>
-          <Component {...pageProps} key={router.route} />
+          <Component {...(pageProps as any)} key={router.route} />
         </AnimatePresence>
       </MyAppShell>
     </ThemeProvider>
-    //   </QueryClientProvider>
     // </Provider>
+    //   </QueryClientProvider>
   )
 }
 
-export default MyApp
+export default withUrqlClient(
+  ssr => getClientOptions(ssr),
+  { ssr: false, neverSuspend: false, staleWhileRevalidate: true } // Important so we don't wrap our component in getInitialProps
+)(MyApp)
+
+// export default MyApp
 
 interface AppProps extends IAppProps {
   pageProps: {

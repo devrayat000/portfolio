@@ -7,7 +7,7 @@ import { useToggle, useColorScheme, useHotkeys } from '@mantine/hooks'
 import { useCallback } from 'react'
 
 const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
-  const preferedColorScheme = useColorScheme()
+  const preferedColorScheme = useColorScheme('dark')
   const [colorScheme, setColorScheme] = useToggle<ColorScheme>(
     preferedColorScheme,
     ['light', 'dark']

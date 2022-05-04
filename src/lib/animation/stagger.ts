@@ -5,7 +5,7 @@ export const stagger: Variants = {
   show: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1,
+      staggerChildren: 0.15,
       when: 'beforeChildren',
     },
   },

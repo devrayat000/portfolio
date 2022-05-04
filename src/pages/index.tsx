@@ -68,7 +68,9 @@ export const getStaticProps: GetStaticProps = async context => {
   }
 }
 
-export default withUrqlClient(
-  ssr => getClientOptions(ssr),
-  { ssr: false, neverSuspend: true } // Important so we don't wrap our component in getInitialProps
-)(Home)
+export default Home
+
+// export default withUrqlClient(
+//   ssr => getClientOptions(ssr),
+//   { ssr: false, neverSuspend: true } // Important so we don't wrap our component in getInitialProps
+// )(Home)

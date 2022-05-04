@@ -4,7 +4,9 @@ import {
   // fetchExchange,
   ssrExchange,
   ClientOptions,
+  Exchange,
 } from '@urql/core'
+import { suspenseExchange } from '@urql/exchange-suspense'
 import { multipartFetchExchange } from '@urql/exchange-multipart-fetch'
 import { createClient } from 'urql'
 import type { SSRData, SSRExchange } from '@urql/core/dist/types/exchanges/ssr'

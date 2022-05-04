@@ -1,5 +1,6 @@
 import {
   createStyles,
+  keyframes,
   Image,
   Container,
   Title,
@@ -24,6 +25,11 @@ const wiggle: Variants = {
     },
   },
 }
+
+const grow = keyframes({
+  from: { width: '0%', opacity: 0 },
+  to: { width: '100%', opacity: 1 },
+})
 
 const useStyles = createStyles(theme => ({
   inner: {
@@ -68,12 +74,14 @@ const useStyles = createStyles(theme => ({
 
   highlight: {
     position: 'relative',
+    padding: '4px 12px',
+    // isolation: 'isolate',
     backgroundColor:
       theme.colorScheme === 'dark'
         ? theme.fn.rgba(theme.colors[theme.primaryColor][5], 0.55)
         : theme.colors[theme.primaryColor][1],
     borderRadius: theme.radius.sm,
-    padding: '4px 12px',
+    animation: `${grow} 300ms ease-in-out`,
   },
 }))
 

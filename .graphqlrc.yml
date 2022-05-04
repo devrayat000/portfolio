@@ -15,12 +15,12 @@ extensions:
           - "typescript-urql"
 
         config:
-          inputMaybeValue: T | undefined
-          declarationKind:
-            type: 'interface'
-            input: 'interface'
-            interface: 'interface'
-            arguments: 'interface'
+          # inputMaybeValue: T | undefined
+          # declarationKind:
+          #   type: 'interface'
+          #   input: 'interface'
+          #   interface: 'interface'
+          #   arguments: 'interface'
           # federation: true
           constEnums: true
           namingConvention:
@@ -28,7 +28,7 @@ extensions:
             enumValues: change-case-all#constantCase
           useTypeImports: true
           dedupeFragments: true
-          withComponent: true,
+          # withComponent: true,
 
 
     # config:

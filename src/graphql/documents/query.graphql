@@ -1,7 +1,8 @@
-# import '../input.graphql'
 # import './fragment.graphql'
 
-query GetProjects($where: ProjectWhereInput = {status: {equals: published}}) {
+query GetProjects(
+  $where: ProjectWhereInput = { status: { equals: published } }
+) {
   projects(where: $where) {
     ...ProjectFragment
   }
@@ -22,5 +23,33 @@ query GetImages($where: ImageWhereInput = {}) {
 query GetImageById($id: ID!) {
   image(where: { id: $id }) {
     ...ImageFragment
+  }
+}
+
+query GetHumanLanguageSkills {
+  languageSkills(
+    where: {
+      type: { equals: human }
+      user: { email: { equals: "dev.rayat000@gmail.com" } }
+    }
+  ) {
+    ...LanguageFragment
+  }
+}
+
+query GetProgrammingLanguageSkills {
+  languageSkills(
+    where: {
+      type: { equals: programming }
+      user: { email: { equals: "dev.rayat000@gmail.com" } }
+    }
+  ) {
+    ...LanguageFragment
+  }
+}
+
+query GetMyInfo {
+  admin(where: { email: "dev.rayat000@gmail.com" }) {
+    ...MyInfo
   }
 }

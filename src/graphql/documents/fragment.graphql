@@ -1,5 +1,3 @@
-# import '../type.graphql'
-
 fragment ProjectFragment on Project {
   id
   title
@@ -22,4 +20,17 @@ fragment ImageFragment on Image {
     width
     height
   }
+}
+
+fragment LanguageFragment on LanguageSkill {
+  id
+  language
+  value
+}
+
+fragment MyInfo on Admin {
+  age
+  residence
+  freelance
+  address
 }
