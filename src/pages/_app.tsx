@@ -2,17 +2,25 @@ import { useMemo } from 'react'
 import type { NextPage } from 'next'
 import { Provider } from 'urql'
 import type { AppProps as IAppProps } from 'next/app'
-import { AnimatePresence } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
+import {
+  Affix,
+  AppShell,
+  Button,
+  createStyles,
+  ScrollArea,
+} from '@mantine/core'
+import { useWindowScroll } from '@mantine/hooks'
+import { ArrowUp as ArrowUpIcon } from 'tabler-icons-react'
 import type { SSRData } from '@urql/core/dist/types/exchanges/ssr'
 
 import { createUrqlClient, createSSRExchange } from '$lib/utils/urql_client'
 import ThemeProvider from '$lib/components/common/theme-provider'
-import { AppShell, createStyles, ScrollArea } from '@mantine/core'
 import MyNavbar from '$lib/components/home/navbar'
 import MyAside from '$lib/components/home/aside'
 import '../styles/globals.css'
-import { QueryClientProvider } from 'react-query'
 import { createQueryClient } from '$lib/utils/query_client'
+import { slideX } from '$lib/animation/slide'
 
 const useStyles = createStyles(theme => ({
   main: {
@@ -26,6 +34,8 @@ const useStyles = createStyles(theme => ({
 
 const MyAppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { classes } = useStyles()
+
+  const [scroll, scrollTo] = useWindowScroll()
 
   return (
     <AppShell
@@ -47,6 +57,7 @@ const MyAppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 const MyApp: NextPage<AppProps> = ({
   Component,
   pageProps: { urqlState, ...pageProps },
+  router,
 }) => {
   const ssrCache = useMemo(createSSRExchange, [])
   if (urqlState) {
@@ -61,7 +72,7 @@ const MyApp: NextPage<AppProps> = ({
     <ThemeProvider>
       <MyAppShell>
         <AnimatePresence exitBeforeEnter>
-          <Component {...pageProps} />
+          <Component {...pageProps} key={router.route} />
         </AnimatePresence>
       </MyAppShell>
     </ThemeProvider>

@@ -8,29 +8,40 @@ extensions:
     documents: 'src/graphql/documents/*.{gql,graphql}'
 
     generates:
-      src/graphql/generated.ts:
+      src/graphql/generated.tsx:
         plugins:
           - "typescript"
           - "typescript-operations"
           - "typescript-urql"
 
-      src/graphql/query-types-hooks.ts:
-        plugins:
-          - "typescript"
-          - "typescript-operations"
-          - "typescript-react-query"
-
-    config:
-      inputMaybeValue: T | undefined
-      declarationKind:
-        type: 'interface'
-        input: 'interface'
-        interface: 'interface'
-        arguments: 'interface'
-      federation: true
-      constEnums: true
-      namingConvention:
+        config:
+          inputMaybeValue: T | undefined
+          declarationKind:
+            type: 'interface'
+            input: 'interface'
+            interface: 'interface'
+            arguments: 'interface'
+          # federation: true
+          constEnums: true
+          namingConvention:
             typeNames: keep
             enumValues: change-case-all#constantCase
+          useTypeImports: true
+          dedupeFragments: true
+          withComponent: true,
+
+
+    # config:
+      # inputMaybeValue: T | undefined
+      # declarationKind:
+      #   type: 'interface'
+      #   input: 'interface'
+      #   interface: 'interface'
+      #   arguments: 'interface'
+      # federation: true
+      # constEnums: true
+      # namingConvention:
+      #   typeNames: keep
+      #   enumValues: change-case-all#constantCase
 
 

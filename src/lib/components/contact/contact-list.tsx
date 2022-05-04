@@ -1,4 +1,3 @@
-import React from 'react'
 import {
   createStyles,
   ThemeIcon,
@@ -10,6 +9,10 @@ import {
   AnchorProps,
 } from '@mantine/core'
 import { Sun, Phone, MapPin, At } from 'tabler-icons-react'
+import { motion } from 'framer-motion'
+
+import { slideY } from '$lib/animation/slide'
+import { stagger } from '$lib/animation/stagger'
 
 type ContactIconVariant = 'white' | 'gradient'
 
@@ -48,7 +51,8 @@ const useStyles = createStyles((theme, { variant }: ContactIconStyles) => ({
   },
 }))
 
-interface ContactIconProps extends Omit<AnchorProps<'a'>, 'title' | 'variant'> {
+interface ContactIconProps
+  extends Omit<AnchorProps<typeof motion.a>, 'title' | 'variant'> {
   icon: React.FC<any>
   title: React.ReactNode
   description: React.ReactNode
@@ -69,6 +73,8 @@ function ContactIcon({
     <Anchor
       className={cx(classes.wrapper, className)}
       underline={false}
+      component={motion.a}
+      variants={slideY(20)}
       {...others}
     >
       {variant === 'gradient' ? (
@@ -129,5 +135,9 @@ export default function ContactIconsList({
   const items = data.map((item, index) => (
     <ContactIcon key={index} variant={variant} {...item} />
   ))
-  return <Group direction="column">{items}</Group>
+  return (
+    <motion.div variants={stagger}>
+      <Group direction="column">{items}</Group>
+    </motion.div>
+  )
 }

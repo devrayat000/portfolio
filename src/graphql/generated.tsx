@@ -1,4 +1,5 @@
 import gql from 'graphql-tag';
+import * as React from 'react';
 import * as Urql from 'urql';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = T | undefined;
@@ -13,7 +14,6 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  _FieldSet: any;
   DateTime: any;
   /** The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf). */
   JSON: any;
@@ -1272,37 +1272,37 @@ export interface TagWhereUniqueInput {
   id?: InputMaybe<Scalars['ID']>;
 }
 
-export type ProjectFragmentFragment = { __typename?: 'Project', id: string, title?: string | null | undefined, demo?: string | null | undefined, source?: string | null | undefined, description?: { __typename?: 'Project_description_Document', document: any } | null | undefined, images?: Array<{ __typename?: 'Image', id: string, label?: string | null | undefined, image?: { __typename?: 'AzureStorageImageFieldOutputType', id: string, url: string, width: number, height: number } | null | undefined }> | null | undefined };
+export type ProjectFragmentFragment = { __typename?: 'Project', id: string, title?: string | null, demo?: string | null, source?: string | null, description?: { __typename?: 'Project_description_Document', document: any } | null, images?: Array<{ __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'AzureStorageImageFieldOutputType', id: string, url: string, width: number, height: number } | null }> | null };
 
-export type ImageFragmentFragment = { __typename?: 'Image', id: string, label?: string | null | undefined, image?: { __typename?: 'AzureStorageImageFieldOutputType', id: string, url: string, width: number, height: number } | null | undefined };
+export type ImageFragmentFragment = { __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'AzureStorageImageFieldOutputType', id: string, url: string, width: number, height: number } | null };
 
 export type GetProjectsQueryVariables = Exact<{
   where?: InputMaybe<ProjectWhereInput>;
 }>;
 
 
-export type GetProjectsQuery = { __typename?: 'Query', projects?: Array<{ __typename?: 'Project', id: string, title?: string | null | undefined, demo?: string | null | undefined, source?: string | null | undefined, description?: { __typename?: 'Project_description_Document', document: any } | null | undefined, images?: Array<{ __typename?: 'Image', id: string, label?: string | null | undefined, image?: { __typename?: 'AzureStorageImageFieldOutputType', id: string, url: string, width: number, height: number } | null | undefined }> | null | undefined }> | null | undefined };
+export type GetProjectsQuery = { __typename?: 'Query', projects?: Array<{ __typename?: 'Project', id: string, title?: string | null, demo?: string | null, source?: string | null, description?: { __typename?: 'Project_description_Document', document: any } | null, images?: Array<{ __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'AzureStorageImageFieldOutputType', id: string, url: string, width: number, height: number } | null }> | null }> | null };
 
 export type GetProjectByIdQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type GetProjectByIdQuery = { __typename?: 'Query', project?: { __typename?: 'Project', id: string, title?: string | null | undefined, demo?: string | null | undefined, source?: string | null | undefined, description?: { __typename?: 'Project_description_Document', document: any } | null | undefined, images?: Array<{ __typename?: 'Image', id: string, label?: string | null | undefined, image?: { __typename?: 'AzureStorageImageFieldOutputType', id: string, url: string, width: number, height: number } | null | undefined }> | null | undefined } | null | undefined };
+export type GetProjectByIdQuery = { __typename?: 'Query', project?: { __typename?: 'Project', id: string, title?: string | null, demo?: string | null, source?: string | null, description?: { __typename?: 'Project_description_Document', document: any } | null, images?: Array<{ __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'AzureStorageImageFieldOutputType', id: string, url: string, width: number, height: number } | null }> | null } | null };
 
 export type GetImagesQueryVariables = Exact<{
   where?: InputMaybe<ImageWhereInput>;
 }>;
 
 
-export type GetImagesQuery = { __typename?: 'Query', images?: Array<{ __typename?: 'Image', id: string, label?: string | null | undefined, image?: { __typename?: 'AzureStorageImageFieldOutputType', id: string, url: string, width: number, height: number } | null | undefined }> | null | undefined };
+export type GetImagesQuery = { __typename?: 'Query', images?: Array<{ __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'AzureStorageImageFieldOutputType', id: string, url: string, width: number, height: number } | null }> | null };
 
 export type GetImageByIdQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type GetImageByIdQuery = { __typename?: 'Query', image?: { __typename?: 'Image', id: string, label?: string | null | undefined, image?: { __typename?: 'AzureStorageImageFieldOutputType', id: string, url: string, width: number, height: number } | null | undefined } | null | undefined };
+export type GetImageByIdQuery = { __typename?: 'Query', image?: { __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'AzureStorageImageFieldOutputType', id: string, url: string, width: number, height: number } | null } | null };
 
 export const ImageFragmentFragmentDoc = gql`
     fragment ImageFragment on Image {
@@ -1329,14 +1329,20 @@ export const ProjectFragmentFragmentDoc = gql`
     ...ImageFragment
   }
 }
-    ${ImageFragmentFragmentDoc}`;
+    `;
 export const GetProjectsDocument = gql`
     query GetProjects($where: ProjectWhereInput = {status: {equals: published}}) {
   projects(where: $where) {
     ...ProjectFragment
   }
 }
-    ${ProjectFragmentFragmentDoc}`;
+    ${ProjectFragmentFragmentDoc}
+${ImageFragmentFragmentDoc}`;
+
+export const GetProjectsComponent = (props: Omit<Urql.QueryProps<GetProjectsQuery, GetProjectsQueryVariables>, 'query'> & { variables?: GetProjectsQueryVariables }) => (
+  <Urql.Query {...props} query={GetProjectsDocument} />
+);
+
 
 export function useGetProjectsQuery(options?: Omit<Urql.UseQueryArgs<GetProjectsQueryVariables>, 'query'>) {
   return Urql.useQuery<GetProjectsQuery>({ query: GetProjectsDocument, ...options });
@@ -1347,7 +1353,13 @@ export const GetProjectByIdDocument = gql`
     ...ProjectFragment
   }
 }
-    ${ProjectFragmentFragmentDoc}`;
+    ${ProjectFragmentFragmentDoc}
+${ImageFragmentFragmentDoc}`;
+
+export const GetProjectByIdComponent = (props: Omit<Urql.QueryProps<GetProjectByIdQuery, GetProjectByIdQueryVariables>, 'query'> & { variables: GetProjectByIdQueryVariables }) => (
+  <Urql.Query {...props} query={GetProjectByIdDocument} />
+);
+
 
 export function useGetProjectByIdQuery(options: Omit<Urql.UseQueryArgs<GetProjectByIdQueryVariables>, 'query'>) {
   return Urql.useQuery<GetProjectByIdQuery>({ query: GetProjectByIdDocument, ...options });
@@ -1360,6 +1372,11 @@ export const GetImagesDocument = gql`
 }
     ${ImageFragmentFragmentDoc}`;
 
+export const GetImagesComponent = (props: Omit<Urql.QueryProps<GetImagesQuery, GetImagesQueryVariables>, 'query'> & { variables?: GetImagesQueryVariables }) => (
+  <Urql.Query {...props} query={GetImagesDocument} />
+);
+
+
 export function useGetImagesQuery(options?: Omit<Urql.UseQueryArgs<GetImagesQueryVariables>, 'query'>) {
   return Urql.useQuery<GetImagesQuery>({ query: GetImagesDocument, ...options });
 };
@@ -1370,6 +1387,11 @@ export const GetImageByIdDocument = gql`
   }
 }
     ${ImageFragmentFragmentDoc}`;
+
+export const GetImageByIdComponent = (props: Omit<Urql.QueryProps<GetImageByIdQuery, GetImageByIdQueryVariables>, 'query'> & { variables: GetImageByIdQueryVariables }) => (
+  <Urql.Query {...props} query={GetImageByIdDocument} />
+);
+
 
 export function useGetImageByIdQuery(options: Omit<Urql.UseQueryArgs<GetImageByIdQueryVariables>, 'query'>) {
   return Urql.useQuery<GetImageByIdQuery>({ query: GetImageByIdDocument, ...options });

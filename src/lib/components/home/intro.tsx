@@ -8,6 +8,22 @@ import {
   Paper,
 } from '@mantine/core'
 import { ArrowRight } from 'tabler-icons-react'
+import { motion, Variants } from 'framer-motion'
+import { slideX } from '$lib/animation/slide'
+
+const wiggle: Variants = {
+  stop: {
+    x: 0,
+  },
+  hover: {
+    x: [4, -4],
+    transition: {
+      duration: 0.4,
+      repeat: Infinity,
+      repeatType: 'reverse',
+    },
+  },
+}
 
 const useStyles = createStyles(theme => ({
   inner: {
@@ -65,7 +81,12 @@ export default function Intro() {
   const { classes } = useStyles()
 
   return (
-    <div>
+    <motion.div
+      variants={slideX(40)}
+      initial="hidden"
+      animate="show"
+      exit="hidden"
+    >
       <Container>
         <Paper
           className={classes.inner}
@@ -87,7 +108,14 @@ export default function Intro() {
 
             <Button
               size="md"
-              rightIcon={<ArrowRight size={18} strokeWidth={3} />}
+              component={motion.button}
+              initial="stop"
+              whileHover="hover"
+              rightIcon={
+                <motion.span variants={wiggle}>
+                  <ArrowRight size={18} strokeWidth={3} />
+                </motion.span>
+              }
             >
               Hire Me
             </Button>
@@ -100,6 +128,6 @@ export default function Intro() {
           />
         </Paper>
       </Container>
-    </div>
+    </motion.div>
   )
 }

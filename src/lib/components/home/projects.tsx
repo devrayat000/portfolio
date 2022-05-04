@@ -8,8 +8,6 @@ import ProjectsList from './projects-list'
 import Label from './label'
 
 type Props = {}
-// Our custom easing
-let easing = [0.6, -0.05, 0.01, 0.99]
 
 const Projects = (props: Props) => {
   return (

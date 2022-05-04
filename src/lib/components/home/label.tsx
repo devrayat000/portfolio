@@ -1,17 +1,6 @@
+import { grow } from '$lib/animation/grow'
 import { Center, Text, Title } from '@mantine/core'
 import { motion as m, type Variants } from 'framer-motion'
-
-const labelGrow: Variants = {
-  initial: { opacity: 0, scale: 0.6 },
-  animate: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      duration: 0.4,
-      ease: 'easeInOut',
-    },
-  },
-}
 
 export interface LabelProps {
   title: React.ReactNode
@@ -20,12 +9,7 @@ export interface LabelProps {
 
 const Label: React.FC<LabelProps> = ({ title, subtitle }) => {
   return (
-    <m.div
-      variants={labelGrow}
-      initial="initial"
-      whileInView="animate"
-      viewport={{ once: true }}
-    >
+    <m.div variants={grow(0.6)} whileInView="show" viewport={{ once: true }}>
       <Title order={2} align="center">
         {title}
       </Title>
