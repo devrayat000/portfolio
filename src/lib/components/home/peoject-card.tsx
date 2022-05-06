@@ -119,6 +119,8 @@ const ProjectCard = ({ project }: Props) => {
   )
 }
 
+ProjectCard.displayName = 'MyProjectCard'
+
 export default ProjectCard
 
 const NoDemo = () => (

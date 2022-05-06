@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import type { NextPage } from 'next'
+import { type NextPage } from 'next'
 import { Provider } from 'urql'
 import { type AppProps as IAppProps } from 'next/app'
 import { AnimatePresence, motion } from 'framer-motion'
@@ -65,33 +65,33 @@ const MyApp: NextPage<AppProps, AppProps['pageProps']> = ({
   pageProps,
   router,
 }) => {
-  // const ssrCache = useMemo(createSSRExchange, [])
-  // if (pageProps?.urqlState) {
-  //   ssrCache.restoreData(pageProps?.urqlState)
-  // }
-  // const client = useMemo(() => createUrqlClient(ssrCache), [ssrCache])
+  const ssrCache = useMemo(createSSRExchange, [])
+  if (pageProps?.urqlState) {
+    ssrCache.restoreData(pageProps?.urqlState)
+  }
+  const client = useMemo(() => createUrqlClient(ssrCache), [ssrCache])
 
   return (
     //   <QueryClientProvider client={queryClient}>
-    // <Provider value={client}>
-    <ThemeProvider>
-      <MyAppShell>
-        <AnimatePresence exitBeforeEnter>
-          <Component {...(pageProps as any)} key={router.route} />
-        </AnimatePresence>
-      </MyAppShell>
-    </ThemeProvider>
-    // </Provider>
+    <Provider value={client}>
+      <ThemeProvider>
+        <MyAppShell>
+          <AnimatePresence exitBeforeEnter>
+            <Component {...(pageProps as any)} key={router.route} />
+          </AnimatePresence>
+        </MyAppShell>
+      </ThemeProvider>
+    </Provider>
     //   </QueryClientProvider>
   )
 }
 
-export default withUrqlClient(
-  ssr => getClientOptions(ssr),
-  { ssr: false, neverSuspend: false, staleWhileRevalidate: true } // Important so we don't wrap our component in getInitialProps
-)(MyApp)
+// export default withUrqlClient(
+//   ssr => getClientOptions(ssr),
+//   { ssr: false, neverSuspend: true } // Important so we don't wrap our component in getInitialProps
+// )(MyApp)
 
-// export default MyApp
+export default MyApp
 
 interface AppProps extends IAppProps {
   pageProps: {

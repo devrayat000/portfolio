@@ -1,22 +1,23 @@
-import { Aside, Group, ScrollArea, Space, Stack } from '@mantine/core'
+import { Aside, Group, ScrollArea } from '@mantine/core'
 import { Certificate, Home2, Message, ClipboardCheck } from 'tabler-icons-react'
-import { motion } from 'framer-motion'
+// import { motion } from 'framer-motion'
 
-import { useStackStyles } from '$lib/styles/stack'
+// import { useStackStyles } from '$lib/styles/stack'
 import NavLink from '../common/nav-link'
 import ThemeToggle from '../common/theme-toggle'
 import { stagger } from '$lib/animation/stagger'
+import { MotionStack } from '$lib/animation'
 
 const MyAside = () => {
-  const { classes } = useStackStyles({ spacing: 48 })
+  // const { classes } = useStackStyles({ spacing: 48 })
   return (
     <ScrollArea type="scroll" style={{ height: '100vh' }}>
       <Aside width={{ base: 80 }} p="xs">
         <Group direction="column" align="center" spacing={20 * 6} my="xl">
           {/* <Space /> */}
           <ThemeToggle />
-          <motion.div
-            className={classes.stack}
+          <MotionStack
+            spacing={48}
             variants={stagger}
             initial="hidden"
             animate="show"
@@ -34,7 +35,7 @@ const MyAside = () => {
             <NavLink href="/contact" label="Contact Me">
               <Message />
             </NavLink>
-          </motion.div>
+          </MotionStack>
         </Group>
       </Aside>
     </ScrollArea>

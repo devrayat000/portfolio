@@ -2,15 +2,15 @@ import {
   createStyles,
   keyframes,
   Image,
-  Container,
   Title,
   Button,
   Text,
   Paper,
 } from '@mantine/core'
 import { ArrowRight } from 'tabler-icons-react'
-import { motion, Variants } from 'framer-motion'
+import { motion, type Variants } from 'framer-motion'
 import { slideX } from '$lib/animation/slide'
+import { expandX, MotionContainer } from '$lib/animation'
 
 const wiggle: Variants = {
   stop: {
@@ -75,13 +75,21 @@ const useStyles = createStyles(theme => ({
   highlight: {
     position: 'relative',
     padding: '4px 12px',
-    // isolation: 'isolate',
+    isolation: 'isolate',
+  },
+  highlightBar: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
+    height: '100%',
+    width: '50%',
     backgroundColor:
       theme.colorScheme === 'dark'
         ? theme.fn.rgba(theme.colors[theme.primaryColor][5], 0.55)
         : theme.colors[theme.primaryColor][1],
     borderRadius: theme.radius.sm,
-    animation: `${grow} 300ms ease-in-out`,
+    zIndex: -1,
+    // animation: `${grow} 300ms ease-in-out`,
   },
 }))
 
@@ -89,53 +97,59 @@ export default function Intro() {
   const { classes } = useStyles()
 
   return (
-    <motion.div
+    <MotionContainer
       variants={slideX(40)}
       initial="hidden"
       animate="show"
       exit="hidden"
+      px={0}
     >
-      <Container>
-        <Paper
-          className={classes.inner}
-          p={12 * 4}
-          shadow="md"
-          radius="sm"
-          // mb="xl"
-        >
-          <div className={classes.content}>
-            <Title className={classes.title} order={1}>
-              I’m Musaddik Rayat <br />
-              <span className={classes.highlight}>Full-stack</span> Developer
-            </Title>
-            <Text color="dimmed" my="xl" component="p">
-              Build fully functional accessible web applications faster than
-              ever – Mantine includes more than 120 customizable components and
-              hooks to cover you in any situation
-            </Text>
+      <Paper
+        className={classes.inner}
+        p={12 * 4}
+        shadow="md"
+        radius="sm"
+        // mb="xl"
+      >
+        <div className={classes.content}>
+          <Title className={classes.title} order={1}>
+            I’m Musaddik Rayat <br />
+            <span className={classes.highlight}>
+              <motion.span
+                className={classes.highlightBar}
+                variants={expandX(100)}
+              />
+              Full-stack
+            </span>{' '}
+            Developer
+          </Title>
+          <Text color="dimmed" my="xl" component="p">
+            Build fully functional accessible web applications faster than ever
+            – Mantine includes more than 120 customizable components and hooks
+            to cover you in any situation
+          </Text>
 
-            <Button
-              size="md"
-              component={motion.button}
-              initial="stop"
-              whileHover="hover"
-              rightIcon={
-                <motion.span variants={wiggle}>
-                  <ArrowRight size={18} strokeWidth={3} />
-                </motion.span>
-              }
-            >
-              Hire Me
-            </Button>
-          </div>
-          <Image
-            src="/images/rayat2.png"
-            alt="Zul Ikram Musaddik Rayat"
-            withPlaceholder
-            className={classes.image}
-          />
-        </Paper>
-      </Container>
-    </motion.div>
+          <Button
+            size="md"
+            component={motion.button}
+            initial="stop"
+            whileHover="hover"
+            rightIcon={
+              <motion.span variants={wiggle}>
+                <ArrowRight size={18} strokeWidth={3} />
+              </motion.span>
+            }
+          >
+            Hire Me
+          </Button>
+        </div>
+        <Image
+          src="/images/rayat2.png"
+          alt="Zul Ikram Musaddik Rayat"
+          withPlaceholder
+          className={classes.image}
+        />
+      </Paper>
+    </MotionContainer>
   )
 }

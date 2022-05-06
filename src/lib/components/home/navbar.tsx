@@ -12,6 +12,7 @@ import {
   ActionIcon,
   useMantineTheme,
   Mark,
+  Button,
 } from '@mantine/core'
 import { motion, useMotionValue, useTransform } from 'framer-motion'
 import {
@@ -19,6 +20,7 @@ import {
   BrandLinkedin,
   BrandTwitter,
   BrandTelegram,
+  Download,
   type Icon,
 } from 'tabler-icons-react'
 
@@ -26,6 +28,7 @@ import { slideY, stagger } from '$lib/animation'
 import HumanLanguageSkill from '../common/nav/human-language-skill'
 import { Suspense } from 'react'
 import Info from '../common/nav/info-item'
+import ProgrammingLanguageSkill from '../common/nav/programming-language-skill'
 
 interface SocialIconProp {
   icon: Icon
@@ -51,9 +54,9 @@ const socialActions: SocialIconProp[] = [
 const MyNavbar = () => {
   const theme = useMantineTheme()
   return (
-    <ScrollArea type="scroll" style={{ height: '100vh' }}>
-      <Navbar width={{ base: 280 }} p="sm" py="xl">
-        <Stack align="center">
+    <ScrollArea type="scroll" offsetScrollbars>
+      <Navbar width={{ base: 280 }} p="sm">
+        <Stack align="center" py="xl">
           <motion.div variants={pageFade}>
             <Indicator
               inline
@@ -102,6 +105,10 @@ const MyNavbar = () => {
           <Info />
           <Divider my="sm" size="sm" style={{ alignSelf: 'stretch' }} />
           <HumanLanguageSkill />
+          <Divider my="sm" size="sm" style={{ alignSelf: 'stretch' }} />
+          <ProgrammingLanguageSkill />
+          <Divider my="sm" size="sm" style={{ alignSelf: 'stretch' }} />
+          <Button rightIcon={<Download />} fullWidth>Download CV</Button>
         </Stack>
       </Navbar>
     </ScrollArea>

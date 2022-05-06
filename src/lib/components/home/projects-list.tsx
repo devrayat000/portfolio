@@ -17,6 +17,7 @@ import { motion } from 'framer-motion'
 import { stagger } from '$lib/animation/stagger'
 import { slideY } from '$lib/animation/slide'
 import ProjectCard from './peoject-card'
+import { MotionSimpleGrid } from '$lib/animation'
 // import { useGetProjectsQuery } from '$graphql/query-types-hooks'
 
 type Props = {}
@@ -26,10 +27,10 @@ const useStyles = createStyles(theme => ({
     display: 'grid',
     gap: theme.spacing.sm,
     gridTemplateColumns: 'repeat(1, minmax(0, 1fr))',
-    [`@media (min-width: ${theme.breakpoints.md}px)`]: {
+    [theme.fn.largerThan('md')]: {
       gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
     },
-    [`@media (min-width: ${theme.breakpoints.lg}px)`]: {
+    [theme.fn.largerThan('lg')]: {
       gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
     },
   },
@@ -38,20 +39,30 @@ const useStyles = createStyles(theme => ({
 const ProjectsList = () => {
   const [{ data }] = useGetProjectsQuery()
 
-  const { classes } = useStyles()
+  // const { classes } = useStyles()
 
   return (
-    <motion.div
+    <MotionSimpleGrid
+      cols={1}
+      breakpoints={[
+        {
+          minWidth: 'md',
+          cols: 2,
+        },
+        {
+          minWidth: 'lg',
+          cols: 3,
+        },
+      ]}
       variants={stagger}
       initial="hidden"
       whileInView="show"
       viewport={{ once: true }}
-      className={classes.projectGrid}
     >
       {data?.projects?.map(project => {
         return <ProjectCard key={project.id} project={project as Project} />
       })}
-    </motion.div>
+    </MotionSimpleGrid>
   )
 }
 

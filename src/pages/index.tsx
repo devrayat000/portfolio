@@ -56,7 +56,7 @@ function Home() {
 
 export const getStaticProps: GetStaticProps = async context => {
   const ssrCache = createSSRExchange()
-  const client = initUrqlClient(getClientOptions(ssrCache), false)!
+  const client = createUrqlClient(ssrCache)
 
   await client.query(GetProjectsDocument).toPromise()
 
