@@ -25,10 +25,10 @@ const ProjectCard = ({ project }: Props) => {
 
   return (
     <Link href="/projects/[id]" as={`/projects/${project.id}`} passHref>
-      <Card<typeof motion.a>
+      <Card<typeof motion.div>
         shadow="sm"
         p="lg"
-        component={motion.a}
+        component={motion.div}
         variants={slideY(60)}
         viewport={{ once: true }}
         whileHover={{
@@ -42,6 +42,9 @@ const ProjectCard = ({ project }: Props) => {
           transition: {
             type: 'spring',
           },
+        }}
+        sx={{
+          cursor: 'pointer',
         }}
       >
         <Card.Section
@@ -90,36 +93,32 @@ const ProjectCard = ({ project }: Props) => {
 
         <Stack spacing="xs">
           {project.demo ? (
-            <Link href={project.demo} passHref>
-              <Button<'a'>
-                component="a"
-                variant="outline"
-                // color="blue"
-                fullWidth
-                target="_blank"
-                onClick={e => e.stopPropagation()}
-                onClickCapture={e => e.stopPropagation()}
-              >
-                Watch Demo
-              </Button>
-            </Link>
+            <Button<'a'>
+              component="a"
+              variant="outline"
+              href={project.demo}
+              fullWidth
+              target="_blank"
+              onClick={e => e.stopPropagation()}
+              onClickCapture={e => e.stopPropagation()}
+            >
+              Watch Demo
+            </Button>
           ) : (
             <NoDemo />
           )}
           {project.source ? (
-            <Link href={project.source} passHref>
-              <Button<'a'>
-                component="a"
-                variant="light"
-                // color="blue"
-                fullWidth
-                target="_blank"
-                onClick={e => e.stopPropagation()}
-                onClickCapture={e => e.stopPropagation()}
-              >
-                View Source Code
-              </Button>
-            </Link>
+            <Button<'a'>
+              variant="light"
+              component="a"
+              href={project.source}
+              fullWidth
+              target="_blank"
+              onClick={e => e.stopPropagation()}
+              onClickCapture={e => e.stopPropagation()}
+            >
+              View Source Code
+            </Button>
           ) : (
             <NoSourceCode />
           )}
