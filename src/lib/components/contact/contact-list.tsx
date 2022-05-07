@@ -3,13 +3,12 @@ import {
   ThemeIcon,
   Text,
   Group,
-  SimpleGrid,
   Box,
   Anchor,
   AnchorProps,
 } from '@mantine/core'
 import { Sun, Phone, MapPin, At } from 'tabler-icons-react'
-import { motion } from 'framer-motion'
+import { m as motion } from 'framer-motion'
 
 import { slideY } from '$lib/animation/slide'
 import { stagger } from '$lib/animation/stagger'
@@ -133,7 +132,7 @@ export default function ContactIconsList({
   variant,
 }: ContactIconsListProps) {
   const items = data.map((item, index) => (
-    <ContactIcon key={index} variant={variant} {...item} />
+    <ContactIcon key={item.href} variant={variant} {...item} />
   ))
   return (
     <motion.div variants={stagger}>

@@ -8,7 +8,7 @@ import {
   SimpleGrid,
   createStyles,
 } from '@mantine/core'
-import { motion } from 'framer-motion'
+import { m as motion } from 'framer-motion'
 import { Send } from 'tabler-icons-react'
 import { type GetStaticProps } from 'next'
 

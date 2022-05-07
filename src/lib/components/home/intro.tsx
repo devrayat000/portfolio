@@ -8,7 +8,8 @@ import {
   Paper,
 } from '@mantine/core'
 import { ArrowRight } from 'tabler-icons-react'
-import { motion, type Variants } from 'framer-motion'
+import { m as motion, type Variants } from 'framer-motion'
+
 import { slideX } from '$lib/animation/slide'
 import { expandX, MotionContainer } from '$lib/animation'
 

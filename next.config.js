@@ -13,6 +13,7 @@ const nextConfig = {
       'https://framerusercontent.com/modules/',
       'https://framer.com/m/',
     ],
+    scrollRestoration: true,
   },
   images: {
     domains: [

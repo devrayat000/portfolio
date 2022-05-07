@@ -1,4 +1,5 @@
-import { Group, Mark, Stack, Text } from '@mantine/core'
+import { Mark, Navbar, Text } from '@mantine/core'
+
 import { useGetMyInfoQuery } from '$graphql/generated'
 import { MotionGroup, MotionStack, slideX, stagger } from '$lib/animation'
 
@@ -27,8 +28,8 @@ const InfoItem = ({ item, label }: Props) => {
 const Info = () => {
   const [{ data }] = useGetMyInfoQuery()
   return (
-    <MotionStack
-      align="stretch"
+    <Navbar.Section
+      component={MotionStack}
       style={{ alignSelf: 'stretch' }}
       variants={stagger}
     >
@@ -36,7 +37,7 @@ const Info = () => {
       <InfoItem label="Residence" item={data?.admin?.residence!} />
       <InfoItem label="Freelance" item={data?.admin?.freelance!} />
       <InfoItem label="Address" item={data?.admin?.address!} />
-    </MotionStack>
+    </Navbar.Section>
   )
 }
 

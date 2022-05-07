@@ -1,7 +1,9 @@
+import { AspectRatio } from '@mantine/core'
+import Image from 'next/image'
 import { type ParsedUrlQuery } from 'querystring'
 import { useRouter } from 'next/router'
 import { type GetStaticPaths, type GetStaticProps, type NextPage } from 'next'
-import { m as motion, domAnimation, LazyMotion } from 'framer-motion'
+import { m as motion } from 'framer-motion'
 
 import { createSSRExchange, createUrqlClient } from '$lib/utils/urql_client'
 import {
@@ -19,17 +21,26 @@ const ProjectDetailsPage: NextPage = () => {
     variables: { id: router.query.id as string },
   })
 
+  const image = data?.project?.images?.at(0)
+
   return (
-    <LazyMotion features={domAnimation}>
-      <motion.main
-        variants={pageFade}
-        // initial="hidden"
-        // animate="show"
-        // exit="hidden"
-      >
-        Enter
-      </motion.main>
-    </LazyMotion>
+    <motion.main
+      variants={pageFade}
+      layoutId={`project-${data?.project?.id}`}
+      // initial="hidden"
+      // animate="show"
+      // exit="hidden"
+    >
+      <AspectRatio ratio={3 / 2} sx={{ position: 'relative' }}>
+        <Image
+          key={image?.id}
+          src={image?.image?.url!}
+          alt={image?.label!}
+          layout="fill"
+          objectFit="cover"
+        />
+      </AspectRatio>
+    </motion.main>
   )
 }
 

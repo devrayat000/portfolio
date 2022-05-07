@@ -1,5 +1,5 @@
 import { Group, Text, useMantineTheme } from '@mantine/core'
-import { motion } from 'framer-motion'
+
 import ProgressBar from '../progress'
 
 type Props = {

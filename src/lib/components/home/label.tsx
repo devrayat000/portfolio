@@ -1,6 +1,6 @@
 import { grow } from '$lib/animation/grow'
 import { Center, Text, Title } from '@mantine/core'
-import { motion as m, type Variants } from 'framer-motion'
+import { m } from 'framer-motion'
 
 export interface LabelProps {
   title: React.ReactNode

@@ -4,17 +4,15 @@ import {
   Divider,
   Navbar,
   Indicator,
-  Stack,
   Title,
   Text,
   Group,
   ScrollArea,
   ActionIcon,
   useMantineTheme,
-  Mark,
   Button,
 } from '@mantine/core'
-import { motion, useMotionValue, useTransform } from 'framer-motion'
+import { m as motion } from 'framer-motion'
 import {
   BrandFacebook,
   BrandLinkedin,
@@ -24,11 +22,10 @@ import {
   type Icon,
 } from 'tabler-icons-react'
 
-import { slideY, stagger } from '$lib/animation'
-import HumanLanguageSkill from '../common/nav/human-language-skill'
-import { Suspense } from 'react'
-import Info from '../common/nav/info-item'
-import ProgrammingLanguageSkill from '../common/nav/programming-language-skill'
+import { MotionStack, slideY, stagger } from '$lib/animation'
+import HumanLanguageSkill from './human-language-skill'
+import Info from './info-item'
+import ProgrammingLanguageSkill from './programming-language-skill'
 
 interface SocialIconProp {
   icon: Icon
@@ -53,10 +50,19 @@ const socialActions: SocialIconProp[] = [
 
 const MyNavbar = () => {
   const theme = useMantineTheme()
+
+  const divider = <Divider my="sm" size="sm" style={{ alignSelf: 'stretch' }} />
+
   return (
     <ScrollArea type="scroll" offsetScrollbars>
       <Navbar width={{ base: 280 }} p="sm">
-        <Stack align="center" py="xl">
+        <MotionStack
+          align="center"
+          py="xl"
+          initial="hidden"
+          animate="show"
+          exit="hidden"
+        >
           <motion.div variants={pageFade}>
             <Indicator
               inline
@@ -101,15 +107,17 @@ const MyNavbar = () => {
               ))}
             </Group>
           </motion.div>
-          <Divider my="sm" size="sm" style={{ alignSelf: 'stretch' }} />
+          {divider}
           <Info />
-          <Divider my="sm" size="sm" style={{ alignSelf: 'stretch' }} />
+          {divider}
           <HumanLanguageSkill />
-          <Divider my="sm" size="sm" style={{ alignSelf: 'stretch' }} />
+          {divider}
           <ProgrammingLanguageSkill />
-          <Divider my="sm" size="sm" style={{ alignSelf: 'stretch' }} />
-          <Button rightIcon={<Download />} fullWidth>Download CV</Button>
-        </Stack>
+          {divider}
+          <Button rightIcon={<Download />} fullWidth>
+            Download CV
+          </Button>
+        </MotionStack>
       </Navbar>
     </ScrollArea>
   )

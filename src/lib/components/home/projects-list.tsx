@@ -1,21 +1,7 @@
-import {
-  Text,
-  AspectRatio,
-  Card,
-  Group,
-  Button,
-  Stack,
-  TypographyStylesProvider,
-  createStyles,
-} from '@mantine/core'
-import { DocumentRenderer } from '@keystone-6/document-renderer'
-import Image from 'next/image'
+import { createStyles } from '@mantine/core'
 
 import { type Project, useGetProjectsQuery } from '$graphql/generated'
-import Link from 'next/link'
-import { motion } from 'framer-motion'
 import { stagger } from '$lib/animation/stagger'
-import { slideY } from '$lib/animation/slide'
 import ProjectCard from './peoject-card'
 import { MotionSimpleGrid } from '$lib/animation'
 // import { useGetProjectsQuery } from '$graphql/query-types-hooks'

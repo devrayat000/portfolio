@@ -1,7 +1,7 @@
 import { useGetProgrammingLanguageSkillsQuery } from '$graphql/generated'
 import { slideX, stagger } from '$lib/animation'
-import { Group, Text } from '@mantine/core'
-import { motion } from 'framer-motion'
+import { Group, Navbar, Text } from '@mantine/core'
+import { m as motion } from 'framer-motion'
 
 import LanguageSkill from './language-skill'
 
@@ -11,7 +11,12 @@ const ProgrammingLanguageSkill = (props: Props) => {
   const [{ data }] = useGetProgrammingLanguageSkillsQuery()
 
   return (
-    <Group direction="column" align="stretch" style={{ alignSelf: 'stretch' }}>
+    <Navbar.Section
+      component={Group}
+      direction="column"
+      align="stretch"
+      style={{ alignSelf: 'stretch' }}
+    >
       <Text variant="text" size="xl">
         Skills
       </Text>
@@ -37,7 +42,7 @@ const ProgrammingLanguageSkill = (props: Props) => {
           ))}
         </Group>
       </motion.div>
-    </Group>
+    </Navbar.Section>
   )
 }
 

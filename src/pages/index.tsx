@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { Stack } from '@mantine/core'
-import { motion } from 'framer-motion'
+import { m as motion } from 'framer-motion'
 import { type GetStaticProps } from 'next'
 // import Image from 'next/image'
 

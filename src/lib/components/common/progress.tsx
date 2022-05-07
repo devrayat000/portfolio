@@ -5,12 +5,7 @@ import {
   MantineNumberSize,
   useMantineDefaultProps,
 } from '@mantine/core'
-import {
-  type HTMLMotionProps,
-  m as motion,
-  domAnimation,
-  LazyMotion,
-} from 'framer-motion'
+import { type HTMLMotionProps, m as motion } from 'framer-motion'
 import { forwardRef } from 'react'
 
 const sizes = {
@@ -80,15 +75,13 @@ const ProgressBar = forwardRef<HTMLDivElement, Props>((props, ref) => {
   )
 
   return (
-    <LazyMotion features={domAnimation}>
-      <motion.div className={classes.root} ref={ref} {...rest}>
-        <motion.div
-          role="progressbar"
-          className={classes.bar}
-          variants={expandX(value)}
-        />
-      </motion.div>
-    </LazyMotion>
+    <motion.div className={classes.root} ref={ref} {...rest}>
+      <motion.div
+        role="progressbar"
+        className={classes.bar}
+        variants={expandX(value)}
+      />
+    </motion.div>
   )
 })
 

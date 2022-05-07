@@ -9,9 +9,9 @@ import {
 } from '@mantine/core'
 import { DocumentRenderer } from '@keystone-6/document-renderer'
 import Image from 'next/image'
-
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { m as motion } from 'framer-motion'
+
 import { slideY } from '$lib/animation/slide'
 import { Project } from '$graphql/generated'
 

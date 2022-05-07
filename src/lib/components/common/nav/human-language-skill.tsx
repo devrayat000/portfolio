@@ -1,8 +1,8 @@
+import { Group, Navbar, Text } from '@mantine/core'
+import { m as motion } from 'framer-motion'
+
 import { useGetHumanLanguageSkillsQuery } from '$graphql/generated'
 import { MotionGroup, slideX, stagger } from '$lib/animation'
-import { Group, Progress, Text } from '@mantine/core'
-import { motion } from 'framer-motion'
-
 import LanguageSkill from './language-skill'
 
 type Props = {}
@@ -11,7 +11,12 @@ const HumanLanguageSkill = (props: Props) => {
   const [{ data }] = useGetHumanLanguageSkillsQuery()
 
   return (
-    <Group direction="column" align="stretch" style={{ alignSelf: 'stretch' }}>
+    <Navbar.Section
+      component={Group}
+      direction="column"
+      align="stretch"
+      style={{ alignSelf: 'stretch' }}
+    >
       <Text variant="text" size="xl">
         Languages
       </Text>
@@ -31,7 +36,7 @@ const HumanLanguageSkill = (props: Props) => {
           </motion.div>
         ))}
       </MotionGroup>
-    </Group>
+    </Navbar.Section>
   )
 }
 

@@ -1,37 +1,29 @@
-import { useMemo } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { type NextPage } from 'next'
 import { Provider } from 'urql'
 import { type AppProps as IAppProps } from 'next/app'
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence, LazyMotion, useElementScroll } from 'framer-motion'
 import {
   Affix,
   AppShell,
   Button,
   createStyles,
   ScrollArea,
+  Transition,
 } from '@mantine/core'
-import { useWindowScroll } from '@mantine/hooks'
 import { ArrowUp as ArrowUpIcon } from 'tabler-icons-react'
 import type { SSRData } from '@urql/core/dist/types/exchanges/ssr'
-import { initUrqlClient, withUrqlClient } from 'next-urql'
 
-import {
-  createUrqlClient,
-  createSSRExchange,
-  getClientOptions,
-} from '$lib/utils/urql_client'
+import { createUrqlClient, createSSRExchange } from '$lib/utils/urql_client'
 import ThemeProvider from '$lib/components/common/theme-provider'
-import MyNavbar from '$lib/components/home/navbar'
-import MyAside from '$lib/components/home/aside'
-import { createQueryClient } from '$lib/utils/query_client'
-import { slideX } from '$lib/animation/slide'
+import MyNavbar from '$lib/components/common/nav/navbar'
+import MyAside from '$lib/components/common/aside/aside'
 import {
   GetHumanLanguageSkillsDocument,
   GetMyInfoDocument,
   GetProgrammingLanguageSkillsDocument,
 } from '$graphql/generated'
 import '../styles/globals.css'
-import Script from 'next/script'
 
 const useStyles = createStyles(theme => ({
   main: {
@@ -44,24 +36,56 @@ const useStyles = createStyles(theme => ({
 }))
 
 const MyAppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [isScrollWorthy, setIsScrollWorthy] = useState(false)
   const { classes } = useStyles()
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const { scrollY } = useElementScroll(scrollRef)
+
+  const scrollToTop = () =>
+    scrollRef?.current?.scrollTo({ top: 0, behavior: 'smooth' })
+
+  useEffect(() => {
+    return scrollY.onChange(position => {
+      if (position > 500) {
+        setIsScrollWorthy(true)
+      } else {
+        setIsScrollWorthy(false)
+      }
+    })
+  }, [scrollY])
 
   return (
-    <motion.div initial="hidden" animate="show" exit="hidden" layout>
-      <AppShell
-        navbarOffsetBreakpoint="md"
-        asideOffsetBreakpoint="md"
-        navbar={<MyNavbar />}
-        aside={<MyAside />}
-        classNames={{
-          main: classes.main,
-        }}
+    <AppShell
+      navbarOffsetBreakpoint="md"
+      asideOffsetBreakpoint="md"
+      navbar={<MyNavbar />}
+      aside={<MyAside />}
+      classNames={{
+        main: classes.main,
+      }}
+    >
+      <ScrollArea
+        key="main-scroll"
+        type="scroll"
+        style={{ height: '100vh' }}
+        viewportRef={scrollRef}
       >
-        <ScrollArea type="scroll" style={{ height: '100vh' }}>
-          {children}
-        </ScrollArea>
-      </AppShell>
-    </motion.div>
+        {children}
+      </ScrollArea>
+      <Affix position={{ bottom: 20, right: 96 }}>
+        <Transition transition="slide-up" mounted={isScrollWorthy}>
+          {transitionStyles => (
+            <Button
+              leftIcon={<ArrowUpIcon />}
+              style={transitionStyles}
+              onClick={scrollToTop}
+            >
+              Scroll to top
+            </Button>
+          )}
+        </Transition>
+      </Affix>
+    </AppShell>
   )
 }
 
@@ -80,11 +104,18 @@ const MyApp: NextPage<AppProps, AppProps['pageProps']> = ({
     //   <QueryClientProvider client={queryClient}>
     <Provider value={client}>
       <ThemeProvider>
-        <MyAppShell>
-          <AnimatePresence exitBeforeEnter>
-            <Component {...(pageProps as any)} key={router.route} />
-          </AnimatePresence>
-        </MyAppShell>
+        <LazyMotion
+          features={() =>
+            import('$lib/animation/dom-animation').then(res => res.default)
+          }
+          strict
+        >
+          <MyAppShell>
+            <AnimatePresence exitBeforeEnter>
+              <Component {...(pageProps as any)} key={router.route} />
+            </AnimatePresence>
+          </MyAppShell>
+        </LazyMotion>
       </ThemeProvider>
     </Provider>
     //   </QueryClientProvider>

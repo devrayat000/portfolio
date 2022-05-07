@@ -1,9 +1,6 @@
-import { Box, Title, Text, Center, createStyles } from '@mantine/core'
-import { motion, type Variants } from 'framer-motion'
+import { Box } from '@mantine/core'
 import { ErrorBoundary } from 'react-error-boundary'
-import { Suspense } from 'react'
 
-import { useGetProjectsQuery } from '$graphql/generated'
 import ProjectsList from './projects-list'
 import Label from './label'
 

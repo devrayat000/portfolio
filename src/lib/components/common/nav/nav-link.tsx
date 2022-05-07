@@ -1,7 +1,7 @@
 import { ActionIcon, Tooltip } from '@mantine/core'
 import Link, { type LinkProps } from 'next/link'
 import { useRouter } from 'next/router'
-import { motion, type Variants } from 'framer-motion'
+import { m as motion } from 'framer-motion'
 import { slideX } from '$lib/animation/slide'
 
 export interface NavLinkProps extends LinkProps {

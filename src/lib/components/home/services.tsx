@@ -1,5 +1,5 @@
 import { Box, Title, Text, SimpleGrid, Paper, Center } from '@mantine/core'
-import { motion } from 'framer-motion'
+import { m as motion } from 'framer-motion'
 
 import Label from './label'
 
