@@ -1471,6 +1471,8 @@ export type TagWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']>;
 };
 
+export type DemoProjectFragmentFragment = { __typename?: 'Project', id: string, title?: string | null, demo?: string | null, source?: string | null, description?: { __typename?: 'Project_description_Document', document: any } | null, images?: Array<{ __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'AzureStorageImageFieldOutputType', url: string } | null }> | null };
+
 export type ProjectFragmentFragment = { __typename?: 'Project', id: string, title?: string | null, demo?: string | null, source?: string | null, description?: { __typename?: 'Project_description_Document', document: any } | null, images?: Array<{ __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'AzureStorageImageFieldOutputType', id: string, url: string, width: number, height: number } | null }> | null };
 
 export type ImageFragmentFragment = { __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'AzureStorageImageFieldOutputType', id: string, url: string, width: number, height: number } | null };
@@ -1478,6 +1480,13 @@ export type ImageFragmentFragment = { __typename?: 'Image', id: string, label?: 
 export type LanguageFragmentFragment = { __typename?: 'LanguageSkill', id: string, language?: string | null, value?: number | null };
 
 export type MyInfoFragment = { __typename?: 'Admin', age?: number | null, residence?: string | null, freelance?: AdminFreelanceType | null, address?: string | null };
+
+export type GetDemoProjectsQueryVariables = Exact<{
+  where?: InputMaybe<ProjectWhereInput>;
+}>;
+
+
+export type GetDemoProjectsQuery = { __typename?: 'Query', projects?: Array<{ __typename?: 'Project', id: string, title?: string | null, demo?: string | null, source?: string | null, description?: { __typename?: 'Project_description_Document', document: any } | null, images?: Array<{ __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'AzureStorageImageFieldOutputType', url: string } | null }> | null }> | null };
 
 export type GetProjectsQueryVariables = Exact<{
   where?: InputMaybe<ProjectWhereInput>;
@@ -1529,6 +1538,24 @@ export type GetMyInfoQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetMyInfoQuery = { __typename?: 'Query', admin?: { __typename?: 'Admin', age?: number | null, residence?: string | null, freelance?: AdminFreelanceType | null, address?: string | null } | null };
 
+export const DemoProjectFragmentFragmentDoc = gql`
+    fragment DemoProjectFragment on Project {
+  id
+  title
+  description {
+    document
+  }
+  demo
+  source
+  images(take: 1) {
+    id
+    label
+    image {
+      url
+    }
+  }
+}
+    `;
 export const ImageFragmentFragmentDoc = gql`
     fragment ImageFragment on Image {
   id
@@ -1570,6 +1597,17 @@ export const MyInfoFragmentDoc = gql`
   address
 }
     `;
+export const GetDemoProjectsDocument = gql`
+    query GetDemoProjects($where: ProjectWhereInput = {status: {equals: published}}) {
+  projects(where: $where) {
+    ...DemoProjectFragment
+  }
+}
+    ${DemoProjectFragmentFragmentDoc}`;
+
+export function useGetDemoProjectsQuery(options?: Omit<Urql.UseQueryArgs<GetDemoProjectsQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetDemoProjectsQuery>({ query: GetDemoProjectsDocument, ...options });
+};
 export const GetProjectsDocument = gql`
     query GetProjects($where: ProjectWhereInput = {status: {equals: published}}) {
   projects(where: $where) {

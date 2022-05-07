@@ -1,3 +1,20 @@
+fragment DemoProjectFragment on Project {
+  id
+  title
+  description {
+    document
+  }
+  demo
+  source
+  images(take: 1) {
+    id
+    label
+    image {
+      url
+    }
+  }
+}
+
 fragment ProjectFragment on Project {
   id
   title

@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { type NextPage } from 'next'
 import { Provider } from 'urql'
 import { type AppProps as IAppProps } from 'next/app'
-import { AnimatePresence, LazyMotion, useElementScroll } from 'framer-motion'
+import { AnimatePresence, LazyMotion, useElementScroll, m } from 'framer-motion'
 import {
   Affix,
   AppShell,
@@ -24,6 +24,7 @@ import {
   GetProgrammingLanguageSkillsDocument,
 } from '$graphql/generated'
 import '../styles/globals.css'
+import { slideY } from '$lib/animation'
 
 const useStyles = createStyles(theme => ({
   main: {
@@ -73,7 +74,22 @@ const MyAppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         {children}
       </ScrollArea>
       <Affix position={{ bottom: 20, right: 96 }}>
-        <Transition transition="slide-up" mounted={isScrollWorthy}>
+        <AnimatePresence>
+          {isScrollWorthy && (
+            <Button
+              component={m.button}
+              leftIcon={<ArrowUpIcon />}
+              onClick={scrollToTop}
+              variants={slideY(40)}
+              initial="hidden"
+              animate="show"
+              exit="hidden"
+            >
+              Scroll to top
+            </Button>
+          )}
+        </AnimatePresence>
+        {/* <Transition transition="slide-up" mounted={isScrollWorthy}>
           {transitionStyles => (
             <Button
               leftIcon={<ArrowUpIcon />}
@@ -83,7 +99,7 @@ const MyAppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
               Scroll to top
             </Button>
           )}
-        </Transition>
+        </Transition> */}
       </Affix>
     </AppShell>
   )

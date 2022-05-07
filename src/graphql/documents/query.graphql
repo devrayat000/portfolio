@@ -1,5 +1,13 @@
 # import './fragment.graphql'
 
+query GetDemoProjects(
+  $where: ProjectWhereInput = { status: { equals: published } }
+) {
+  projects(where: $where) {
+    ...DemoProjectFragment
+  }
+}
+
 query GetProjects(
   $where: ProjectWhereInput = { status: { equals: published } }
 ) {

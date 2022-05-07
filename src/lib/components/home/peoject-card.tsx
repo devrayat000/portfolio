@@ -6,6 +6,7 @@ import {
   Button,
   Stack,
   TypographyStylesProvider,
+  Image as MImage,
 } from '@mantine/core'
 import { DocumentRenderer } from '@keystone-6/document-renderer'
 import Image from 'next/image'
@@ -20,7 +21,8 @@ type Props = {
 }
 
 const ProjectCard = ({ project }: Props) => {
-  const image = project.images?.at(0)
+  const images = project.images
+
   return (
     <Link href="/projects/[id]" as={`/projects/${project.id}`} passHref>
       <Card<typeof motion.a>
@@ -47,13 +49,17 @@ const ProjectCard = ({ project }: Props) => {
           layoutId={`project-${project.id}`}
         >
           <AspectRatio ratio={3 / 2} sx={{ position: 'relative' }}>
-            <Image
-              key={image?.id}
-              src={image?.image?.url!}
-              alt={image?.label!}
-              layout="fill"
-              objectFit="cover"
-            />
+            {images && images.length > 0 ? (
+              <Image
+                key={images[0]?.id}
+                src={images[0]?.image?.url!}
+                alt={images[0]?.label!}
+                layout="fill"
+                objectFit="cover"
+              />
+            ) : (
+              <MImage withPlaceholder />
+            )}
           </AspectRatio>
         </Card.Section>
 

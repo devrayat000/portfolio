@@ -1,6 +1,4 @@
-import { createStyles } from '@mantine/core'
-
-import { type Project, useGetProjectsQuery } from '$graphql/generated'
+import { type Project, useGetDemoProjectsQuery } from '$graphql/generated'
 import { stagger } from '$lib/animation/stagger'
 import ProjectCard from './peoject-card'
 import { MotionSimpleGrid } from '$lib/animation'
@@ -8,22 +6,8 @@ import { MotionSimpleGrid } from '$lib/animation'
 
 type Props = {}
 
-const useStyles = createStyles(theme => ({
-  projectGrid: {
-    display: 'grid',
-    gap: theme.spacing.sm,
-    gridTemplateColumns: 'repeat(1, minmax(0, 1fr))',
-    [theme.fn.largerThan('md')]: {
-      gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-    },
-    [theme.fn.largerThan('lg')]: {
-      gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
-    },
-  },
-}))
-
 const ProjectsList = () => {
-  const [{ data }] = useGetProjectsQuery()
+  const [{ data }] = useGetDemoProjectsQuery()
 
   // const { classes } = useStyles()
 

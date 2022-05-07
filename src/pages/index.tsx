@@ -4,7 +4,7 @@ import { m as motion } from 'framer-motion'
 import { type GetStaticProps } from 'next'
 // import Image from 'next/image'
 
-import { GetProjectsDocument } from '$graphql/generated'
+import { GetDemoProjectsDocument } from '$graphql/generated'
 import { createSSRExchange, createUrqlClient } from '$lib/utils/urql_client'
 import Intro from '$lib/components/home/intro'
 import Services from '$lib/components/home/services'
@@ -37,7 +37,7 @@ export const getStaticProps: GetStaticProps = async context => {
   const ssrCache = createSSRExchange()
   const client = createUrqlClient(ssrCache)
 
-  await client.query(GetProjectsDocument).toPromise()
+  await client.query(GetDemoProjectsDocument).toPromise()
 
   return {
     props: {

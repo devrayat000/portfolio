@@ -1,4 +1,4 @@
-import { AspectRatio } from '@mantine/core'
+import { AspectRatio, Stack } from '@mantine/core'
 import Image from 'next/image'
 import { type ParsedUrlQuery } from 'querystring'
 import { useRouter } from 'next/router'
@@ -21,8 +21,6 @@ const ProjectDetailsPage: NextPage = () => {
     variables: { id: router.query.id as string },
   })
 
-  const image = data?.project?.images?.at(0)
-
   return (
     <motion.main
       variants={pageFade}
@@ -31,15 +29,23 @@ const ProjectDetailsPage: NextPage = () => {
       // animate="show"
       // exit="hidden"
     >
-      <AspectRatio ratio={3 / 2} sx={{ position: 'relative' }}>
-        <Image
-          key={image?.id}
-          src={image?.image?.url!}
-          alt={image?.label!}
-          layout="fill"
-          objectFit="cover"
-        />
-      </AspectRatio>
+      <Stack>
+        {data?.project?.images?.map(image => (
+          <AspectRatio
+            key={image.id}
+            ratio={3 / 2}
+            sx={{ position: 'relative' }}
+          >
+            <Image
+              key={image?.id}
+              src={image?.image?.url!}
+              alt={image?.label!}
+              layout="fill"
+              objectFit="cover"
+            />
+          </AspectRatio>
+        ))}
+      </Stack>
     </motion.main>
   )
 }
