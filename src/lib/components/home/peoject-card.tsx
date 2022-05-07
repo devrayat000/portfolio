@@ -42,9 +42,13 @@ const ProjectCard = ({ project }: Props) => {
           },
         }}
       >
-        <Card.Section>
+        <Card.Section
+          component={motion.section}
+          layoutId={`project-${project.id}`}
+        >
           <AspectRatio ratio={3 / 2} sx={{ position: 'relative' }}>
             <Image
+              key={image?.id}
               src={image?.image?.url!}
               alt={image?.label!}
               layout="fill"

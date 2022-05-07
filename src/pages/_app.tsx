@@ -25,8 +25,13 @@ import MyNavbar from '$lib/components/home/navbar'
 import MyAside from '$lib/components/home/aside'
 import { createQueryClient } from '$lib/utils/query_client'
 import { slideX } from '$lib/animation/slide'
-import { GetHumanLanguageSkillsDocument } from '$graphql/generated'
+import {
+  GetHumanLanguageSkillsDocument,
+  GetMyInfoDocument,
+  GetProgrammingLanguageSkillsDocument,
+} from '$graphql/generated'
 import '../styles/globals.css'
+import Script from 'next/script'
 
 const useStyles = createStyles(theme => ({
   main: {
@@ -42,7 +47,7 @@ const MyAppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { classes } = useStyles()
 
   return (
-    <motion.div initial="hidden" animate="show" exit="hidden">
+    <motion.div initial="hidden" animate="show" exit="hidden" layout>
       <AppShell
         navbarOffsetBreakpoint="md"
         asideOffsetBreakpoint="md"
@@ -90,6 +95,21 @@ const MyApp: NextPage<AppProps, AppProps['pageProps']> = ({
 //   ssr => getClientOptions(ssr),
 //   { ssr: false, neverSuspend: true } // Important so we don't wrap our component in getInitialProps
 // )(MyApp)
+
+MyApp.getInitialProps = async context => {
+  const ssrCache = createSSRExchange()
+  const client = createUrqlClient(ssrCache)
+
+  await Promise.all([
+    client.query(GetMyInfoDocument).toPromise(),
+    client.query(GetHumanLanguageSkillsDocument).toPromise(),
+    client.query(GetProgrammingLanguageSkillsDocument).toPromise(),
+  ])
+
+  return {
+    urqlState: ssrCache.extractData(),
+  }
+}
 
 export default MyApp
 

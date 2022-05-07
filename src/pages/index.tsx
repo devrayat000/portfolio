@@ -1,19 +1,11 @@
 import Head from 'next/head'
 import { Stack } from '@mantine/core'
-import { withUrqlClient, initUrqlClient } from 'next-urql'
 import { motion } from 'framer-motion'
-import { GetServerSideProps, GetStaticProps } from 'next'
+import { type GetStaticProps } from 'next'
 // import Image from 'next/image'
-// import { query } from '.keystone/api'
-//
-import { useGetProjectsQuery, GetProjectsDocument } from '$graphql/generated'
-import {
-  createSSRExchange,
-  createUrqlClient,
-  getClientOptions,
-} from '$lib/utils/urql_client'
-// import { DocumentRenderer } from '@keystone-6/document-renderer'
-// import { getImageUrl } from '$lib/utils/image-url'
+
+import { GetProjectsDocument } from '$graphql/generated'
+import { createSSRExchange, createUrqlClient } from '$lib/utils/urql_client'
 import Intro from '$lib/components/home/intro'
 import Services from '$lib/components/home/services'
 import Projects from '$lib/components/home/projects'
@@ -40,19 +32,6 @@ function Home() {
     </motion.main>
   )
 }
-
-// export const getServerSideProps: GetServerSideProps = async ctx => {
-//   const ssrCache = createSSRExchange()
-//   const client = createUrqlClient(ssrCache)
-
-//   await client.query(GetProjectsDocument).toPromise()
-
-//   return {
-//     props: {
-//       urqlState: ssrCache.extractData(),
-//     },
-//   }
-// }
 
 export const getStaticProps: GetStaticProps = async context => {
   const ssrCache = createSSRExchange()

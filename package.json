@@ -17,6 +17,7 @@
     "@mantine/next": "^4.2.2",
     "@urql/core": "^2.4.4",
     "@urql/exchange-suspense": "^1.9.2",
+    "framer": "^2.1.2",
     "framer-motion": "^6.3.3",
     "graphql": ">=15.7.2 <16.0.0",
     "graphql-tag": "^2.0.0",

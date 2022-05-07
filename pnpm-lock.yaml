@@ -23,6 +23,7 @@ specifiers:
   concurrently: ^7.0.0
   eslint: 7.32.0
   eslint-config-next: 12.0.7
+  framer: ^2.1.2
   framer-motion: ^6.3.3
   graphql: '>=15.7.2 <16.0.0'
   graphql-tag: ^2.0.0
@@ -45,6 +46,7 @@ dependencies:
   '@mantine/next': 4.2.2_e721045221d5ae1bba0fcd333282dc3b
   '@urql/core': 2.4.4_graphql@15.8.0
   '@urql/exchange-suspense': 1.9.2_graphql@15.8.0+react@18.1.0
+  framer: 2.1.2_903f048286eec1280446518cab3ca0ad
   framer-motion: 6.3.3_react-dom@18.1.0+react@18.1.0
   graphql: 15.8.0
   graphql-tag: 2.12.6_graphql@15.8.0
@@ -1319,6 +1321,10 @@ packages:
       '@jridgewell/resolve-uri': 3.0.5
       '@jridgewell/sourcemap-codec': 1.4.11
     dev: true
+
+  /@juggle/resize-observer/3.3.1:
+    resolution: {integrity: sha512-zMM9Ds+SawiUkakS7y94Ymqx+S0ORzpG3frZirN3l+UlXUmSUR7hF4wxCVqW+ei94JzV5kt0uXBcoOEAuiydrw==}
+    dev: false
 
   /@keystone-6/document-renderer/1.0.0_react@18.1.0:
     resolution: {integrity: sha512-mumjqZ+6+m9GhPauJTuRPRZGiZSbYOVJlqBvRmiEcndCuXiTucpyOWmANkIqDQFtPMOy0b13Elpx20mh8eUC6g==}
@@ -3237,7 +3243,6 @@ packages:
 
   /eventemitter3/3.1.2:
     resolution: {integrity: sha512-tvtQIeLVHjDkJYnzf2dgVMxfuSGJeM/7UCG17TT4EumTfNtF+0nebF/4zWOIkCreAbtNqhGEboB6BWrwqNaw4Q==}
-    dev: true
 
   /expand-template/2.0.3:
     resolution: {integrity: sha512-XYfuKMvj4O35f/pOXLObndIRvyQ+/+6AhODh+OKWj9S9498pHHn/IMszH+gt0fBCRWMNfk1ZSp5x3AifmnI2vg==}
@@ -3379,6 +3384,10 @@ packages:
     resolution: {integrity: sha512-WIWGi2L3DyTUvUrwRKgGi9TwxQMUEqPOPQBVi71R96jZXJdFskXEmf54BoZaS1kknGODoIGASGEzBUYdyMCBJg==}
     dev: true
 
+  /fontfaceobserver/2.1.0:
+    resolution: {integrity: sha512-ReOsO2F66jUa0jmv2nlM/s1MiutJx/srhAe2+TE8dJCMi02ZZOcCTxTCQFr3Yet+uODUtnr4Mewg+tNQ+4V1Ng==}
+    dev: false
+
   /form-data-encoder/1.7.2:
     resolution: {integrity: sha512-qfqtYan3rxrnCk1VYaA4H+Ms9xdpPqvLZa6xmMgFvhO32x7/3J/ExcTd6qpxM0vH2GdMI+poehyBZvqfMTto8A==}
     dev: true
@@ -3415,6 +3424,24 @@ packages:
       tslib: 2.3.1
     optionalDependencies:
       '@emotion/is-prop-valid': 0.8.8
+    dev: false
+
+  /framer/2.1.2_903f048286eec1280446518cab3ca0ad:
+    resolution: {integrity: sha512-PSdTrHtuboabVAV0fMav9EEKJUflIoYUCvXimZeUtnccxhGF8lcf4iC28da9qgB81z/k0l3kWvOjuzgRWAN6eA==}
+    requiresBuild: true
+    peerDependencies:
+      framer-motion: ^6.2.4
+      react: ^17.0.2
+      react-dom: ^17.0.2
+    dependencies:
+      '@juggle/resize-observer': 3.3.1
+      eventemitter3: 3.1.2
+      fontfaceobserver: 2.1.0
+      framer-motion: 6.3.3_react-dom@18.1.0+react@18.1.0
+      hoist-non-react-statics: 2.5.5
+      hsluv: 0.0.3
+      react: 18.1.0
+      react-dom: 18.1.0_react@18.1.0
     dev: false
 
   /framesync/6.0.1:
@@ -3712,10 +3739,18 @@ packages:
     resolution: {integrity: sha512-COpmrF2NOg4TBWUJ5UVyaCU2A88wEMkUPK4hNqyCkqHbxT92BbvfjoSozkAIIm6XhicGlJHhFdullInrdhwU8Q==}
     dev: false
 
+  /hoist-non-react-statics/2.5.5:
+    resolution: {integrity: sha512-rqcy4pJo55FTTLWt+bU8ukscqHeE/e9KWvsOW2b/a3afxQZhwkQdT1rPPCJ0rYXdj4vNcasY8zHTH+jF/qStxw==}
+    dev: false
+
   /hoist-non-react-statics/3.3.2:
     resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
     dependencies:
       react-is: 16.13.1
+    dev: false
+
+  /hsluv/0.0.3:
+    resolution: {integrity: sha1-gpEH2vtKn4tSoYCe0C4JHq3mdUw=}
     dev: false
 
   /html-dom-parser/1.0.2:

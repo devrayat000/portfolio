@@ -8,6 +8,14 @@ query GetProjects(
   }
 }
 
+query GetProjectsId(
+  $where: ProjectWhereInput = { status: { equals: published } }
+) {
+  projects(where: $where, take: 5) {
+    id
+  }
+}
+
 query GetProjectById($id: ID!) {
   project(where: { id: $id }) {
     ...ProjectFragment

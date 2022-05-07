@@ -1,6 +1,3 @@
-import { pageFade } from '$lib/animation/fade'
-import { slideX, slideY } from '$lib/animation/slide'
-import ContactIconsList from '$lib/components/contact/contact-list'
 import {
   Paper,
   Text,
@@ -13,6 +10,11 @@ import {
 } from '@mantine/core'
 import { motion } from 'framer-motion'
 import { Send } from 'tabler-icons-react'
+import { type GetStaticProps } from 'next'
+
+import { pageFade } from '$lib/animation/fade'
+import { slideX, slideY } from '$lib/animation/slide'
+import ContactIconsList from '$lib/components/contact/contact-list'
 
 const useStyles = createStyles(theme => {
   const BREAKPOINT = theme.fn.smallerThan('sm')
@@ -176,4 +178,10 @@ export default function ContactPage() {
       </Paper>
     </motion.main>
   )
+}
+
+export const getStaticProps: GetStaticProps = async context => {
+  return {
+    props: {},
+  }
 }

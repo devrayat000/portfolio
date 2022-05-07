@@ -1486,6 +1486,13 @@ export type GetProjectsQueryVariables = Exact<{
 
 export type GetProjectsQuery = { __typename?: 'Query', projects?: Array<{ __typename?: 'Project', id: string, title?: string | null, demo?: string | null, source?: string | null, description?: { __typename?: 'Project_description_Document', document: any } | null, images?: Array<{ __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'AzureStorageImageFieldOutputType', id: string, url: string, width: number, height: number } | null }> | null }> | null };
 
+export type GetProjectsIdQueryVariables = Exact<{
+  where?: InputMaybe<ProjectWhereInput>;
+}>;
+
+
+export type GetProjectsIdQuery = { __typename?: 'Query', projects?: Array<{ __typename?: 'Project', id: string }> | null };
+
 export type GetProjectByIdQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
@@ -1574,6 +1581,17 @@ ${ImageFragmentFragmentDoc}`;
 
 export function useGetProjectsQuery(options?: Omit<Urql.UseQueryArgs<GetProjectsQueryVariables>, 'query'>) {
   return Urql.useQuery<GetProjectsQuery>({ query: GetProjectsDocument, ...options });
+};
+export const GetProjectsIdDocument = gql`
+    query GetProjectsId($where: ProjectWhereInput = {status: {equals: published}}) {
+  projects(where: $where, take: 5) {
+    id
+  }
+}
+    `;
+
+export function useGetProjectsIdQuery(options?: Omit<Urql.UseQueryArgs<GetProjectsIdQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetProjectsIdQuery>({ query: GetProjectsIdDocument, ...options });
 };
 export const GetProjectByIdDocument = gql`
     query GetProjectById($id: ID!) {

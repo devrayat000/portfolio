@@ -11,7 +11,7 @@ import { multipartFetchExchange } from '@urql/exchange-multipart-fetch'
 import { createClient } from 'urql'
 import type { SSRData, SSRExchange } from '@urql/core/dist/types/exchanges/ssr'
 
-export function createUrqlClient(ssr: SSRExchange) {
+export function createUrqlClient(ssr: SSRExchange = createSSRExchange()) {
   return createClient(getClientOptions(ssr))
 }
 
