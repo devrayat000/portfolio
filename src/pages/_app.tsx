@@ -9,8 +9,8 @@ import {
   Button,
   createStyles,
   ScrollArea,
-  Transition,
 } from '@mantine/core'
+import { NotificationsProvider } from '@mantine/notifications'
 import { ArrowUp as ArrowUpIcon } from 'tabler-icons-react'
 import type { SSRData } from '@urql/core/dist/types/exchanges/ssr'
 
@@ -120,18 +120,20 @@ const MyApp: NextPage<AppProps, AppProps['pageProps']> = ({
     //   <QueryClientProvider client={queryClient}>
     <Provider value={client}>
       <ThemeProvider>
-        <LazyMotion
-          features={() =>
-            import('$lib/animation/dom-animation').then(res => res.default)
-          }
-          strict
-        >
-          <MyAppShell>
-            <AnimatePresence exitBeforeEnter>
-              <Component {...(pageProps as any)} key={router.route} />
-            </AnimatePresence>
-          </MyAppShell>
-        </LazyMotion>
+        <NotificationsProvider>
+          <LazyMotion
+            features={() =>
+              import('$lib/animation/dom-animation').then(res => res.default)
+            }
+            strict
+          >
+            <MyAppShell>
+              <AnimatePresence exitBeforeEnter>
+                <Component {...(pageProps as any)} key={router.route} />
+              </AnimatePresence>
+            </MyAppShell>
+          </LazyMotion>
+        </NotificationsProvider>
       </ThemeProvider>
     </Provider>
     //   </QueryClientProvider>

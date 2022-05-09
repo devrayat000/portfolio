@@ -13,8 +13,9 @@ import { Send } from 'tabler-icons-react'
 import { type GetStaticProps } from 'next'
 
 import { pageFade } from '$lib/animation/fade'
-import { slideX, slideY } from '$lib/animation/slide'
+import { slideY } from '$lib/animation/slide'
 import ContactIconsList from '$lib/components/contact/contact-list'
+import ContactForm from '$lib/components/contact/contact-form'
 
 const useStyles = createStyles(theme => {
   const BREAKPOINT = theme.fn.smallerThan('sm')
@@ -35,23 +36,6 @@ const useStyles = createStyles(theme => {
       [BREAKPOINT]: {
         flexDirection: 'column',
       },
-    },
-
-    form: {
-      boxSizing: 'border-box',
-      flex: 1,
-      padding: theme.spacing.xl,
-      paddingLeft: theme.spacing.xl * 2,
-      borderLeft: 0,
-
-      [BREAKPOINT]: {
-        padding: theme.spacing.md,
-        paddingLeft: theme.spacing.md,
-      },
-    },
-
-    fields: {
-      marginTop: -12,
     },
 
     contacts: {
@@ -84,12 +68,6 @@ const useStyles = createStyles(theme => {
 
       [BREAKPOINT]: {
         marginBottom: theme.spacing.xl,
-      },
-    },
-
-    control: {
-      [BREAKPOINT]: {
-        flex: 1,
       },
     },
   }
@@ -127,53 +105,7 @@ export default function ContactPage() {
             <ContactIconsList variant="white" />
           </div>
 
-          <form
-            className={classes.form}
-            onSubmit={event => event.preventDefault()}
-          >
-            <Text size="lg" weight={700} className={classes.title}>
-              Get in touch
-            </Text>
-
-            <div className={classes.fields}>
-              <SimpleGrid cols={2} breakpoints={[{ maxWidth: 'sm', cols: 1 }]}>
-                <TextInput label="Your name" placeholder="Your name" />
-                <TextInput
-                  label="Your email"
-                  placeholder="hello@mantine.dev"
-                  required
-                />
-              </SimpleGrid>
-
-              <TextInput
-                mt="md"
-                label="Subject"
-                placeholder="Subject"
-                required
-              />
-
-              <Textarea
-                mt="md"
-                label="Your message"
-                placeholder="Please include all relevant information"
-                minRows={3}
-              />
-
-              <Group position="right" mt="md">
-                <Button
-                  type="submit"
-                  className={classes.control}
-                  rightIcon={
-                    <Send size={20} style={{ transform: 'rotate(45deg)' }} />
-                  }
-                  component={motion.button}
-                  variants={slideX(-20)}
-                >
-                  Send message
-                </Button>
-              </Group>
-            </div>
-          </form>
+          <ContactForm />
         </div>
       </Paper>
     </motion.main>

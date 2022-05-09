@@ -12,6 +12,7 @@ specifiers:
   '@mantine/core': ^4.2.2
   '@mantine/hooks': ^4.2.2
   '@mantine/next': ^4.2.2
+  '@mantine/notifications': ^4.2.4
   '@types/graphql-upload': ^8.0.9
   '@types/node': ^17.0.8
   '@types/react': ^18.0.6
@@ -24,6 +25,7 @@ specifiers:
   framer-motion: ^6.3.3
   graphql: '>=15.7.2 <16.0.0'
   graphql-tag: ^2.0.0
+  is-it-email: ^1.0.1
   next: ^12.1.6
   next-urql: ^3.3.2
   react: 18.1.0
@@ -40,10 +42,12 @@ dependencies:
   '@mantine/core': 4.2.2_e67c2149b7d6ccee35e308a82ad44d2e
   '@mantine/hooks': 4.2.2_react@18.1.0
   '@mantine/next': 4.2.2_e721045221d5ae1bba0fcd333282dc3b
+  '@mantine/notifications': 4.2.4_af46c71ecf518c86fb9b76e8a89b700a
   '@urql/core': 2.4.4_graphql@15.8.0
   framer-motion: 6.3.3_react-dom@18.1.0+react@18.1.0
   graphql: 15.8.0
   graphql-tag: 2.12.6_graphql@15.8.0
+  is-it-email: 1.0.1
   next: 12.1.6_react-dom@18.1.0+react@18.1.0
   next-urql: 3.3.2_react@18.1.0+urql@2.2.0
   react: 18.1.0
@@ -1350,6 +1354,21 @@ packages:
       - '@babel/core'
       - '@emotion/css'
       - '@types/react'
+    dev: false
+
+  /@mantine/notifications/4.2.4_af46c71ecf518c86fb9b76e8a89b700a:
+    resolution: {integrity: sha512-BgiG8jMW6WStgHuuj/BSX6g8camSUY1iP5SFw0hFkseWW4Y/6IPbcshejGQKS7stkjoJZQVZGaXkJQGkZcWcpA==}
+    peerDependencies:
+      '@mantine/core': 4.2.4
+      '@mantine/hooks': 4.2.4
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+    dependencies:
+      '@mantine/core': 4.2.2_e67c2149b7d6ccee35e308a82ad44d2e
+      '@mantine/hooks': 4.2.2_react@18.1.0
+      react: 18.1.0
+      react-dom: 18.1.0_react@18.1.0
+      react-transition-group: 4.4.2_react-dom@18.1.0+react@18.1.0
     dev: false
 
   /@mantine/ssr/4.2.2_88579d3b6b39c2f7d58d2e55301b0aa5:
@@ -2764,6 +2783,13 @@ packages:
       esutils: 2.0.3
     dev: true
 
+  /dom-helpers/5.2.1:
+    resolution: {integrity: sha512-nRCa7CK3VTrM2NmGkIy4cbK7IZlgBE/PYMn55rrXefr5xXDP0LdtfPnblFDoVdcAfslJ7or6iqAUnx0CCGIWQA==}
+    dependencies:
+      '@babel/runtime': 7.17.9
+      csstype: 3.0.11
+    dev: false
+
   /dom-serializer/1.4.1:
     resolution: {integrity: sha512-VHwB3KfrcOOkelEG2ZOfxqLZdfkil8PtJi4P8N2MMXucZq2yLp75ClViUlOVwyoHEDjYU433Aq+5zWP61+RGag==}
     dependencies:
@@ -3917,6 +3943,10 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  /is-it-email/1.0.1:
+    resolution: {integrity: sha512-HqDCj/OaugJAFOsAEky8J473rnnqizafIYRXiSrSNYAcBrslKviDGwuLsI41qT0yICiZMkEeuiHdumLzeDMgRA==}
+    dev: false
+
   /is-lower-case/2.0.2:
     resolution: {integrity: sha512-bVcMJy4X5Og6VZfdOZstSexlEy20Sr0k/p/b2IlQJlfdKAQuMpiv5w2Ccxb8sKdRUNAG1PnHVHjFSdRDVS6NlQ==}
     dependencies:
@@ -4974,7 +5004,6 @@ packages:
       loose-envify: 1.4.0
       object-assign: 4.1.1
       react-is: 16.13.1
-    dev: true
 
   /pump/3.0.0:
     resolution: {integrity: sha512-LwZy+p3SFs1Pytd/jYct4wpv49HiYCqd9Rlc5ZVdk0V+8Yzv6jR5Blk3TRmPL1ft69TxP0IMZGJ+WPFU2BFhww==}
@@ -5067,6 +5096,20 @@ packages:
       use-latest: 1.2.1_@types+react@18.0.6+react@18.1.0
     transitivePeerDependencies:
       - '@types/react'
+    dev: false
+
+  /react-transition-group/4.4.2_react-dom@18.1.0+react@18.1.0:
+    resolution: {integrity: sha512-/RNYfRAMlZwDSr6z4zNKV6xu53/e2BuaBbGhbyYIXTrmgu/bGHzmqOs7mJSJBHy9Ud+ApHx3QjrkKSp1pxvlFg==}
+    peerDependencies:
+      react: '>=16.6.0'
+      react-dom: '>=16.6.0'
+    dependencies:
+      '@babel/runtime': 7.17.9
+      dom-helpers: 5.2.1
+      loose-envify: 1.4.0
+      prop-types: 15.8.1
+      react: 18.1.0
+      react-dom: 18.1.0_react@18.1.0
     dev: false
 
   /react/18.1.0:
