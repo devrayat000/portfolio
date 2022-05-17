@@ -12,9 +12,16 @@ import { DocumentRenderer } from '@keystone-6/document-renderer'
 import Image from 'next/image'
 import Link from 'next/link'
 import { m as motion } from 'framer-motion'
+import {
+  AdvancedImage,
+  placeholder,
+  lazyload,
+  responsive,
+} from '@cloudinary/react'
 
 import { slideY } from '$lib/animation/slide'
 import { Project } from '$graphql/generated'
+import { cld } from '$lib/services/cloudinary'
 
 type Props = {
   project: Project
@@ -53,12 +60,16 @@ const ProjectCard = ({ project }: Props) => {
         >
           <AspectRatio ratio={3 / 2} sx={{ position: 'relative' }}>
             {images && images.length > 0 ? (
-              <Image
-                key={images[0]?.id}
-                src={images[0]?.image?.url!}
-                alt={images[0]?.label!}
-                layout="fill"
-                objectFit="cover"
+              // <Image
+              //   key={images[0]?.id}
+              //   src={images[0]?.image?.publicUrl!}
+              //   alt={images[0]?.label!}
+              //   layout="fill"
+              //   objectFit="cover"
+              // />
+              <AdvancedImage
+                cldImg={cld.image('Portfolio/' + images[0]?.image?.id!)}
+                plugins={[placeholder(), lazyload(), responsive()]}
               />
             ) : (
               <MImage withPlaceholder />

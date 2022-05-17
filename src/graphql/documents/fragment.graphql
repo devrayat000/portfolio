@@ -10,7 +10,8 @@ fragment DemoProjectFragment on Project {
     id
     label
     image {
-      url
+      id
+      publicUrl
     }
   }
 }
@@ -33,9 +34,7 @@ fragment ImageFragment on Image {
   label
   image {
     id
-    url
-    width
-    height
+    publicUrl
   }
 }
 
@@ -50,4 +49,9 @@ fragment MyInfo on Admin {
   residence
   freelance
   address
+}
+fragment TagFragment on Tag {
+  id
+  name
+  slug
 }

@@ -182,37 +182,57 @@ export type ApiKeyWhereUniqueInput = {
 
 export type AuthenticatedItem = Admin;
 
-export const enum AzureStorageImageExtension {
-  GIF = 'gif',
-  JPG = 'jpg',
-  PNG = 'png',
-  WEBP = 'webp'
+/**
+ * Mirrors the formatting options [Cloudinary provides](https://cloudinary.com/documentation/image_transformation_reference).
+ * All options are strings as they ultimately end up in a URL.
+ */
+export type CloudinaryImageFormat = {
+  angle?: InputMaybe<Scalars['String']>;
+  aspect_ratio?: InputMaybe<Scalars['String']>;
+  background?: InputMaybe<Scalars['String']>;
+  border?: InputMaybe<Scalars['String']>;
+  color?: InputMaybe<Scalars['String']>;
+  color_space?: InputMaybe<Scalars['String']>;
+  crop?: InputMaybe<Scalars['String']>;
+  default_image?: InputMaybe<Scalars['String']>;
+  delay?: InputMaybe<Scalars['String']>;
+  density?: InputMaybe<Scalars['String']>;
+  dpr?: InputMaybe<Scalars['String']>;
+  effect?: InputMaybe<Scalars['String']>;
+  fetch_format?: InputMaybe<Scalars['String']>;
+  flags?: InputMaybe<Scalars['String']>;
+  format?: InputMaybe<Scalars['String']>;
+  gravity?: InputMaybe<Scalars['String']>;
+  height?: InputMaybe<Scalars['String']>;
+  opacity?: InputMaybe<Scalars['String']>;
+  overlay?: InputMaybe<Scalars['String']>;
+  page?: InputMaybe<Scalars['String']>;
+  /**  Rewrites the filename to be this pretty string. Do not include `/` or `.` */
+  prettyName?: InputMaybe<Scalars['String']>;
+  quality?: InputMaybe<Scalars['String']>;
+  radius?: InputMaybe<Scalars['String']>;
+  transformation?: InputMaybe<Scalars['String']>;
+  underlay?: InputMaybe<Scalars['String']>;
+  width?: InputMaybe<Scalars['String']>;
+  x?: InputMaybe<Scalars['String']>;
+  y?: InputMaybe<Scalars['String']>;
+  zoom?: InputMaybe<Scalars['String']>;
 };
 
-export type AzureStorageImageFieldInput = {
-  ref?: InputMaybe<Scalars['String']>;
-  upload?: InputMaybe<Scalars['Upload']>;
+export type CloudinaryImage_File = {
+  __typename?: 'CloudinaryImage_File';
+  encoding?: Maybe<Scalars['String']>;
+  filename?: Maybe<Scalars['String']>;
+  id?: Maybe<Scalars['ID']>;
+  mimetype?: Maybe<Scalars['String']>;
+  originalFilename?: Maybe<Scalars['String']>;
+  publicUrl?: Maybe<Scalars['String']>;
+  publicUrlTransformed?: Maybe<Scalars['String']>;
 };
 
-export type AzureStorageImageFieldOutput = {
-  extension: AzureStorageImageExtension;
-  filesize: Scalars['Int'];
-  height: Scalars['Int'];
-  id: Scalars['ID'];
-  ref: Scalars['String'];
-  url: Scalars['String'];
-  width: Scalars['Int'];
-};
 
-export type AzureStorageImageFieldOutputType = AzureStorageImageFieldOutput & {
-  __typename?: 'AzureStorageImageFieldOutputType';
-  extension: AzureStorageImageExtension;
-  filesize: Scalars['Int'];
-  height: Scalars['Int'];
-  id: Scalars['ID'];
-  ref: Scalars['String'];
-  url: Scalars['String'];
-  width: Scalars['Int'];
+export type CloudinaryImage_FilepublicUrlTransformedArgs = {
+  transformation?: InputMaybe<CloudinaryImageFormat>;
 };
 
 export type CreateInitialAdminInput = {
@@ -317,13 +337,13 @@ export type Image = {
   __typename?: 'Image';
   createdAt?: Maybe<Scalars['DateTime']>;
   id: Scalars['ID'];
-  image?: Maybe<AzureStorageImageFieldOutput>;
+  image?: Maybe<CloudinaryImage_File>;
   label?: Maybe<Scalars['String']>;
 };
 
 export type ImageCreateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
-  image?: InputMaybe<AzureStorageImageFieldInput>;
+  image?: InputMaybe<Scalars['Upload']>;
   label?: InputMaybe<Scalars['String']>;
 };
 
@@ -358,7 +378,7 @@ export type ImageUpdateArgs = {
 
 export type ImageUpdateInput = {
   createdAt?: InputMaybe<Scalars['DateTime']>;
-  image?: InputMaybe<AzureStorageImageFieldInput>;
+  image?: InputMaybe<Scalars['Upload']>;
   label?: InputMaybe<Scalars['String']>;
 };
 
@@ -1286,13 +1306,13 @@ export type Service = {
   __typename?: 'Service';
   details?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
-  image?: Maybe<AzureStorageImageFieldOutput>;
+  image?: Maybe<CloudinaryImage_File>;
   title?: Maybe<Scalars['String']>;
 };
 
 export type ServiceCreateInput = {
   details?: InputMaybe<Scalars['String']>;
-  image?: InputMaybe<AzureStorageImageFieldInput>;
+  image?: InputMaybe<Scalars['Upload']>;
   title?: InputMaybe<Scalars['String']>;
 };
 
@@ -1309,7 +1329,7 @@ export type ServiceUpdateArgs = {
 
 export type ServiceUpdateInput = {
   details?: InputMaybe<Scalars['String']>;
-  image?: InputMaybe<AzureStorageImageFieldInput>;
+  image?: InputMaybe<Scalars['Upload']>;
   title?: InputMaybe<Scalars['String']>;
 };
 
@@ -1405,6 +1425,7 @@ export type Tag = {
   name?: Maybe<Scalars['String']>;
   projects?: Maybe<Array<Project>>;
   projectsCount?: Maybe<Scalars['Int']>;
+  slug?: Maybe<Scalars['String']>;
 };
 
 
@@ -1471,29 +1492,31 @@ export type TagWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']>;
 };
 
-export type DemoProjectFragmentFragment = { __typename?: 'Project', id: string, title?: string | null, demo?: string | null, source?: string | null, description?: { __typename?: 'Project_description_Document', document: any } | null, images?: Array<{ __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'AzureStorageImageFieldOutputType', url: string } | null }> | null };
+export type DemoProjectFragmentFragment = { __typename?: 'Project', id: string, title?: string | null, demo?: string | null, source?: string | null, description?: { __typename?: 'Project_description_Document', document: any } | null, images?: Array<{ __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'CloudinaryImage_File', id?: string | null, publicUrl?: string | null } | null }> | null };
 
-export type ProjectFragmentFragment = { __typename?: 'Project', id: string, title?: string | null, demo?: string | null, source?: string | null, description?: { __typename?: 'Project_description_Document', document: any } | null, images?: Array<{ __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'AzureStorageImageFieldOutputType', id: string, url: string, width: number, height: number } | null }> | null };
+export type ProjectFragmentFragment = { __typename?: 'Project', id: string, title?: string | null, demo?: string | null, source?: string | null, description?: { __typename?: 'Project_description_Document', document: any } | null, images?: Array<{ __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'CloudinaryImage_File', id?: string | null, publicUrl?: string | null } | null }> | null };
 
-export type ImageFragmentFragment = { __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'AzureStorageImageFieldOutputType', id: string, url: string, width: number, height: number } | null };
+export type ImageFragmentFragment = { __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'CloudinaryImage_File', id?: string | null, publicUrl?: string | null } | null };
 
 export type LanguageFragmentFragment = { __typename?: 'LanguageSkill', id: string, language?: string | null, value?: number | null };
 
 export type MyInfoFragment = { __typename?: 'Admin', age?: number | null, residence?: string | null, freelance?: AdminFreelanceType | null, address?: string | null };
+
+export type TagFragmentFragment = { __typename?: 'Tag', id: string, name?: string | null, slug?: string | null };
 
 export type GetDemoProjectsQueryVariables = Exact<{
   where?: InputMaybe<ProjectWhereInput>;
 }>;
 
 
-export type GetDemoProjectsQuery = { __typename?: 'Query', projects?: Array<{ __typename?: 'Project', id: string, title?: string | null, demo?: string | null, source?: string | null, description?: { __typename?: 'Project_description_Document', document: any } | null, images?: Array<{ __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'AzureStorageImageFieldOutputType', url: string } | null }> | null }> | null };
+export type GetDemoProjectsQuery = { __typename?: 'Query', projects?: Array<{ __typename?: 'Project', id: string, title?: string | null, demo?: string | null, source?: string | null, description?: { __typename?: 'Project_description_Document', document: any } | null, images?: Array<{ __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'CloudinaryImage_File', id?: string | null, publicUrl?: string | null } | null }> | null }> | null };
 
 export type GetProjectsQueryVariables = Exact<{
   where?: InputMaybe<ProjectWhereInput>;
 }>;
 
 
-export type GetProjectsQuery = { __typename?: 'Query', projects?: Array<{ __typename?: 'Project', id: string, title?: string | null, demo?: string | null, source?: string | null, description?: { __typename?: 'Project_description_Document', document: any } | null, images?: Array<{ __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'AzureStorageImageFieldOutputType', id: string, url: string, width: number, height: number } | null }> | null }> | null };
+export type GetProjectsQuery = { __typename?: 'Query', projects?: Array<{ __typename?: 'Project', id: string, title?: string | null, demo?: string | null, source?: string | null, description?: { __typename?: 'Project_description_Document', document: any } | null, images?: Array<{ __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'CloudinaryImage_File', id?: string | null, publicUrl?: string | null } | null }> | null }> | null };
 
 export type GetProjectsIdQueryVariables = Exact<{
   where?: InputMaybe<ProjectWhereInput>;
@@ -1507,21 +1530,21 @@ export type GetProjectByIdQueryVariables = Exact<{
 }>;
 
 
-export type GetProjectByIdQuery = { __typename?: 'Query', project?: { __typename?: 'Project', id: string, title?: string | null, demo?: string | null, source?: string | null, description?: { __typename?: 'Project_description_Document', document: any } | null, images?: Array<{ __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'AzureStorageImageFieldOutputType', id: string, url: string, width: number, height: number } | null }> | null } | null };
+export type GetProjectByIdQuery = { __typename?: 'Query', project?: { __typename?: 'Project', id: string, title?: string | null, demo?: string | null, source?: string | null, tags?: Array<{ __typename?: 'Tag', id: string, name?: string | null, slug?: string | null }> | null, description?: { __typename?: 'Project_description_Document', document: any } | null, images?: Array<{ __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'CloudinaryImage_File', id?: string | null, publicUrl?: string | null } | null }> | null } | null };
 
 export type GetImagesQueryVariables = Exact<{
   where?: InputMaybe<ImageWhereInput>;
 }>;
 
 
-export type GetImagesQuery = { __typename?: 'Query', images?: Array<{ __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'AzureStorageImageFieldOutputType', id: string, url: string, width: number, height: number } | null }> | null };
+export type GetImagesQuery = { __typename?: 'Query', images?: Array<{ __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'CloudinaryImage_File', id?: string | null, publicUrl?: string | null } | null }> | null };
 
 export type GetImageByIdQueryVariables = Exact<{
   id: Scalars['ID'];
 }>;
 
 
-export type GetImageByIdQuery = { __typename?: 'Query', image?: { __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'AzureStorageImageFieldOutputType', id: string, url: string, width: number, height: number } | null } | null };
+export type GetImageByIdQuery = { __typename?: 'Query', image?: { __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'CloudinaryImage_File', id?: string | null, publicUrl?: string | null } | null } | null };
 
 export type GetHumanLanguageSkillsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1551,7 +1574,8 @@ export const DemoProjectFragmentFragmentDoc = gql`
     id
     label
     image {
-      url
+      id
+      publicUrl
     }
   }
 }
@@ -1562,9 +1586,7 @@ export const ImageFragmentFragmentDoc = gql`
   label
   image {
     id
-    url
-    width
-    height
+    publicUrl
   }
 }
     `;
@@ -1595,6 +1617,13 @@ export const MyInfoFragmentDoc = gql`
   residence
   freelance
   address
+}
+    `;
+export const TagFragmentFragmentDoc = gql`
+    fragment TagFragment on Tag {
+  id
+  name
+  slug
 }
     `;
 export const GetDemoProjectsDocument = gql`
@@ -1635,10 +1664,14 @@ export const GetProjectByIdDocument = gql`
     query GetProjectById($id: ID!) {
   project(where: {id: $id}) {
     ...ProjectFragment
+    tags {
+      ...TagFragment
+    }
   }
 }
     ${ProjectFragmentFragmentDoc}
-${ImageFragmentFragmentDoc}`;
+${ImageFragmentFragmentDoc}
+${TagFragmentFragmentDoc}`;
 
 export function useGetProjectByIdQuery(options: Omit<Urql.UseQueryArgs<GetProjectByIdQueryVariables>, 'query'>) {
   return Urql.useQuery<GetProjectByIdQuery>({ query: GetProjectByIdDocument, ...options });

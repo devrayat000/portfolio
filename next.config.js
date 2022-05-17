@@ -13,7 +13,7 @@ const nextConfig = {
       'https://framerusercontent.com/modules/',
       'https://framer.com/m/',
     ],
-    scrollRestoration: true
+    scrollRestoration: true,
   },
   images: {
     domains: [
@@ -21,6 +21,7 @@ const nextConfig = {
       'localhost',
       'devrayatstorage.blob.core.windows.net',
       '127.0.0.1',
+      'res.cloudinary.com',
     ],
   },
 }

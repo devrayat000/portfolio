@@ -29,22 +29,25 @@ import ProgrammingLanguageSkill from './programming-language-skill'
 
 interface SocialIconProp {
   icon: Icon
-  link?: string
+  href?: string
   label?: string
 }
 
 const socialActions: SocialIconProp[] = [
   {
     icon: BrandFacebook,
+    href: 'https://www.facebook.com/rayat.ass',
   },
   {
     icon: BrandLinkedin,
+    href: 'https://www.linkedin.com/in/musaddik-rayat',
   },
   {
     icon: BrandTwitter,
   },
   {
     icon: BrandTelegram,
+    href: 'https://t.me/rayat_69',
   },
 ]
 
@@ -97,6 +100,8 @@ const MyNavbar = () => {
                   variant="filled"
                   component={motion.a}
                   variants={slideY(10)}
+                  href={s.href}
+                  target="_blank"
                 >
                   <s.icon
                     color={

@@ -27,6 +27,9 @@ query GetProjectsId(
 query GetProjectById($id: ID!) {
   project(where: { id: $id }) {
     ...ProjectFragment
+    tags {
+      ...TagFragment
+    }
   }
 }
 

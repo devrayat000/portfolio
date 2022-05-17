@@ -1,9 +1,25 @@
-import { AspectRatio, Stack } from '@mantine/core'
+import {
+  AspectRatio,
+  Stack,
+  Box,
+  Title,
+  TypographyStylesProvider,
+  Breadcrumbs,
+  Anchor,
+  Text,
+} from '@mantine/core'
 import Image from 'next/image'
-import { type ParsedUrlQuery } from 'querystring'
 import { useRouter } from 'next/router'
-import { type GetStaticPaths, type GetStaticProps, type NextPage } from 'next'
 import { m as motion } from 'framer-motion'
+import Carousel from 'framer-motion-carousel'
+import { type ParsedUrlQuery } from 'querystring'
+import { type GetStaticPaths, type GetStaticProps, type NextPage } from 'next'
+import {
+  AdvancedImage,
+  placeholder,
+  lazyload,
+  responsive,
+} from '@cloudinary/react'
 
 import { createSSRExchange, createUrqlClient } from '$lib/utils/urql_client'
 import {
@@ -13,6 +29,9 @@ import {
   useGetProjectByIdQuery,
 } from '$graphql/generated'
 import { pageFade } from '$lib/animation'
+import { DocumentRenderer } from '@keystone-6/document-renderer'
+import Link from 'next/link'
+import { cld } from '$lib/services/cloudinary'
 
 const ProjectDetailsPage: NextPage = () => {
   const router = useRouter()
@@ -29,23 +48,39 @@ const ProjectDetailsPage: NextPage = () => {
       // animate="show"
       // exit="hidden"
     >
-      <Stack>
-        {data?.project?.images?.map(image => (
-          <AspectRatio
-            key={image.id}
-            ratio={3 / 2}
-            sx={{ position: 'relative' }}
+      <Title order={1}>{data?.project?.title}</Title>
+      <Text>Tags:</Text>
+      <Breadcrumbs separator="•">
+        {data?.project?.tags?.map(tag => (
+          <Link
+            key={tag.id}
+            passHref
+            href={{
+              pathname: '/tags/[slug]',
+              query: {
+                slug: tag.slug,
+                tag: tag.id,
+              },
+            }}
+            as={`/tags/${tag.slug}`}
           >
-            <Image
-              key={image?.id}
-              src={image?.image?.url!}
-              alt={image?.label!}
-              layout="fill"
-              objectFit="cover"
-            />
-          </AspectRatio>
+            <Anchor>{tag.name}</Anchor>
+          </Link>
         ))}
-      </Stack>
+      </Breadcrumbs>
+      <Carousel autoPlay interval={4000} loop>
+        {data?.project?.images?.map(image => (
+          <AdvancedImage
+            key={image.id}
+            width="100%"
+            cldImg={cld.image('Portfolio/' + image?.image?.id)}
+            plugins={[placeholder(), lazyload(), responsive()]}
+          />
+        ))}
+      </Carousel>
+      <TypographyStylesProvider>
+        <DocumentRenderer document={data?.project?.description?.document} />
+      </TypographyStylesProvider>
     </motion.main>
   )
 }

@@ -11,6 +11,8 @@
     "gql:watch": "graphql-codegen --config .graphqlrc.yml --watch"
   },
   "dependencies": {
+    "@cloudinary/react": "^1.4.0",
+    "@cloudinary/url-gen": "^1.8.0",
     "@keystone-6/document-renderer": "^1.0.0",
     "@mantine/core": "^4.2.2",
     "@mantine/hooks": "^4.2.2",
@@ -18,6 +20,7 @@
     "@mantine/notifications": "^4.2.4",
     "@urql/core": "^2.4.4",
     "framer-motion": "^6.3.3",
+    "framer-motion-carousel": "^1.0.7",
     "graphql": ">=15.7.2 <16.0.0",
     "graphql-tag": "^2.0.0",
     "is-it-email": "^1.0.1",
