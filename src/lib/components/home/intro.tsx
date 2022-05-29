@@ -12,6 +12,7 @@ import { m as motion, type Variants } from 'framer-motion'
 
 import { slideX } from '$lib/animation/slide'
 import { expandX, MotionContainer } from '$lib/animation'
+import { useGetMyInfoQuery } from '$graphql/generated'
 
 const wiggle: Variants = {
   stop: {
@@ -96,6 +97,7 @@ const useStyles = createStyles(theme => ({
 
 export default function Intro() {
   const { classes } = useStyles()
+  const [{ data }] = useGetMyInfoQuery()
 
   return (
     <MotionContainer
@@ -120,7 +122,7 @@ export default function Intro() {
                 className={classes.highlightBar}
                 variants={expandX(100)}
               />
-              Full-stack
+              {data?.admin?.rank}
             </span>{' '}
             Developer
           </Title>

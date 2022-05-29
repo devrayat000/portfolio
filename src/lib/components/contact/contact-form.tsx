@@ -11,7 +11,7 @@ import { useForm } from '@mantine/hooks'
 import { showNotification } from '@mantine/notifications'
 import { m } from 'framer-motion'
 import { Send } from 'tabler-icons-react'
-import { validate as validateEmail } from 'is-it-email'
+import * as isEmail from 'is-it-email'
 
 import { slideX } from '$lib/animation'
 
@@ -72,7 +72,7 @@ const ContactForm = (props: Props) => {
     },
     validationRules: {
       name: value => value.trim().length >= 6,
-      email: value => validateEmail(value),
+      email: value => isEmail.validate(value),
       subject: value => value.trim().length > 0,
       message: value => value.trim().length >= 50 && value.length <= 200,
     },

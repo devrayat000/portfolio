@@ -49,6 +49,7 @@ fragment MyInfo on Admin {
   residence
   freelance
   address
+  rank
 }
 fragment TagFragment on Tag {
   id

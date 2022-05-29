@@ -33,6 +33,20 @@ query GetProjectById($id: ID!) {
   }
 }
 
+query GetProjectsByTag($tag: ID!) {
+  projects(where: {
+    tags: {
+      some: {
+        id: {
+          equals: $tag
+        }
+      }
+    }
+  }) {
+    ...DemoProjectFragment
+  }
+}
+
 query GetImages($where: ImageWhereInput = {}) {
   images(where: $where) {
     ...ImageFragment

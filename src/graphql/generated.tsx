@@ -32,6 +32,7 @@ export type Admin = {
   languageSkillsCount?: Maybe<Scalars['Int']>;
   name?: Maybe<Scalars['String']>;
   password?: Maybe<PasswordState>;
+  rank?: Maybe<AdminRankType>;
   residence?: Maybe<Scalars['String']>;
 };
 
@@ -70,6 +71,7 @@ export type AdminCreateInput = {
   languageSkills?: InputMaybe<LanguageSkillRelateToManyForCreateInput>;
   name?: InputMaybe<Scalars['String']>;
   password?: InputMaybe<Scalars['String']>;
+  rank?: InputMaybe<AdminRankType>;
   residence?: InputMaybe<Scalars['String']>;
 };
 
@@ -93,7 +95,21 @@ export type AdminOrderByInput = {
   freelance?: InputMaybe<OrderDirection>;
   id?: InputMaybe<OrderDirection>;
   name?: InputMaybe<OrderDirection>;
+  rank?: InputMaybe<OrderDirection>;
   residence?: InputMaybe<OrderDirection>;
+};
+
+export const enum AdminRankType {
+  BACK_END = 'back_end',
+  FRONT_END = 'front_end',
+  FULL_STACK = 'full_stack'
+};
+
+export type AdminRankTypeNullableFilter = {
+  equals?: InputMaybe<AdminRankType>;
+  in?: InputMaybe<Array<AdminRankType>>;
+  not?: InputMaybe<AdminRankTypeNullableFilter>;
+  notIn?: InputMaybe<Array<AdminRankType>>;
 };
 
 export type AdminRelateToOneForCreateInput = {
@@ -121,6 +137,7 @@ export type AdminUpdateInput = {
   languageSkills?: InputMaybe<LanguageSkillRelateToManyForUpdateInput>;
   name?: InputMaybe<Scalars['String']>;
   password?: InputMaybe<Scalars['String']>;
+  rank?: InputMaybe<AdminRankType>;
   residence?: InputMaybe<Scalars['String']>;
 };
 
@@ -136,6 +153,7 @@ export type AdminWhereInput = {
   id?: InputMaybe<IDFilter>;
   languageSkills?: InputMaybe<LanguageSkillManyRelationFilter>;
   name?: InputMaybe<StringFilter>;
+  rank?: InputMaybe<AdminRankTypeNullableFilter>;
   residence?: InputMaybe<StringFilter>;
 };
 
@@ -1500,7 +1518,7 @@ export type ImageFragmentFragment = { __typename?: 'Image', id: string, label?: 
 
 export type LanguageFragmentFragment = { __typename?: 'LanguageSkill', id: string, language?: string | null, value?: number | null };
 
-export type MyInfoFragment = { __typename?: 'Admin', age?: number | null, residence?: string | null, freelance?: AdminFreelanceType | null, address?: string | null };
+export type MyInfoFragment = { __typename?: 'Admin', age?: number | null, residence?: string | null, freelance?: AdminFreelanceType | null, address?: string | null, rank?: AdminRankType | null };
 
 export type TagFragmentFragment = { __typename?: 'Tag', id: string, name?: string | null, slug?: string | null };
 
@@ -1532,6 +1550,13 @@ export type GetProjectByIdQueryVariables = Exact<{
 
 export type GetProjectByIdQuery = { __typename?: 'Query', project?: { __typename?: 'Project', id: string, title?: string | null, demo?: string | null, source?: string | null, tags?: Array<{ __typename?: 'Tag', id: string, name?: string | null, slug?: string | null }> | null, description?: { __typename?: 'Project_description_Document', document: any } | null, images?: Array<{ __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'CloudinaryImage_File', id?: string | null, publicUrl?: string | null } | null }> | null } | null };
 
+export type GetProjectsByTagQueryVariables = Exact<{
+  tag: Scalars['ID'];
+}>;
+
+
+export type GetProjectsByTagQuery = { __typename?: 'Query', projects?: Array<{ __typename?: 'Project', id: string, title?: string | null, demo?: string | null, source?: string | null, description?: { __typename?: 'Project_description_Document', document: any } | null, images?: Array<{ __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'CloudinaryImage_File', id?: string | null, publicUrl?: string | null } | null }> | null }> | null };
+
 export type GetImagesQueryVariables = Exact<{
   where?: InputMaybe<ImageWhereInput>;
 }>;
@@ -1559,7 +1584,7 @@ export type GetProgrammingLanguageSkillsQuery = { __typename?: 'Query', language
 export type GetMyInfoQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetMyInfoQuery = { __typename?: 'Query', admin?: { __typename?: 'Admin', age?: number | null, residence?: string | null, freelance?: AdminFreelanceType | null, address?: string | null } | null };
+export type GetMyInfoQuery = { __typename?: 'Query', admin?: { __typename?: 'Admin', age?: number | null, residence?: string | null, freelance?: AdminFreelanceType | null, address?: string | null, rank?: AdminRankType | null } | null };
 
 export const DemoProjectFragmentFragmentDoc = gql`
     fragment DemoProjectFragment on Project {
@@ -1617,6 +1642,7 @@ export const MyInfoFragmentDoc = gql`
   residence
   freelance
   address
+  rank
 }
     `;
 export const TagFragmentFragmentDoc = gql`
@@ -1675,6 +1701,17 @@ ${TagFragmentFragmentDoc}`;
 
 export function useGetProjectByIdQuery(options: Omit<Urql.UseQueryArgs<GetProjectByIdQueryVariables>, 'query'>) {
   return Urql.useQuery<GetProjectByIdQuery>({ query: GetProjectByIdDocument, ...options });
+};
+export const GetProjectsByTagDocument = gql`
+    query GetProjectsByTag($tag: ID!) {
+  projects(where: {tags: {some: {id: {equals: $tag}}}}) {
+    ...DemoProjectFragment
+  }
+}
+    ${DemoProjectFragmentFragmentDoc}`;
+
+export function useGetProjectsByTagQuery(options: Omit<Urql.UseQueryArgs<GetProjectsByTagQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetProjectsByTagQuery>({ query: GetProjectsByTagDocument, ...options });
 };
 export const GetImagesDocument = gql`
     query GetImages($where: ImageWhereInput = {}) {

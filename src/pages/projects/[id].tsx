@@ -7,6 +7,7 @@ import {
   Breadcrumbs,
   Anchor,
   Text,
+  LoadingOverlay,
 } from '@mantine/core'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
@@ -40,6 +41,10 @@ const ProjectDetailsPage: NextPage = () => {
     variables: { id: router.query.id as string },
   })
 
+  if (router.isFallback) {
+    return <LoadingOverlay visible />
+  }
+
   return (
     <motion.main
       variants={pageFade}
@@ -51,22 +56,17 @@ const ProjectDetailsPage: NextPage = () => {
       <Title order={1}>{data?.project?.title}</Title>
       <Text>Tags:</Text>
       <Breadcrumbs separator="•">
-        {data?.project?.tags?.map(tag => (
-          <Link
-            key={tag.id}
-            passHref
-            href={{
-              pathname: '/tags/[slug]',
-              query: {
-                slug: tag.slug,
-                tag: tag.id,
-              },
-            }}
-            as={`/tags/${tag.slug}`}
-          >
-            <Anchor>{tag.name}</Anchor>
-          </Link>
-        ))}
+        {data?.project?.tags &&
+          data?.project?.tags?.map(tag => (
+            <Link
+              key={tag.id}
+              passHref
+              href="/tags/[slug]"
+              as={`/tags/${tag.id}`}
+            >
+              <Anchor>{tag.name}</Anchor>
+            </Link>
+          ))}
       </Breadcrumbs>
       <Carousel autoPlay interval={4000} loop>
         {data?.project?.images?.map(image => (
