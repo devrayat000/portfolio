@@ -115,13 +115,19 @@ export const getStaticProps: GetStaticProps = async context => {
   const ssrCache = createSSRExchange()
   const client = createUrqlClient(ssrCache)
 
-  await client.query(GetProjectByIdDocument, { id }).toPromise()
+  try {
+    await client.query(GetProjectByIdDocument, { id }).toPromise()
 
-  return {
-    props: {
-      urqlState: ssrCache.extractData(),
-    },
-    revalidate: 600,
+    return {
+      props: {
+        urqlState: ssrCache.extractData(),
+      },
+      revalidate: 60 * 10,
+    }
+  } catch (error) {
+    return {
+      notFound: true,
+    }
   }
 }
 

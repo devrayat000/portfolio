@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "next dev",
     "dev:gen": "concurrently -n \"codegen,next\" \"yarn gql:watch\" \"yarn next:dev\"",
+    "prebuild": "graphql-codegen --config .graphqlrc.yml",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
