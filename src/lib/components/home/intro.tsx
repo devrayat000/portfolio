@@ -149,7 +149,7 @@ export default function Intro() {
         <Image
           src="/images/rayat2.png"
           alt="Zul Ikram Musaddik Rayat"
-          withPlaceholder
+          // withPlaceholder
           className={classes.image}
         />
       </Paper>

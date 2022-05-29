@@ -8,6 +8,8 @@ import {
   Anchor,
   Text,
   LoadingOverlay,
+  SimpleGrid,
+  Grid,
 } from '@mantine/core'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
@@ -52,35 +54,52 @@ const ProjectDetailsPage: NextPage = () => {
       // initial="hidden"
       // animate="show"
       // exit="hidden"
+      style={{ display: 'grid', placeItems: 'center', minHeight: '100vh' }}
     >
-      <Title order={1}>{data?.project?.title}</Title>
-      <Text>Tags:</Text>
-      <Breadcrumbs separator="•">
-        {data?.project?.tags &&
-          data?.project?.tags?.map(tag => (
-            <Link
-              key={tag.id}
-              passHref
-              href="/tags/[slug]"
-              as={`/tags/${tag.id}`}
-            >
-              <Anchor>{tag.name}</Anchor>
-            </Link>
-          ))}
-      </Breadcrumbs>
-      <Carousel autoPlay interval={4000} loop>
-        {data?.project?.images?.map(image => (
-          <AdvancedImage
-            key={image.id}
-            width="100%"
-            cldImg={cld.image('Portfolio/' + image?.image?.id)}
-            plugins={[placeholder(), lazyload(), responsive()]}
-          />
-        ))}
-      </Carousel>
-      <TypographyStylesProvider>
-        <DocumentRenderer document={data?.project?.description?.document} />
-      </TypographyStylesProvider>
+      <SimpleGrid
+        cols={2}
+        spacing={80}
+        py="xl"
+        my="xl"
+        px="lg"
+        style={{ placeItems: 'center' }}
+      >
+        <section>
+          <Carousel autoPlay interval={4000} loop>
+            {data?.project?.images?.map(image => (
+              <AdvancedImage
+                key={image.id}
+                width="100%"
+                height="360rem"
+                cldImg={cld.image('Portfolio/' + image?.image?.id)}
+                plugins={[placeholder(), lazyload(), responsive()]}
+              />
+            ))}
+          </Carousel>
+        </section>
+        <section>
+          <Title order={1} mb="xl">
+            {data?.project?.title}
+          </Title>
+          <Text mb="xs">Tags:</Text>
+          <Breadcrumbs separator="•" mb="md">
+            {data?.project?.tags &&
+              data?.project?.tags?.map(tag => (
+                <Link
+                  key={tag.id}
+                  passHref
+                  href="/tags/[slug]"
+                  as={`/tags/${tag.id}`}
+                >
+                  <Anchor>{tag.name}</Anchor>
+                </Link>
+              ))}
+          </Breadcrumbs>
+          <TypographyStylesProvider>
+            <DocumentRenderer document={data?.project?.description?.document} />
+          </TypographyStylesProvider>
+        </section>
+      </SimpleGrid>
     </motion.main>
   )
 }
