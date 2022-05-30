@@ -30,6 +30,7 @@ specifiers:
   graphql-tag: ^2.0.0
   is-it-email: ^1.0.1
   next: ^12.1.6
+  next-seo: ^5.4.0
   next-transpile-modules: ^9.0.0
   next-urql: ^3.3.2
   react: 18.1.0
@@ -56,6 +57,7 @@ dependencies:
   graphql-tag: 2.12.6_graphql@15.8.0
   is-it-email: 1.0.1
   next: 12.1.6_react-dom@18.1.0+react@18.1.0
+  next-seo: 5.4.0_d30c2367b03c877b70a67c330200ac54
   next-transpile-modules: 9.0.0
   next-urql: 3.3.2_react@18.1.0+urql@2.2.0
   react: 18.1.0
@@ -4635,6 +4637,18 @@ packages:
   /natural-compare/1.4.0:
     resolution: {integrity: sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=}
     dev: true
+
+  /next-seo/5.4.0_d30c2367b03c877b70a67c330200ac54:
+    resolution: {integrity: sha512-R9DhajPwJnR/lsF2hZ8cN8uqr5CVITsRrCG1AF5+ufcaybKYOvnH8sH9MaH4/hpkps3PQ9H71S7J7SPYixAYzQ==}
+    peerDependencies:
+      next: ^8.1.1-canary.54 || >=9.0.0
+      react: '>=16.0.0'
+      react-dom: '>=16.0.0'
+    dependencies:
+      next: 12.1.6_react-dom@18.1.0+react@18.1.0
+      react: 18.1.0
+      react-dom: 18.1.0_react@18.1.0
+    dev: false
 
   /next-transpile-modules/9.0.0:
     resolution: {integrity: sha512-VCNFOazIAnXn1hvgYYSTYMnoWgKgwlYh4lm1pKbSfiB3kj5ZYLcKVhfh3jkPOg1cnd9DP+pte9yCUocdPEUBTQ==}

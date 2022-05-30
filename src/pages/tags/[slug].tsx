@@ -13,6 +13,7 @@ import type { PageProps } from '$lib/types/urql-page-props'
 import { createSSRExchange, createUrqlClient } from '$lib/utils/urql_client'
 import { MotionSimpleGrid, pageFade, stagger } from '$lib/animation'
 import ProjectCard from '$lib/components/home/peoject-card'
+import { NextSeo } from 'next-seo'
 
 interface TagPageProps {}
 
@@ -28,30 +29,44 @@ const TagsPage: NextPage<TagPageProps> = () => {
   })
 
   return (
-    <m.div variants={pageFade}>
-      <Title>Tag:</Title>
-      <MotionSimpleGrid
-        cols={1}
-        breakpoints={[
-          {
-            minWidth: 'md',
-            cols: 2,
-          },
-          {
-            minWidth: 'lg',
-            cols: 3,
-          },
-        ]}
-        variants={stagger}
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true }}
-      >
-        {data?.projects?.map(project => {
-          return <ProjectCard key={project.id} project={project as Project} />
-        })}
-      </MotionSimpleGrid>
-    </m.div>
+    <>
+      <NextSeo
+        title={router.query.slug as string}
+        description="Build fully functional accessible web applications faster than ever
+            – Mantine includes more than 120 customizable components and hooks
+            to cover you in any situation"
+        openGraph={{
+          title: router.query.slug as string,
+          description:
+            'Build fully functional accessible web applications faster than ever – Mantine includes more than 120 customizable components and hooks to cover you in any situation',
+          type: `https://devrayat.me/tags/${router.query.slug}`,
+        }}
+      />
+      <m.div variants={pageFade}>
+        <Title>Tag:</Title>
+        <MotionSimpleGrid
+          cols={1}
+          breakpoints={[
+            {
+              minWidth: 'md',
+              cols: 2,
+            },
+            {
+              minWidth: 'lg',
+              cols: 3,
+            },
+          ]}
+          variants={stagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true }}
+        >
+          {data?.projects?.map(project => {
+            return <ProjectCard key={project.id} project={project as Project} />
+          })}
+        </MotionSimpleGrid>
+      </m.div>
+    </>
   )
 }
 

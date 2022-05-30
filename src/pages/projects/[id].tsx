@@ -35,6 +35,7 @@ import { pageFade } from '$lib/animation'
 import { DocumentRenderer } from '@keystone-6/document-renderer'
 import Link from 'next/link'
 import { cld } from '$lib/services/cloudinary'
+import { NextSeo } from 'next-seo'
 
 const ProjectDetailsPage: NextPage = () => {
   const router = useRouter()
@@ -48,59 +49,82 @@ const ProjectDetailsPage: NextPage = () => {
   }
 
   return (
-    <motion.main
-      variants={pageFade}
-      layoutId={`project-${data?.project?.id}`}
-      // initial="hidden"
-      // animate="show"
-      // exit="hidden"
-      style={{ display: 'grid', placeItems: 'center', minHeight: '100vh' }}
-    >
-      <SimpleGrid
-        cols={2}
-        spacing={80}
-        py="xl"
-        my="xl"
-        px="lg"
-        style={{ placeItems: 'center' }}
+    <>
+      <NextSeo
+        title={data?.project?.title!}
+        description={data?.project?.description?.document.toString()}
+        openGraph={{
+          title: data?.project?.title!,
+          description: data?.project?.description?.document.toString(),
+          url: `https://devrayat.me/projects/${data?.project?.id}`,
+          images: data?.project?.images?.map(image => ({
+            url: image.image?.publicUrl!,
+            alt: image.label!,
+          })),
+        }}
+        additionalMetaTags={[
+          {
+            name: 'keywords',
+            content: data?.project?.tags?.join(',')!,
+          },
+        ]}
+      />
+      <motion.main
+        variants={pageFade}
+        layoutId={`project-${data?.project?.id}`}
+        // initial="hidden"
+        // animate="show"
+        // exit="hidden"
+        style={{ display: 'grid', placeItems: 'center', minHeight: '100vh' }}
       >
-        <section>
-          <Carousel autoPlay interval={4000} loop>
-            {data?.project?.images?.map(image => (
-              <AdvancedImage
-                key={image.id}
-                width="100%"
-                height="360rem"
-                cldImg={cld.image('Portfolio/' + image?.image?.id)}
-                plugins={[placeholder(), lazyload(), responsive()]}
-              />
-            ))}
-          </Carousel>
-        </section>
-        <section>
-          <Title order={1} mb="xl">
-            {data?.project?.title}
-          </Title>
-          <Text mb="xs">Tags:</Text>
-          <Breadcrumbs separator="•" mb="md">
-            {data?.project?.tags &&
-              data?.project?.tags?.map(tag => (
-                <Link
-                  key={tag.id}
-                  passHref
-                  href="/tags/[slug]"
-                  as={`/tags/${tag.id}`}
-                >
-                  <Anchor>{tag.name}</Anchor>
-                </Link>
+        <SimpleGrid
+          cols={2}
+          spacing={80}
+          py="xl"
+          my="xl"
+          px="lg"
+          style={{ placeItems: 'center' }}
+        >
+          <section>
+            <Carousel autoPlay interval={4000} loop>
+              {data?.project?.images?.map(image => (
+                <AdvancedImage
+                  key={image.id}
+                  width="100%"
+                  height="360rem"
+                  cldImg={cld.image('Portfolio/' + image?.image?.id)}
+                  plugins={[placeholder(), lazyload(), responsive()]}
+                />
               ))}
-          </Breadcrumbs>
-          <TypographyStylesProvider>
-            <DocumentRenderer document={data?.project?.description?.document} />
-          </TypographyStylesProvider>
-        </section>
-      </SimpleGrid>
-    </motion.main>
+            </Carousel>
+          </section>
+          <section>
+            <Title order={1} mb="xl">
+              {data?.project?.title}
+            </Title>
+            <Text mb="xs">Tags:</Text>
+            <Breadcrumbs separator="•" mb="md">
+              {data?.project?.tags &&
+                data?.project?.tags?.map(tag => (
+                  <Link
+                    key={tag.id}
+                    passHref
+                    href="/tags/[slug]"
+                    as={`/tags/${tag.id}`}
+                  >
+                    <Anchor>{tag.name}</Anchor>
+                  </Link>
+                ))}
+            </Breadcrumbs>
+            <TypographyStylesProvider>
+              <DocumentRenderer
+                document={data?.project?.description?.document}
+              />
+            </TypographyStylesProvider>
+          </section>
+        </SimpleGrid>
+      </motion.main>
+    </>
   )
 }
 

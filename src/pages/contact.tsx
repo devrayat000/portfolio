@@ -16,6 +16,7 @@ import { pageFade } from '$lib/animation/fade'
 import { slideY } from '$lib/animation/slide'
 import ContactIconsList from '$lib/components/contact/contact-list'
 import ContactForm from '$lib/components/contact/contact-form'
+import { NextSeo } from 'next-seo'
 
 const useStyles = createStyles(theme => {
   const BREAKPOINT = theme.fn.smallerThan('sm')
@@ -77,38 +78,58 @@ export default function ContactPage() {
   const { classes } = useStyles()
 
   return (
-    <motion.main
-      variants={pageFade}
-      initial="hidden"
-      animate="show"
-      exit="hidden"
-    >
-      <Paper
-        shadow="lg"
-        radius="lg"
-        component={motion.div}
-        variants={slideY(20)}
+    <>
+      <NextSeo
+        title="Contact Me - Zul Ikram Musaddik Rayat"
+        description="Build fully functional accessible web applications faster than ever
+            – Mantine includes more than 120 customizable components and hooks
+            to cover you in any situation"
+        openGraph={{
+          title: 'Contact Me - Zul Ikram Musaddik Rayat',
+          description:
+            'Build fully functional accessible web applications faster than ever – Mantine includes more than 120 customizable components and hooks to cover you in any situation',
+          type: 'https://devrayat.me/contact',
+          images: [
+            {
+              url: '/images/rayat.jpg',
+              alt: 'Zul Ikram Musaddik Rayat',
+            },
+          ],
+        }}
+      />
+      <motion.main
+        variants={pageFade}
+        initial="hidden"
+        animate="show"
+        exit="hidden"
       >
-        <div className={classes.wrapper}>
-          <div className={classes.contacts}>
-            <Text
-              size="lg"
-              weight={700}
-              className={classes.title}
-              sx={theme => ({
-                color: theme.white,
-              })}
-            >
-              Contact information
-            </Text>
+        <Paper
+          shadow="lg"
+          radius="lg"
+          component={motion.div}
+          variants={slideY(20)}
+        >
+          <div className={classes.wrapper}>
+            <div className={classes.contacts}>
+              <Text
+                size="lg"
+                weight={700}
+                className={classes.title}
+                sx={theme => ({
+                  color: theme.white,
+                })}
+              >
+                Contact information
+              </Text>
 
-            <ContactIconsList variant="white" />
+              <ContactIconsList variant="white" />
+            </div>
+
+            <ContactForm />
           </div>
-
-          <ContactForm />
-        </div>
-      </Paper>
-    </motion.main>
+        </Paper>
+      </motion.main>
+    </>
   )
 }
 

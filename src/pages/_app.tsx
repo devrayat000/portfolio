@@ -25,6 +25,7 @@ import {
 } from '$graphql/generated'
 import '../styles/globals.css'
 import { slideY } from '$lib/animation'
+import { DefaultSeo } from 'next-seo'
 
 const useStyles = createStyles(theme => ({
   main: {
@@ -118,24 +119,42 @@ const MyApp: NextPage<AppProps, AppProps['pageProps']> = ({
 
   return (
     //   <QueryClientProvider client={queryClient}>
-    <Provider value={client}>
-      <ThemeProvider>
-        <NotificationsProvider>
-          <LazyMotion
-            features={() =>
-              import('$lib/animation/dom-animation').then(res => res.default)
-            }
-            strict
-          >
-            <MyAppShell>
-              <AnimatePresence exitBeforeEnter>
-                <Component {...(pageProps as any)} key={router.route} />
-              </AnimatePresence>
-            </MyAppShell>
-          </LazyMotion>
-        </NotificationsProvider>
-      </ThemeProvider>
-    </Provider>
+    <>
+      <DefaultSeo
+        additionalMetaTags={[
+          {
+            name: 'viewport',
+            content: 'width=device-width, initial-scale=1.0',
+          },
+          {
+            httpEquiv: 'x-ua-compatible',
+            content: 'ie=edge',
+          },
+          {
+            httpEquiv: 'content-type',
+            content: 'text/html;charset=UTF-8',
+          },
+        ]}
+      />
+      <Provider value={client}>
+        <ThemeProvider>
+          <NotificationsProvider>
+            <LazyMotion
+              features={() =>
+                import('$lib/animation/dom-animation').then(res => res.default)
+              }
+              strict
+            >
+              <MyAppShell>
+                <AnimatePresence exitBeforeEnter>
+                  <Component {...(pageProps as any)} key={router.route} />
+                </AnimatePresence>
+              </MyAppShell>
+            </LazyMotion>
+          </NotificationsProvider>
+        </ThemeProvider>
+      </Provider>
+    </>
     //   </QueryClientProvider>
   )
 }
