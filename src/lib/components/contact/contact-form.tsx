@@ -10,7 +10,7 @@ import {
 import { useForm } from '@mantine/hooks'
 import { showNotification } from '@mantine/notifications'
 import { m } from 'framer-motion'
-import { Send } from 'tabler-icons-react'
+import { Send, Cross as Cross1Icon } from 'tabler-icons-react'
 import * as isEmail from 'is-it-email'
 
 import { slideX } from '$lib/animation'
@@ -81,25 +81,43 @@ const ContactForm = (props: Props) => {
   return (
     <form
       className={classes.form}
-      onSubmit={onSubmit(data => {
-        // TODO: Send mail
+      onSubmit={onSubmit(async data => {
+        try {
+          const res = await fetch('/api/mail', { body: JSON.stringify(data) })
+          const { id } = await res.json()
 
-        // TODO: Show notification
-        showNotification({
-          id: 'hello-there',
-          disallowClose: false,
-          onClose: () => console.log('unmounted'),
-          onOpen: () => console.log('mounted'),
-          autoClose: 2000,
-          title: "You've been compromised",
-          message: 'Leave the building immediately',
-          color: 'red',
-          //   icon: <Cross1Icon />,
-          className: 'my-notification-class',
-          style: { backgroundColor: 'red' },
-          sx: { backgroundColor: 'red' },
-          loading: false,
-        })
+          showNotification({
+            id,
+            disallowClose: false,
+            onClose: () => console.log('unmounted'),
+            onOpen: () => console.log('mounted'),
+            autoClose: 2000,
+            title: 'Successfully sent.',
+            message: 'Your response was sent using email!',
+            color: 'green',
+            icon: <Cross1Icon />,
+            className: 'my-notification-success-class',
+            style: { backgroundColor: 'green' },
+            sx: { backgroundColor: 'green' },
+            loading: false,
+          })
+        } catch (error) {
+          showNotification({
+            id: 'error',
+            disallowClose: false,
+            onClose: () => console.log('unmounted'),
+            onOpen: () => console.log('mounted'),
+            autoClose: 2000,
+            title: 'Error sending mail!',
+            message: 'The server did not respont to your request!',
+            color: 'red',
+            icon: <Cross1Icon />,
+            className: 'my-notification-error-class',
+            style: { backgroundColor: 'red' },
+            sx: { backgroundColor: 'red' },
+            loading: false,
+          })
+        }
       })}
     >
       <Text size="lg" weight={700} className={classes.title}>
@@ -112,6 +130,7 @@ const ContactForm = (props: Props) => {
             label="Your name"
             placeholder="Your name"
             required
+            minLength={6}
             {...getInputProps('name')}
           />
           <TextInput
@@ -135,6 +154,9 @@ const ContactForm = (props: Props) => {
           label="Your message"
           placeholder="Please include all relevant information"
           minRows={3}
+          required
+          minLength={50}
+          maxLength={200}
           {...getInputProps('message')}
         />
 

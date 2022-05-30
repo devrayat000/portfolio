@@ -121,6 +121,12 @@ const MyApp: NextPage<AppProps, AppProps['pageProps']> = ({
     //   <QueryClientProvider client={queryClient}>
     <>
       <DefaultSeo
+        additionalLinkTags={[
+          {
+            rel: 'icon',
+            href: '/favicon.ico',
+          },
+        ]}
         additionalMetaTags={[
           {
             name: 'viewport',
