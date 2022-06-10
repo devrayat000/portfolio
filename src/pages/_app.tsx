@@ -1,110 +1,21 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useMemo } from 'react'
 import { type NextPage } from 'next'
 import { Provider } from 'urql'
 import { type AppProps as IAppProps } from 'next/app'
-import { AnimatePresence, LazyMotion, useElementScroll, m } from 'framer-motion'
-import {
-  Affix,
-  AppShell,
-  Button,
-  createStyles,
-  ScrollArea,
-} from '@mantine/core'
+import { AnimatePresence, LazyMotion } from 'framer-motion'
 import { NotificationsProvider } from '@mantine/notifications'
-import { ArrowUp as ArrowUpIcon } from 'tabler-icons-react'
+import { DefaultSeo } from 'next-seo'
 import type { SSRData } from '@urql/core/dist/types/exchanges/ssr'
 
 import { createUrqlClient, createSSRExchange } from '$lib/utils/urql_client'
 import ThemeProvider from '$lib/components/common/theme-provider'
-import MyNavbar from '$lib/components/common/nav/navbar'
-import MyAside from '$lib/components/common/aside/aside'
 import {
   GetHumanLanguageSkillsDocument,
   GetMyInfoDocument,
   GetProgrammingLanguageSkillsDocument,
 } from '$graphql/generated'
+import MyAppShell from '$lib/components/common/shell'
 import '../styles/globals.css'
-import { slideY } from '$lib/animation'
-import { DefaultSeo } from 'next-seo'
-
-const useStyles = createStyles(theme => ({
-  main: {
-    backgroundColor:
-      theme.colorScheme == 'light'
-        ? theme.colors.gray[1]
-        : theme.colors.gray[8],
-    paddingTop: 0,
-  },
-}))
-
-const MyAppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [isScrollWorthy, setIsScrollWorthy] = useState(false)
-  const { classes } = useStyles()
-  const scrollRef = useRef<HTMLDivElement>(null)
-  const { scrollY } = useElementScroll(scrollRef)
-
-  const scrollToTop = () =>
-    scrollRef?.current?.scrollTo({ top: 0, behavior: 'smooth' })
-
-  useEffect(() => {
-    return scrollY.onChange(position => {
-      if (position > 500) {
-        setIsScrollWorthy(true)
-      } else {
-        setIsScrollWorthy(false)
-      }
-    })
-  }, [scrollY])
-
-  return (
-    <AppShell
-      navbarOffsetBreakpoint="md"
-      asideOffsetBreakpoint="md"
-      navbar={<MyNavbar />}
-      aside={<MyAside />}
-      classNames={{
-        main: classes.main,
-      }}
-    >
-      <ScrollArea
-        key="main-scroll"
-        type="scroll"
-        style={{ height: '100vh' }}
-        viewportRef={scrollRef}
-      >
-        {children}
-      </ScrollArea>
-      <Affix position={{ bottom: 20, right: 96 }}>
-        <AnimatePresence>
-          {isScrollWorthy && (
-            <Button
-              component={m.button}
-              leftIcon={<ArrowUpIcon />}
-              onClick={scrollToTop}
-              variants={slideY(40)}
-              initial="hidden"
-              animate="show"
-              exit="hidden"
-            >
-              Scroll to top
-            </Button>
-          )}
-        </AnimatePresence>
-        {/* <Transition transition="slide-up" mounted={isScrollWorthy}>
-          {transitionStyles => (
-            <Button
-              leftIcon={<ArrowUpIcon />}
-              style={transitionStyles}
-              onClick={scrollToTop}
-            >
-              Scroll to top
-            </Button>
-          )}
-        </Transition> */}
-      </Affix>
-    </AppShell>
-  )
-}
 
 const MyApp: NextPage<AppProps, AppProps['pageProps']> = ({
   Component,
@@ -118,7 +29,6 @@ const MyApp: NextPage<AppProps, AppProps['pageProps']> = ({
   const client = useMemo(() => createUrqlClient(ssrCache), [ssrCache])
 
   return (
-    //   <QueryClientProvider client={queryClient}>
     <>
       <DefaultSeo
         additionalLinkTags={[
@@ -161,14 +71,8 @@ const MyApp: NextPage<AppProps, AppProps['pageProps']> = ({
         </ThemeProvider>
       </Provider>
     </>
-    //   </QueryClientProvider>
   )
 }
-
-// export default withUrqlClient(
-//   ssr => getClientOptions(ssr),
-//   { ssr: false, neverSuspend: true } // Important so we don't wrap our component in getInitialProps
-// )(MyApp)
 
 MyApp.getInitialProps = async context => {
   const ssrCache = createSSRExchange()

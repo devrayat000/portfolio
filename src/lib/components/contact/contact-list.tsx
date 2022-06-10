@@ -12,6 +12,7 @@ import { m as motion } from 'framer-motion'
 
 import { slideY } from '$lib/animation/slide'
 import { stagger } from '$lib/animation/stagger'
+import { MotionGroup } from '$lib/animation'
 
 type ContactIconVariant = 'white' | 'gradient'
 
@@ -116,15 +117,14 @@ const MOCKDATA: ContactIconProps[] = [
   },
   {
     title: 'Address',
-    description: '844 Morris Park avenue',
+    description: 'BUET Central Road, Dhaka',
     target: '_blank',
     href:
       'https://www.google.com/maps/search/' +
-      encodeURIComponent('844 Morris Park avenue'),
+      encodeURIComponent('BUET Central Road, Dhaka'),
 
     icon: MapPin,
   },
-  { title: 'Working hours', description: '8 a.m. – 11 p.m.', icon: Sun },
 ]
 
 export default function ContactIconsList({
@@ -135,8 +135,8 @@ export default function ContactIconsList({
     <ContactIcon key={item.href} variant={variant} {...item} />
   ))
   return (
-    <motion.div variants={stagger}>
-      <Group direction="column">{items}</Group>
-    </motion.div>
+    <MotionGroup variants={stagger} direction="column">
+      {items}
+    </MotionGroup>
   )
 }
