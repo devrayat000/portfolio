@@ -12,7 +12,6 @@ import { ArrowUp as ArrowUpIcon } from 'tabler-icons-react'
 import MyNavbar from '$lib/components/common/nav/navbar'
 import MyAside from '$lib/components/common/aside/aside'
 import { slideY } from '$lib/animation'
-import '../styles/globals.css'
 
 const useStyles = createStyles(theme => ({
   main: {
@@ -57,6 +56,7 @@ const MyAppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         key="main-scroll"
         type="scroll"
         style={{ height: '100vh' }}
+        styles={{ viewport: { scrollBehavior: 'smooth' } }}
         viewportRef={scrollRef}
       >
         {children}

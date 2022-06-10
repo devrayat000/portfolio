@@ -1,16 +1,19 @@
-import Head from 'next/head'
 import { Stack } from '@mantine/core'
 import { m as motion } from 'framer-motion'
 import { type GetStaticProps } from 'next'
+import { NextSeo } from 'next-seo'
 // import Image from 'next/image'
 
-import { GetDemoProjectsDocument } from '$graphql/generated'
+import {
+  GetDemoProjectsDocument,
+  GetMyEducationDocument,
+} from '$graphql/generated'
 import { createSSRExchange, createUrqlClient } from '$lib/utils/urql_client'
 import Intro from '$lib/components/home/intro'
 import Services from '$lib/components/home/services'
 import Projects from '$lib/components/home/projects'
 import { pageFade } from '$lib/animation/fade'
-import { NextSeo } from 'next-seo'
+import Education from '$lib/components/home/education'
 
 function Home() {
   return (
@@ -42,6 +45,7 @@ function Home() {
         <Stack align="stretch" spacing="xl">
           <Intro />
           <Services />
+          <Education />
           <Projects />
         </Stack>
       </motion.main>
@@ -53,7 +57,10 @@ export const getStaticProps: GetStaticProps = async context => {
   const ssrCache = createSSRExchange()
   const client = createUrqlClient(ssrCache)
 
-  await client.query(GetDemoProjectsDocument).toPromise()
+  await Promise.all([
+    client.query(GetDemoProjectsDocument).toPromise(),
+    client.query(GetMyEducationDocument).toPromise(),
+  ])
 
   return {
     props: {

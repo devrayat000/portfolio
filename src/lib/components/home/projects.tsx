@@ -8,7 +8,7 @@ type Props = {}
 
 const Projects = (props: Props) => {
   return (
-    <Box>
+    <Box id="projects">
       <Label
         title="Projects"
         subtitle="Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. lorem ipsum"

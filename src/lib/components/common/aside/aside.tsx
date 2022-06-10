@@ -34,10 +34,10 @@ const MyAside = () => {
             <NavLink href="/" label="Home">
               <Home2 />
             </NavLink>
-            <NavLink href="/education" label="Education">
+            <NavLink href="/#education" label="Education">
               <Certificate />
             </NavLink>
-            <NavLink href="/work" label="My Work">
+            <NavLink href="/#projects" label="My Work">
               <ClipboardCheck />
             </NavLink>
             <NavLink href="/contact" label="Contact Me">

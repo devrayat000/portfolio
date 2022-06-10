@@ -1522,6 +1522,8 @@ export type MyInfoFragment = { __typename?: 'Admin', age?: number | null, reside
 
 export type TagFragmentFragment = { __typename?: 'Tag', id: string, name?: string | null, slug?: string | null };
 
+export type EducationFragmentFragment = { __typename?: 'Education', id: string, title?: string | null, passed?: any | null, certificate?: string | null, description?: { __typename?: 'Education_description_Document', document: any } | null };
+
 export type GetDemoProjectsQueryVariables = Exact<{
   where?: InputMaybe<ProjectWhereInput>;
 }>;
@@ -1585,6 +1587,11 @@ export type GetMyInfoQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetMyInfoQuery = { __typename?: 'Query', admin?: { __typename?: 'Admin', age?: number | null, residence?: string | null, freelance?: AdminFreelanceType | null, address?: string | null, rank?: AdminRankType | null } | null };
+
+export type GetMyEducationQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetMyEducationQuery = { __typename?: 'Query', educations?: Array<{ __typename?: 'Education', id: string, title?: string | null, passed?: any | null, certificate?: string | null, description?: { __typename?: 'Education_description_Document', document: any } | null }> | null };
 
 export const DemoProjectFragmentFragmentDoc = gql`
     fragment DemoProjectFragment on Project {
@@ -1650,6 +1657,17 @@ export const TagFragmentFragmentDoc = gql`
   id
   name
   slug
+}
+    `;
+export const EducationFragmentFragmentDoc = gql`
+    fragment EducationFragment on Education {
+  id
+  title
+  passed
+  certificate
+  description {
+    document
+  }
 }
     `;
 export const GetDemoProjectsDocument = gql`
@@ -1771,4 +1789,15 @@ export const GetMyInfoDocument = gql`
 
 export function useGetMyInfoQuery(options?: Omit<Urql.UseQueryArgs<GetMyInfoQueryVariables>, 'query'>) {
   return Urql.useQuery<GetMyInfoQuery>({ query: GetMyInfoDocument, ...options });
+};
+export const GetMyEducationDocument = gql`
+    query GetMyEducation {
+  educations {
+    ...EducationFragment
+  }
+}
+    ${EducationFragmentFragmentDoc}`;
+
+export function useGetMyEducationQuery(options?: Omit<Urql.UseQueryArgs<GetMyEducationQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetMyEducationQuery>({ query: GetMyEducationDocument, ...options });
 };

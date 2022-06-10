@@ -23,6 +23,7 @@ specifiers:
   '@urql/core': ^2.4.4
   '@urql/exchange-multipart-fetch': ^0.1.14
   concurrently: ^7.0.0
+  dayjs: ^1.11.3
   eslint: 7.32.0
   eslint-config-next: 12.0.7
   framer-motion: ^6.3.3
@@ -53,6 +54,7 @@ dependencies:
   '@mantine/next': 4.2.2_e721045221d5ae1bba0fcd333282dc3b
   '@mantine/notifications': 4.2.4_af46c71ecf518c86fb9b76e8a89b700a
   '@urql/core': 2.4.4_graphql@15.8.0
+  dayjs: 1.11.3
   framer-motion: 6.3.3_react-dom@18.1.0+react@18.1.0
   framer-motion-carousel: 1.0.7_react-dom@18.1.0+react@18.1.0
   graphql: 15.8.0
@@ -2725,6 +2727,10 @@ packages:
     resolution: {integrity: sha512-8d35hViGYx/QH0icHYCeLmsLmMUheMmTyV9Fcm6gvNwdw31yXXH+O85sOBJ+OLnLQMKZowvpKb6FgMIQjcpvQw==}
     engines: {node: '>=0.11'}
     dev: true
+
+  /dayjs/1.11.3:
+    resolution: {integrity: sha512-xxwlswWOlGhzgQ4TKzASQkUhqERI3egRNqgV4ScR8wlANA/A9tZ7miXa44vTTKEq5l7vWoL5G57bG3zA+Kow0A==}
+    dev: false
 
   /debounce/1.2.1:
     resolution: {integrity: sha512-XRRe6Glud4rd/ZGQfiV1ruXSfbvfJedlV9Y6zOlP+2K04vBYiJEte6stfFkCP03aMnY5tsipamumUjL14fofug==}

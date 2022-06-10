@@ -86,3 +86,9 @@ query GetMyInfo {
     ...MyInfo
   }
 }
+
+query GetMyEducation {
+  educations {
+    ...EducationFragment
+  }
+}

@@ -56,3 +56,13 @@ fragment TagFragment on Tag {
   name
   slug
 }
+
+fragment EducationFragment on Education {
+  id
+  title
+  passed
+  certificate
+  description {
+    document
+  }
+}

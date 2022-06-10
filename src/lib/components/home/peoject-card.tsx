@@ -44,6 +44,7 @@ const ProjectCard = ({ project }: Props) => {
             type: 'spring',
           },
         }}
+        title={project.title ?? undefined}
         whileTap={{
           scale: 0.975,
           transition: {
