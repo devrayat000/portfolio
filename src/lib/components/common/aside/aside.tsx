@@ -1,5 +1,11 @@
 import { Aside, ScrollArea } from '@mantine/core'
-import { Certificate, Home2, Message, ClipboardCheck } from 'tabler-icons-react'
+import {
+  Certificate,
+  Home2,
+  Message,
+  ClipboardCheck,
+  ReportMoney,
+} from 'tabler-icons-react'
 // import { motion } from 'framer-motion'
 
 // import { useStackStyles } from '$lib/styles/stack'
@@ -25,7 +31,7 @@ const MyAside = () => {
           {/* <Space /> */}
           <ThemeToggle />
           <MotionStack
-            spacing={48}
+            spacing={40}
             variants={stagger}
             initial="hidden"
             animate="show"
@@ -34,13 +40,16 @@ const MyAside = () => {
             <NavLink href="/" label="Home">
               <Home2 />
             </NavLink>
+            {/* <NavLink href="/#pricing" label="Pricing">
+              <ReportMoney />
+            </NavLink> */}
             <NavLink href="/#education" label="Education">
               <Certificate />
             </NavLink>
             <NavLink href="/#projects" label="My Work">
               <ClipboardCheck />
             </NavLink>
-            <NavLink href="/contact" label="Contact Me">
+            <NavLink href="/#contact" label="Contact Me">
               <Message />
             </NavLink>
           </MotionStack>

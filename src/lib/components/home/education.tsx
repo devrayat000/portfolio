@@ -12,7 +12,7 @@ const Education = (props: Props) => {
     <Box id="education">
       <Label
         title="Education"
-        subtitle="Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. lorem ipsum"
+        subtitle="Certifications I achieved from popular online learning platform such as Coursera, edX, Udemy etc."
       />
 
       <Stack>

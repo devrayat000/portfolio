@@ -1,16 +1,40 @@
-import { type Project, useGetDemoProjectsQuery } from '$graphql/generated'
+import { Center, Loader, LoadingOverlay } from '@mantine/core'
+
+import {
+  type Project,
+  useGetDemoProjectsQuery,
+  useGetProjectsByTagQuery,
+} from '$graphql/generated'
 import { stagger } from '$lib/animation/stagger'
 import ProjectCard from './peoject-card'
 import { MotionSimpleGrid } from '$lib/animation'
-// import { useGetProjectsQuery } from '$graphql/query-types-hooks'
 
-type Props = {}
+type Props = {
+  slug: string
+}
 
-const ProjectsList = () => {
+export const TaggedProjectsList = (props: Props) => {
+  const [{ data, fetching }] = useGetProjectsByTagQuery({
+    variables: { tag: props.slug! },
+  })
+
+  if (fetching)
+    return (
+      <Center>
+        <Loader />
+      </Center>
+    )
+
+  return Projects(data?.projects)
+}
+
+export const AllProjectsList = () => {
   const [{ data }] = useGetDemoProjectsQuery()
 
-  // const { classes } = useStyles()
+  return Projects(data?.projects)
+}
 
+function Projects(projects?: Project[] | null) {
   return (
     <MotionSimpleGrid
       cols={1}
@@ -29,11 +53,9 @@ const ProjectsList = () => {
       whileInView="show"
       viewport={{ once: true }}
     >
-      {data?.projects?.map(project => {
-        return <ProjectCard key={project.id} project={project as Project} />
+      {projects?.map(project => {
+        return <ProjectCard key={project.id} project={project} />
       })}
     </MotionSimpleGrid>
   )
 }
-
-export default ProjectsList

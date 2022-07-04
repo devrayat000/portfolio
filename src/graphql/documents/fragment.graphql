@@ -1,32 +1,18 @@
 fragment DemoProjectFragment on Project {
   id
   title
-  description {
-    document
-  }
-  demo
-  source
   images(take: 1) {
-    id
-    label
-    image {
-      id
-      publicUrl
-    }
+    ...ImageFragment
   }
 }
 
 fragment ProjectFragment on Project {
-  id
-  title
+  ...DemoProjectFragment
   description {
     document
   }
   demo
   source
-  images {
-    ...ImageFragment
-  }
 }
 
 fragment ImageFragment on Image {

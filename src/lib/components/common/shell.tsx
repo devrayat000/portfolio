@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
+import { useRouter } from 'next/router'
 import { AnimatePresence, useElementScroll, m } from 'framer-motion'
 import {
+  ActionIcon,
   Affix,
   AppShell,
   Button,
@@ -28,9 +30,12 @@ const MyAppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { classes } = useStyles()
   const scrollRef = useRef<HTMLDivElement>(null)
   const { scrollY } = useElementScroll(scrollRef)
+  const router = useRouter()
 
-  const scrollToTop = () =>
+  const scrollToTop = () => {
     scrollRef?.current?.scrollTo({ top: 0, behavior: 'smooth' })
+    router.replace('/')
+  }
 
   useEffect(() => {
     return scrollY.onChange(position => {
@@ -64,17 +69,20 @@ const MyAppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       <Affix position={{ bottom: 20, right: 96 }}>
         <AnimatePresence>
           {isScrollWorthy && (
-            <Button
+            <ActionIcon
+              variant="filled"
+              size="xl"
+              radius="xl"
+              color="primaryColor"
               component={m.button}
-              leftIcon={<ArrowUpIcon />}
               onClick={scrollToTop}
               variants={slideY(40)}
               initial="hidden"
               animate="show"
               exit="hidden"
             >
-              Scroll to top
-            </Button>
+              <ArrowUpIcon />
+            </ActionIcon>
           )}
         </AnimatePresence>
       </Affix>

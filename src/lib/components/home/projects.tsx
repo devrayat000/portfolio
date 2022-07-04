@@ -1,23 +1,40 @@
-import { Box } from '@mantine/core'
+import { Box, Tabs } from '@mantine/core'
+import {} from '@mantine/hooks'
 // import { ErrorBoundary } from 'react-error-boundary'
 
-import ProjectsList from './projects-list'
+import { AllProjectsList, TaggedProjectsList } from './projects-list'
 import Label from './label'
+import { useGetTagsQuery } from '$graphql/generated'
+import { useState } from 'react'
 
 type Props = {}
 
+interface TabState {
+  index: number
+  key?: string
+}
+
 const Projects = (props: Props) => {
+  const [activeTab, setActiveTab] = useState(0)
+  const [{ data }] = useGetTagsQuery()
+
   return (
     <Box id="projects">
       <Label
         title="Projects"
-        subtitle="Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. lorem ipsum"
+        subtitle="Project I have completed so far both for clients and personal pleasure."
       />
-      {/* <ErrorBoundary fallbackRender={props => <h1>{props.error.message}</h1>}> */}
-      {/* <Suspense fallback={<h1>Loading...</h1>}> */}
-      <ProjectsList />
-      {/* </Suspense> */}
-      {/* </ErrorBoundary> */}
+      <Tabs active={activeTab} onTabChange={setActiveTab}>
+        <Tabs.Tab label="All" tabKey="all">
+          <AllProjectsList />
+        </Tabs.Tab>
+
+        {data?.tags?.map(tag => (
+          <Tabs.Tab key={tag.id} label={tag.name}>
+            <TaggedProjectsList slug={tag.id} />
+          </Tabs.Tab>
+        ))}
+      </Tabs>
     </Box>
   )
 }

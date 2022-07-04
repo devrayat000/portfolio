@@ -1,23 +1,21 @@
 import {
   Text,
   AspectRatio,
-  Card,
-  Group,
-  Button,
-  Stack,
-  TypographyStylesProvider,
   Image as MImage,
+  Overlay,
+  Box,
+  Transition,
+  Center,
 } from '@mantine/core'
-import { DocumentRenderer } from '@keystone-6/document-renderer'
-import Image from 'next/image'
 import Link from 'next/link'
-import { m as motion } from 'framer-motion'
+import { m } from 'framer-motion'
 import {
   AdvancedImage,
   placeholder,
   lazyload,
   responsive,
 } from '@cloudinary/react'
+import { useHover } from '@mantine/hooks'
 
 import { slideY } from '$lib/animation/slide'
 import { Project } from '$graphql/generated'
@@ -28,114 +26,53 @@ type Props = {
 }
 
 const ProjectCard = ({ project }: Props) => {
+  const { hovered, ref } = useHover<HTMLAnchorElement>()
+
   const images = project.images
 
   return (
-    <Link href="/projects/[id]" as={`/projects/${project.id}`} passHref>
-      <Card<typeof motion.div>
-        shadow="sm"
-        p="lg"
-        component={motion.div}
-        variants={slideY(60)}
+    <Link href="/p/[id]" as={`/p/${project.id}`} passHref>
+      <Box
+        component={m.a}
+        sx={{ position: 'relative' }}
+        ref={ref}
+        variants={slideY(20)}
         viewport={{ once: true }}
-        whileHover={{
-          scale: 1.025,
-          transition: {
-            type: 'spring',
-          },
-        }}
-        title={project.title ?? undefined}
-        whileTap={{
-          scale: 0.975,
-          transition: {
-            type: 'spring',
-          },
-        }}
-        sx={{
-          cursor: 'pointer',
-        }}
       >
-        <Card.Section
-          component={motion.section}
-          layoutId={`project-${project.id}`}
+        <Transition
+          mounted={hovered}
+          transition="fade"
+          duration={400}
+          timingFunction="ease"
         >
-          <AspectRatio ratio={3 / 2} sx={{ position: 'relative' }}>
-            {images && images.length > 0 ? (
-              // <Image
-              //   key={images[0]?.id}
-              //   src={images[0]?.image?.publicUrl!}
-              //   alt={images[0]?.label!}
-              //   layout="fill"
-              //   objectFit="cover"
-              // />
-              <AdvancedImage
-                cldImg={cld.image('Portfolio/' + images[0]?.image?.id!)}
-                plugins={[placeholder(), lazyload(), responsive()]}
-              />
-            ) : (
-              <MImage withPlaceholder />
-            )}
-          </AspectRatio>
-        </Card.Section>
-
-        <Group
-          position="apart"
-          sx={theme => ({
-            marginBottom: 5,
-            marginTop: theme.spacing.sm,
-          })}
-        >
-          <Text weight={500}>{project.title}</Text>
-        </Group>
-
-        <TypographyStylesProvider
-          sx={{
-            '& > *': {
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              msTextOverflow: 'ellipsis',
-              WebkitLineClamp: 1,
-              display: '-webkit-box',
-              WebkitBoxOrient: 'vertical',
-            },
-          }}
-        >
-          <DocumentRenderer document={project.description?.document} />
-        </TypographyStylesProvider>
-
-        <Stack spacing="xs">
-          {project.demo ? (
-            <Button<'a'>
-              component="a"
-              variant="outline"
-              href={project.demo}
-              fullWidth
-              target="_blank"
-              onClick={e => e.stopPropagation()}
-              onClickCapture={e => e.stopPropagation()}
+          {styles => (
+            <Box
+              style={styles}
+              sx={{ position: 'absolute', inset: 0, h: 0, w: 0, zIndex: 5 }}
+              p="sm"
             >
-              Watch Demo
-            </Button>
-          ) : (
-            <NoDemo />
+              <Center
+                sx={{ zIndex: 7, position: 'absolute', inset: 0, h: 0, w: 0 }}
+              >
+                <Text weight="bold" size="xl" color="orange">
+                  {project.title}
+                </Text>
+              </Center>
+              <Overlay opacity={0.7} color="#000" blur={1} zIndex={6} />
+            </Box>
           )}
-          {project.source ? (
-            <Button<'a'>
-              variant="light"
-              component="a"
-              href={project.source}
-              fullWidth
-              target="_blank"
-              onClick={e => e.stopPropagation()}
-              onClickCapture={e => e.stopPropagation()}
-            >
-              View Source Code
-            </Button>
+        </Transition>
+        <AspectRatio ratio={3 / 2} sx={{ position: 'relative' }}>
+          {images && images.length > 0 ? (
+            <AdvancedImage
+              cldImg={cld.image('Portfolio/' + images[0]?.image?.id!)}
+              plugins={[placeholder(), lazyload(), responsive()]}
+            />
           ) : (
-            <NoSourceCode />
+            <MImage withPlaceholder />
           )}
-        </Stack>
-      </Card>
+        </AspectRatio>
+      </Box>
     </Link>
   )
 }
@@ -143,26 +80,3 @@ const ProjectCard = ({ project }: Props) => {
 ProjectCard.displayName = 'MyProjectCard'
 
 export default ProjectCard
-
-const NoDemo = () => (
-  <Button
-    variant="outline"
-    // color="blue"
-    fullWidth
-    disabled
-  >
-    No Demo
-  </Button>
-)
-
-const NoSourceCode = () => (
-  <Button
-    // component="a"
-    variant="light"
-    // color="blue"
-    fullWidth
-    disabled
-  >
-    No Source Code
-  </Button>
-)

@@ -24,6 +24,14 @@ const nextConfig = {
       'res.cloudinary.com',
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/p/:id',
+        destination: '/projects/:id',
+      },
+    ]
+  },
 }
 
 const withTM = require('next-transpile-modules')(['is-it-email'])

@@ -75,6 +75,8 @@ function ContactIcon({
       underline={false}
       component={motion.a}
       variants={slideY(20)}
+      whileInView="show"
+      viewport={{ once: true }}
       {...others}
     >
       {variant === 'gradient' ? (
@@ -102,6 +104,9 @@ interface ContactIconsListProps {
   variant?: ContactIconVariant
 }
 
+const formatter =
+  /^(?<country>\+880)(?<operator>\d{2})(?<leading>\d{2})(?<trailing_1>\d{3})(?<trailing_2>\d{3})/
+
 const MOCKDATA: ContactIconProps[] = [
   {
     title: 'Email',
@@ -111,7 +116,7 @@ const MOCKDATA: ContactIconProps[] = [
   },
   {
     title: 'Phone',
-    description: '+880 (17) 41 891 955',
+    description: '+8801741891955'.replace(formatter, '$1 ($2) $3 $4 $5'),
     href: 'call:+8801741891955',
     icon: Phone,
   },
@@ -135,7 +140,12 @@ export default function ContactIconsList({
     <ContactIcon key={item.href} variant={variant} {...item} />
   ))
   return (
-    <MotionGroup variants={stagger} direction="column">
+    <MotionGroup
+      variants={stagger}
+      whileInView="show"
+      viewport={{ once: true }}
+      direction="column"
+    >
       {items}
     </MotionGroup>
   )

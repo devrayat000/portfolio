@@ -7,6 +7,7 @@ import { NextSeo } from 'next-seo'
 import {
   GetDemoProjectsDocument,
   GetMyEducationDocument,
+  GetTagsDocument,
 } from '$graphql/generated'
 import { createSSRExchange, createUrqlClient } from '$lib/utils/urql_client'
 import Intro from '$lib/components/home/intro'
@@ -14,6 +15,7 @@ import Services from '$lib/components/home/services'
 import Projects from '$lib/components/home/projects'
 import { pageFade } from '$lib/animation/fade'
 import Education from '$lib/components/home/education'
+import Contact from '$lib/components/home/contact'
 
 function Home() {
   return (
@@ -42,11 +44,12 @@ function Home() {
         animate="show"
         exit="hidden"
       >
-        <Stack align="stretch" spacing="xl">
+        <Stack align="stretch" spacing={80} mb={80}>
           <Intro />
           <Services />
           <Education />
           <Projects />
+          <Contact />
         </Stack>
       </motion.main>
     </>
@@ -60,6 +63,7 @@ export const getStaticProps: GetStaticProps = async context => {
   await Promise.all([
     client.query(GetDemoProjectsDocument).toPromise(),
     client.query(GetMyEducationDocument).toPromise(),
+    client.query(GetTagsDocument).toPromise(),
   ])
 
   return {

@@ -1,22 +1,18 @@
 import {
-  AspectRatio,
-  Stack,
-  Box,
   Title,
   TypographyStylesProvider,
   Breadcrumbs,
-  Anchor,
   Text,
   LoadingOverlay,
   SimpleGrid,
-  Grid,
 } from '@mantine/core'
-import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { m as motion } from 'framer-motion'
 import Carousel from 'framer-motion-carousel'
 import { type ParsedUrlQuery } from 'querystring'
+import { DocumentRenderer } from '@keystone-6/document-renderer'
 import { type GetStaticPaths, type GetStaticProps, type NextPage } from 'next'
+import { NextSeo } from 'next-seo'
 import {
   AdvancedImage,
   placeholder,
@@ -32,10 +28,7 @@ import {
   useGetProjectByIdQuery,
 } from '$graphql/generated'
 import { pageFade } from '$lib/animation'
-import { DocumentRenderer } from '@keystone-6/document-renderer'
-import Link from 'next/link'
 import { cld } from '$lib/services/cloudinary'
-import { NextSeo } from 'next-seo'
 
 const ProjectDetailsPage: NextPage = () => {
   const router = useRouter()
@@ -47,6 +40,9 @@ const ProjectDetailsPage: NextPage = () => {
   if (router.isFallback) {
     return <LoadingOverlay visible />
   }
+
+  if (typeof window !== 'undefined')
+    console.log(data?.project?.description?.document)
 
   return (
     <>
@@ -65,7 +61,7 @@ const ProjectDetailsPage: NextPage = () => {
         additionalMetaTags={[
           {
             name: 'keywords',
-            content: data?.project?.tags?.join(',')!,
+            content: data?.project?.tags?.map(t => t.name)?.join(',')!,
           },
         ]}
       />
@@ -106,14 +102,13 @@ const ProjectDetailsPage: NextPage = () => {
             <Breadcrumbs separator="•" mb="md">
               {data?.project?.tags &&
                 data?.project?.tags?.map(tag => (
-                  <Link
+                  <Text
                     key={tag.id}
-                    passHref
-                    href="/tags/[slug]"
-                    as={`/tags/${tag.id}`}
+                    sx={theme => ({ color: theme.primaryColor })}
+                    component="p"
                   >
-                    <Anchor>{tag.name}</Anchor>
-                  </Link>
+                    {tag.name}
+                  </Text>
                 ))}
             </Breadcrumbs>
             <TypographyStylesProvider>

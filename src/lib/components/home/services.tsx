@@ -44,7 +44,7 @@ const Services = (props: Props) => {
     <Box>
       <Label
         title="My Services"
-        subtitle="Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. lorem ipsum"
+        subtitle="Services I provide as a full-stack developer."
       />
       <MotionSimpleGrid
         variants={slideX(-40)}

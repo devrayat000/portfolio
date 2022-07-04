@@ -1510,9 +1510,9 @@ export type TagWhereUniqueInput = {
   id?: InputMaybe<Scalars['ID']>;
 };
 
-export type DemoProjectFragmentFragment = { __typename?: 'Project', id: string, title?: string | null, demo?: string | null, source?: string | null, description?: { __typename?: 'Project_description_Document', document: any } | null, images?: Array<{ __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'CloudinaryImage_File', id?: string | null, publicUrl?: string | null } | null }> | null };
+export type DemoProjectFragmentFragment = { __typename?: 'Project', id: string, title?: string | null, images?: Array<{ __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'CloudinaryImage_File', id?: string | null, publicUrl?: string | null } | null }> | null };
 
-export type ProjectFragmentFragment = { __typename?: 'Project', id: string, title?: string | null, demo?: string | null, source?: string | null, description?: { __typename?: 'Project_description_Document', document: any } | null, images?: Array<{ __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'CloudinaryImage_File', id?: string | null, publicUrl?: string | null } | null }> | null };
+export type ProjectFragmentFragment = { __typename?: 'Project', demo?: string | null, source?: string | null, id: string, title?: string | null, description?: { __typename?: 'Project_description_Document', document: any } | null, images?: Array<{ __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'CloudinaryImage_File', id?: string | null, publicUrl?: string | null } | null }> | null };
 
 export type ImageFragmentFragment = { __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'CloudinaryImage_File', id?: string | null, publicUrl?: string | null } | null };
 
@@ -1529,14 +1529,14 @@ export type GetDemoProjectsQueryVariables = Exact<{
 }>;
 
 
-export type GetDemoProjectsQuery = { __typename?: 'Query', projects?: Array<{ __typename?: 'Project', id: string, title?: string | null, demo?: string | null, source?: string | null, description?: { __typename?: 'Project_description_Document', document: any } | null, images?: Array<{ __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'CloudinaryImage_File', id?: string | null, publicUrl?: string | null } | null }> | null }> | null };
+export type GetDemoProjectsQuery = { __typename?: 'Query', projects?: Array<{ __typename?: 'Project', id: string, title?: string | null, images?: Array<{ __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'CloudinaryImage_File', id?: string | null, publicUrl?: string | null } | null }> | null }> | null };
 
 export type GetProjectsQueryVariables = Exact<{
   where?: InputMaybe<ProjectWhereInput>;
 }>;
 
 
-export type GetProjectsQuery = { __typename?: 'Query', projects?: Array<{ __typename?: 'Project', id: string, title?: string | null, demo?: string | null, source?: string | null, description?: { __typename?: 'Project_description_Document', document: any } | null, images?: Array<{ __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'CloudinaryImage_File', id?: string | null, publicUrl?: string | null } | null }> | null }> | null };
+export type GetProjectsQuery = { __typename?: 'Query', projects?: Array<{ __typename?: 'Project', demo?: string | null, source?: string | null, id: string, title?: string | null, description?: { __typename?: 'Project_description_Document', document: any } | null, images?: Array<{ __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'CloudinaryImage_File', id?: string | null, publicUrl?: string | null } | null }> | null }> | null };
 
 export type GetProjectsIdQueryVariables = Exact<{
   where?: InputMaybe<ProjectWhereInput>;
@@ -1550,14 +1550,14 @@ export type GetProjectByIdQueryVariables = Exact<{
 }>;
 
 
-export type GetProjectByIdQuery = { __typename?: 'Query', project?: { __typename?: 'Project', id: string, title?: string | null, demo?: string | null, source?: string | null, tags?: Array<{ __typename?: 'Tag', id: string, name?: string | null, slug?: string | null }> | null, description?: { __typename?: 'Project_description_Document', document: any } | null, images?: Array<{ __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'CloudinaryImage_File', id?: string | null, publicUrl?: string | null } | null }> | null } | null };
+export type GetProjectByIdQuery = { __typename?: 'Query', project?: { __typename?: 'Project', demo?: string | null, source?: string | null, id: string, title?: string | null, tags?: Array<{ __typename?: 'Tag', id: string, name?: string | null, slug?: string | null }> | null, description?: { __typename?: 'Project_description_Document', document: any } | null, images?: Array<{ __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'CloudinaryImage_File', id?: string | null, publicUrl?: string | null } | null }> | null } | null };
 
 export type GetProjectsByTagQueryVariables = Exact<{
   tag: Scalars['ID'];
 }>;
 
 
-export type GetProjectsByTagQuery = { __typename?: 'Query', projects?: Array<{ __typename?: 'Project', id: string, title?: string | null, demo?: string | null, source?: string | null, description?: { __typename?: 'Project_description_Document', document: any } | null, images?: Array<{ __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'CloudinaryImage_File', id?: string | null, publicUrl?: string | null } | null }> | null }> | null };
+export type GetProjectsByTagQuery = { __typename?: 'Query', projects?: Array<{ __typename?: 'Project', id: string, title?: string | null, images?: Array<{ __typename?: 'Image', id: string, label?: string | null, image?: { __typename?: 'CloudinaryImage_File', id?: string | null, publicUrl?: string | null } | null }> | null }> | null };
 
 export type GetImagesQueryVariables = Exact<{
   where?: InputMaybe<ImageWhereInput>;
@@ -1593,25 +1593,11 @@ export type GetMyEducationQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetMyEducationQuery = { __typename?: 'Query', educations?: Array<{ __typename?: 'Education', id: string, title?: string | null, passed?: any | null, certificate?: string | null, description?: { __typename?: 'Education_description_Document', document: any } | null }> | null };
 
-export const DemoProjectFragmentFragmentDoc = gql`
-    fragment DemoProjectFragment on Project {
-  id
-  title
-  description {
-    document
-  }
-  demo
-  source
-  images(take: 1) {
-    id
-    label
-    image {
-      id
-      publicUrl
-    }
-  }
-}
-    `;
+export type GetTagsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetTagsQuery = { __typename?: 'Query', tags?: Array<{ __typename?: 'Tag', id: string, name?: string | null, slug?: string | null }> | null };
+
 export const ImageFragmentFragmentDoc = gql`
     fragment ImageFragment on Image {
   id
@@ -1622,18 +1608,23 @@ export const ImageFragmentFragmentDoc = gql`
   }
 }
     `;
-export const ProjectFragmentFragmentDoc = gql`
-    fragment ProjectFragment on Project {
+export const DemoProjectFragmentFragmentDoc = gql`
+    fragment DemoProjectFragment on Project {
   id
   title
+  images(take: 1) {
+    ...ImageFragment
+  }
+}
+    `;
+export const ProjectFragmentFragmentDoc = gql`
+    fragment ProjectFragment on Project {
+  ...DemoProjectFragment
   description {
     document
   }
   demo
   source
-  images {
-    ...ImageFragment
-  }
 }
     `;
 export const LanguageFragmentFragmentDoc = gql`
@@ -1676,7 +1667,8 @@ export const GetDemoProjectsDocument = gql`
     ...DemoProjectFragment
   }
 }
-    ${DemoProjectFragmentFragmentDoc}`;
+    ${DemoProjectFragmentFragmentDoc}
+${ImageFragmentFragmentDoc}`;
 
 export function useGetDemoProjectsQuery(options?: Omit<Urql.UseQueryArgs<GetDemoProjectsQueryVariables>, 'query'>) {
   return Urql.useQuery<GetDemoProjectsQuery>({ query: GetDemoProjectsDocument, ...options });
@@ -1688,6 +1680,7 @@ export const GetProjectsDocument = gql`
   }
 }
     ${ProjectFragmentFragmentDoc}
+${DemoProjectFragmentFragmentDoc}
 ${ImageFragmentFragmentDoc}`;
 
 export function useGetProjectsQuery(options?: Omit<Urql.UseQueryArgs<GetProjectsQueryVariables>, 'query'>) {
@@ -1714,6 +1707,7 @@ export const GetProjectByIdDocument = gql`
   }
 }
     ${ProjectFragmentFragmentDoc}
+${DemoProjectFragmentFragmentDoc}
 ${ImageFragmentFragmentDoc}
 ${TagFragmentFragmentDoc}`;
 
@@ -1726,7 +1720,8 @@ export const GetProjectsByTagDocument = gql`
     ...DemoProjectFragment
   }
 }
-    ${DemoProjectFragmentFragmentDoc}`;
+    ${DemoProjectFragmentFragmentDoc}
+${ImageFragmentFragmentDoc}`;
 
 export function useGetProjectsByTagQuery(options: Omit<Urql.UseQueryArgs<GetProjectsByTagQueryVariables>, 'query'>) {
   return Urql.useQuery<GetProjectsByTagQuery>({ query: GetProjectsByTagDocument, ...options });
@@ -1800,4 +1795,15 @@ export const GetMyEducationDocument = gql`
 
 export function useGetMyEducationQuery(options?: Omit<Urql.UseQueryArgs<GetMyEducationQueryVariables>, 'query'>) {
   return Urql.useQuery<GetMyEducationQuery>({ query: GetMyEducationDocument, ...options });
+};
+export const GetTagsDocument = gql`
+    query GetTags {
+  tags {
+    ...TagFragment
+  }
+}
+    ${TagFragmentFragmentDoc}`;
+
+export function useGetTagsQuery(options?: Omit<Urql.UseQueryArgs<GetTagsQueryVariables>, 'query'>) {
+  return Urql.useQuery<GetTagsQuery>({ query: GetTagsDocument, ...options });
 };
