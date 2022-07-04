@@ -26,6 +26,6 @@
       "$lib/*": ["lib/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "ormconfig.ts"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "ormconfig.ts", "public/scripts/devtools.js"],
   "exclude": ["node_modules", "server"]
 }

@@ -2,7 +2,7 @@ import { Cloudinary } from '@cloudinary/url-gen'
 
 export const cld = new Cloudinary({
   cloud: {
-    cloudName: 'buet',
+    cloudName: process.env.NEXT_PUBLIC_CLOUDINARY_COULDNAME,
   },
   url: {
     shorten: true,

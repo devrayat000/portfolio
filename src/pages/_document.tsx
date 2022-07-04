@@ -27,6 +27,9 @@ class MyDocument extends Document {
         </Head>
         <body>
           <Main />
+          {process.env.NODE_ENV === 'production' && (
+            <script src="/scripts/devtools.js" defer />
+          )}
           <NextScript />
         </body>
       </Html>

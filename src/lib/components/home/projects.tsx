@@ -6,17 +6,17 @@ import { AllProjectsList, TaggedProjectsList } from './projects-list'
 import Label from './label'
 import { useGetTagsQuery } from '$graphql/generated'
 import { useState } from 'react'
+import ErrorHandler from '../common/error-handler'
 
 type Props = {}
 
-interface TabState {
-  index: number
-  key?: string
-}
-
 const Projects = (props: Props) => {
   const [activeTab, setActiveTab] = useState(0)
-  const [{ data }] = useGetTagsQuery()
+  const [{ data, error }, retry] = useGetTagsQuery()
+
+  if (error) {
+    return <ErrorHandler message={error.message} retry={retry} />
+  }
 
   return (
     <Box id="projects">

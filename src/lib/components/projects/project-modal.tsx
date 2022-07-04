@@ -4,6 +4,7 @@ import { Modal, Center, Loader } from '@mantine/core'
 
 import { useGetProjectByIdQuery } from '$graphql/generated'
 import ProjectDetails from './project-details'
+import ErrorHandler from '../common/error-handler'
 
 type Props = {
   id: string
@@ -30,7 +31,7 @@ function ProjectModal() {
 }
 
 function Project({ id }: Props) {
-  const [{ data, fetching }] = useGetProjectByIdQuery({
+  const [{ data, fetching, error }, retry] = useGetProjectByIdQuery({
     variables: { id },
   })
 
@@ -40,6 +41,10 @@ function Project({ id }: Props) {
         <Loader />
       </Center>
     )
+
+  if (error) {
+    return <ErrorHandler message={error.message} retry={retry} />
+  }
 
   return <ProjectDetails project={data?.project} />
 }

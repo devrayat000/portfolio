@@ -142,6 +142,7 @@ export default function ContactIconsList({
   return (
     <MotionGroup
       variants={stagger}
+      initial="hidden"
       whileInView="show"
       viewport={{ once: true }}
       direction="column"

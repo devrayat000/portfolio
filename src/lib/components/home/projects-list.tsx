@@ -8,15 +8,20 @@ import {
 import { stagger } from '$lib/animation/stagger'
 import ProjectCard from './peoject-card'
 import { MotionSimpleGrid } from '$lib/animation'
+import ErrorHandler from '../common/error-handler'
 
 type Props = {
   slug: string
 }
 
 export const TaggedProjectsList = (props: Props) => {
-  const [{ data, fetching }] = useGetProjectsByTagQuery({
+  const [{ data, fetching, error }, retry] = useGetProjectsByTagQuery({
     variables: { tag: props.slug! },
   })
+
+  if (error) {
+    return <ErrorHandler message={error.message} retry={retry} />
+  }
 
   if (fetching)
     return (
@@ -29,7 +34,11 @@ export const TaggedProjectsList = (props: Props) => {
 }
 
 export const AllProjectsList = () => {
-  const [{ data }] = useGetDemoProjectsQuery()
+  const [{ data, error }, retry] = useGetDemoProjectsQuery()
+
+  if (error) {
+    return <ErrorHandler message={error.message} retry={retry} />
+  }
 
   return Projects(data?.projects)
 }
