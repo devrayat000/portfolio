@@ -14,7 +14,7 @@ type Props = {
 
 const EducationCard = ({ title, certificate, passed, description }: Props) => {
   return (
-    <Card component="a">
+    <Card component="article">
       <Grid columns={5}>
         <Grid.Col span={2}>
           <Text component="p" weight="bold" my={0}>

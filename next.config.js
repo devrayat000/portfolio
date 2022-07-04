@@ -4,8 +4,8 @@
 const nextConfig = {
   typescript: { ignoreBuildErrors: true },
   eslint: { ignoreDuringBuilds: true },
-  swcMinify: true,
-  compress: true,
+  swcMinify: process.env.NODE_ENV === 'production',
+  compress: process.env.NODE_ENV === 'production',
   experimental: {
     reactRoot: true,
     urlImports: [

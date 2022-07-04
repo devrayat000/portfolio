@@ -128,8 +128,7 @@ export default function Intro() {
           </Title>
           <Text color="dimmed" my="xl" component="p">
             Build fully functional accessible web applications faster than ever
-            – Mantine includes more than 120 customizable components and hooks
-            to cover you in any situation
+            – with modern javascript frameworks to cover you in any situation
           </Text>
 
           <Button
