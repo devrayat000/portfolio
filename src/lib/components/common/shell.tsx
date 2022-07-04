@@ -5,15 +5,18 @@ import {
   ActionIcon,
   Affix,
   AppShell,
-  Button,
+  Center,
   createStyles,
+  Footer,
   ScrollArea,
+  Text,
 } from '@mantine/core'
 import { ArrowUp as ArrowUpIcon } from 'tabler-icons-react'
 
 import MyNavbar from '$lib/components/common/nav/navbar'
 import MyAside from '$lib/components/common/aside/aside'
 import { slideY } from '$lib/animation'
+import ProjectModal from '../projects/project-modal'
 
 const useStyles = createStyles(theme => ({
   main: {
@@ -65,6 +68,14 @@ const MyAppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         viewportRef={scrollRef}
       >
         {children}
+        <Footer height={60}>
+          <Center>
+            <Text component="p">
+              {new Date().getFullYear()} All Rights Reserved. DevRayat
+            </Text>
+          </Center>
+        </Footer>
+        <ProjectModal />
       </ScrollArea>
       <Affix position={{ bottom: 20, right: 96 }}>
         <AnimatePresence>

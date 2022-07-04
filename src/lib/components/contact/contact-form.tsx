@@ -17,6 +17,57 @@ import { slideX } from '$lib/animation'
 
 type Props = {}
 
+interface ContactInfo {
+  name: string
+  email: string
+  subject: string
+  message: string
+}
+
+const contactMe = async (data: ContactInfo) => {
+  try {
+    const res = await fetch('/api/mail', {
+      method: 'POST',
+      headers: { 'Content-Type:': 'application/json' },
+      mode: 'same-origin',
+      body: JSON.stringify(data),
+    })
+    const { id } = await res.json()
+
+    showNotification({
+      id,
+      disallowClose: false,
+      onClose: () => console.log('unmounted'),
+      onOpen: () => console.log('mounted'),
+      autoClose: 2000,
+      title: 'Successfully sent.',
+      message: 'Your response was sent using email!',
+      color: 'green',
+      icon: <Cross1Icon />,
+      className: 'my-notification-success-class',
+      style: { backgroundColor: 'green' },
+      sx: { backgroundColor: 'green' },
+      loading: false,
+    })
+  } catch (error) {
+    showNotification({
+      id: 'error',
+      disallowClose: false,
+      onClose: () => console.log('unmounted'),
+      onOpen: () => console.log('mounted'),
+      autoClose: 2000,
+      title: 'Error sending mail!',
+      message: 'The server did not respont to your request!',
+      color: 'red',
+      icon: <Cross1Icon />,
+      className: 'my-notification-error-class',
+      style: { backgroundColor: 'red' },
+      sx: { backgroundColor: 'red' },
+      loading: false,
+    })
+  }
+}
+
 const useStyles = createStyles(theme => {
   const BREAKPOINT = theme.fn.smallerThan('sm')
 
@@ -57,7 +108,7 @@ const useStyles = createStyles(theme => {
 const ContactForm = (props: Props) => {
   const { classes } = useStyles()
 
-  const { getInputProps, onSubmit, errors } = useForm({
+  const { getInputProps, onSubmit, errors } = useForm<ContactInfo>({
     initialValues: {
       name: '',
       email: '',
@@ -79,47 +130,7 @@ const ContactForm = (props: Props) => {
   })
 
   return (
-    <form
-      className={classes.form}
-      onSubmit={onSubmit(async data => {
-        try {
-          const res = await fetch('/api/mail', { body: JSON.stringify(data) })
-          const { id } = await res.json()
-
-          showNotification({
-            id,
-            disallowClose: false,
-            onClose: () => console.log('unmounted'),
-            onOpen: () => console.log('mounted'),
-            autoClose: 2000,
-            title: 'Successfully sent.',
-            message: 'Your response was sent using email!',
-            color: 'green',
-            icon: <Cross1Icon />,
-            className: 'my-notification-success-class',
-            style: { backgroundColor: 'green' },
-            sx: { backgroundColor: 'green' },
-            loading: false,
-          })
-        } catch (error) {
-          showNotification({
-            id: 'error',
-            disallowClose: false,
-            onClose: () => console.log('unmounted'),
-            onOpen: () => console.log('mounted'),
-            autoClose: 2000,
-            title: 'Error sending mail!',
-            message: 'The server did not respont to your request!',
-            color: 'red',
-            icon: <Cross1Icon />,
-            className: 'my-notification-error-class',
-            style: { backgroundColor: 'red' },
-            sx: { backgroundColor: 'red' },
-            loading: false,
-          })
-        }
-      })}
-    >
+    <form className={classes.form} onSubmit={onSubmit(contactMe)}>
       <Text size="lg" weight={700} className={classes.title}>
         Get in touch
       </Text>

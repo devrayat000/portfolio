@@ -1,0 +1,27 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "build",
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"problemMatcher": [],
+			"label": "npm: build",
+			"detail": "next build",
+			"dependsOn": [
+				"npm: gql:gen"
+			]
+		},
+		{
+			"type": "npm",
+			"script": "gql:gen",
+			"group": "build",
+			"problemMatcher": [],
+			"label": "npm: gql:gen",
+			"detail": "graphql-codegen --config .graphqlrc.yml",
+		}
+	]
+}

@@ -12,7 +12,9 @@ const transporter = createTransport({
 })
 
 const handler: NextApiHandler = async (req, res) => {
-  if (req.method! == 'POST') return
+  if (req.method! == 'POST')
+    return res.status(405).send(`${req.method} not allowed!`)
+
   const { name, email, subject, message } = req.body
 
   transporter.sendMail(

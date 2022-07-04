@@ -69,7 +69,7 @@ function Contact({}: Props) {
 
   return (
     <Box id="contact">
-      <Label title="Contact Us" />
+      <Label title="Contact Me" />
       <Paper
         shadow="lg"
         radius="lg"

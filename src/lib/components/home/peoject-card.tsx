@@ -31,18 +31,18 @@ const ProjectCard = ({ project }: Props) => {
   const images = project.images
 
   return (
-    <Link href="/p/[id]" as={`/p/${project.id}`} passHref>
+    <Link href={`/?project=${project.id}`} as={`/p/${project.id}`} passHref>
       <Box
         component={m.a}
         sx={{ position: 'relative' }}
         ref={ref}
-        variants={slideY(20)}
+        variants={slideY(40)}
         viewport={{ once: true }}
       >
         <Transition
           mounted={hovered}
           transition="fade"
-          duration={400}
+          duration={300}
           timingFunction="ease"
         >
           {styles => (

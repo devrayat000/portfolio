@@ -1,0 +1,31 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch Production Mode via NPM",
+      "request": "launch",
+      "runtimeArgs": ["start"],
+      "runtimeExecutable": "pnpm",
+      "skipFiles": ["<node_internals>/**"],
+      "type": "node",
+      "preLaunchTask": "${defaultBuildTask}",
+    },
+    {
+      "name": "Launch Development Mode via NPM",
+      "request": "launch",
+      "runtimeArgs": ["dev"],
+      "runtimeExecutable": "pnpm",
+      "skipFiles": ["<node_internals>/**"],
+      "type": "node",
+      "preLaunchTask": "npm: gql:gen",
+      "serverReadyAction":{
+        "action": "debugWithEdge",
+        "pattern": "url: http://localhost:([0-9]+)",
+        "uriFormat": "http://localhost:%s",
+      }
+    }
+  ]
+}

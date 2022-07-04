@@ -1,24 +1,9 @@
-import {
-  Title,
-  TypographyStylesProvider,
-  Breadcrumbs,
-  Text,
-  LoadingOverlay,
-  SimpleGrid,
-} from '@mantine/core'
+import { LoadingOverlay } from '@mantine/core'
 import { useRouter } from 'next/router'
 import { m as motion } from 'framer-motion'
-import Carousel from 'framer-motion-carousel'
 import { type ParsedUrlQuery } from 'querystring'
-import { DocumentRenderer } from '@keystone-6/document-renderer'
 import { type GetStaticPaths, type GetStaticProps, type NextPage } from 'next'
 import { NextSeo } from 'next-seo'
-import {
-  AdvancedImage,
-  placeholder,
-  lazyload,
-  responsive,
-} from '@cloudinary/react'
 
 import { createSSRExchange, createUrqlClient } from '$lib/utils/urql_client'
 import {
@@ -28,7 +13,7 @@ import {
   useGetProjectByIdQuery,
 } from '$graphql/generated'
 import { pageFade } from '$lib/animation'
-import { cld } from '$lib/services/cloudinary'
+import ProjectDetails from '$lib/components/projects/project-details'
 
 const ProjectDetailsPage: NextPage = () => {
   const router = useRouter()
@@ -73,51 +58,7 @@ const ProjectDetailsPage: NextPage = () => {
         // exit="hidden"
         style={{ display: 'grid', placeItems: 'center', minHeight: '100vh' }}
       >
-        <SimpleGrid
-          cols={2}
-          spacing={80}
-          py="xl"
-          my="xl"
-          px="lg"
-          style={{ placeItems: 'center' }}
-        >
-          <section>
-            <Carousel autoPlay interval={4000} loop>
-              {data?.project?.images?.map(image => (
-                <AdvancedImage
-                  key={image.id}
-                  width="100%"
-                  height="360rem"
-                  cldImg={cld.image('Portfolio/' + image?.image?.id)}
-                  plugins={[placeholder(), lazyload(), responsive()]}
-                />
-              ))}
-            </Carousel>
-          </section>
-          <section>
-            <Title order={1} mb="xl">
-              {data?.project?.title}
-            </Title>
-            <Text mb="xs">Tags:</Text>
-            <Breadcrumbs separator="•" mb="md">
-              {data?.project?.tags &&
-                data?.project?.tags?.map(tag => (
-                  <Text
-                    key={tag.id}
-                    sx={theme => ({ color: theme.primaryColor })}
-                    component="p"
-                  >
-                    {tag.name}
-                  </Text>
-                ))}
-            </Breadcrumbs>
-            <TypographyStylesProvider>
-              <DocumentRenderer
-                document={data?.project?.description?.document}
-              />
-            </TypographyStylesProvider>
-          </section>
-        </SimpleGrid>
+        <ProjectDetails project={data?.project} />
       </motion.main>
     </>
   )
