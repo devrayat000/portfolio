@@ -57,8 +57,19 @@ const MyNavbar = () => {
   const divider = <Divider my="sm" size="sm" style={{ alignSelf: 'stretch' }} />
 
   return (
-    <ScrollArea type="scroll" offsetScrollbars>
-      <Navbar width={{ base: 280 }} p="sm">
+    <Navbar
+      hiddenBreakpoint="md"
+      width={{ base: 280 }}
+      sx={{ minHeight: '100vh' }}
+      hidden
+    >
+      <Navbar.Section
+        grow
+        component={ScrollArea}
+        type="scroll"
+        offsetScrollbars
+        p="sm"
+      >
         <MotionStack
           align="center"
           py="xl"
@@ -118,13 +129,15 @@ const MyNavbar = () => {
           <HumanLanguageSkill />
           {divider}
           <ProgrammingLanguageSkill />
-          {divider}
-          <Button rightIcon={<Download />} fullWidth>
-            Download CV
-          </Button>
         </MotionStack>
-      </Navbar>
-    </ScrollArea>
+      </Navbar.Section>
+
+      <Navbar.Section px="sm" pb="xl">
+        <Button rightIcon={<Download />} fullWidth>
+          Download CV
+        </Button>
+      </Navbar.Section>
+    </Navbar>
   )
 }
 

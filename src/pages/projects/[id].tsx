@@ -14,6 +14,7 @@ import {
 } from '$graphql/generated'
 import { pageFade } from '$lib/animation'
 import ProjectDetails from '$lib/components/projects/project-details'
+import { mapDocumentToString } from '$lib/utils/document-parser'
 
 const ProjectDetailsPage: NextPage = () => {
   const router = useRouter()
@@ -33,10 +34,12 @@ const ProjectDetailsPage: NextPage = () => {
     <>
       <NextSeo
         title={data?.project?.title!}
-        description={data?.project?.description?.document.toString()}
+        description={mapDocumentToString(data?.project?.description?.document)}
         openGraph={{
           title: data?.project?.title!,
-          description: data?.project?.description?.document.toString(),
+          description: mapDocumentToString(
+            data?.project?.description?.document
+          ),
           url: `https://devrayat.me/projects/${data?.project?.id}`,
           images: data?.project?.images?.map(image => ({
             url: image.image?.publicUrl!,

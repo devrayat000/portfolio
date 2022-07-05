@@ -50,14 +50,14 @@ const useStyles = createStyles(theme => ({
   },
 
   title: {
-    fontSize: 40,
+    // fontSize: 40,
     lineHeight: 1.4,
     letterSpacing: 1.1,
     fontWeight: 900,
 
-    [theme.fn.smallerThan('xs')]: {
-      fontSize: 20,
-    },
+    // [theme.fn.smallerThan('xs')]: {
+    //   fontSize: 20,
+    // },
   },
 
   control: {
@@ -69,8 +69,15 @@ const useStyles = createStyles(theme => ({
   image: {
     flex: 1,
 
-    [theme.fn.smallerThan('md')]: {
+    [theme.fn.smallerThan('sm')]: {
       display: 'none',
+    },
+  },
+  image2: {
+    // flex: 1,
+    display: 'none',
+    [theme.fn.smallerThan('sm')]: {
+      display: 'inline',
     },
   },
 
@@ -126,6 +133,12 @@ export default function Intro() {
             </span>{' '}
             Developer
           </Title>
+          <Image
+            src="/images/rayat2.png"
+            alt="Zul Ikram Musaddik Rayat"
+            withPlaceholder
+            className={classes.image2}
+          />
           <Text color="dimmed" my="xl" component="p">
             Build fully functional accessible web applications faster than ever
             – with modern javascript frameworks to cover you in any situation
@@ -148,7 +161,7 @@ export default function Intro() {
         <Image
           src="/images/rayat2.png"
           alt="Zul Ikram Musaddik Rayat"
-          // withPlaceholder
+          withPlaceholder
           className={classes.image}
         />
       </Paper>

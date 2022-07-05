@@ -17,8 +17,8 @@ import { MotionGroup, MotionStack } from '$lib/animation'
 const MyAside = () => {
   // const { classes } = useStackStyles({ spacing: 48 })
   return (
-    <ScrollArea type="scroll" style={{ height: '100vh' }}>
-      <Aside width={{ base: 80 }} p="xs">
+    <Aside width={{ base: 80 }} hiddenBreakpoint="md" hidden>
+      <ScrollArea type="scroll" p="xs">
         <MotionGroup
           direction="column"
           align="center"
@@ -54,8 +54,8 @@ const MyAside = () => {
             </NavLink>
           </MotionStack>
         </MotionGroup>
-      </Aside>
-    </ScrollArea>
+      </ScrollArea>
+    </Aside>
   )
 }
 

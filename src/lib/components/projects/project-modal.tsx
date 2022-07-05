@@ -1,6 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/router'
-import { Modal, Center, Loader } from '@mantine/core'
+import { Modal, Center, Loader, useMantineTheme } from '@mantine/core'
+import { useMediaQuery } from '@mantine/hooks'
 
 import { useGetProjectByIdQuery } from '$graphql/generated'
 import ProjectDetails from './project-details'
@@ -12,18 +13,23 @@ type Props = {
 
 function ProjectModal() {
   const router = useRouter()
+  const theme = useMantineTheme()
+  const isPc = useMediaQuery(theme.fn.largerThan('md'))
+
   const id = router.query.project as string
 
   return (
     <Modal
       opened={!!id}
       onClose={() => void router.replace('/')}
+      padding={isPc ? undefined : 'xs'}
       //   title={data?.project?.title}
       centered
       closeOnEscape
       closeOnClickOutside
       size={960}
-      withCloseButton={false}
+      withCloseButton={!isPc}
+      overlayBlur={2}
     >
       <Project id={id} />
     </Modal>
@@ -46,7 +52,7 @@ function Project({ id }: Props) {
     return <ErrorHandler message={error.message} retry={retry} />
   }
 
-  return <ProjectDetails project={data?.project} />
+  return <ProjectDetails project={data?.project} isModal />
 }
 
 export default ProjectModal

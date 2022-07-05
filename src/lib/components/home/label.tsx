@@ -25,9 +25,11 @@ const Label: React.FC<LabelProps> = ({ title, subtitle }) => {
             component="p"
             align="center"
             color="dimmed"
-            sx={{
-              maxWidth: '50%',
-            }}
+            sx={theme => ({
+              [theme.fn.largerThan('md')]: {
+                maxWidth: '50%',
+              },
+            })}
           >
             {subtitle}
           </Text>

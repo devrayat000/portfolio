@@ -1,4 +1,4 @@
-import { Center, Loader, LoadingOverlay } from '@mantine/core'
+import { Center, Loader } from '@mantine/core'
 
 import {
   type Project,
@@ -49,11 +49,11 @@ function Projects(projects?: Project[] | null) {
       cols={1}
       breakpoints={[
         {
-          minWidth: 'md',
+          minWidth: 'sm',
           cols: 2,
         },
         {
-          minWidth: 'lg',
+          minWidth: 'md',
           cols: 3,
         },
       ]}

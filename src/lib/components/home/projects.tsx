@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Box, Tabs } from '@mantine/core'
 import {} from '@mantine/hooks'
 // import { ErrorBoundary } from 'react-error-boundary'
@@ -5,7 +6,6 @@ import {} from '@mantine/hooks'
 import { AllProjectsList, TaggedProjectsList } from './projects-list'
 import Label from './label'
 import { useGetTagsQuery } from '$graphql/generated'
-import { useState } from 'react'
 import ErrorHandler from '../common/error-handler'
 
 type Props = {}

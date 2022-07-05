@@ -1612,7 +1612,7 @@ export const DemoProjectFragmentFragmentDoc = gql`
     fragment DemoProjectFragment on Project {
   id
   title
-  images(take: 1) {
+  images {
     ...ImageFragment
   }
 }

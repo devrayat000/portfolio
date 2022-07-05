@@ -19,16 +19,22 @@ import { cld } from '$lib/services/cloudinary'
 
 type Props = {
   project?: Project | null
+  isModal?: boolean
 }
 
-function ProjectDetails({ project }: Props) {
+function ProjectDetails({ project, isModal }: Props) {
   return (
     <SimpleGrid
-      cols={2}
-      spacing={80}
-      py="xl"
-      my="xl"
-      px="lg"
+      cols={1}
+      spacing="md"
+      breakpoints={[
+        {
+          minWidth: 'md',
+          cols: 2,
+          spacing: 80,
+        },
+      ]}
+      {...(!isModal ? { py: 'xl', my: 'xl', px: 'lg' } : {})}
       style={{ placeItems: 'center' }}
     >
       <section>
@@ -67,6 +73,10 @@ function ProjectDetails({ project }: Props) {
       </section>
     </SimpleGrid>
   )
+}
+
+ProjectDetails.defaultProps = {
+  isModal: false,
 }
 
 export default ProjectDetails

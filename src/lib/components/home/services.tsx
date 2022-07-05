@@ -50,7 +50,17 @@ const Services = (props: Props) => {
         variants={slideX(-40)}
         viewport={{ once: true }}
         whileInView={{ opacity: 1, x: 0 }}
-        cols={3}
+        cols={1}
+        breakpoints={[
+          {
+            minWidth: 'sm',
+            cols: 2,
+          },
+          {
+            minWidth: 'md',
+            cols: 3,
+          },
+        ]}
       >
         {services.map(service => (
           <Paper key={service.title} className={classes.service} shadow="xs">
