@@ -1,12 +1,12 @@
 import {
   dedupExchange,
   cacheExchange,
-  // fetchExchange,
+  fetchExchange,
   ssrExchange,
   ClientOptions,
 } from '@urql/core'
 // import { suspenseExchange } from '@urql/exchange-suspense'
-import { multipartFetchExchange } from '@urql/exchange-multipart-fetch'
+// import { multipartFetchExchange } from '@urql/exchange-multipart-fetch'
 import { createClient } from 'urql'
 import type { SSRExchange } from '@urql/core/dist/types/exchanges/ssr'
 
@@ -17,7 +17,7 @@ export function createUrqlClient(ssr: SSRExchange = createSSRExchange()) {
 export function getClientOptions(ssr: SSRExchange): ClientOptions {
   return {
     url: process.env.NEXT_PUBLIC_API_URL + '/api/graphql',
-    exchanges: [dedupExchange, cacheExchange, ssr, multipartFetchExchange],
+    exchanges: [dedupExchange, cacheExchange, ssr, fetchExchange],
     fetchOptions: {
       // @ts-ignore next-line
       headers: {
