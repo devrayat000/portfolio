@@ -1,6 +1,7 @@
+import { Center, Text, Title } from '@mantine/core'
+
+import { MotionContainer } from '$lib/animation'
 import { grow } from '$lib/animation/grow'
-import { Box, Center, Text, Title } from '@mantine/core'
-import { m } from 'framer-motion'
 
 export interface LabelProps {
   title: React.ReactNode
@@ -9,9 +10,10 @@ export interface LabelProps {
 
 const Label: React.FC<LabelProps> = ({ title, subtitle }) => {
   return (
-    <Box
+    <MotionContainer
+      fluid
       mb="lg"
-      component={m.div}
+      // component={m.div}
       variants={grow(0.6)}
       whileInView="show"
       viewport={{ once: true }}
@@ -35,7 +37,7 @@ const Label: React.FC<LabelProps> = ({ title, subtitle }) => {
           </Text>
         </Center>
       )}
-    </Box>
+    </MotionContainer>
   )
 }
 

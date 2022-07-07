@@ -112,7 +112,7 @@ export default function Intro() {
       initial="hidden"
       animate="show"
       exit="hidden"
-      px={0}
+      mx={0}
     >
       <Paper
         className={classes.inner}

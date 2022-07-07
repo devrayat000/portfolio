@@ -1,5 +1,3 @@
-import { Stack } from '@mantine/core'
-import { m as motion } from 'framer-motion'
 import { type GetStaticProps } from 'next'
 import { NextSeo } from 'next-seo'
 // import Image from 'next/image'
@@ -16,6 +14,7 @@ import Projects from '$lib/components/home/projects'
 import { pageFade } from '$lib/animation/fade'
 import Education from '$lib/components/home/education'
 import Contact from '$lib/components/home/contact'
+import { MotionStack } from '$lib/animation'
 
 function Home() {
   return (
@@ -38,20 +37,21 @@ function Home() {
           ],
         }}
       />
-      <motion.main
+      <MotionStack
         variants={pageFade}
         initial="hidden"
         animate="show"
         exit="hidden"
+        align="stretch"
+        spacing={80}
+        mb={80}
       >
-        <Stack align="stretch" spacing={80} mb={80}>
-          <Intro />
-          <Services />
-          <Education />
-          <Projects />
-          <Contact />
-        </Stack>
-      </motion.main>
+        <Intro />
+        <Services />
+        <Education />
+        <Projects />
+        <Contact />
+      </MotionStack>
     </>
   )
 }

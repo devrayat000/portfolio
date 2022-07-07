@@ -1,4 +1,4 @@
-import { Paper, Text, createStyles, Box } from '@mantine/core'
+import { Paper, Text, createStyles, Box, Container } from '@mantine/core'
 import { m as motion } from 'framer-motion'
 
 import { slideY } from '$lib/animation/slide'
@@ -68,7 +68,7 @@ function Contact({}: Props) {
   const { classes } = useStyles()
 
   return (
-    <Box id="contact">
+    <Container id="contact" mx={0}>
       <Label title="Contact Me" />
       <Paper
         shadow="lg"
@@ -77,27 +77,28 @@ function Contact({}: Props) {
         variants={slideY(20)}
         whileInView="show"
         viewport={{ once: true }}
+        className={classes.wrapper}
       >
-        <div className={classes.wrapper}>
-          <div className={classes.contacts}>
-            <Text
-              size="lg"
-              weight={700}
-              className={classes.title}
-              sx={theme => ({
-                color: theme.white,
-              })}
-            >
-              Contact information
-            </Text>
+        {/* <div > */}
+        <div className={classes.contacts}>
+          <Text
+            size="lg"
+            weight={700}
+            className={classes.title}
+            sx={theme => ({
+              color: theme.white,
+            })}
+          >
+            Contact information
+          </Text>
 
-            <ContactIconsList variant="white" />
-          </div>
-
-          <ContactForm />
+          <ContactIconsList variant="white" />
         </div>
+
+        <ContactForm />
+        {/* </div> */}
       </Paper>
-    </Box>
+    </Container>
   )
 }
 

@@ -1,4 +1,4 @@
-import { Box, Paper, Stack } from '@mantine/core'
+import { Container, Paper, Stack } from '@mantine/core'
 
 import { useGetMyEducationQuery } from '$graphql/generated'
 import ErrorHandler from '../common/error-handler'
@@ -11,7 +11,7 @@ const Education = (props: Props) => {
   const [{ data, error }, retry] = useGetMyEducationQuery()
 
   return (
-    <Box id="education">
+    <Container fluid id="education" mx={0}>
       <Label
         title="Education"
         subtitle="Certifications I achieved from popular online learning platform such as Coursera, edX, Udemy etc."
@@ -31,7 +31,7 @@ const Education = (props: Props) => {
           })}
         </Paper>
       </Stack>
-    </Box>
+    </Container>
   )
 }
 

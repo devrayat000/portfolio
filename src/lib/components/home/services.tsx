@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { Box, Paper, Title, Text, createStyles } from '@mantine/core'
+import { Paper, Title, Text, createStyles, Container } from '@mantine/core'
 
 import { MotionSimpleGrid, slideX } from '$lib/animation'
 import Label from './label'
@@ -41,7 +41,7 @@ const Services = (props: Props) => {
   const { classes } = useStyles()
 
   return (
-    <Box>
+    <Container fluid mx={0}>
       <Label
         title="My Services"
         subtitle="Services I provide as a full-stack developer."
@@ -82,7 +82,7 @@ const Services = (props: Props) => {
           </Paper>
         ))}
       </MotionSimpleGrid>
-    </Box>
+    </Container>
   )
 }
 

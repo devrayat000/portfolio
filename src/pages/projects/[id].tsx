@@ -27,9 +27,6 @@ const ProjectDetailsPage: NextPage = () => {
     return <LoadingOverlay visible />
   }
 
-  if (typeof window !== 'undefined')
-    console.log(data?.project?.description?.document)
-
   return (
     <>
       <NextSeo

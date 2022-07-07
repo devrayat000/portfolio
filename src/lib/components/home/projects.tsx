@@ -1,6 +1,5 @@
 import { useState } from 'react'
-import { Box, Tabs } from '@mantine/core'
-import {} from '@mantine/hooks'
+import { Container, Tabs } from '@mantine/core'
 // import { ErrorBoundary } from 'react-error-boundary'
 
 import { AllProjectsList, TaggedProjectsList } from './projects-list'
@@ -19,7 +18,7 @@ const Projects = (props: Props) => {
   }
 
   return (
-    <Box id="projects">
+    <Container id="projects" fluid mx={0}>
       <Label
         title="Projects"
         subtitle="Project I have completed so far both for clients and personal pleasure."
@@ -35,7 +34,7 @@ const Projects = (props: Props) => {
           </Tabs.Tab>
         ))}
       </Tabs>
-    </Box>
+    </Container>
   )
 }
 
