@@ -28,10 +28,10 @@ const wiggle: Variants = {
   },
 }
 
-const grow = keyframes({
-  from: { width: '0%', opacity: 0 },
-  to: { width: '100%', opacity: 1 },
-})
+// const grow = keyframes({
+//   from: { width: '0%', opacity: 0 },
+//   to: { width: '100%', opacity: 1 },
+// })
 
 const useStyles = createStyles(theme => ({
   inner: {
@@ -136,7 +136,7 @@ export default function Intro() {
           <Image
             src="/images/rayat2.png"
             alt="Zul Ikram Musaddik Rayat"
-            withPlaceholder
+            // withPlaceholder
             className={classes.image2}
           />
           <Text color="dimmed" my="xl" component="p">
@@ -146,9 +146,10 @@ export default function Intro() {
 
           <Button
             size="md"
-            component={motion.button}
+            component={motion.a}
             initial="stop"
             whileHover="hover"
+            href="https://www.fiverr.com/share/lm6QbR"
             rightIcon={
               <motion.span variants={wiggle}>
                 <ArrowRight size={18} strokeWidth={3} />
@@ -161,7 +162,7 @@ export default function Intro() {
         <Image
           src="/images/rayat2.png"
           alt="Zul Ikram Musaddik Rayat"
-          withPlaceholder
+          // withPlaceholder
           className={classes.image}
         />
       </Paper>

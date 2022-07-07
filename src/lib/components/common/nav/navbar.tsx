@@ -133,7 +133,12 @@ const MyNavbar = () => {
       </Navbar.Section>
 
       <Navbar.Section px="sm" pb="xl">
-        <Button rightIcon={<Download />} fullWidth>
+        <Button
+          component="a"
+          href="/assets/portfolio.pdf"
+          rightIcon={<Download />}
+          fullWidth
+        >
           Download CV
         </Button>
       </Navbar.Section>
