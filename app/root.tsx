@@ -9,6 +9,8 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 
+import MyShell from "./components/shell";
+
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
   title: "Zul - My Portfolio",
@@ -26,13 +28,15 @@ export default function App() {
         <MantineProvider
           withGlobalStyles
           withNormalizeCSS
-          withCSSVariables
+          // withCSSVariables
           theme={{
             colorScheme: "light",
             primaryColor: "orange",
           }}
         >
-          <Outlet />
+          <MyShell>
+            <Outlet />
+          </MyShell>
         </MantineProvider>
         <ScrollRestoration />
         <Scripts />
