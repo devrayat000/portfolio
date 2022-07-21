@@ -1,0 +1,7 @@
+fragment MyJourney on Journey {
+    id
+    title
+    subject
+    from
+    to
+}

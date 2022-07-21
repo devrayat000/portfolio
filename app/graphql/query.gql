@@ -1,3 +1,49 @@
+query GetMyInfo {
+    info(
+        where: {
+            email: "dev.rayat000@gmail.com"
+        }
+    ) {
+      name
+      email
+      phone
+      aboutMe
+    }
+}
+
+query GetMyExpertise {
+    skills(
+        where: {
+            percent_gte: 70
+        }
+    ) {
+        id
+        name
+        percent
+        type
+    }
+}
+
+query GetMyEducation {
+    educations:journeys(
+        where: {
+            type: EDUCATION
+        }
+    ) {
+        ...MyJourney
+    }
+}
+
+query GetMyExperience {
+    experiences:journeys(
+        where: {
+            type: EXPERIENCE
+        }
+    ) {
+        ...MyJourney
+    }
+}
+
 query GetProjects {
     projects {
         id
