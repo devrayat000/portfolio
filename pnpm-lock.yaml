@@ -11,6 +11,7 @@ specifiers:
   '@mantine/ssr': ^4.2.12
   '@remix-run/dev': ^1.6.5
   '@remix-run/eslint-config': ^1.6.5
+  '@remix-run/netlify': ^1.6.5
   '@remix-run/node': ^1.6.5
   '@remix-run/react': ^1.6.5
   '@remix-run/serve': ^1.6.5
@@ -31,6 +32,7 @@ dependencies:
   '@mantine/core': 4.2.12_09d646d943feb6b3811ba4e9083c4c8d
   '@mantine/hooks': 4.2.12_react@18.2.0
   '@mantine/ssr': 4.2.12_08741bd84ef3e6fa073678331eea05f2
+  '@remix-run/netlify': 1.6.5_react-dom@18.2.0+react@18.2.0
   '@remix-run/node': 1.6.5_react-dom@18.2.0+react@18.2.0
   '@remix-run/react': 1.6.5_react-dom@18.2.0+react@18.2.0
   '@remix-run/serve': 1.6.5_react-dom@18.2.0+react@18.2.0
@@ -2433,6 +2435,18 @@ packages:
     dependencies:
       '@remix-run/node': 1.6.5_react-dom@18.2.0+react@18.2.0
       express: 4.18.1
+    transitivePeerDependencies:
+      - react
+      - react-dom
+    dev: false
+
+  /@remix-run/netlify/1.6.5_react-dom@18.2.0+react@18.2.0:
+    resolution: {integrity: sha512-i9TVN05N3Fa3+6HnL3wjEigfCZIQ7Hwjp35WlVmuk7ZJjr8kzTKTLCa76MZLqe+3YIVv5u+mTbl9ndpkyPbkvw==}
+    engines: {node: '>=14'}
+    peerDependencies:
+      '@netlify/functions': ^0.10.0 || ^0.11.0 || ^1.0.0
+    dependencies:
+      '@remix-run/node': 1.6.5_react-dom@18.2.0+react@18.2.0
     transitivePeerDependencies:
       - react
       - react-dom
