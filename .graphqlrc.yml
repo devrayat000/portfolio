@@ -1,0 +1,28 @@
+documents: 'app/graphql/*.{gql,graphql}'
+schema: 
+  - https://api-ap-south-1.hygraph.com/v2/cl5toima02gsp01uqfz7j3679/master
+
+extensions:
+  codegen:
+    overwrite: true
+    schema: 
+      - https://api-ap-south-1.hygraph.com/v2/cl5toima02gsp01uqfz7j3679/master
+    documents: 'app/graphql/*.{gql,graphql}'
+
+    generates:
+      app/graphql/generated.ts:
+        plugins:
+          - "typescript"
+          - "typescript-operations"
+          - "typescript-graphql-request"
+
+        config:
+          gqlImport: graphql-request#gql
+          constEnums: true
+          namingConvention:
+            typeNames: keep
+            enumValues: change-case-all#constantCase
+          useTypeImports: true
+          dedupeFragments: true
+
+
