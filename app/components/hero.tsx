@@ -16,7 +16,7 @@ const useStyles = createStyles((theme) => ({
   container: {
     backgroundColor:
       theme.colorScheme === "light"
-        ? theme.colors.gray[2]
+        ? theme.colors.gray[1]
         : theme.colors.dark[7],
     position: "relative",
   },
