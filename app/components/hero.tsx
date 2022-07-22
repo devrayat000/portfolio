@@ -78,7 +78,9 @@ export default function HeroSection() {
             <Text color={theme.colors[theme.primaryColor][6]} size="xl">
               Hi, I am
             </Text>
-            <Title className={classes.title}>Zul Ikram Musaddik Rayat</Title>
+            <Title order={1} className={classes.title}>
+              Zul Ikram Musaddik Rayat
+            </Title>
             <Text size="xl" weight={600}>
               Full Stack Web Developer
             </Text>

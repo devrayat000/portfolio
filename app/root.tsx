@@ -1,4 +1,4 @@
-import { MantineProvider } from "@mantine/core";
+import { MantineProvider, ScrollArea } from "@mantine/core";
 import type { MetaFunction } from "@remix-run/node";
 import {
   Links,
@@ -34,9 +34,11 @@ export default function App() {
             primaryColor: "orange",
           }}
         >
-          <MyShell>
-            <Outlet />
-          </MyShell>
+          <ScrollArea sx={{ height: "100vh" }}>
+            <MyShell>
+              <Outlet />
+            </MyShell>
+          </ScrollArea>
         </MantineProvider>
         <ScrollRestoration />
         <Scripts />
