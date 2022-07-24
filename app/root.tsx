@@ -28,7 +28,7 @@ export default function App() {
         <MantineProvider
           withGlobalStyles
           withNormalizeCSS
-          // withCSSVariables
+          withCSSVariables={process.env.NODE_ENV === "production"}
           theme={{
             colorScheme: "light",
             primaryColor: "orange",
