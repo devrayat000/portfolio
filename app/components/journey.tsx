@@ -14,14 +14,6 @@ import { type Icon, Medal2 } from "tabler-icons-react";
 type Props = {};
 
 const useStyles = createStyles((theme) => ({
-  container: {
-    backgroundColor:
-      theme.colorScheme === "light"
-        ? theme.fn.lighten(theme.colors[theme.primaryColor][0], 0.6)
-        : theme.colors[theme.primaryColor][1],
-    position: "relative",
-  },
-
   title: {
     color: theme.colorScheme === "dark" ? theme.white : theme.black,
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
@@ -32,6 +24,10 @@ const useStyles = createStyles((theme) => ({
     [theme.fn.smallerThan("xs")]: {
       fontSize: 24,
     },
+  },
+  grid: {
+    marginTop: theme.spacing.xl * 2,
+    marginBottom: theme.spacing.xl * 2,
   },
 }));
 
@@ -51,12 +47,7 @@ const MyJourney = (props: Props) => {
         My Expertise Area
       </Title>
 
-      <SimpleGrid
-        my="xl"
-        cols={2}
-        spacing="xl"
-        sx={(theme) => ({ columnGap: theme.spacing.xl * 4 })}
-      >
+      <SimpleGrid cols={2} spacing="xl" className={classes.grid}>
         <JourneyTimeline
           icon={Medal2}
           label="Education"

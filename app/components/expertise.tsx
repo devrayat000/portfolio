@@ -30,6 +30,11 @@ const useStyles = createStyles((theme) => ({
       fontSize: 24,
     },
   },
+  grid: {
+    marginTop: theme.spacing.xl * 2,
+    marginBottom: theme.spacing.xl * 2,
+    columnGap: theme.spacing.xl * 4,
+  },
 }));
 
 export default function MyExpertise() {
@@ -49,12 +54,7 @@ export default function MyExpertise() {
           My Expertise Area
         </Title>
 
-        <SimpleGrid
-          my="xl"
-          cols={2}
-          spacing="xl"
-          sx={(theme) => ({ columnGap: theme.spacing.xl * 4 })}
-        >
+        <SimpleGrid cols={2} spacing="xl" className={classes.grid}>
           <Skill label="Facebook Marketing" value={90} />
           <Skill label="Facebook Marketing" value={90} />
           <Skill label="Facebook Marketing" value={90} />
