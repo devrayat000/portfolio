@@ -90,7 +90,7 @@ export default function AboutMe() {
             to cover you in any situation
           </Text>
 
-          <Grid>
+          <Grid mt='xl'>
             <InfoItem
               icon={User}
               label="Name"

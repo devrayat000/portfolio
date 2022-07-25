@@ -40,10 +40,10 @@ const MyServices = (props: Props) => {
         color={theme.colors[theme.primaryColor][6]}
         size="xl"
       >
-        Why Choose Me
+        Specialized In
       </Text>
       <Title align="center" order={2} className={classes.title}>
-        My Expertise Area
+        What I Offer
       </Title>
 
       <SimpleGrid cols={3} className={classes.grid}>
