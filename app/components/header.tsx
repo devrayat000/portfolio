@@ -7,8 +7,8 @@ import {
   Button,
 } from "@mantine/core";
 import { useBooleanToggle } from "@mantine/hooks";
-import { BrandAdobe } from "tabler-icons-react";
 import { Link, type NavLinkProps } from "@remix-run/react";
+import { BrandDark, BrandLight } from "~/icons/brand";
 
 const useStyles = createStyles((theme) => ({
   header: {
@@ -68,12 +68,16 @@ export interface MyHeaderProps {
 
 export default function MyHeader({ links }: MyHeaderProps) {
   const [opened, toggleOpened] = useBooleanToggle(false);
-  const { classes } = useStyles();
+  const { classes, theme } = useStyles();
 
   return (
     <Header height={60}>
       <Container className={classes.header}>
-        <BrandAdobe />
+        {theme.colorScheme === "light" ? (
+          <BrandLight size={36} />
+        ) : (
+          <BrandDark size={36} />
+        )}
         <Group spacing={5} className={classes.links}>
           {links.map((link) => (
             <Button

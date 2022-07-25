@@ -23,6 +23,7 @@ const useStyles = createStyles((theme) => ({
   paper: {
     borderRadius: 9999,
     padding: theme.spacing.xl * 1.2,
+    boxShadow: theme.shadows.xl,
   },
 }));
 
@@ -41,7 +42,7 @@ const MyTags = (props: Props) => {
 
   return (
     <div className={classes.container}>
-      <Paper shadow="xl" className={classes.paper}>
+      <Paper className={classes.paper}>
         <Group position="apart" spacing="xl" align="center">
           <Tag icon={<Award />} label="8 Years Job" highlighted="Experience" />
           {divider}

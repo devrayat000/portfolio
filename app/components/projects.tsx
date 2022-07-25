@@ -15,8 +15,8 @@ const useStyles = createStyles((theme) => ({
   container: {
     backgroundColor:
       theme.colorScheme === "light"
-        ? theme.fn.lighten(theme.colors[theme.primaryColor][0], 0.6)
-        : theme.colors[theme.primaryColor][1],
+        ? theme.fn.rgba(theme.colors[theme.primaryColor][0], 0.6)
+        : theme.fn.rgba(theme.colors[theme.primaryColor][4], 0.35),
     position: "relative",
   },
 
