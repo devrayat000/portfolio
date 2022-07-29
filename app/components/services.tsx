@@ -7,7 +7,7 @@ import {
   ThemeIcon,
   Title,
 } from "@mantine/core";
-import { type Icon, Apps } from "tabler-icons-react";
+import { type TablerIcon, IconApps } from "@tabler/icons";
 
 type Props = {};
 
@@ -48,37 +48,37 @@ const MyServices = (props: Props) => {
 
       <SimpleGrid cols={3} className={classes.grid}>
         <ServiceCard
-          icon={Apps}
+          icon={IconApps}
           title="Frontend Marketing"
           description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni odio
             deleniti expedita, fuga tempora animi."
         />
         <ServiceCard
-          icon={Apps}
+          icon={IconApps}
           title="Frontend Marketing"
           description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni odio
             deleniti expedita, fuga tempora animi."
         />
         <ServiceCard
-          icon={Apps}
+          icon={IconApps}
           title="Frontend Marketing"
           description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni odio
             deleniti expedita, fuga tempora animi."
         />
         <ServiceCard
-          icon={Apps}
+          icon={IconApps}
           title="Frontend Marketing"
           description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni odio
             deleniti expedita, fuga tempora animi."
         />
         <ServiceCard
-          icon={Apps}
+          icon={IconApps}
           title="Frontend Marketing"
           description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni odio
             deleniti expedita, fuga tempora animi."
         />
         <ServiceCard
-          icon={Apps}
+          icon={IconApps}
           title="Frontend Marketing"
           description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni odio
             deleniti expedita, fuga tempora animi."
@@ -105,7 +105,7 @@ const useCardStyles = createStyles((theme) => ({
 }));
 
 type ServiceCardProps = {
-  icon: Icon;
+  icon: TablerIcon;
   title: string;
   description: string;
 };

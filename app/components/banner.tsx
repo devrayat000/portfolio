@@ -2,14 +2,11 @@ import {
   createStyles,
   Container,
   Title,
-  Text,
   Box,
-  SimpleGrid,
-  Card,
   Button,
   Center,
 } from "@mantine/core";
-import { Link, useLoaderData } from "@remix-run/react";
+import { Link } from "@remix-run/react";
 
 const useStyles = createStyles((theme) => ({
   container: {
@@ -20,6 +17,7 @@ const useStyles = createStyles((theme) => ({
     position: "relative",
     marginLeft: -theme.spacing.md,
     marginRight: -theme.spacing.md,
+    marginBottom: -theme.spacing.md,
   },
 
   title: {

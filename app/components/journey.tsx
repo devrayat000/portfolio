@@ -9,7 +9,7 @@ import {
   Title,
   useMantineTheme,
 } from "@mantine/core";
-import { type Icon, Medal2 } from "tabler-icons-react";
+import { type TablerIcon, IconMedal2 } from "@tabler/icons";
 
 type Props = {};
 
@@ -49,7 +49,7 @@ const MyJourney = (props: Props) => {
 
       <SimpleGrid cols={2} spacing="xl" className={classes.grid}>
         <JourneyTimeline
-          icon={Medal2}
+          icon={IconMedal2}
           label="Education"
           journeys={[
             {
@@ -70,7 +70,7 @@ const MyJourney = (props: Props) => {
           ]}
         />
         <JourneyTimeline
-          icon={Medal2}
+          icon={IconMedal2}
           label="Experience"
           journeys={[
             {
@@ -98,12 +98,12 @@ const MyJourney = (props: Props) => {
 export default MyJourney;
 
 type JourneyTimelineProps = {
-  icon: Icon;
+  icon: TablerIcon;
   label: string;
   journeys: JourneyItemProps[];
 };
 const JourneyTimeline: React.FC<JourneyTimelineProps> = ({
-  icon: JourneyIcon,
+  icon: JourneyTablerIcon,
   journeys,
   label,
 }) => {
@@ -112,7 +112,7 @@ const JourneyTimeline: React.FC<JourneyTimelineProps> = ({
   return (
     <Box>
       <Group>
-        <JourneyIcon
+        <JourneyTablerIcon
           size={theme.fontSizes.xl * 1.5}
           color={theme.colors[theme.primaryColor][6]}
         />

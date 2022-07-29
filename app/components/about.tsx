@@ -10,15 +10,15 @@ import {
   Box,
 } from "@mantine/core";
 import {
-  type Icon,
-  Mail,
-  Phone,
-  User,
-  Headphones,
-  Movie,
-  Camera,
-  BuildingSkyscraper,
-} from "tabler-icons-react";
+  type TablerIcon,
+  IconMail,
+  IconPhone,
+  IconUser,
+  IconHeadphones,
+  IconMovie,
+  IconCamera,
+  IconBuildingSkyscraper,
+} from "@tabler/icons";
 
 import dp from "~/assets/dp.png";
 
@@ -90,15 +90,19 @@ export default function AboutMe() {
             to cover you in any situation
           </Text>
 
-          <Grid mt='xl'>
+          <Grid mt="xl">
             <InfoItem
-              icon={User}
+              icon={IconUser}
               label="Name"
               value="Zul Ikram Musaddik Rayat"
             />
-            <InfoItem icon={Phone} label="Phone" value="+8801741891955" />
             <InfoItem
-              icon={Mail}
+              icon={IconPhone}
+              label="IconPhone"
+              value="+8801741891955"
+            />
+            <InfoItem
+              icon={IconMail}
               label="Email"
               value="dev.rayat000@gmail.com"
             />
@@ -107,10 +111,10 @@ export default function AboutMe() {
           <Box mt="xl">
             <Title order={3}>My Interests</Title>
             <Group mt="sm" spacing="xl">
-              <InterestItem icon={Headphones} label="Music" />
-              <InterestItem icon={BuildingSkyscraper} label="Travel" />
-              <InterestItem icon={Movie} label="Movie" />
-              <InterestItem icon={Camera} label="Photo" />
+              <InterestItem icon={IconHeadphones} label="Music" />
+              <InterestItem icon={IconBuildingSkyscraper} label="Travel" />
+              <InterestItem icon={IconMovie} label="IconMovie" />
+              <InterestItem icon={IconCamera} label="Photo" />
             </Group>
           </Box>
         </div>
@@ -120,7 +124,7 @@ export default function AboutMe() {
 }
 
 interface InfoItemProps {
-  icon: Icon;
+  icon: TablerIcon;
   label: string;
   value: string;
 }
@@ -148,7 +152,7 @@ const InfoItem: React.FC<InfoItemProps> = ({
 };
 
 interface InterestItemProps {
-  icon: Icon;
+  icon: TablerIcon;
   label: string;
 }
 

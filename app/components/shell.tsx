@@ -1,4 +1,5 @@
 import { AppShell } from "@mantine/core";
+import { MyFooter } from "./footer";
 import MyHeader, { type MyHeaderProps } from "./header";
 
 type Props = React.PropsWithChildren<{}>;
@@ -29,7 +30,11 @@ const links: MyHeaderProps["links"] = [
 ];
 
 const MyShell = ({ children }: Props) => {
-  return <AppShell header={<MyHeader links={links} />}>{children}</AppShell>;
+  return (
+    <AppShell header={<MyHeader links={links} />} footer={<MyFooter />}>
+      {children}
+    </AppShell>
+  );
 };
 
 export default MyShell;

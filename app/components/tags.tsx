@@ -8,7 +8,7 @@ import {
   ThemeIcon,
   useMantineTheme,
 } from "@mantine/core";
-import { Award, Notebook, UserCheck } from "tabler-icons-react";
+import { IconAward, IconNotebook, IconUserCheck } from "@tabler/icons";
 
 const useStyles = createStyles((theme) => ({
   container: {
@@ -44,15 +44,23 @@ const MyTags = (props: Props) => {
     <div className={classes.container}>
       <Paper className={classes.paper}>
         <Group position="apart" spacing="xl" align="center">
-          <Tag icon={<Award />} label="8 Years Job" highlighted="Experience" />
+          <Tag
+            icon={<IconAward />}
+            label="8 Years Job"
+            highlighted="Experience"
+          />
           {divider}
           <Tag
-            icon={<Notebook />}
+            icon={<IconNotebook />}
             label="50+ Projects"
             highlighted="Completed"
           />
           {divider}
-          <Tag icon={<UserCheck />} label="Support" highlighted="Online 24/7" />
+          <Tag
+            icon={<IconUserCheck />}
+            label="Support"
+            highlighted="Online 24/7"
+          />
         </Group>
       </Paper>
     </div>
