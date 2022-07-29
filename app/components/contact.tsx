@@ -1,5 +1,4 @@
 import {
-  Paper,
   Text,
   TextInput,
   Textarea,
@@ -7,8 +6,12 @@ import {
   Group,
   SimpleGrid,
   createStyles,
-  Container,
+  Stack,
+  ThemeIcon,
+  Box,
 } from "@mantine/core";
+import { IconLocation, IconMail, IconPhone } from "@tabler/icons";
+import SectionWrapper from "./wrapper";
 
 const useStyles = createStyles((theme) => {
   const BREAKPOINT = theme.fn.smallerThan("sm");
@@ -18,13 +21,8 @@ const useStyles = createStyles((theme) => {
       display: "flex",
       backgroundColor:
         theme.colorScheme === "dark" ? theme.colors.dark[8] : theme.white,
-      borderRadius: theme.radius.lg,
       padding: 4,
-      border: `1px solid ${
-        theme.colorScheme === "dark"
-          ? theme.colors.dark[8]
-          : theme.colors.gray[2]
-      }`,
+      marginTop: theme.spacing.xl,
 
       [BREAKPOINT]: {
         flexDirection: "column",
@@ -72,13 +70,8 @@ const useStyles = createStyles((theme) => {
     contacts: {
       boxSizing: "border-box",
       position: "relative",
-      borderRadius: theme.radius.lg - 2,
-      backgroundColor: theme.colors[theme.primaryColor][6],
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-      border: "1px solid transparent",
       padding: theme.spacing.xl,
-      flex: "0 0 280px",
+      flex: "0 0 320px",
 
       [BREAKPOINT]: {
         marginBottom: theme.spacing.sm,
@@ -87,12 +80,8 @@ const useStyles = createStyles((theme) => {
     },
 
     title: {
-      marginBottom: theme.spacing.xl * 1.5,
       fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-
-      [BREAKPOINT]: {
-        marginBottom: theme.spacing.xl,
-      },
+      fontWeight: 600,
     },
 
     control: {
@@ -107,63 +96,72 @@ export default function GetInTouch() {
   const { classes } = useStyles();
 
   return (
-    <Container my="xl" id="contact">
-      <Paper shadow="md" radius="lg">
-        <div className={classes.wrapper}>
-          <form
-            className={classes.form}
-            onSubmit={(event) => event.preventDefault()}
-          >
-            <Text size="lg" weight={700} className={classes.title}>
-              Get in touch
-            </Text>
-
-            <div className={classes.fields}>
-              <SimpleGrid cols={2} breakpoints={[{ maxWidth: "sm", cols: 1 }]}>
-                <TextInput label="Your name" placeholder="Your name" />
-                <TextInput
-                  label="Your email"
-                  placeholder="hello@mantine.dev"
-                  required
-                />
-              </SimpleGrid>
-
+    <SectionWrapper subtitle="Contact Me" title="Get In Touch" id="contact">
+      <div className={classes.wrapper}>
+        <form className={classes.form}>
+          <div className={classes.fields}>
+            <SimpleGrid cols={2} breakpoints={[{ maxWidth: "sm", cols: 1 }]}>
+              <TextInput label="Your name" placeholder="Your name" />
               <TextInput
-                mt="md"
-                label="Subject"
-                placeholder="Subject"
+                label="Your email"
+                placeholder="hello@mantine.dev"
                 required
               />
+            </SimpleGrid>
 
-              <Textarea
-                mt="md"
-                label="Your message"
-                placeholder="Please include all relevant information"
-                minRows={3}
-              />
+            <TextInput mt="md" label="Subject" placeholder="Subject" required />
 
-              <Group position="left" mt="md">
-                <Button type="submit" className={classes.control}>
-                  Send message
-                </Button>
-              </Group>
-            </div>
-          </form>
+            <Textarea
+              mt="md"
+              label="Your message"
+              placeholder="Please include all relevant information"
+              minRows={3}
+            />
 
-          <div className={classes.contacts}>
-            <Text
-              size="lg"
-              weight={700}
-              className={classes.title}
-              sx={{ color: "#fff" }}
-            >
-              Contact information
-            </Text>
-
-            {/* <ContactIconsList variant="white" /> */}
+            <Group position="left" mt="md">
+              <Button type="submit" className={classes.control}>
+                Send message
+              </Button>
+            </Group>
           </div>
-        </div>
-      </Paper>
-    </Container>
+        </form>
+
+        <Stack className={classes.contacts} spacing="xl">
+          <Group align="flex-start">
+            <ThemeIcon size="xl" radius="xl">
+              <IconPhone />
+            </ThemeIcon>
+            <Box>
+              <Text size="lg" className={classes.title}>
+                Call Me
+              </Text>
+              <Text size="sm">+8801741891955</Text>
+            </Box>
+          </Group>
+          <Group align="flex-start">
+            <ThemeIcon size="xl" radius="xl">
+              <IconMail />
+            </ThemeIcon>
+            <Box>
+              <Text size="lg" className={classes.title}>
+                Email
+              </Text>
+              <Text size="sm">dev.rayat000@gmail.com</Text>
+            </Box>
+          </Group>
+          <Group align="flex-start">
+            <ThemeIcon size="xl" radius="xl">
+              <IconLocation />
+            </ThemeIcon>
+            <Box>
+              <Text size="lg" className={classes.title}>
+                Location
+              </Text>
+              <Text size="sm">BUET Central Road, Dhaka-1205</Text>
+            </Box>
+          </Group>
+        </Stack>
+      </div>
+    </SectionWrapper>
   );
 }

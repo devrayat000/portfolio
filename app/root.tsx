@@ -1,6 +1,6 @@
 import { Global, MantineProvider, ScrollArea } from "@mantine/core";
 import { useScrollIntoView } from "@mantine/hooks";
-import type { MetaFunction } from "@remix-run/node";
+import type { MetaFunction, LoaderArgs } from "@remix-run/node";
 import {
   Links,
   LiveReload,
@@ -13,12 +13,26 @@ import {
 import { useEffect } from "react";
 
 import MyShell from "./components/shell";
+import apiServer from "./services/api.server";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
   title: "Zul - My Portfolio",
   viewport: "width=device-width,initial-scale=1",
 });
+
+export async function loader({ request }: LoaderArgs) {
+  const url = new URL(request.url);
+  const fbclid = url.searchParams.get("fbclid");
+
+  if (fbclid) {
+    await apiServer.AddVisitor({ uid: fbclid });
+  }
+
+  const data = await apiServer.GetVisitorCount();
+
+  return { visitorCount: data.visitors.length };
+}
 
 export default function App() {
   const location = useLocation();
