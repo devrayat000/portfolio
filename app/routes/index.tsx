@@ -1,11 +1,12 @@
+import type { LoaderArgs } from "@remix-run/node";
+
 import AboutMe from "~/components/about";
 import MyExpertise from "~/components/expertise";
 import HeroSection from "~/components/hero";
 import MyJourney from "~/components/journey";
 import MyServices from "~/components/services";
-
-import type { LoaderArgs } from "@remix-run/node";
 import MyProjects from "~/components/projects";
+import BannerSection from "~/components/banner";
 
 const demo = {
   id: "cl5v26xoc2r8l0bpld6e9kyrg",
@@ -220,6 +221,7 @@ export default function Index() {
       <MyJourney />
       <MyServices />
       <MyProjects />
+      <BannerSection />
     </>
   );
 }

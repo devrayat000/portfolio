@@ -17,6 +17,8 @@ const useStyles = createStyles((theme) => ({
         ? theme.fn.rgba(theme.colors[theme.primaryColor][0], 0.6)
         : theme.fn.rgba(theme.colors[theme.primaryColor][4], 0.35),
     position: "relative",
+    marginLeft: -theme.spacing.md,
+    marginRight: -theme.spacing.md,
   },
 
   title: {

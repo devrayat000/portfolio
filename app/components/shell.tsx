@@ -29,18 +29,7 @@ const links: MyHeaderProps["links"] = [
 ];
 
 const MyShell = ({ children }: Props) => {
-  return (
-    <AppShell
-      header={<MyHeader links={links} />}
-      styles={{
-        main: {
-          padding: 0,
-        },
-      }}
-    >
-      {children}
-    </AppShell>
-  );
+  return <AppShell header={<MyHeader links={links} />}>{children}</AppShell>;
 };
 
 export default MyShell;

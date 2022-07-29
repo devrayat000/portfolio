@@ -19,6 +19,7 @@ const useStyles = createStyles((theme) => ({
         ? theme.colors.gray[1]
         : theme.colors.dark[6],
     position: "relative",
+    margin: -theme.spacing.md,
   },
   content: {
     maxWidth: 480,
