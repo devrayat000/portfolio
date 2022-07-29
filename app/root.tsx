@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Global, MantineProvider, ScrollArea } from "@mantine/core";
 import { useScrollIntoView } from "@mantine/hooks";
 import type { MetaFunction, LoaderArgs } from "@remix-run/node";
@@ -10,7 +11,6 @@ import {
   ScrollRestoration,
   useLocation,
 } from "@remix-run/react";
-import { useEffect } from "react";
 
 import MyShell from "./components/shell";
 import apiServer from "./services/api.server";
@@ -41,8 +41,8 @@ export default function App() {
 
   useEffect(() => {
     if (location.hash) {
-      targetRef.current = document.querySelector(location.hash)!;
-      console.log(targetRef.current);
+      targetRef.current =
+        document.querySelector(location.hash) ?? document.body;
       scrollIntoView();
     }
 
