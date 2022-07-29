@@ -42,7 +42,7 @@ export function MyFooter() {
 
         <Group spacing="xl" position="right" noWrap>
           <ActionIcon
-            color={theme.colors[theme.primaryColor][6]}
+            color={theme.primaryColor}
             size="lg"
             variant="filled"
             radius="xl"
@@ -50,7 +50,7 @@ export function MyFooter() {
             <IconBrandTwitter size={18} stroke={1.5} />
           </ActionIcon>
           <ActionIcon
-            color={theme.colors[theme.primaryColor][6]}
+            color={theme.primaryColor}
             size="lg"
             variant="filled"
             radius="xl"
@@ -58,7 +58,7 @@ export function MyFooter() {
             <IconBrandYoutube size={18} stroke={1.5} />
           </ActionIcon>
           <ActionIcon
-            color={theme.colors[theme.primaryColor][6]}
+            color={theme.primaryColor}
             size="lg"
             variant="filled"
             radius="xl"
@@ -66,7 +66,7 @@ export function MyFooter() {
             <IconBrandInstagram size={18} stroke={1.5} />
           </ActionIcon>
           <ActionIcon
-            color={theme.colors[theme.primaryColor][6]}
+            color={theme.primaryColor}
             size="lg"
             variant="filled"
             radius="xl"

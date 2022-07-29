@@ -1,28 +1,16 @@
 import {
-  Container,
   createStyles,
   Paper,
   SimpleGrid,
   Text,
   ThemeIcon,
-  Title,
 } from "@mantine/core";
 import { type TablerIcon, IconApps } from "@tabler/icons";
+import SectionWrapper from "./wrapper";
 
 type Props = {};
 
 const useStyles = createStyles((theme) => ({
-  title: {
-    color: theme.colorScheme === "dark" ? theme.white : theme.black,
-    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-    fontSize: 36,
-    lineHeight: 1.2,
-    fontWeight: 900,
-
-    [theme.fn.smallerThan("xs")]: {
-      fontSize: 24,
-    },
-  },
   grid: {
     marginTop: theme.spacing.xl * 3.5,
     marginBottom: theme.spacing.xl * 3.5,
@@ -31,21 +19,14 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const MyServices = (props: Props) => {
-  const { classes, theme } = useStyles();
+  const { classes } = useStyles();
 
   return (
-    <Container p="xl" mt="xl" id="services">
-      <Text
-        align="center"
-        color={theme.colors[theme.primaryColor][6]}
-        size="xl"
-      >
-        Specialized In
-      </Text>
-      <Title align="center" order={2} className={classes.title}>
-        What I Offer
-      </Title>
-
+    <SectionWrapper
+      subtitle="Specialized In"
+      title="What I Offer"
+      id="services"
+    >
       <SimpleGrid cols={3} className={classes.grid}>
         <ServiceCard
           icon={IconApps}
@@ -84,7 +65,7 @@ const MyServices = (props: Props) => {
             deleniti expedita, fuga tempora animi."
         />
       </SimpleGrid>
-    </Container>
+    </SectionWrapper>
   );
 };
 

@@ -1,6 +1,5 @@
 import {
   Box,
-  Container,
   createStyles,
   Group,
   SimpleGrid,
@@ -10,21 +9,11 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 import { type TablerIcon, IconMedal2 } from "@tabler/icons";
+import SectionWrapper from "./wrapper";
 
 type Props = {};
 
 const useStyles = createStyles((theme) => ({
-  title: {
-    color: theme.colorScheme === "dark" ? theme.white : theme.black,
-    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-    fontSize: 36,
-    lineHeight: 1.2,
-    fontWeight: 900,
-
-    [theme.fn.smallerThan("xs")]: {
-      fontSize: 24,
-    },
-  },
   grid: {
     marginTop: theme.spacing.xl * 2,
     marginBottom: theme.spacing.xl * 2,
@@ -32,21 +21,14 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const MyJourney = (props: Props) => {
-  const { classes, theme } = useStyles();
+  const { classes } = useStyles();
 
   return (
-    <Container p="xl" mt="xl" id="intro">
-      <Text
-        align="center"
-        color={theme.colors[theme.primaryColor][6]}
-        size="xl"
-      >
-        Why Choose Me
-      </Text>
-      <Title align="center" order={2} className={classes.title}>
-        My Expertise Area
-      </Title>
-
+    <SectionWrapper
+      subtitle="My Qualification"
+      title="Awesome Journey"
+      id="journey"
+    >
       <SimpleGrid cols={2} spacing="xl" className={classes.grid}>
         <JourneyTimeline
           icon={IconMedal2}
@@ -91,7 +73,7 @@ const MyJourney = (props: Props) => {
           ]}
         />
       </SimpleGrid>
-    </Container>
+    </SectionWrapper>
   );
 };
 

@@ -171,7 +171,6 @@ export type AssetCreateInput = {
   fileName: Scalars['String'];
   handle: Scalars['String'];
   height?: InputMaybe<Scalars['Float']>;
-  imageProjectImage?: InputMaybe<ProjectImageCreateManyInlineInput>;
   /** Inline mutations for managing document localizations excluding the default locale */
   localizations?: InputMaybe<AssetCreateLocalizationsInput>;
   mimeType?: InputMaybe<Scalars['String']>;
@@ -342,7 +341,6 @@ export type AssetUpdateInput = {
   fileName?: InputMaybe<Scalars['String']>;
   handle?: InputMaybe<Scalars['String']>;
   height?: InputMaybe<Scalars['Float']>;
-  imageProjectImage?: InputMaybe<ProjectImageUpdateManyInlineInput>;
   /** Manage document localizations */
   localizations?: InputMaybe<AssetUpdateLocalizationsInput>;
   mimeType?: InputMaybe<Scalars['String']>;
@@ -1956,6 +1954,8 @@ export type Mutation = {
   createScheduledRelease?: Maybe<ScheduledRelease>;
   /** Create one skill */
   createSkill?: Maybe<Skill>;
+  /** Create one visitor */
+  createVisitor?: Maybe<Visitor>;
   /** Delete one asset from _all_ existing stages. Returns deleted document. */
   deleteAsset?: Maybe<Asset>;
   /** Delete one info from _all_ existing stages. Returns deleted document. */
@@ -1997,6 +1997,13 @@ export type Mutation = {
   deleteManySkills: BatchPayload;
   /** Delete many Skill documents, return deleted documents */
   deleteManySkillsConnection: SkillConnection;
+  /**
+   * Delete many Visitor documents
+   * @deprecated Please use the new paginated many mutation (deleteManyVisitorsConnection)
+   */
+  deleteManyVisitors: BatchPayload;
+  /** Delete many Visitor documents, return deleted documents */
+  deleteManyVisitorsConnection: VisitorConnection;
   /** Delete one project from _all_ existing stages. Returns deleted document. */
   deleteProject?: Maybe<Project>;
   /** Delete and return scheduled operation */
@@ -2005,6 +2012,8 @@ export type Mutation = {
   deleteScheduledRelease?: Maybe<ScheduledRelease>;
   /** Delete one skill from _all_ existing stages. Returns deleted document. */
   deleteSkill?: Maybe<Skill>;
+  /** Delete one visitor from _all_ existing stages. Returns deleted document. */
+  deleteVisitor?: Maybe<Visitor>;
   /** Publish one asset */
   publishAsset?: Maybe<Asset>;
   /** Publish one info */
@@ -2046,10 +2055,19 @@ export type Mutation = {
   publishManySkills: BatchPayload;
   /** Publish many Skill documents */
   publishManySkillsConnection: SkillConnection;
+  /**
+   * Publish many Visitor documents
+   * @deprecated Please use the new paginated many mutation (publishManyVisitorsConnection)
+   */
+  publishManyVisitors: BatchPayload;
+  /** Publish many Visitor documents */
+  publishManyVisitorsConnection: VisitorConnection;
   /** Publish one project */
   publishProject?: Maybe<Project>;
   /** Publish one skill */
   publishSkill?: Maybe<Skill>;
+  /** Publish one visitor */
+  publishVisitor?: Maybe<Visitor>;
   /** Schedule to publish one asset */
   schedulePublishAsset?: Maybe<Asset>;
   /** Schedule to publish one info */
@@ -2060,6 +2078,8 @@ export type Mutation = {
   schedulePublishProject?: Maybe<Project>;
   /** Schedule to publish one skill */
   schedulePublishSkill?: Maybe<Skill>;
+  /** Schedule to publish one visitor */
+  schedulePublishVisitor?: Maybe<Visitor>;
   /** Unpublish one asset from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishAsset?: Maybe<Asset>;
   /** Unpublish one info from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
@@ -2070,6 +2090,8 @@ export type Mutation = {
   scheduleUnpublishProject?: Maybe<Project>;
   /** Unpublish one skill from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   scheduleUnpublishSkill?: Maybe<Skill>;
+  /** Unpublish one visitor from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  scheduleUnpublishVisitor?: Maybe<Visitor>;
   /** Unpublish one asset from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishAsset?: Maybe<Asset>;
   /** Unpublish one info from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
@@ -2111,10 +2133,19 @@ export type Mutation = {
   unpublishManySkills: BatchPayload;
   /** Find many Skill documents that match criteria in specified stage and unpublish from target stages */
   unpublishManySkillsConnection: SkillConnection;
+  /**
+   * Unpublish many Visitor documents
+   * @deprecated Please use the new paginated many mutation (unpublishManyVisitorsConnection)
+   */
+  unpublishManyVisitors: BatchPayload;
+  /** Find many Visitor documents that match criteria in specified stage and unpublish from target stages */
+  unpublishManyVisitorsConnection: VisitorConnection;
   /** Unpublish one project from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishProject?: Maybe<Project>;
   /** Unpublish one skill from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
   unpublishSkill?: Maybe<Skill>;
+  /** Unpublish one visitor from selected stages. Unpublish either the complete document with its relations, localizations and base data or specific localizations only. */
+  unpublishVisitor?: Maybe<Visitor>;
   /** Update one asset */
   updateAsset?: Maybe<Asset>;
   /** Update one info */
@@ -2156,12 +2187,21 @@ export type Mutation = {
   updateManySkills: BatchPayload;
   /** Update many Skill documents */
   updateManySkillsConnection: SkillConnection;
+  /**
+   * Update many visitors
+   * @deprecated Please use the new paginated many mutation (updateManyVisitorsConnection)
+   */
+  updateManyVisitors: BatchPayload;
+  /** Update many Visitor documents */
+  updateManyVisitorsConnection: VisitorConnection;
   /** Update one project */
   updateProject?: Maybe<Project>;
   /** Update one scheduledRelease */
   updateScheduledRelease?: Maybe<ScheduledRelease>;
   /** Update one skill */
   updateSkill?: Maybe<Skill>;
+  /** Update one visitor */
+  updateVisitor?: Maybe<Visitor>;
   /** Upsert one asset */
   upsertAsset?: Maybe<Asset>;
   /** Upsert one info */
@@ -2172,6 +2212,8 @@ export type Mutation = {
   upsertProject?: Maybe<Project>;
   /** Upsert one skill */
   upsertSkill?: Maybe<Skill>;
+  /** Upsert one visitor */
+  upsertVisitor?: Maybe<Visitor>;
 };
 
 
@@ -2202,6 +2244,11 @@ export type MutationcreateScheduledReleaseArgs = {
 
 export type MutationcreateSkillArgs = {
   data: SkillCreateInput;
+};
+
+
+export type MutationcreateVisitorArgs = {
+  data: VisitorCreateInput;
 };
 
 
@@ -2295,6 +2342,21 @@ export type MutationdeleteManySkillsConnectionArgs = {
 };
 
 
+export type MutationdeleteManyVisitorsArgs = {
+  where?: InputMaybe<VisitorManyWhereInput>;
+};
+
+
+export type MutationdeleteManyVisitorsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<VisitorManyWhereInput>;
+};
+
+
 export type MutationdeleteProjectArgs = {
   where: ProjectWhereUniqueInput;
 };
@@ -2312,6 +2374,11 @@ export type MutationdeleteScheduledReleaseArgs = {
 
 export type MutationdeleteSkillArgs = {
   where: SkillWhereUniqueInput;
+};
+
+
+export type MutationdeleteVisitorArgs = {
+  where: VisitorWhereUniqueInput;
 };
 
 
@@ -2432,6 +2499,24 @@ export type MutationpublishManySkillsConnectionArgs = {
 };
 
 
+export type MutationpublishManyVisitorsArgs = {
+  to?: Array<Stage>;
+  where?: InputMaybe<VisitorManyWhereInput>;
+};
+
+
+export type MutationpublishManyVisitorsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  from?: InputMaybe<Stage>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  to?: Array<Stage>;
+  where?: InputMaybe<VisitorManyWhereInput>;
+};
+
+
 export type MutationpublishProjectArgs = {
   to?: Array<Stage>;
   where: ProjectWhereUniqueInput;
@@ -2441,6 +2526,12 @@ export type MutationpublishProjectArgs = {
 export type MutationpublishSkillArgs = {
   to?: Array<Stage>;
   where: SkillWhereUniqueInput;
+};
+
+
+export type MutationpublishVisitorArgs = {
+  to?: Array<Stage>;
+  where: VisitorWhereUniqueInput;
 };
 
 
@@ -2487,6 +2578,14 @@ export type MutationschedulePublishSkillArgs = {
 };
 
 
+export type MutationschedulePublishVisitorArgs = {
+  releaseAt?: InputMaybe<Scalars['DateTime']>;
+  releaseId?: InputMaybe<Scalars['String']>;
+  to?: Array<Stage>;
+  where: VisitorWhereUniqueInput;
+};
+
+
 export type MutationscheduleUnpublishAssetArgs = {
   from?: Array<Stage>;
   locales?: InputMaybe<Array<Locale>>;
@@ -2526,6 +2625,14 @@ export type MutationscheduleUnpublishSkillArgs = {
   releaseAt?: InputMaybe<Scalars['DateTime']>;
   releaseId?: InputMaybe<Scalars['String']>;
   where: SkillWhereUniqueInput;
+};
+
+
+export type MutationscheduleUnpublishVisitorArgs = {
+  from?: Array<Stage>;
+  releaseAt?: InputMaybe<Scalars['DateTime']>;
+  releaseId?: InputMaybe<Scalars['String']>;
+  where: VisitorWhereUniqueInput;
 };
 
 
@@ -2643,6 +2750,24 @@ export type MutationunpublishManySkillsConnectionArgs = {
 };
 
 
+export type MutationunpublishManyVisitorsArgs = {
+  from?: Array<Stage>;
+  where?: InputMaybe<VisitorManyWhereInput>;
+};
+
+
+export type MutationunpublishManyVisitorsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  first?: InputMaybe<Scalars['Int']>;
+  from?: Array<Stage>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: InputMaybe<Stage>;
+  where?: InputMaybe<VisitorManyWhereInput>;
+};
+
+
 export type MutationunpublishProjectArgs = {
   from?: Array<Stage>;
   where: ProjectWhereUniqueInput;
@@ -2652,6 +2777,12 @@ export type MutationunpublishProjectArgs = {
 export type MutationunpublishSkillArgs = {
   from?: Array<Stage>;
   where: SkillWhereUniqueInput;
+};
+
+
+export type MutationunpublishVisitorArgs = {
+  from?: Array<Stage>;
+  where: VisitorWhereUniqueInput;
 };
 
 
@@ -2758,6 +2889,23 @@ export type MutationupdateManySkillsConnectionArgs = {
 };
 
 
+export type MutationupdateManyVisitorsArgs = {
+  data: VisitorUpdateManyInput;
+  where?: InputMaybe<VisitorManyWhereInput>;
+};
+
+
+export type MutationupdateManyVisitorsConnectionArgs = {
+  after?: InputMaybe<Scalars['ID']>;
+  before?: InputMaybe<Scalars['ID']>;
+  data: VisitorUpdateManyInput;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<VisitorManyWhereInput>;
+};
+
+
 export type MutationupdateProjectArgs = {
   data: ProjectUpdateInput;
   where: ProjectWhereUniqueInput;
@@ -2773,6 +2921,12 @@ export type MutationupdateScheduledReleaseArgs = {
 export type MutationupdateSkillArgs = {
   data: SkillUpdateInput;
   where: SkillWhereUniqueInput;
+};
+
+
+export type MutationupdateVisitorArgs = {
+  data: VisitorUpdateInput;
+  where: VisitorWhereUniqueInput;
 };
 
 
@@ -2803,6 +2957,12 @@ export type MutationupsertProjectArgs = {
 export type MutationupsertSkillArgs = {
   upsert: SkillUpsertInput;
   where: SkillWhereUniqueInput;
+};
+
+
+export type MutationupsertVisitorArgs = {
+  upsert: VisitorUpsertInput;
+  where: VisitorWhereUniqueInput;
 };
 
 /** An object with an ID */
@@ -2980,15 +3140,10 @@ export type ProjectImage = {
   __typename?: 'ProjectImage';
   /** The unique identifier */
   id: Scalars['ID'];
-  image: Asset;
+  image: Scalars['Json'];
   label: Scalars['String'];
   /** System stage field */
   stage: Stage;
-};
-
-
-export type ProjectImageimageArgs = {
-  locales?: InputMaybe<Array<Locale>>;
 };
 
 export type ProjectImageConnectInput = {
@@ -3009,7 +3164,7 @@ export type ProjectImageConnection = {
 };
 
 export type ProjectImageCreateInput = {
-  image: AssetCreateOneInlineInput;
+  image: Scalars['Json'];
   label: Scalars['String'];
 };
 
@@ -3068,7 +3223,6 @@ export type ProjectImageManyWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']>;
-  image?: InputMaybe<AssetWhereInput>;
   label?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   label_contains?: InputMaybe<Scalars['String']>;
@@ -3178,7 +3332,7 @@ export type ProjectImageParentWhereUniqueInput = {
 };
 
 export type ProjectImageUpdateInput = {
-  image?: InputMaybe<AssetUpdateOneInlineInput>;
+  image?: InputMaybe<Scalars['Json']>;
   label?: InputMaybe<Scalars['String']>;
 };
 
@@ -3194,6 +3348,7 @@ export type ProjectImageUpdateManyInlineInput = {
 };
 
 export type ProjectImageUpdateManyInput = {
+  image?: InputMaybe<Scalars['Json']>;
   label?: InputMaybe<Scalars['String']>;
 };
 
@@ -3283,7 +3438,6 @@ export type ProjectImageWhereInput = {
   id_not_starts_with?: InputMaybe<Scalars['ID']>;
   /** All values starting with the given string. */
   id_starts_with?: InputMaybe<Scalars['ID']>;
-  image?: InputMaybe<AssetWhereInput>;
   label?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   label_contains?: InputMaybe<Scalars['String']>;
@@ -3809,6 +3963,14 @@ export type Query = {
   users: Array<User>;
   /** Retrieve multiple users using the Relay connection interface */
   usersConnection: UserConnection;
+  /** Retrieve a single visitor */
+  visitor?: Maybe<Visitor>;
+  /** Retrieve document version */
+  visitorVersion?: Maybe<DocumentVersion>;
+  /** Retrieve multiple visitors */
+  visitors: Array<Visitor>;
+  /** Retrieve multiple visitors using the Relay connection interface */
+  visitorsConnection: VisitorConnection;
 };
 
 
@@ -4107,6 +4269,44 @@ export type QueryusersConnectionArgs = {
   where?: InputMaybe<UserWhereInput>;
 };
 
+
+export type QueryvisitorArgs = {
+  locales?: Array<Locale>;
+  stage?: Stage;
+  where: VisitorWhereUniqueInput;
+};
+
+
+export type QueryvisitorVersionArgs = {
+  where: VersionWhereInput;
+};
+
+
+export type QueryvisitorsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<VisitorOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: Stage;
+  where?: InputMaybe<VisitorWhereInput>;
+};
+
+
+export type QueryvisitorsConnectionArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: Array<Locale>;
+  orderBy?: InputMaybe<VisitorOrderByInput>;
+  skip?: InputMaybe<Scalars['Int']>;
+  stage?: Stage;
+  where?: InputMaybe<VisitorWhereInput>;
+};
+
 /** Representing a RGBA color value: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#rgb()_and_rgba() */
 export type RGBA = {
   __typename?: 'RGBA';
@@ -4214,7 +4414,7 @@ export type ScheduledOperationupdatedByArgs = {
   locales?: InputMaybe<Array<Locale>>;
 };
 
-export type ScheduledOperationAffectedDocument = Asset | Info | Journey | Project | Skill;
+export type ScheduledOperationAffectedDocument = Asset | Info | Journey | Project | Skill | Visitor;
 
 export type ScheduledOperationConnectInput = {
   /** Allow to specify document position in list of connected documents, will default to appending at end of list */
@@ -6311,6 +6511,430 @@ export type VersionWhereInput = {
   stage: Stage;
 };
 
+export type Visitor = Node & {
+  __typename?: 'Visitor';
+  /** The time the document was created */
+  createdAt: Scalars['DateTime'];
+  /** User that created this document */
+  createdBy?: Maybe<User>;
+  /** Get the document in other stages */
+  documentInStages: Array<Visitor>;
+  /** List of Visitor versions */
+  history: Array<Version>;
+  /** The unique identifier */
+  id: Scalars['ID'];
+  provider: VisitorProvider;
+  /** The time the document was published. Null on documents in draft stage. */
+  publishedAt?: Maybe<Scalars['DateTime']>;
+  /** User that last published this document */
+  publishedBy?: Maybe<User>;
+  scheduledIn: Array<ScheduledOperation>;
+  /** System stage field */
+  stage: Stage;
+  uid: Scalars['String'];
+  /** The time the document was updated */
+  updatedAt: Scalars['DateTime'];
+  /** User that last updated this document */
+  updatedBy?: Maybe<User>;
+};
+
+
+export type VisitorcreatedByArgs = {
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type VisitordocumentInStagesArgs = {
+  includeCurrent?: Scalars['Boolean'];
+  inheritLocale?: Scalars['Boolean'];
+  stages?: Array<Stage>;
+};
+
+
+export type VisitorhistoryArgs = {
+  limit?: Scalars['Int'];
+  skip?: Scalars['Int'];
+  stageOverride?: InputMaybe<Stage>;
+};
+
+
+export type VisitorpublishedByArgs = {
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+
+export type VisitorscheduledInArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  locales?: InputMaybe<Array<Locale>>;
+  skip?: InputMaybe<Scalars['Int']>;
+  where?: InputMaybe<ScheduledOperationWhereInput>;
+};
+
+
+export type VisitorupdatedByArgs = {
+  locales?: InputMaybe<Array<Locale>>;
+};
+
+export type VisitorConnectInput = {
+  /** Allow to specify document position in list of connected documents, will default to appending at end of list */
+  position?: InputMaybe<ConnectPositionInput>;
+  /** Document to connect */
+  where: VisitorWhereUniqueInput;
+};
+
+/** A connection to a list of items. */
+export type VisitorConnection = {
+  __typename?: 'VisitorConnection';
+  aggregate: Aggregate;
+  /** A list of edges. */
+  edges: Array<VisitorEdge>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+export type VisitorCreateInput = {
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  provider: VisitorProvider;
+  uid: Scalars['String'];
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+};
+
+export type VisitorCreateManyInlineInput = {
+  /** Connect multiple existing Visitor documents */
+  connect?: InputMaybe<Array<VisitorWhereUniqueInput>>;
+  /** Create and connect multiple existing Visitor documents */
+  create?: InputMaybe<Array<VisitorCreateInput>>;
+};
+
+export type VisitorCreateOneInlineInput = {
+  /** Connect one existing Visitor document */
+  connect?: InputMaybe<VisitorWhereUniqueInput>;
+  /** Create and connect one Visitor document */
+  create?: InputMaybe<VisitorCreateInput>;
+};
+
+/** An edge in a connection. */
+export type VisitorEdge = {
+  __typename?: 'VisitorEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  node: Visitor;
+};
+
+/** Identifies documents */
+export type VisitorManyWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<VisitorWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<VisitorWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<VisitorWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  id?: InputMaybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<Scalars['ID']>>;
+  /** All values that are not equal to given value. */
+  id_not?: InputMaybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']>;
+  provider?: InputMaybe<VisitorProvider>;
+  /** All values that are contained in given list. */
+  provider_in?: InputMaybe<Array<VisitorProvider>>;
+  /** All values that are not equal to given value. */
+  provider_not?: InputMaybe<VisitorProvider>;
+  /** All values that are not contained in given list. */
+  provider_not_in?: InputMaybe<Array<VisitorProvider>>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  uid?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  uid_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  uid_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  uid_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values that are not equal to given value. */
+  uid_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  uid_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  uid_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  uid_not_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values not starting with the given string. */
+  uid_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  uid_starts_with?: InputMaybe<Scalars['String']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+export const enum VisitorOrderByInput {
+  CREATED_AT_ASC = 'createdAt_ASC',
+  CREATED_AT_DESC = 'createdAt_DESC',
+  ID_ASC = 'id_ASC',
+  ID_DESC = 'id_DESC',
+  PROVIDER_ASC = 'provider_ASC',
+  PROVIDER_DESC = 'provider_DESC',
+  PUBLISHED_AT_ASC = 'publishedAt_ASC',
+  PUBLISHED_AT_DESC = 'publishedAt_DESC',
+  UID_ASC = 'uid_ASC',
+  UID_DESC = 'uid_DESC',
+  UPDATED_AT_ASC = 'updatedAt_ASC',
+  UPDATED_AT_DESC = 'updatedAt_DESC'
+};
+
+export const enum VisitorProvider {
+  FACEBOOK = 'Facebook'
+};
+
+export type VisitorUpdateInput = {
+  provider?: InputMaybe<VisitorProvider>;
+  uid?: InputMaybe<Scalars['String']>;
+};
+
+export type VisitorUpdateManyInlineInput = {
+  /** Connect multiple existing Visitor documents */
+  connect?: InputMaybe<Array<VisitorConnectInput>>;
+  /** Create and connect multiple Visitor documents */
+  create?: InputMaybe<Array<VisitorCreateInput>>;
+  /** Delete multiple Visitor documents */
+  delete?: InputMaybe<Array<VisitorWhereUniqueInput>>;
+  /** Disconnect multiple Visitor documents */
+  disconnect?: InputMaybe<Array<VisitorWhereUniqueInput>>;
+  /** Override currently-connected documents with multiple existing Visitor documents */
+  set?: InputMaybe<Array<VisitorWhereUniqueInput>>;
+  /** Update multiple Visitor documents */
+  update?: InputMaybe<Array<VisitorUpdateWithNestedWhereUniqueInput>>;
+  /** Upsert multiple Visitor documents */
+  upsert?: InputMaybe<Array<VisitorUpsertWithNestedWhereUniqueInput>>;
+};
+
+export type VisitorUpdateManyInput = {
+  provider?: InputMaybe<VisitorProvider>;
+};
+
+export type VisitorUpdateManyWithNestedWhereInput = {
+  /** Update many input */
+  data: VisitorUpdateManyInput;
+  /** Document search */
+  where: VisitorWhereInput;
+};
+
+export type VisitorUpdateOneInlineInput = {
+  /** Connect existing Visitor document */
+  connect?: InputMaybe<VisitorWhereUniqueInput>;
+  /** Create and connect one Visitor document */
+  create?: InputMaybe<VisitorCreateInput>;
+  /** Delete currently connected Visitor document */
+  delete?: InputMaybe<Scalars['Boolean']>;
+  /** Disconnect currently connected Visitor document */
+  disconnect?: InputMaybe<Scalars['Boolean']>;
+  /** Update single Visitor document */
+  update?: InputMaybe<VisitorUpdateWithNestedWhereUniqueInput>;
+  /** Upsert single Visitor document */
+  upsert?: InputMaybe<VisitorUpsertWithNestedWhereUniqueInput>;
+};
+
+export type VisitorUpdateWithNestedWhereUniqueInput = {
+  /** Document to update */
+  data: VisitorUpdateInput;
+  /** Unique document search */
+  where: VisitorWhereUniqueInput;
+};
+
+export type VisitorUpsertInput = {
+  /** Create document if it didn't exist */
+  create: VisitorCreateInput;
+  /** Update document if it exists */
+  update: VisitorUpdateInput;
+};
+
+export type VisitorUpsertWithNestedWhereUniqueInput = {
+  /** Upsert data */
+  data: VisitorUpsertInput;
+  /** Unique document search */
+  where: VisitorWhereUniqueInput;
+};
+
+/** Identifies documents */
+export type VisitorWhereInput = {
+  /** Logical AND on all given filters. */
+  AND?: InputMaybe<Array<VisitorWhereInput>>;
+  /** Logical NOT on all given filters combined by AND. */
+  NOT?: InputMaybe<Array<VisitorWhereInput>>;
+  /** Logical OR on all given filters. */
+  OR?: InputMaybe<Array<VisitorWhereInput>>;
+  /** Contains search across all appropriate fields. */
+  _search?: InputMaybe<Scalars['String']>;
+  createdAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  createdAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  createdAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  createdAt_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  createdAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  createdAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  createdAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  createdAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  createdBy?: InputMaybe<UserWhereInput>;
+  id?: InputMaybe<Scalars['ID']>;
+  /** All values containing the given string. */
+  id_contains?: InputMaybe<Scalars['ID']>;
+  /** All values ending with the given string. */
+  id_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are contained in given list. */
+  id_in?: InputMaybe<Array<Scalars['ID']>>;
+  /** All values that are not equal to given value. */
+  id_not?: InputMaybe<Scalars['ID']>;
+  /** All values not containing the given string. */
+  id_not_contains?: InputMaybe<Scalars['ID']>;
+  /** All values not ending with the given string */
+  id_not_ends_with?: InputMaybe<Scalars['ID']>;
+  /** All values that are not contained in given list. */
+  id_not_in?: InputMaybe<Array<Scalars['ID']>>;
+  /** All values not starting with the given string. */
+  id_not_starts_with?: InputMaybe<Scalars['ID']>;
+  /** All values starting with the given string. */
+  id_starts_with?: InputMaybe<Scalars['ID']>;
+  provider?: InputMaybe<VisitorProvider>;
+  /** All values that are contained in given list. */
+  provider_in?: InputMaybe<Array<VisitorProvider>>;
+  /** All values that are not equal to given value. */
+  provider_not?: InputMaybe<VisitorProvider>;
+  /** All values that are not contained in given list. */
+  provider_not_in?: InputMaybe<Array<VisitorProvider>>;
+  publishedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  publishedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  publishedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  publishedAt_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  publishedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  publishedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  publishedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  publishedAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  publishedBy?: InputMaybe<UserWhereInput>;
+  scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
+  scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  uid?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  uid_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  uid_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  uid_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values that are not equal to given value. */
+  uid_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  uid_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  uid_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  uid_not_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values not starting with the given string. */
+  uid_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  uid_starts_with?: InputMaybe<Scalars['String']>;
+  updatedAt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than the given value. */
+  updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
+  /** All values greater than or equal the given value. */
+  updatedAt_gte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are contained in given list. */
+  updatedAt_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  /** All values less than the given value. */
+  updatedAt_lt?: InputMaybe<Scalars['DateTime']>;
+  /** All values less than or equal the given value. */
+  updatedAt_lte?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not equal to given value. */
+  updatedAt_not?: InputMaybe<Scalars['DateTime']>;
+  /** All values that are not contained in given list. */
+  updatedAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
+  updatedBy?: InputMaybe<UserWhereInput>;
+};
+
+/** References Visitor record uniquely */
+export type VisitorWhereUniqueInput = {
+  id?: InputMaybe<Scalars['ID']>;
+  uid?: InputMaybe<Scalars['String']>;
+};
+
 export const enum _FilterKind {
   AND = 'AND',
   NOT = 'NOT',
@@ -6392,6 +7016,14 @@ export const enum _SystemDateTimeFieldVariation {
 
 export type MyJourneyFragment = { __typename?: 'Journey', id: string, title: string, subject: string, from: any, to: any };
 
+export type AddVisitorMutationVariables = Exact<{
+  uid: Scalars['String'];
+  provider?: InputMaybe<VisitorProvider>;
+}>;
+
+
+export type AddVisitorMutation = { __typename?: 'Mutation', upsertVisitor?: { __typename?: 'Visitor', uid: string } | null };
+
 export type GetMyInfoQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -6417,6 +7049,11 @@ export type GetProjectsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string }> };
 
+export type GetVisitorCountQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetVisitorCountQuery = { __typename?: 'Query', visitors: Array<{ __typename?: 'Visitor', uid: string }> };
+
 export const MyJourneyFragmentDoc = gql`
     fragment MyJourney on Journey {
   id
@@ -6424,6 +7061,16 @@ export const MyJourneyFragmentDoc = gql`
   subject
   from
   to
+}
+    `;
+export const AddVisitorDocument = gql`
+    mutation AddVisitor($uid: String!, $provider: VisitorProvider = Facebook) {
+  upsertVisitor(
+    upsert: {create: {uid: $uid, provider: $provider}, update: {uid: $uid, provider: $provider}}
+    where: {uid: $uid}
+  ) {
+    uid
+  }
 }
     `;
 export const GetMyInfoDocument = gql`
@@ -6467,6 +7114,13 @@ export const GetProjectsDocument = gql`
   }
 }
     `;
+export const GetVisitorCountDocument = gql`
+    query GetVisitorCount {
+  visitors {
+    uid
+  }
+}
+    `;
 
 export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
@@ -6475,6 +7129,9 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
+    AddVisitor(variables: AddVisitorMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AddVisitorMutation> {
+      return withWrapper((wrappedRequestHeaders) => client.request<AddVisitorMutation>(AddVisitorDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'AddVisitor', 'mutation');
+    },
     GetMyInfo(variables?: GetMyInfoQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetMyInfoQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetMyInfoQuery>(GetMyInfoDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetMyInfo', 'query');
     },
@@ -6489,6 +7146,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     GetProjects(variables?: GetProjectsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetProjectsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetProjectsQuery>(GetProjectsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetProjects', 'query');
+    },
+    GetVisitorCount(variables?: GetVisitorCountQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetVisitorCountQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetVisitorCountQuery>(GetVisitorCountDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetVisitorCount', 'query');
     }
   };
 }

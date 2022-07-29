@@ -1,0 +1,19 @@
+mutation AddVisitor($uid: String!, $provider: VisitorProvider = Facebook) {
+    upsertVisitor(
+        upsert: {
+            create: {
+                uid: $uid,
+                provider: $provider,
+            },
+            update: {
+                uid: $uid,
+                provider: $provider,
+            },
+        },
+        where: {
+            uid: $uid
+        }
+    ) {
+      uid
+    }
+}

@@ -1,7 +1,5 @@
 import {
   createStyles,
-  Container,
-  Title,
   Text,
   Box,
   SimpleGrid,
@@ -10,6 +8,7 @@ import {
   Center,
 } from "@mantine/core";
 import { Link, useLoaderData } from "@remix-run/react";
+import SectionWrapper from "./wrapper";
 
 const useStyles = createStyles((theme) => ({
   container: {
@@ -20,18 +19,6 @@ const useStyles = createStyles((theme) => ({
     position: "relative",
     marginLeft: -theme.spacing.md,
     marginRight: -theme.spacing.md,
-  },
-
-  title: {
-    color: theme.colorScheme === "dark" ? theme.white : theme.black,
-    fontFamily: `Greycliff CF, ${theme.fontFamily}`,
-    fontSize: 36,
-    lineHeight: 1.2,
-    fontWeight: 900,
-
-    [theme.fn.smallerThan("xs")]: {
-      fontSize: 24,
-    },
   },
   grid: {
     marginTop: theme.spacing.xl * 2,
@@ -44,22 +31,11 @@ const useStyles = createStyles((theme) => ({
 
 export default function MyProjects() {
   const { projects } = useLoaderData();
-  const { classes, theme } = useStyles();
+  const { classes } = useStyles();
 
   return (
     <Box py="lg" className={classes.container} id="portfolio">
-      <Container p="xl" mt="xl">
-        <Text
-          align="center"
-          color={theme.colors[theme.primaryColor][6]}
-          size="xl"
-        >
-          My Portfolio
-        </Text>
-        <Title align="center" order={2} className={classes.title}>
-          Recent Works
-        </Title>
-
+      <SectionWrapper subtitle="My Portfolio" title="Recent Works">
         <SimpleGrid cols={3} spacing="md" className={classes.grid}>
           {projects.map((project: any, i: number) => (
             <ImageCard
@@ -71,13 +47,12 @@ export default function MyProjects() {
             />
           ))}
         </SimpleGrid>
-
         <Center>
           <Button radius="xl" size="lg" className={classes.showMore}>
             Show More
           </Button>
         </Center>
-      </Container>
+      </SectionWrapper>
     </Box>
   );
 }

@@ -96,11 +96,7 @@ export default function AboutMe() {
               label="Name"
               value="Zul Ikram Musaddik Rayat"
             />
-            <InfoItem
-              icon={IconPhone}
-              label="IconPhone"
-              value="+8801741891955"
-            />
+            <InfoItem icon={IconPhone} label="Phone" value="+8801741891955" />
             <InfoItem
               icon={IconMail}
               label="Email"
@@ -113,7 +109,7 @@ export default function AboutMe() {
             <Group mt="sm" spacing="xl">
               <InterestItem icon={IconHeadphones} label="Music" />
               <InterestItem icon={IconBuildingSkyscraper} label="Travel" />
-              <InterestItem icon={IconMovie} label="IconMovie" />
+              <InterestItem icon={IconMovie} label="Movie" />
               <InterestItem icon={IconCamera} label="Photo" />
             </Group>
           </Box>

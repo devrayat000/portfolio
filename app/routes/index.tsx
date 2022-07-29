@@ -7,6 +7,7 @@ import MyJourney from "~/components/journey";
 import MyServices from "~/components/services";
 import MyProjects from "~/components/projects";
 import BannerSection from "~/components/banner";
+import GetInTouch from "~/components/contact";
 
 const demo = {
   id: "cl5v26xoc2r8l0bpld6e9kyrg",
@@ -222,6 +223,7 @@ export default function Index() {
       <MyServices />
       <MyProjects />
       <BannerSection />
+      <GetInTouch />
     </>
   );
 }

@@ -17,7 +17,6 @@ const useStyles = createStyles((theme) => ({
     position: "relative",
     marginLeft: -theme.spacing.md,
     marginRight: -theme.spacing.md,
-    marginBottom: -theme.spacing.md,
   },
 
   title: {
