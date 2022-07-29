@@ -7,7 +7,7 @@ import {
   Button,
 } from "@mantine/core";
 import { useBooleanToggle } from "@mantine/hooks";
-import { Link, type NavLinkProps } from "@remix-run/react";
+import { NavLink, type NavLinkProps } from "@remix-run/react";
 import { BrandDark, BrandLight } from "~/icons/brand";
 
 const useStyles = createStyles((theme) => ({
@@ -82,7 +82,7 @@ export default function MyHeader({ links }: MyHeaderProps) {
           {links.map((link) => (
             <Button
               key={link.label}
-              component={Link}
+              component={NavLink}
               to={link.link}
               variant="subtle"
             >

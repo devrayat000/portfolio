@@ -34,7 +34,7 @@ const MyServices = (props: Props) => {
   const { classes, theme } = useStyles();
 
   return (
-    <Container p="xl" mt="xl" id="intro">
+    <Container p="xl" mt="xl" id="services">
       <Text
         align="center"
         color={theme.colors[theme.primaryColor][6]}

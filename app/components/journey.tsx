@@ -129,8 +129,8 @@ const JourneyTimeline: React.FC<JourneyTimelineProps> = ({
         lineWidth={4}
         mt="xl"
       >
-        {journeys.map(({ title, subject, time }) => (
-          <Timeline.Item title={title} key={title + subject}>
+        {journeys.map(({ title, subject, time }, i) => (
+          <Timeline.Item title={title} key={title + subject + i}>
             <Text size="xs" color="gray">
               {subject}
             </Text>

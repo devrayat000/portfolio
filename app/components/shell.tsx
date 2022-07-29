@@ -10,18 +10,21 @@ const links: MyHeaderProps["links"] = [
   },
   {
     label: "My Intro",
-    link: "#intro",
+    link: {
+      hash: "intro",
+    },
   },
   {
     label: "Services",
     link: {
-      pathname: "/",
       hash: "services",
     },
   },
   {
     label: "Portfolio",
-    link: "#portfolio",
+    link: {
+      hash: "portfolio",
+    },
   },
 ];
 

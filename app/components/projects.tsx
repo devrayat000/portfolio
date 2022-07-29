@@ -45,8 +45,8 @@ export default function MyProjects() {
   const { classes, theme } = useStyles();
 
   return (
-    <Box py="lg" className={classes.container}>
-      <Container p="xl" mt="xl" id="intro">
+    <Box py="lg" className={classes.container} id="portfolio">
+      <Container p="xl" mt="xl">
         <Text
           align="center"
           color={theme.colors[theme.primaryColor][6]}
@@ -61,7 +61,7 @@ export default function MyProjects() {
         <SimpleGrid cols={3} spacing="md" className={classes.grid}>
           {projects.map((project: any, i: number) => (
             <ImageCard
-              key={project.id}
+              key={project.id + i}
               title={project.title}
               link={project.slug}
               image={project.images[0].image.url}
