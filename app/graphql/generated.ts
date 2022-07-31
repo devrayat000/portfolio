@@ -778,11 +778,12 @@ export type ImageTransformationInput = {
 
 export type Info = Node & {
   __typename?: 'Info';
-  aboutMe: Scalars['String'];
+  aboutMe: RichText;
   /** The time the document was created */
   createdAt: Scalars['DateTime'];
   /** User that created this document */
   createdBy?: Maybe<User>;
+  description: Scalars['String'];
   /** Get the document in other stages */
   documentInStages: Array<Info>;
   email: Scalars['String'];
@@ -801,6 +802,7 @@ export type Info = Node & {
   scheduledIn: Array<ScheduledOperation>;
   /** System stage field */
   stage: Stage;
+  subtitle: Scalars['String'];
   /** The time the document was updated */
   updatedAt: Scalars['DateTime'];
   /** User that last updated this document */
@@ -865,13 +867,15 @@ export type InfoConnection = {
 };
 
 export type InfoCreateInput = {
-  aboutMe: Scalars['String'];
+  aboutMe: Scalars['RichTextAST'];
   createdAt?: InputMaybe<Scalars['DateTime']>;
+  description: Scalars['String'];
   email: Scalars['String'];
   experienceYears?: InputMaybe<Scalars['Int']>;
   interests?: InputMaybe<Array<Scalars['String']>>;
   name: Scalars['String'];
   phone: Scalars['String'];
+  subtitle: Scalars['String'];
   updatedAt?: InputMaybe<Scalars['DateTime']>;
 };
 
@@ -908,25 +912,6 @@ export type InfoManyWhereInput = {
   OR?: InputMaybe<Array<InfoWhereInput>>;
   /** Contains search across all appropriate fields. */
   _search?: InputMaybe<Scalars['String']>;
-  aboutMe?: InputMaybe<Scalars['String']>;
-  /** All values containing the given string. */
-  aboutMe_contains?: InputMaybe<Scalars['String']>;
-  /** All values ending with the given string. */
-  aboutMe_ends_with?: InputMaybe<Scalars['String']>;
-  /** All values that are contained in given list. */
-  aboutMe_in?: InputMaybe<Array<Scalars['String']>>;
-  /** All values that are not equal to given value. */
-  aboutMe_not?: InputMaybe<Scalars['String']>;
-  /** All values not containing the given string. */
-  aboutMe_not_contains?: InputMaybe<Scalars['String']>;
-  /** All values not ending with the given string */
-  aboutMe_not_ends_with?: InputMaybe<Scalars['String']>;
-  /** All values that are not contained in given list. */
-  aboutMe_not_in?: InputMaybe<Array<Scalars['String']>>;
-  /** All values not starting with the given string. */
-  aboutMe_not_starts_with?: InputMaybe<Scalars['String']>;
-  /** All values starting with the given string. */
-  aboutMe_starts_with?: InputMaybe<Scalars['String']>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   createdAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -943,6 +928,25 @@ export type InfoManyWhereInput = {
   /** All values that are not contained in given list. */
   createdAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
   createdBy?: InputMaybe<UserWhereInput>;
+  description?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  description_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  description_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  description_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values that are not equal to given value. */
+  description_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  description_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  description_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  description_not_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values not starting with the given string. */
+  description_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  description_starts_with?: InputMaybe<Scalars['String']>;
   email?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   email_contains?: InputMaybe<Scalars['String']>;
@@ -1063,6 +1067,25 @@ export type InfoManyWhereInput = {
   scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  subtitle?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  subtitle_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  subtitle_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  subtitle_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values that are not equal to given value. */
+  subtitle_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  subtitle_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  subtitle_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  subtitle_not_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values not starting with the given string. */
+  subtitle_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  subtitle_starts_with?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -1082,10 +1105,10 @@ export type InfoManyWhereInput = {
 };
 
 export const enum InfoOrderByInput {
-  ABOUT_ME_ASC = 'aboutMe_ASC',
-  ABOUT_ME_DESC = 'aboutMe_DESC',
   CREATED_AT_ASC = 'createdAt_ASC',
   CREATED_AT_DESC = 'createdAt_DESC',
+  DESCRIPTION_ASC = 'description_ASC',
+  DESCRIPTION_DESC = 'description_DESC',
   EMAIL_ASC = 'email_ASC',
   EMAIL_DESC = 'email_DESC',
   EXPERIENCE_YEARS_ASC = 'experienceYears_ASC',
@@ -1100,17 +1123,21 @@ export const enum InfoOrderByInput {
   PHONE_DESC = 'phone_DESC',
   PUBLISHED_AT_ASC = 'publishedAt_ASC',
   PUBLISHED_AT_DESC = 'publishedAt_DESC',
+  SUBTITLE_ASC = 'subtitle_ASC',
+  SUBTITLE_DESC = 'subtitle_DESC',
   UPDATED_AT_ASC = 'updatedAt_ASC',
   UPDATED_AT_DESC = 'updatedAt_DESC'
 };
 
 export type InfoUpdateInput = {
-  aboutMe?: InputMaybe<Scalars['String']>;
+  aboutMe?: InputMaybe<Scalars['RichTextAST']>;
+  description?: InputMaybe<Scalars['String']>;
   email?: InputMaybe<Scalars['String']>;
   experienceYears?: InputMaybe<Scalars['Int']>;
   interests?: InputMaybe<Array<Scalars['String']>>;
   name?: InputMaybe<Scalars['String']>;
   phone?: InputMaybe<Scalars['String']>;
+  subtitle?: InputMaybe<Scalars['String']>;
 };
 
 export type InfoUpdateManyInlineInput = {
@@ -1131,11 +1158,13 @@ export type InfoUpdateManyInlineInput = {
 };
 
 export type InfoUpdateManyInput = {
-  aboutMe?: InputMaybe<Scalars['String']>;
+  aboutMe?: InputMaybe<Scalars['RichTextAST']>;
+  description?: InputMaybe<Scalars['String']>;
   experienceYears?: InputMaybe<Scalars['Int']>;
   interests?: InputMaybe<Array<Scalars['String']>>;
   name?: InputMaybe<Scalars['String']>;
   phone?: InputMaybe<Scalars['String']>;
+  subtitle?: InputMaybe<Scalars['String']>;
 };
 
 export type InfoUpdateManyWithNestedWhereInput = {
@@ -1191,25 +1220,6 @@ export type InfoWhereInput = {
   OR?: InputMaybe<Array<InfoWhereInput>>;
   /** Contains search across all appropriate fields. */
   _search?: InputMaybe<Scalars['String']>;
-  aboutMe?: InputMaybe<Scalars['String']>;
-  /** All values containing the given string. */
-  aboutMe_contains?: InputMaybe<Scalars['String']>;
-  /** All values ending with the given string. */
-  aboutMe_ends_with?: InputMaybe<Scalars['String']>;
-  /** All values that are contained in given list. */
-  aboutMe_in?: InputMaybe<Array<Scalars['String']>>;
-  /** All values that are not equal to given value. */
-  aboutMe_not?: InputMaybe<Scalars['String']>;
-  /** All values not containing the given string. */
-  aboutMe_not_contains?: InputMaybe<Scalars['String']>;
-  /** All values not ending with the given string */
-  aboutMe_not_ends_with?: InputMaybe<Scalars['String']>;
-  /** All values that are not contained in given list. */
-  aboutMe_not_in?: InputMaybe<Array<Scalars['String']>>;
-  /** All values not starting with the given string. */
-  aboutMe_not_starts_with?: InputMaybe<Scalars['String']>;
-  /** All values starting with the given string. */
-  aboutMe_starts_with?: InputMaybe<Scalars['String']>;
   createdAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   createdAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -1226,6 +1236,25 @@ export type InfoWhereInput = {
   /** All values that are not contained in given list. */
   createdAt_not_in?: InputMaybe<Array<Scalars['DateTime']>>;
   createdBy?: InputMaybe<UserWhereInput>;
+  description?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  description_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  description_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  description_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values that are not equal to given value. */
+  description_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  description_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  description_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  description_not_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values not starting with the given string. */
+  description_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  description_starts_with?: InputMaybe<Scalars['String']>;
   email?: InputMaybe<Scalars['String']>;
   /** All values containing the given string. */
   email_contains?: InputMaybe<Scalars['String']>;
@@ -1346,6 +1375,25 @@ export type InfoWhereInput = {
   scheduledIn_every?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_none?: InputMaybe<ScheduledOperationWhereInput>;
   scheduledIn_some?: InputMaybe<ScheduledOperationWhereInput>;
+  subtitle?: InputMaybe<Scalars['String']>;
+  /** All values containing the given string. */
+  subtitle_contains?: InputMaybe<Scalars['String']>;
+  /** All values ending with the given string. */
+  subtitle_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are contained in given list. */
+  subtitle_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values that are not equal to given value. */
+  subtitle_not?: InputMaybe<Scalars['String']>;
+  /** All values not containing the given string. */
+  subtitle_not_contains?: InputMaybe<Scalars['String']>;
+  /** All values not ending with the given string */
+  subtitle_not_ends_with?: InputMaybe<Scalars['String']>;
+  /** All values that are not contained in given list. */
+  subtitle_not_in?: InputMaybe<Array<Scalars['String']>>;
+  /** All values not starting with the given string. */
+  subtitle_not_starts_with?: InputMaybe<Scalars['String']>;
+  /** All values starting with the given string. */
+  subtitle_starts_with?: InputMaybe<Scalars['String']>;
   updatedAt?: InputMaybe<Scalars['DateTime']>;
   /** All values greater than the given value. */
   updatedAt_gt?: InputMaybe<Scalars['DateTime']>;
@@ -7024,10 +7072,15 @@ export type AddVisitorMutationVariables = Exact<{
 
 export type AddVisitorMutation = { __typename?: 'Mutation', upsertVisitor?: { __typename?: 'Visitor', uid: string } | null };
 
+export type GetHomePageDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetHomePageDataQuery = { __typename?: 'Query', info?: { __typename?: 'Info', name: string, email: string, phone: string, description: string, experienceYears?: number | null, aboutMe: { __typename?: 'RichText', raw: any } } | null, skills: Array<{ __typename?: 'Skill', id: string, name: string, percent: number, type: SkillType }>, educations: Array<{ __typename?: 'Journey', id: string, title: string, subject: string, from: any, to: any }>, experiences: Array<{ __typename?: 'Journey', id: string, title: string, subject: string, from: any, to: any }>, projects: Array<{ __typename?: 'Project', id: string, title: string, slug?: string | null, source?: string | null, demo?: string | null, description: { __typename?: 'RichText', raw: any }, images: Array<{ __typename?: 'ProjectImage', id: string, label: string, image: any }> }>, visitors: Array<{ __typename?: 'Visitor', uid: string }> };
+
 export type GetMyInfoQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetMyInfoQuery = { __typename?: 'Query', info?: { __typename?: 'Info', name: string, email: string, phone: string, aboutMe: string } | null };
+export type GetMyInfoQuery = { __typename?: 'Query', info?: { __typename?: 'Info', name: string, email: string, phone: string, description: string } | null };
 
 export type GetMyExpertiseQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -7073,13 +7126,57 @@ export const AddVisitorDocument = gql`
   }
 }
     `;
+export const GetHomePageDataDocument = gql`
+    query GetHomePageData {
+  info(where: {email: "dev.rayat000@gmail.com"}) {
+    name
+    email
+    phone
+    description
+    aboutMe {
+      raw
+    }
+    experienceYears
+  }
+  skills(where: {percent_gte: 70}) {
+    id
+    name
+    percent
+    type
+  }
+  educations: journeys(where: {type: EDUCATION}) {
+    ...MyJourney
+  }
+  experiences: journeys(where: {type: EXPERIENCE}) {
+    ...MyJourney
+  }
+  projects {
+    id
+    title
+    slug
+    description {
+      raw
+    }
+    source
+    demo
+    images(first: 1) {
+      id
+      label
+      image
+    }
+  }
+  visitors {
+    uid
+  }
+}
+    ${MyJourneyFragmentDoc}`;
 export const GetMyInfoDocument = gql`
     query GetMyInfo {
   info(where: {email: "dev.rayat000@gmail.com"}) {
     name
     email
     phone
-    aboutMe
+    description
   }
 }
     `;
@@ -7131,6 +7228,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
   return {
     AddVisitor(variables: AddVisitorMutationVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<AddVisitorMutation> {
       return withWrapper((wrappedRequestHeaders) => client.request<AddVisitorMutation>(AddVisitorDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'AddVisitor', 'mutation');
+    },
+    GetHomePageData(variables?: GetHomePageDataQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetHomePageDataQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetHomePageDataQuery>(GetHomePageDataDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetHomePageData', 'query');
     },
     GetMyInfo(variables?: GetMyInfoQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetMyInfoQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetMyInfoQuery>(GetMyInfoDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetMyInfo', 'query');

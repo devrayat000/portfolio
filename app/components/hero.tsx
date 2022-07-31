@@ -8,8 +8,10 @@ import {
   Text,
   Box,
 } from "@mantine/core";
+import { useLoaderData } from "@remix-run/react";
 
 import dp from "~/assets/dp.png";
+import type { GetHomePageDataQuery } from "~/graphql/generated";
 import MyTags from "./tags";
 
 const useStyles = createStyles((theme) => ({
@@ -69,6 +71,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export default function HeroSection() {
+  const { info } = useLoaderData<GetHomePageDataQuery>();
   const { classes, theme } = useStyles();
 
   return (
@@ -80,15 +83,13 @@ export default function HeroSection() {
               Hi, I am
             </Text>
             <Title order={1} className={classes.title}>
-              Zul Ikram Musaddik Rayat
+              {info?.name}
             </Title>
             <Text size="xl" weight={600}>
               Full Stack Web Developer
             </Text>
             <Text color="dimmed" mt="md" component="p">
-              Build fully functional accessible web applications faster than
-              ever – Mantine includes more than 120 customizable components and
-              hooks to cover you in any situation
+              {info?.description}
             </Text>
 
             <Group mt={30}>

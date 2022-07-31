@@ -8,8 +8,11 @@ import {
   Title,
   useMantineTheme,
 } from "@mantine/core";
-import { type TablerIcon, IconMedal2 } from "@tabler/icons";
+import { useLoaderData } from "@remix-run/react";
+import { type TablerIcon, IconMedal2, IconCalendar } from "@tabler/icons";
+
 import SectionWrapper from "./wrapper";
+import type { GetHomePageDataQuery } from "~/graphql/generated";
 
 type Props = {};
 
@@ -21,6 +24,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const MyJourney = (props: Props) => {
+  const { educations, experiences } = useLoaderData<GetHomePageDataQuery>();
   const { classes } = useStyles();
 
   return (
@@ -33,45 +37,25 @@ const MyJourney = (props: Props) => {
         <JourneyTimeline
           icon={IconMedal2}
           label="Education"
-          journeys={[
-            {
-              title: "Bachelor of Engineering",
-              subject: "Mechanical Engineering",
-              time: "2022 - 2026",
-            },
-            {
-              title: "Bachelor of Engineering",
-              subject: "Mechanical Engineering",
-              time: "2022 - 2026",
-            },
-            {
-              title: "Bachelor of Engineering",
-              subject: "Mechanical Engineering",
-              time: "2022 - 2026",
-            },
-          ]}
+          journeys={educations.map((education) => ({
+            ...education,
+            time: `${new Date(education.from).getFullYear()} - ${new Date(
+              education.to
+            ).getFullYear()}`,
+          }))}
         />
-        <JourneyTimeline
-          icon={IconMedal2}
-          label="Experience"
-          journeys={[
-            {
-              title: "Bachelor of Engineering",
-              subject: "Mechanical Engineering",
-              time: "2022 - 2026",
-            },
-            {
-              title: "Bachelor of Engineering",
-              subject: "Mechanical Engineering",
-              time: "2022 - 2026",
-            },
-            {
-              title: "Bachelor of Engineering",
-              subject: "Mechanical Engineering",
-              time: "2022 - 2026",
-            },
-          ]}
-        />
+        {experiences.length > 0 && (
+          <JourneyTimeline
+            icon={IconMedal2}
+            label="Experience"
+            journeys={experiences.map((education) => ({
+              ...education,
+              time: `${new Date(education.from).getFullYear()} - ${new Date(
+                education.to
+              ).getFullYear()}`,
+            }))}
+          />
+        )}
       </SimpleGrid>
     </SectionWrapper>
   );
@@ -116,9 +100,15 @@ const JourneyTimeline: React.FC<JourneyTimelineProps> = ({
             <Text size="xs" color="gray">
               {subject}
             </Text>
-            <Text size="xs" mt="sm" color={theme.colors[theme.primaryColor][6]}>
-              {time}
-            </Text>
+            <Group mt="sm" spacing="xs">
+              <IconCalendar
+                size={theme.fontSizes.xs}
+                color={theme.colors[theme.primaryColor][6]}
+              />
+              <Text size="xs" color={theme.colors[theme.primaryColor][6]}>
+                {time}
+              </Text>
+            </Group>
           </Timeline.Item>
         ))}
       </Timeline>

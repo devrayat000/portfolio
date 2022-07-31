@@ -155,3 +155,5 @@ function ImageCard({ image, title, link, disabled }: ImageCardProps) {
   );
 }
 ImageCard.defaultProps = { disabled: false };
+
+// pnpm add @mantine/core@latest @mantine/hooks@latest @mantine/carousel embla-carousel-react @mantine/remix @emotion/server @emotion/react

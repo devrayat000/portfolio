@@ -8,6 +8,7 @@ import {
   Grid,
   useMantineTheme,
   Box,
+  TypographyStylesProvider,
 } from "@mantine/core";
 import {
   type TablerIcon,
@@ -19,8 +20,11 @@ import {
   IconCamera,
   IconBuildingSkyscraper,
 } from "@tabler/icons";
+import { RichText } from "@graphcms/rich-text-react-renderer";
 
 import dp from "~/assets/dp.png";
+import { useLoaderData } from "@remix-run/react";
+import type { GetHomePageDataQuery } from "~/graphql/generated";
 
 const useStyles = createStyles((theme) => ({
   content: {
@@ -71,6 +75,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export default function AboutMe() {
+  const { info } = useLoaderData<GetHomePageDataQuery>();
   const { classes, theme } = useStyles();
 
   return (
@@ -84,24 +89,18 @@ export default function AboutMe() {
           <Title order={2} className={classes.title}>
             About Me
           </Title>
-          <Text color="dimmed" mt="md" component="p">
-            Build fully functional accessible web applications faster than ever
-            – Mantine includes more than 120 customizable components and hooks
-            to cover you in any situation
-          </Text>
+          <TypographyStylesProvider>
+            <RichText content={info?.aboutMe.raw} />
+          </TypographyStylesProvider>
 
           <Grid mt="xl">
+            <InfoItem icon={IconUser} label="Name" value={info?.name!} />
             <InfoItem
-              icon={IconUser}
-              label="Name"
-              value="Zul Ikram Musaddik Rayat"
+              icon={IconPhone}
+              label="Phone"
+              value={`+880${info?.phone}`}
             />
-            <InfoItem icon={IconPhone} label="Phone" value="+8801741891955" />
-            <InfoItem
-              icon={IconMail}
-              label="Email"
-              value="dev.rayat000@gmail.com"
-            />
+            <InfoItem icon={IconMail} label="Email" value={info?.email!} />
           </Grid>
 
           <Box mt="xl">

@@ -6,7 +6,7 @@ import {
   Burger,
   Button,
 } from "@mantine/core";
-import { useBooleanToggle } from "@mantine/hooks";
+import { useToggle } from "@mantine/hooks";
 import { NavLink, type NavLinkProps } from "@remix-run/react";
 import IconBrand from "~/icons/brand";
 
@@ -67,7 +67,7 @@ export interface MyHeaderProps {
 }
 
 export default function MyHeader({ links }: MyHeaderProps) {
-  const [opened, toggleOpened] = useBooleanToggle(false);
+  const [opened, toggleOpened] = useToggle([false, true]);
   const { classes } = useStyles();
 
   return (

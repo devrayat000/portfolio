@@ -8,7 +8,10 @@ import {
   ThemeIcon,
   useMantineTheme,
 } from "@mantine/core";
+import { useLoaderData } from "@remix-run/react";
 import { IconAward, IconNotebook, IconUserCheck } from "@tabler/icons";
+
+import type { GetHomePageDataQuery } from "~/graphql/generated";
 
 const useStyles = createStyles((theme) => ({
   container: {
@@ -30,6 +33,7 @@ const useStyles = createStyles((theme) => ({
 type Props = {};
 
 const MyTags = (props: Props) => {
+  const { info, projects } = useLoaderData<GetHomePageDataQuery>();
   const { classes } = useStyles();
 
   const divider = (
@@ -46,13 +50,13 @@ const MyTags = (props: Props) => {
         <Group position="apart" spacing="xl" align="center">
           <Tag
             icon={<IconAward />}
-            label="8 Years Job"
+            label={`${info?.experienceYears}+ Years`}
             highlighted="Experience"
           />
           {divider}
           <Tag
             icon={<IconNotebook />}
-            label="50+ Projects"
+            label={`${projects.length}+ Projects`}
             highlighted="Completed"
           />
           {divider}

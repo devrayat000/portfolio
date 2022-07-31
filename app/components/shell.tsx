@@ -31,7 +31,11 @@ const links: MyHeaderProps["links"] = [
 
 const MyShell = ({ children }: Props) => {
   return (
-    <AppShell header={<MyHeader links={links} />} footer={<MyFooter />}>
+    <AppShell
+      header={<MyHeader links={links} />}
+      footer={<MyFooter />}
+      fixed={false}
+    >
       {children}
     </AppShell>
   );

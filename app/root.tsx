@@ -11,6 +11,7 @@ import {
   ScrollRestoration,
   useLocation,
 } from "@remix-run/react";
+import { StylesPlaceholder } from "@mantine/remix";
 
 import MyShell from "./components/shell";
 import apiServer from "./services/api.server";
@@ -47,24 +48,26 @@ export default function App() {
     }
 
     return cancel;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
   return (
-    <html lang="en">
-      <head>
-        <Meta />
-        <Links />
-      </head>
-      <body>
-        <MantineProvider
-          withGlobalStyles
-          withNormalizeCSS
-          withCSSVariables={process.env.NODE_ENV === "production"}
-          theme={{
-            colorScheme: "light",
-            primaryColor: "orange",
-          }}
-        >
+    <MantineProvider
+      withGlobalStyles
+      withNormalizeCSS
+      withCSSVariables={process.env.NODE_ENV === "production"}
+      theme={{
+        colorScheme: "light",
+        primaryColor: "orange",
+      }}
+    >
+      <html lang="en">
+        <head>
+          <Meta />
+          <Links />
+          <StylesPlaceholder />
+        </head>
+        <body>
           <Global
             styles={{
               "html, body": {
@@ -82,11 +85,11 @@ export default function App() {
               <Outlet />
             </MyShell>
           </ScrollArea>
-        </MantineProvider>
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
-      </body>
-    </html>
+          <ScrollRestoration />
+          <Scripts />
+          <LiveReload />
+        </body>
+      </html>
+    </MantineProvider>
   );
 }

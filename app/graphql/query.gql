@@ -1,57 +1,84 @@
-query GetMyInfo {
-    info(
-        where: {
-            email: "dev.rayat000@gmail.com"
-        }
-    ) {
-      name
-      email
-      phone
-      aboutMe
+query GetHomePageData {
+  info(where: { email: "dev.rayat000@gmail.com" }) {
+    name
+    email
+    phone
+    description
+    aboutMe {
+        raw
     }
+    experienceYears
+  }
+  skills(where: { percent_gte: 70 }) {
+    id
+    name
+    percent
+    type
+  }
+  educations: journeys(where: { type: EDUCATION }) {
+    ...MyJourney
+  }
+  experiences: journeys(where: { type: EXPERIENCE }) {
+    ...MyJourney
+  }
+  projects {
+    id
+    title
+    slug
+    description {
+      raw
+    }
+    source
+    demo
+    images(first: 1) {
+        id
+        label
+        image
+    }
+  }
+  visitors {
+    uid
+  }
+}
+
+query GetMyInfo {
+  info(where: { email: "dev.rayat000@gmail.com" }) {
+    name
+    email
+    phone
+    description
+  }
 }
 
 query GetMyExpertise {
-    skills(
-        where: {
-            percent_gte: 70
-        }
-    ) {
-        id
-        name
-        percent
-        type
-    }
+  skills(where: { percent_gte: 70 }) {
+    id
+    name
+    percent
+    type
+  }
 }
 
 query GetMyEducation {
-    educations:journeys(
-        where: {
-            type: EDUCATION
-        }
-    ) {
-        ...MyJourney
-    }
+  educations: journeys(where: { type: EDUCATION }) {
+    ...MyJourney
+  }
 }
 
 query GetMyExperience {
-    experiences:journeys(
-        where: {
-            type: EXPERIENCE
-        }
-    ) {
-        ...MyJourney
-    }
+  experiences: journeys(where: { type: EXPERIENCE }) {
+    ...MyJourney
+  }
 }
 
 query GetProjects {
-    projects {
-        id
-    }
+  projects {
+    id
+  }
 }
 
 query GetVisitorCount {
-    visitors {
-        uid
-    }
+  visitors {
+    uid
+  }
 }

@@ -6,7 +6,11 @@ import {
   Box,
   SimpleGrid,
   Progress,
+  Stack,
 } from "@mantine/core";
+import { useLoaderData } from "@remix-run/react";
+
+import type { GetHomePageDataQuery } from "~/graphql/generated";
 import SectionWrapper from "./wrapper";
 
 const useStyles = createStyles((theme) => ({
@@ -27,6 +31,7 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export default function MyExpertise() {
+  const { skills } = useLoaderData<GetHomePageDataQuery>();
   const { classes } = useStyles();
 
   return (
@@ -37,14 +42,9 @@ export default function MyExpertise() {
         id="expertise"
       >
         <SimpleGrid cols={2} spacing="xl" className={classes.grid}>
-          <Skill label="Facebook Marketing" value={90} />
-          <Skill label="Facebook Marketing" value={90} />
-          <Skill label="Facebook Marketing" value={90} />
-          <Skill label="Facebook Marketing" value={90} />
-          <Skill label="Facebook Marketing" value={90} />
-          <Skill label="Facebook Marketing" value={90} />
-          <Skill label="Facebook Marketing" value={90} />
-          <Skill label="Facebook Marketing" value={90} />
+          {skills.map((skill) => (
+            <Skill key={skill.id} label={skill.name} value={skill.percent} />
+          ))}
         </SimpleGrid>
       </SectionWrapper>
     </Box>
@@ -60,7 +60,7 @@ const Skill = ({ label, value }: SkillProps) => {
   const theme = useMantineTheme();
 
   return (
-    <Group direction="column" align="stretch">
+    <Stack>
       <Group position="apart">
         <Text weight={600}>{label}</Text>
         <Text weight={600}>{value}%</Text>
@@ -71,6 +71,6 @@ const Skill = ({ label, value }: SkillProps) => {
         radius="sm"
         value={value}
       />
-    </Group>
+    </Stack>
   );
 };
