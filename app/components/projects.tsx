@@ -8,6 +8,7 @@ import {
   Center,
 } from "@mantine/core";
 import { Link, useLoaderData } from "@remix-run/react";
+import type { GetHomePageDataQuery } from "~/graphql/generated";
 import SectionWrapper from "./wrapper";
 
 const useStyles = createStyles((theme) => ({
@@ -30,20 +31,19 @@ const useStyles = createStyles((theme) => ({
 }));
 
 export default function MyProjects() {
-  const { projects } = useLoaderData();
+  const { projects } = useLoaderData<GetHomePageDataQuery>();
   const { classes } = useStyles();
 
   return (
     <Box py="lg" className={classes.container} id="portfolio">
       <SectionWrapper subtitle="My Portfolio" title="Recent Works">
         <SimpleGrid cols={3} spacing="md" className={classes.grid}>
-          {projects.map((project: any, i: number) => (
+          {projects.map((project) => (
             <ImageCard
-              key={project.id + i}
+              key={project.id}
               title={project.title}
-              link={project.slug}
+              link={project.slug!}
               image={project.images[0].image.url}
-              disabled={i % 2 == 0}
             />
           ))}
         </SimpleGrid>

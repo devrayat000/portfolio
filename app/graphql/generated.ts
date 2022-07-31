@@ -7102,6 +7102,13 @@ export type GetProjectsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetProjectsQuery = { __typename?: 'Query', projects: Array<{ __typename?: 'Project', id: string }> };
 
+export type GetProjectBySlugQueryVariables = Exact<{
+  slug: Scalars['String'];
+}>;
+
+
+export type GetProjectBySlugQuery = { __typename?: 'Query', project?: { __typename?: 'Project', title: string, source?: string | null, demo?: string | null, description: { __typename?: 'RichText', raw: any }, images: Array<{ __typename?: 'ProjectImage', id: string, label: string, image: any }> } | null };
+
 export type GetVisitorCountQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -7211,6 +7218,23 @@ export const GetProjectsDocument = gql`
   }
 }
     `;
+export const GetProjectBySlugDocument = gql`
+    query GetProjectBySlug($slug: String!) {
+  project(where: {slug: $slug}) {
+    title
+    description {
+      raw
+    }
+    source
+    demo
+    images {
+      id
+      label
+      image
+    }
+  }
+}
+    `;
 export const GetVisitorCountDocument = gql`
     query GetVisitorCount {
   visitors {
@@ -7246,6 +7270,9 @@ export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = 
     },
     GetProjects(variables?: GetProjectsQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetProjectsQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetProjectsQuery>(GetProjectsDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetProjects', 'query');
+    },
+    GetProjectBySlug(variables: GetProjectBySlugQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetProjectBySlugQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<GetProjectBySlugQuery>(GetProjectBySlugDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetProjectBySlug', 'query');
     },
     GetVisitorCount(variables?: GetVisitorCountQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetVisitorCountQuery> {
       return withWrapper((wrappedRequestHeaders) => client.request<GetVisitorCountQuery>(GetVisitorCountDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'GetVisitorCount', 'query');

@@ -9,6 +9,7 @@ import MyProjects from "~/components/projects";
 import BannerSection from "~/components/banner";
 import GetInTouch from "~/components/contact";
 import apiServer from "~/services/api.server";
+import { Outlet } from "@remix-run/react";
 
 export async function loader({ request }: LoaderArgs) {
   const homePageData = await apiServer.GetHomePageData();
@@ -26,6 +27,7 @@ export default function Index() {
       <MyProjects />
       <BannerSection />
       <GetInTouch />
+      <Outlet />
     </>
   );
 }

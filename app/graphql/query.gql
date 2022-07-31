@@ -5,7 +5,7 @@ query GetHomePageData {
     phone
     description
     aboutMe {
-        raw
+      raw
     }
     experienceYears
   }
@@ -31,9 +31,9 @@ query GetHomePageData {
     source
     demo
     images(first: 1) {
-        id
-        label
-        image
+      id
+      label
+      image
     }
   }
   visitors {
@@ -74,6 +74,22 @@ query GetMyExperience {
 query GetProjects {
   projects {
     id
+  }
+}
+
+query GetProjectBySlug($slug: String!) {
+  project(where: { slug: $slug }) {
+    title
+    description {
+      raw
+    }
+    source
+    demo
+    images {
+      id
+      label
+      image
+    }
   }
 }
 
