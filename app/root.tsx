@@ -58,7 +58,7 @@ export default function App() {
       withCSSVariables={process.env.NODE_ENV === "production"}
       theme={{
         colorScheme: "light",
-        primaryColor: "orange",
+        primaryColor: "violet",
       }}
     >
       <html lang="en">

@@ -9,7 +9,7 @@ query GetHomePageData {
     }
     experienceYears
   }
-  skills(where: { percent_gte: 70 }) {
+  skills(where: { percent_gte: 70 }, orderBy: percent_DESC, first: 8) {
     id
     name
     percent
@@ -21,7 +21,7 @@ query GetHomePageData {
   experiences: journeys(where: { type: EXPERIENCE }) {
     ...MyJourney
   }
-  projects {
+  projects(first: 6) {
     id
     title
     slug
