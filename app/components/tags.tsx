@@ -10,6 +10,8 @@ import {
 } from "@mantine/core";
 import { useLoaderData } from "@remix-run/react";
 import { IconAward, IconNotebook, IconUserCheck } from "@tabler/icons";
+import { m } from "framer-motion";
+import { grow } from "~/animation";
 
 import type { GetHomePageDataQuery } from "~/graphql/generated";
 
@@ -45,7 +47,7 @@ const MyTags = (props: Props) => {
   );
 
   return (
-    <div className={classes.container}>
+    <m.div variants={grow(0.7)} className={classes.container}>
       <Paper className={classes.paper}>
         <Group position="apart" spacing="xl" align="center">
           <Tag
@@ -67,7 +69,7 @@ const MyTags = (props: Props) => {
           />
         </Group>
       </Paper>
-    </div>
+    </m.div>
   );
 };
 

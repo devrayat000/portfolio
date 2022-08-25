@@ -15,6 +15,7 @@ import { StylesPlaceholder } from "@mantine/remix";
 
 import MyShell from "./components/shell";
 import apiServer from "./services/api.server";
+import { LazyMotion } from "framer-motion";
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
@@ -82,7 +83,14 @@ export default function App() {
             viewportRef={scrollableRef}
           >
             <MyShell>
-              <Outlet />
+              <LazyMotion
+                strict
+                features={() =>
+                  import("framer-motion").then((m) => m.domAnimation)
+                }
+              >
+                <Outlet key={location.key} />
+              </LazyMotion>
             </MyShell>
           </ScrollArea>
           <ScrollRestoration />

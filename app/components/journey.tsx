@@ -4,7 +4,7 @@ import {
   Group,
   SimpleGrid,
   Text,
-  Timeline,
+  TimelineItem,
   Title,
   useMantineTheme,
 } from "@mantine/core";
@@ -13,6 +13,12 @@ import { type TablerIcon, IconMedal2, IconCalendar } from "@tabler/icons";
 
 import SectionWrapper from "./wrapper";
 import type { GetHomePageDataQuery } from "~/graphql/generated";
+import {
+  MotionTimeline,
+  MotionTimelineItem,
+  slideY,
+  stagger,
+} from "~/animation";
 
 type Props = {};
 
@@ -89,14 +95,19 @@ const JourneyTimeline: React.FC<JourneyTimelineProps> = ({
           {label}
         </Title>
       </Group>
-      <Timeline
+      <MotionTimeline
         active={journeys.length - 1}
         bulletSize={16}
         lineWidth={4}
         mt="xl"
+        variants={stagger}
       >
         {journeys.map(({ title, subject, time }, i) => (
-          <Timeline.Item title={title} key={title + subject + i}>
+          <TimelineItem
+            title={title}
+            key={title + subject + i}
+            // variants={slideY(40)}
+          >
             <Text size="xs" color="gray">
               {subject}
             </Text>
@@ -109,9 +120,9 @@ const JourneyTimeline: React.FC<JourneyTimelineProps> = ({
                 {time}
               </Text>
             </Group>
-          </Timeline.Item>
+          </TimelineItem>
         ))}
-      </Timeline>
+      </MotionTimeline>
     </Box>
   );
 };

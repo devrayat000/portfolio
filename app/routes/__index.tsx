@@ -1,4 +1,5 @@
 import type { HeadersFunction, LoaderArgs } from "@remix-run/node";
+import { m } from "framer-motion";
 
 import AboutMe from "~/components/about";
 import MyExpertise from "~/components/expertise";
@@ -25,7 +26,13 @@ export async function loader({ request }: LoaderArgs) {
 
 export default function Index() {
   return (
-    <>
+    <m.main
+      initial="hidden"
+      // animate="show"
+      exit="hidden"
+      whileInView="show"
+      viewport={{ once: false }}
+    >
       <HeroSection />
       <AboutMe />
       <MyExpertise />
@@ -35,6 +42,6 @@ export default function Index() {
       <BannerSection />
       <GetInTouch />
       <Outlet />
-    </>
+    </m.main>
   );
 }

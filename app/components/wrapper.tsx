@@ -5,6 +5,8 @@ import {
   Text,
   Title,
 } from "@mantine/core";
+import { m } from "framer-motion";
+import { grow } from "~/animation";
 
 type Props = React.PropsWithChildren<{
   title: string;
@@ -38,17 +40,19 @@ const SectionWrapper: React.FC<Props> = ({
 
   return (
     <Container p="xl" mt="xl" {...props}>
-      <Text
-        align="center"
-        color={theme.colors[theme.primaryColor][6]}
-        sx={{ textTransform: "capitalize" }}
-        size="xl"
-      >
-        {subtitle}
-      </Text>
-      <Title align="center" order={2} className={classes.title}>
-        {title}
-      </Title>
+      <m.div variants={grow(0.7)}>
+        <Text
+          align="center"
+          color={theme.colors[theme.primaryColor][6]}
+          sx={{ textTransform: "capitalize" }}
+          size="xl"
+        >
+          {subtitle}
+        </Text>
+        <Title align="center" order={2} className={classes.title}>
+          {title}
+        </Title>
+      </m.div>
 
       {children}
     </Container>

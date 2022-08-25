@@ -1,13 +1,6 @@
-import {
-  createStyles,
-  Text,
-  Box,
-  SimpleGrid,
-  Card,
-  Button,
-  Center,
-} from "@mantine/core";
-import { Link, useLoaderData } from "@remix-run/react";
+import { createStyles, Text, Box, Card, Button, Center } from "@mantine/core";
+import { useLoaderData } from "@remix-run/react";
+import { MotionLink, MotionSimpleGrid, slideY, stagger } from "~/animation";
 import type { GetHomePageDataQuery } from "~/graphql/generated";
 import SectionWrapper from "./wrapper";
 
@@ -37,7 +30,13 @@ export default function MyProjects() {
   return (
     <Box py="lg" className={classes.container} id="portfolio">
       <SectionWrapper subtitle="My Portfolio" title="Recent Works">
-        <SimpleGrid cols={3} spacing="md" className={classes.grid}>
+        <MotionSimpleGrid
+          cols={3}
+          spacing="md"
+          className={classes.grid}
+          variants={stagger}
+          whileInView="show"
+        >
           {projects.map((project) => (
             <ImageCard
               key={project.id}
@@ -46,7 +45,7 @@ export default function MyProjects() {
               image={project.images[0].image.url}
             />
           ))}
-        </SimpleGrid>
+        </MotionSimpleGrid>
         <Center>
           <Button radius="xl" size="lg" className={classes.showMore}>
             Show More
@@ -139,8 +138,10 @@ function ImageCard({ image, title, link, disabled }: ImageCardProps) {
       shadow="xs"
       className={classes.card}
       radius="md"
-      component={Link}
+      component={MotionLink}
       to={link}
+      prefetch="intent"
+      variants={slideY(50)}
     >
       <div
         className={classes.image}

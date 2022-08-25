@@ -1,9 +1,7 @@
 import {
   createStyles,
-  Image,
   Container,
   Title,
-  Group,
   Text,
   Grid,
   useMantineTheme,
@@ -20,11 +18,20 @@ import {
   IconCamera,
   IconBuildingSkyscraper,
 } from "@tabler/icons";
+import { useLoaderData } from "@remix-run/react";
 import { RichText } from "@graphcms/rich-text-react-renderer";
+import { m } from "framer-motion";
 
 import dp from "~/assets/dp.png";
-import { useLoaderData } from "@remix-run/react";
 import type { GetHomePageDataQuery } from "~/graphql/generated";
+import {
+  MotionGrid,
+  MotionGroup,
+  MotionImage,
+  slideX,
+  slideY,
+  stagger,
+} from "~/animation";
 
 const useStyles = createStyles((theme) => ({
   content: {
@@ -80,9 +87,13 @@ export default function AboutMe() {
 
   return (
     <Container p="xl" mt={60} id="intro">
-      <Group position="apart" py="xl" spacing={80}>
-        <Image src={dp} className={classes.image} />
-        <div className={classes.content}>
+      <MotionGroup variants={stagger} position="apart" py="xl" spacing={80}>
+        <MotionImage
+          variants={slideX(-40)}
+          src={dp}
+          className={classes.image}
+        />
+        <m.div variants={slideX(-40)} className={classes.content}>
           <Text color={theme.colors[theme.primaryColor][6]} size="xl">
             My Intro
           </Text>
@@ -93,7 +104,7 @@ export default function AboutMe() {
             <RichText content={info?.aboutMe.raw} />
           </TypographyStylesProvider>
 
-          <Grid mt="xl">
+          <Box mt="xl" component={m.section} variants={stagger}>
             <InfoItem icon={IconUser} label="Name" value={info?.name!} />
             <InfoItem
               icon={IconPhone}
@@ -101,19 +112,19 @@ export default function AboutMe() {
               value={`+880${info?.phone}`}
             />
             <InfoItem icon={IconMail} label="Email" value={info?.email!} />
-          </Grid>
+          </Box>
 
           <Box mt="xl">
             <Title order={3}>My Interests</Title>
-            <Group mt="sm" spacing="xl">
+            <MotionGroup mt="sm" spacing="xl" variants={stagger}>
               <InterestItem icon={IconHeadphones} label="Music" />
               <InterestItem icon={IconBuildingSkyscraper} label="Travel" />
               <InterestItem icon={IconMovie} label="Movie" />
               <InterestItem icon={IconCamera} label="Photo" />
-            </Group>
+            </MotionGroup>
           </Box>
-        </div>
-      </Group>
+        </m.div>
+      </MotionGroup>
     </Container>
   );
 }
@@ -132,7 +143,7 @@ const InfoItem: React.FC<InfoItemProps> = ({
   const theme = useMantineTheme();
 
   return (
-    <>
+    <MotionGrid variants={slideY(20)}>
       <Grid.Col py={4} span={1}>
         <InfoIcon color={theme.colors[theme.primaryColor][6]} />
       </Grid.Col>
@@ -142,7 +153,7 @@ const InfoItem: React.FC<InfoItemProps> = ({
       <Grid.Col py={4} span={8}>
         <Text weight={500}>{value}</Text>
       </Grid.Col>
-    </>
+    </MotionGrid>
   );
 };
 
@@ -157,12 +168,12 @@ export const InterestItem: React.FC<InterestItemProps> = ({
 }) => {
   const theme = useMantineTheme();
   return (
-    <Group spacing="xs">
+    <MotionGroup spacing="xs" variants={slideY(20)}>
       <InterestIcon
         color={theme.colors[theme.primaryColor][6]}
         size={theme.fontSizes.sm}
       />
       <Text size="sm">{label}</Text>
-    </Group>
+    </MotionGroup>
   );
 };

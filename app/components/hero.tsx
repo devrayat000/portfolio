@@ -1,6 +1,5 @@
 import {
   createStyles,
-  Image,
   Container,
   Title,
   Button,
@@ -9,6 +8,8 @@ import {
   Box,
 } from "@mantine/core";
 import { useLoaderData } from "@remix-run/react";
+import { m } from "framer-motion";
+import { MotionImage, slideX } from "~/animation";
 
 import dp from "~/assets/dp.png";
 import type { GetHomePageDataQuery } from "~/graphql/generated";
@@ -78,7 +79,7 @@ export default function HeroSection() {
     <Box py="xl" className={classes.container}>
       <Container p="xl">
         <Group position="apart" py="xl">
-          <div className={classes.content}>
+          <m.div variants={slideX(-40)} className={classes.content}>
             <Text color={theme.colors[theme.primaryColor][6]} size="xl">
               Hi, I am
             </Text>
@@ -105,8 +106,12 @@ export default function HeroSection() {
                 Contact Me
               </Button>
             </Group>
-          </div>
-          <Image src={dp} className={classes.image} />
+          </m.div>
+          <MotionImage
+            variants={slideX(40)}
+            src={dp}
+            className={classes.image}
+          />
         </Group>
       </Container>
 
